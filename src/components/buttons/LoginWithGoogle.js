@@ -8,7 +8,9 @@ export default function LoginWithGoogle() {
   const router = useRouter();
 
   const handleLogin = async () => {
+    console.log('Attempting to sign in...');
     const result = await signIn('google', { redirect: false });
+    console.log('Sign-in result:', result);
     if (result?.ok) {
       router.push('/account'); // Redirect to /account on successful login
     } else {
