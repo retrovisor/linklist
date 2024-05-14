@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "api/auth/callback/[provider]": {
+      "maxDuration": 10
+    },
+    "api/*": {
+      "maxDuration": 10
+    }
+  }
+}
