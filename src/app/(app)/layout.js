@@ -1,4 +1,3 @@
-import './globals.css';
 import ClientSessionProvider from '@/components/ClientSessionProvider';
 
 export const metadata = {
