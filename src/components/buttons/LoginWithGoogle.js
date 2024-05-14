@@ -2,20 +2,10 @@
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signIn } from "next-auth/react";
-import { useRouter } from 'next/navigation';
 
 export default function LoginWithGoogle() {
-  const router = useRouter();
-
   const handleLogin = async () => {
-    console.log('Attempting to sign in...');
-    const result = await signIn('google', { redirect: false });
-    console.log('Sign-in result:', result);
-    if (result?.ok) {
-      router.push('/account'); // Redirect to /account on successful login
-    } else {
-      console.error(result?.error); // Handle login error
-    }
+    await signIn('google');
   };
 
   return (
