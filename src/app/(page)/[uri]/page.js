@@ -1,19 +1,20 @@
-import {Page} from "@/models/Page";
-import {User} from "@/models/User";
-import {Event} from "@/models/Event";
+import { Page } from "@/models/Page";
+import { User } from "@/models/User";
+import { Event } from "@/models/Event";
 import {
   faDiscord,
   faFacebook,
   faGithub,
-  faInstagram, faTelegram,
+  faInstagram, 
+  faTelegram,
   faTiktok,
   faWhatsapp,
   faYoutube
 } from "@fortawesome/free-brands-svg-icons";
-import {faEnvelope, faLink, faLocationDot, faMobile, faPhone} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { faEnvelope, faLink, faLocationDot, faMobile, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import mongoose from "mongoose";
-import {btoa} from "next/dist/compiled/@edge-runtime/primitives";
+import { btoa } from "next/dist/compiled/@edge-runtime/primitives";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -32,31 +33,41 @@ export const buttonsIcons = {
 
 function buttonLink(key, value) {
   if (key === 'mobile') {
-    return 'tel:'+value;
+    return 'tel:' + value;
   }
   if (key === 'email') {
-    return 'mailto:'+value;
+    return 'mailto:' + value;
   }
   return value;
 }
 
-export default async function UserPage({params}) {
+export default async function UserPage({ params }) {
   const uri = params.uri;
-  mongoose.connect(process.env.MONGO_URI);
-  const page = await Page.findOne({uri});
-  const user = await User.findOne({email:page.owner});
-  await Event.create({uri:uri, page:uri, type:'view'});
+  await mongoose.connect(process.env.MONGO_URI);
+  const page = await Page.findOne({ uri });
+
+  if (!page) {
+    return <div>Page not found</div>;
+  }
+
+  const user = await User.findOne({ email: page.owner });
+
+  if (!user) {
+    return <div>User not found</div>;
+  }
+
+  await Event.create({ uri: uri, page: uri, type: 'view' });
+
   return (
     <div className="bg-blue-950 text-white min-h-screen">
       <div
         className="h-36 bg-gray-400 bg-cover bg-center"
         style={
           page.bgType === 'color'
-            ? {backgroundColor:page.bgColor}
-            : {backgroundImage:`url(${page.bgImage})`}
+            ? { backgroundColor: page.bgColor }
+            : { backgroundImage: `url(${page.bgImage})` }
         }
-      >
-      </div>
+      ></div>
       <div className="aspect-square w-36 h-36 mx-auto relative -top-16 -mb-12">
         <Image
           className="rounded-full w-full h-full object-cover"
@@ -66,7 +77,7 @@ export default async function UserPage({params}) {
         />
       </div>
       <h2 className="text-2xl text-center mb-1">{page.displayName}</h2>
-      <h3 className="text-md flex gap-2 justify-center items-center text-white/70">
+      <h3 className="text-center flex gap-2 justify-center items-center text-white/70">
         <FontAwesomeIcon className="h-4" icon={faLocationDot} />
         <span>
           {page.location}
@@ -88,7 +99,7 @@ export default async function UserPage({params}) {
           <Link
             key={link.url}
             target="_blank"
-            ping={process.env.URL+'api/click?url='+ btoa(link.url)+'&page='+page.uri}
+            ping={process.env.URL + 'api/click?url=' + btoa(link.url) + '&page=' + page.uri}
             className="bg-indigo-800 p-2 block flex"
             href={link.url}>
             <div className="relative -left-4 overflow-hidden w-16">
