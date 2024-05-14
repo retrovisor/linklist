@@ -4,25 +4,22 @@ import PageLinksForm from "@/components/forms/PageLinksForm";
 import PageSettingsForm from "@/components/forms/PageSettingsForm";
 import UsernameForm from "@/components/forms/UsernameForm";
 import { Page } from "@/models/Page";
-import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import cloneDeep from 'clone-deep';
+import clientPromise from '@/lib/mongoClient';
 
 export default async function AccountPage({ searchParams }) {
   const session = await getServerSession(authOptions);
   const desiredUsername = searchParams?.desiredUsername;
-  
+
   if (!session) {
     return redirect('/');
   }
 
-  mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-
-  const page = await Page.findOne({ owner: session?.user?.email });
+  const client = await clientPromise;
+  const db = client.db();
+  const page = await db.collection('pages').findOne({ owner: session?.user?.email });
 
   if (!page) {
     return (
@@ -32,7 +29,7 @@ export default async function AccountPage({ searchParams }) {
     );
   }
 
-  const leanPage = cloneDeep(page.toJSON());
+  const leanPage = cloneDeep(page);
   leanPage._id = leanPage._id.toString();
 
   return (
