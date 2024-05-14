@@ -19,6 +19,7 @@ export default async function AccountPage({ searchParams }) {
 
   const client = await clientPromise;
   const db = client.db();
+
   const page = await db.collection('pages').findOne({ owner: session?.user?.email });
 
   if (!page) {
