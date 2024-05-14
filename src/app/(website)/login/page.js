@@ -1,6 +1,18 @@
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 import LoginWithGoogle from "@/components/buttons/LoginWithGoogle";
 
 export default function LoginPage() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      router.push('/account'); // Redirect to /account if authenticated
+    }
+  }, [status, router]);
+
   return (
     <div>
       <div className="p-4 max-w-xs mx-auto">
