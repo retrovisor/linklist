@@ -1,13 +1,13 @@
 import Link from 'next/link';
 
-export default function AboutPage() {
+export default function PricingPage() {
   return (
     <div className="bg-blue-950 text-white min-h-screen">
       <div className="h-36 bg-gray-400 bg-cover bg-center">
-        <h1 className="text-4xl text-center pt-12">About Page</h1>
+        <h1 className="text-4xl text-center pt-12">Pricing Page</h1>
       </div>
       <div className="max-w-xs mx-auto text-center my-4">
-        <p>Welcome to the about page. Here you will find information about our website and mission.</p>
+        <p>Welcome to the pricing page. Here you will find all the details about our pricing plans.</p>
         {/* Add more static content as needed */}
       </div>
       <div className="max-w-2xl mx-auto grid md:grid-cols-2 gap-6 p-4 px-8">
