@@ -17,27 +17,40 @@ export default async function AccountPage({ searchParams }) {
     return redirect('/');
   }
 
-  const client = await clientPromise;
-  const db = client.db();
+  try {
+    const client = await clientPromise;
+    const db = client.db();
 
-  const page = await db.collection('pages').findOne({ owner: session?.user?.email });
+    console.log('Connected to MongoDB');
 
-  if (!page) {
+    const page = await db.collection('pages').findOne({ owner: session?.user?.email });
+
+    console.log('Query executed successfully');
+
+    if (!page) {
+      console.log('Page not found for the user');
+      return (
+        <div>
+          <UsernameForm desiredUsername={desiredUsername} />
+        </div>
+      );
+    }
+
+    console.log('Page found:', page);
+
+    const leanPage = cloneDeep(page);
+    leanPage._id = leanPage._id.toString();
+
     return (
-      <div>
-        <UsernameForm desiredUsername={desiredUsername} />
-      </div>
+      <>
+        <PageSettingsForm page={leanPage} user={session.user} />
+        <PageButtonsForm page={leanPage} user={session.user} />
+        <PageLinksForm page={leanPage} user={session.user} />
+      </>
     );
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+    // Handle the error appropriately, e.g., show an error message to the user
+    return <div>An error occurred. Please try again later.</div>;
   }
-
-  const leanPage = cloneDeep(page);
-  leanPage._id = leanPage._id.toString();
-
-  return (
-    <>
-      <PageSettingsForm page={leanPage} user={session.user} />
-      <PageButtonsForm page={leanPage} user={session.user} />
-      <PageLinksForm page={leanPage} user={session.user} />
-    </>
-  );
 }
