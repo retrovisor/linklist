@@ -7,7 +7,7 @@ import { Page } from "@/models/Page";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import cloneDeep from 'clone-deep';
-import clientPromise from '@/lib/mongoClient';
+import clientPromise from '@/libs/mongoClient';
 
 export default async function AccountPage({ searchParams }) {
   const session = await getServerSession(authOptions);
