@@ -2,7 +2,7 @@
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signIn } from "next-auth/react";
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export default function LoginWithGoogle() {
   const router = useRouter();
