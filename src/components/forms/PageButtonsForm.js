@@ -1,45 +1,45 @@
 'use client';
 
-import {savePageButtons} from "@/actions/pageActions";
+import { savePageButtons } from "@/actions/pageActions";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import SectionBox from "@/components/layout/SectionBox";
 import { ReactSortable } from "react-sortablejs";
 import {
-  faDiscord,
-  faFacebook,
-  faGithub, faInstagram, faInstagramSquare, faTelegram,
-  faTiktok,
-  faWhatsapp,
-  faYoutube
+  faDiscord, faFacebook, faGithub, faInstagram,
+  faTelegram, faTiktok, faWhatsapp, faYoutube
 } from "@fortawesome/free-brands-svg-icons";
-import {faEnvelope, faGripLines, faMobile, faPlus, faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useState} from "react";
+import { faEnvelope, faGripLines, faMobile, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 export const allButtons = [
-  {key: 'email', 'label': 'e-mail', icon: faEnvelope, placeholder: 'test@example.com'},
-  {key: 'mobile', 'label': 'mobile', icon: faMobile, placeholder: '+46 123 123 123'},
-  {key: 'instagram', 'label': 'instagram', icon: faInstagram, placeholder: 'https://facebook.com/profile/...'},
-  {key: 'facebook', 'label': 'facebook', icon: faFacebook},
-  {key: 'discord', 'label': 'discord', icon: faDiscord},
-  {key: 'tiktok', 'label': 'tiktok', icon: faTiktok},
-  {key: 'youtube', 'label': 'youtube', icon: faYoutube},
-  {key: 'whatsapp', 'label': 'whatsapp', icon: faWhatsapp},
-  {key: 'github', 'label': 'github', icon: faGithub},
-  {key: 'telegram', 'label': 'telegram', icon: faTelegram},
+  { key: 'email', 'label': 'e-mail', icon: faEnvelope, placeholder: 'test@example.com' },
+  { key: 'mobile', 'label': 'mobile', icon: faMobile, placeholder: '+46 123 123 123' },
+  { key: 'instagram', 'label': 'instagram', icon: faInstagram, placeholder: 'https://instagram.com/profile/...' },
+  { key: 'facebook', 'label': 'facebook', icon: faFacebook },
+  { key: 'discord', 'label': 'discord', icon: faDiscord },
+  { key: 'tiktok', 'label': 'tiktok', icon: faTiktok },
+  { key: 'youtube', 'label': 'youtube', icon: faYoutube },
+  { key: 'whatsapp', 'label': 'whatsapp', icon: faWhatsapp },
+  { key: 'github', 'label': 'github', icon: faGithub },
+  { key: 'telegram', 'label': 'telegram', icon: faTelegram },
 ];
 
 function upperFirst(str) {
-  return str.slice(0,1).toUpperCase() + str.slice(1);
+  return str.slice(0, 1).toUpperCase() + str.slice(1);
 }
 
-export default function PageButtonsForm({user,page}) {
+export default function PageButtonsForm({ user, page }) {
+  console.log('PageButtonsForm initialized with user:', user, 'and page:', page);
 
-  const pageSavedButtonsKeys = Object.keys(page.buttons);
+  const pageSavedButtonsKeys = Object.keys(page.buttons || {});
   const pageSavedButtonsInfo = pageSavedButtonsKeys
-    .map(k => allButtons.find(b => b.key === k));
+    .map(k => allButtons.find(b => b.key === k))
+    .filter(b => b !== undefined); // Filter out undefined buttons
+
   const [activeButtons, setActiveButtons] = useState(pageSavedButtonsInfo);
+  console.log('Initial active buttons:', activeButtons);
 
   function addButtonToProfile(button) {
     setActiveButtons(prevButtons => {
@@ -52,14 +52,14 @@ export default function PageButtonsForm({user,page}) {
     toast.success('Settings saved!');
   }
 
-  function removeButton({key:keyToRemove}) {
+  function removeButton({ key: keyToRemove }) {
     setActiveButtons(prevButtons => {
-      return prevButtons
-        .filter(button => button.key !== keyToRemove);
+      return prevButtons.filter(button => button.key !== keyToRemove);
     });
   }
 
   const availableButtons = allButtons.filter(b1 => !activeButtons.find(b2 => b1.key === b2.key));
+  console.log('Available buttons:', availableButtons);
 
   return (
     <SectionBox>
@@ -83,11 +83,11 @@ export default function PageButtonsForm({user,page}) {
                   placeholder={b.placeholder}
                   name={b.key}
                   defaultValue={page.buttons[b.key]}
-                  type="text" style={{marginBottom:'0'}} />
+                  type="text" style={{ marginBottom: '0' }} />
                 <button
                   onClick={() => removeButton(b)}
                   type="button"
-                  className="py-2 px-4  bg-gray-300 cursor-pointer">
+                  className="py-2 px-4 bg-gray-300 cursor-pointer">
                   <FontAwesomeIcon icon={faTrash} />
                 </button>
               </div>
@@ -102,9 +102,7 @@ export default function PageButtonsForm({user,page}) {
               onClick={() => addButtonToProfile(b)}
               className="flex items-center gap-1 p-2 bg-gray-200">
               <FontAwesomeIcon icon={b.icon} />
-              <span className="">
-                {upperFirst(b.label)}
-              </span>
+              <span>{upperFirst(b.label)}</span>
               <FontAwesomeIcon icon={faPlus} />
             </button>
           ))}
