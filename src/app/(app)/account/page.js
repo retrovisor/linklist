@@ -10,10 +10,16 @@ import cloneDeep from 'clone-deep';
 import clientPromise from '@/libs/mongoClient';
 
 export default async function AccountPage({ searchParams }) {
+  console.log('AccountPage function started');
+
   const session = await getServerSession(authOptions);
+  console.log('Session:', session);
+
   const desiredUsername = searchParams?.desiredUsername;
+  console.log('Desired Username:', desiredUsername);
 
   if (!session) {
+    console.log('No session, redirecting to /');
     return redirect('/');
   }
 
@@ -24,8 +30,8 @@ export default async function AccountPage({ searchParams }) {
     console.log('Connected to MongoDB');
 
     const page = await db.collection('pages').findOne({ owner: session?.user?.email });
-
     console.log('Query executed successfully');
+    console.log('Page:', page);
 
     if (!page) {
       console.log('Page not found for the user');
@@ -41,6 +47,8 @@ export default async function AccountPage({ searchParams }) {
     const leanPage = cloneDeep(page);
     leanPage._id = leanPage._id.toString();
 
+    console.log('Rendering page components');
+
     return (
       <>
         <PageSettingsForm page={leanPage} user={session.user} />
@@ -49,8 +57,7 @@ export default async function AccountPage({ searchParams }) {
       </>
     );
   } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
-    // Handle the error appropriately, e.g., show an error message to the user
+    console.error('Error:', error);
     return <div>An error occurred. Please try again later.</div>;
   }
 }
