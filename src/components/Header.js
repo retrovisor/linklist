@@ -26,7 +26,7 @@ export default async function Header() {
           {!!session && (
             <>
               <Link href={'/account'}>
-                Hello, {session?.user?.name}
+                My Links
               </Link>
               <LogoutButton />
             </>
