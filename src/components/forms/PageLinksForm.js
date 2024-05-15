@@ -72,7 +72,7 @@ export default function PageLinksForm({page,user}) {
             handle={'.handle'}
             list={links} setList={setLinks}>
             {links.map(l => (
-              <div key={l.key} className="mt-8 md:flex gap-6 items-center">
+              <div key={l.key} className="mt-8 md:flex gap-2 items-center">
                 <div className="handle">
                   <FontAwesomeIcon
                     className="text-gray-500 mr-2 cursor-ns-resize"
