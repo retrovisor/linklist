@@ -90,7 +90,7 @@ export default function PageButtonsForm({ user, page }) {
                 <input
                   placeholder={b.placeholder}
                   name={b.key}
-                  defaultValue={page.buttons[b.key] || ''}
+                  defaultValue={page.buttons ? page.buttons[b.key] : ''}
                   type="text" style={{ marginBottom: '0' }} />
                 <button
                   onClick={() => removeButton(b)}
