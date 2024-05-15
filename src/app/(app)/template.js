@@ -37,7 +37,7 @@ export default async function AppTemplate({ children, ...rest }) {
         <FontAwesomeIcon icon={faBars} />
 
       </label>
-            <span>Edit your Nav.Link</span>
+            
       <input id="navCb" type="checkbox" className="hidden" />
       <label htmlFor="navCb" className="hidden backdrop fixed inset-0 bg-black/80 z-10"></label>
       <aside className="bg-white w-48 p-4 pt-6 shadow fixed md:static -left-48 top-0 bottom-0 z-20 transition-all">
