@@ -1,7 +1,7 @@
 'use client';
 import { signIn } from "next-auth/react";
 import Image from "next/image";
-import kakaoLogo from "@/public/kakao.png"; // Ensure you have the Kakao logo in your public folder
+import kakaoLogo from '/public/kakao.png'; // Ensure this path is correct
 
 export default function LoginWithKakao() {
   return (
