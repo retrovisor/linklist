@@ -2,7 +2,7 @@ import clientPromise from "@/libs/mongoClient";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import KakaoProvider from "@next-auth/kakao";
+import KakaoProvider from "next-auth/providers/kakao";
 
 export const authOptions = {
   secret: process.env.SECRET,
