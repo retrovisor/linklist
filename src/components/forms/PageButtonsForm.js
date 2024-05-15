@@ -53,9 +53,20 @@ export default function PageButtonsForm({ user, page }) {
   }
 
   // Function to save buttons (called on form submit)
-  async function saveButtons(formData) {
-    await savePageButtons(formData);
-    toast.success('Settings saved!');
+  async function saveButtons(event) {
+    event.preventDefault(); // Prevent page reload
+    const formData = new FormData(event.target);
+    const formObject = {};
+    formData.forEach((value, key) => {
+      formObject[key] = value;
+    });
+    try {
+      await savePageButtons(formObject);
+      toast.success('Settings saved!');
+    } catch (error) {
+      console.error('Failed to save settings:', error);
+      toast.error('Failed to save settings. Please try again.');
+    }
   }
 
   // Function to remove a button from the profile
