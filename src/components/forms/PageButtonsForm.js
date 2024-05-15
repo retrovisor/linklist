@@ -89,7 +89,7 @@ export default function PageButtonsForm({ user, page }) {
           list={activeButtons}
           setList={setActiveButtons}>
           {activeButtons.map(b => (
-            <div key={b.key} className="mb-4 md:flex items-center">
+            <div key={b.key} className="mb-2 md:flex items-center">
               <div className="w-56 flex h-full text-gray-700 gap-2 items-center">
                 <FontAwesomeIcon
                   icon={faGripLines}
