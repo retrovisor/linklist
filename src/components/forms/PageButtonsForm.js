@@ -41,7 +41,6 @@ export default function PageButtonsForm({ user, page }) {
     .filter(b => b !== undefined); // Filter out undefined buttons
 
   const [activeButtons, setActiveButtons] = useState(pageSavedButtonsInfo);
-  const [isLoading, setIsLoading] = useState(false);
   console.log('Initial active buttons:', activeButtons);
 
   // Function to add a button to the profile
@@ -55,7 +54,6 @@ export default function PageButtonsForm({ user, page }) {
 
   // Function to save buttons (called on form submit)
   async function saveButtons(formData) {
-    setIsLoading(true);
     try {
       const response = await savePageButtons(formData);
       if (response.success) {
@@ -67,7 +65,6 @@ export default function PageButtonsForm({ user, page }) {
       console.error('Failed to save settings:', error);
       toast.error('Failed to save settings. Please try again.');
     }
-    setIsLoading(false);
   }
 
   // Function to remove a button from the profile
@@ -83,11 +80,7 @@ export default function PageButtonsForm({ user, page }) {
 
   return (
     <SectionBox>
-      <form onSubmit={event => {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        saveButtons(formData);
-      }}>
+      <form action={saveButtons}>
         <h2 className="text-2xl font-bold mb-4">Buttons</h2>
         <ReactSortable
           handle=".handle"
@@ -132,7 +125,7 @@ export default function PageButtonsForm({ user, page }) {
           ))}
         </div>
         <div className="border-t pt-4 mt-4">
-          <SubmitButton isLoading={isLoading} className="max-w-xs mx-auto">
+          <SubmitButton className="max-w-xs mx-auto">
             <FontAwesomeIcon icon={faSave} />
             <span>Save</span>
           </SubmitButton>
