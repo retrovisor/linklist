@@ -4,7 +4,25 @@
 
 body{
     @apply bg-gray-100;
+
+        width: 500px;
+    -webkit-display: flex;
+    display: -ms-flex;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    margin: 0 auto;
+    overflow: hidden;
+    line-height: 1.2rem;
+    transform: skew(0);
 }
+
+@media screen and (max-width: 500px) {
+body {
+		         width: 100%;
+    }
+}
+
 
 input[type="text"], textarea{
     @apply bg-gray-100 w-full block py-2 px-2 mb-2;
