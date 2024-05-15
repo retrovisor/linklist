@@ -3,13 +3,16 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: '*.googleusercontent.com'
+        hostname: '*.googleusercontent.com',
       },
       {
         hostname: 'linklist-files.s3.amazonaws.com',
       },
+      {
+        hostname: 'k.kakaocdn.net',
+      },
     ],
-  }
-}
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
