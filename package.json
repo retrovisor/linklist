@@ -30,7 +30,7 @@
     "react-sortablejs": "^6.1.4",
     "recharts": "^2.10.3",
     "sortablejs": "^1.15.0",
-    "uniqid": "^5.4.0"
+    "uniqid": "^5.4.0",
     "@next-auth/kakao": "^0.1.0"
   },
   "devDependencies": {
