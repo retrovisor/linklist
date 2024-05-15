@@ -56,6 +56,7 @@ export default function PageButtonsForm({ user, page }) {
   async function saveButtons(event) {
     event.preventDefault(); // Prevent page reload
     const formData = new FormData(event.target);
+    console.log('Form data to be sent:', formData);
     try {
       const response = await savePageButtons(formData); // Send formData directly
       if (response.success) {
