@@ -56,7 +56,6 @@ export default function PageButtonsForm({ user, page }) {
   async function saveButtons(event) {
     event.preventDefault(); // Prevent page reload
     const formData = new FormData(event.target);
-    console.log('Form data to be sent:', formData);
     try {
       const response = await savePageButtons(formData); // Send formData directly
       if (response.success) {
@@ -83,7 +82,7 @@ export default function PageButtonsForm({ user, page }) {
 
   return (
     <SectionBox>
-      <form onSubmit={saveButtons}>
+      <form action={saveButtons}>
         <h2 className="text-2xl font-bold mb-4">Buttons</h2>
         <ReactSortable
           handle=".handle"
