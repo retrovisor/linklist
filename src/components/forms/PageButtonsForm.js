@@ -56,13 +56,14 @@ export default function PageButtonsForm({ user, page }) {
   async function saveButtons(event) {
     event.preventDefault(); // Prevent page reload
     const formData = new FormData(event.target);
-    const formObject = {};
-    formData.forEach((value, key) => {
-      formObject[key] = value;
-    });
+    console.log('Form data to be sent:', formData);
     try {
-      await savePageButtons(formObject);
-      toast.success('Settings saved!');
+      const response = await savePageButtons(formData); // Send formData directly
+      if (response.success) {
+        toast.success('Settings saved!');
+      } else {
+        toast.error(response.message || 'Failed to save settings.');
+      }
     } catch (error) {
       console.error('Failed to save settings:', error);
       toast.error('Failed to save settings. Please try again.');
