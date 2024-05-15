@@ -1,5 +1,4 @@
 'use client';
-import { savePageButtons } from "@/actions/pageActions";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import SectionBox from "@/components/layout/SectionBox";
 import { ReactSortable } from "react-sortablejs";
@@ -55,11 +54,15 @@ export default function PageButtonsForm({ user, page }) {
   // Function to save buttons (called on form submit)
   async function saveButtons(formData) {
     try {
-      const response = await savePageButtons(formData);
-      if (response.success) {
+      const response = await fetch('/api/savePageButtons', {
+        method: 'POST',
+        body: formData,
+      });
+      const result = await response.json();
+      if (result.success) {
         toast.success('Settings saved!');
       } else {
-        toast.error(response.message || 'Failed to save settings.');
+        toast.error(result.message || 'Failed to save settings.');
       }
     } catch (error) {
       console.error('Failed to save settings:', error);
@@ -80,7 +83,11 @@ export default function PageButtonsForm({ user, page }) {
 
   return (
     <SectionBox>
-      <form action={saveButtons}>
+      <form onSubmit={event => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        saveButtons(formData);
+      }}>
         <h2 className="text-2xl font-bold mb-4">Buttons</h2>
         <ReactSortable
           handle=".handle"
