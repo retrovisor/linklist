@@ -1,4 +1,5 @@
 import LoginWithGoogle from "@/components/buttons/LoginWithGoogle";
+import LoginWithKakao from "@/components/buttons/LoginWithKakao";
 
 export default function LoginPage() {
   return (
@@ -11,6 +12,9 @@ export default function LoginPage() {
           Sign in to your account using one of the methods below
         </p>
         <LoginWithGoogle />
+        <div className="mt-4">
+          <LoginWithKakao />
+        </div>
       </div>
     </div>
   );
