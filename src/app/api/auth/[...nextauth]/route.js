@@ -15,6 +15,14 @@ export const authOptions = {
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID,
       clientSecret: process.env.KAKAO_CLIENT_SECRET,
+      profile(profile) {
+        return {
+          id: profile.id,
+          name: profile.kakao_account.profile.nickname,
+          email: profile.kakao_account.email,
+          image: profile.kakao_account.profile.profile_image_url.replace('http://', 'https://'),
+        };
+      },
     }),
   ],
 };
