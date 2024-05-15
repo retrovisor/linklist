@@ -11,9 +11,10 @@ export default function LoginPage() {
         <p className="text-center mb-6 text-gray-500">
           Sign in to your account using one of the methods below
         </p>
-        <LoginWithGoogle />
+        <LoginWithKakao />
         <div className="mt-4">
-          <LoginWithKakao />
+          
+    <LoginWithGoogle />
         </div>
       </div>
     </div>
