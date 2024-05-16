@@ -1,4 +1,4 @@
-// middleware.js
+// src/middleware.js
 import { getToken } from 'next-auth/jwt';
 import { NextResponse } from 'next/server';
 import { parse } from 'cookie';
@@ -7,17 +7,15 @@ export async function middleware(req) {
   console.log('Middleware executed');
   console.log('NEXTAUTH_SECRET:', process.env.NEXTAUTH_SECRET);
 
-  // Log headers and cookies for debugging
-  console.log('Request Headers:', req.headers);
-  console.log('Request Cookies:', req.cookies);
-
   // Manually parse cookies
-  const cookies = parse(req.headers.get('cookie') || '');
-  const tokenCookie = cookies['next-auth.session-token'] || cookies['next-auth.callback-url'];
+  const cookieHeader = req.headers.get('cookie');
+  const cookies = parse(cookieHeader || '');
+  const tokenCookie = cookies['next-auth.session-token'] || cookies['__Secure-next-auth.session-token'];
 
   console.log('Parsed Token Cookie:', tokenCookie);
 
-  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET, raw: tokenCookie });
+  // Manually pass the token to getToken
+  const token = await getToken({ token: tokenCookie, secret: process.env.NEXTAUTH_SECRET });
   console.log('Token:', token);
 
   const { pathname } = req.nextUrl;
