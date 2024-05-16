@@ -1,7 +1,12 @@
+'use client';
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import LoginWithGoogle from "@/components/buttons/LoginWithGoogle";
+import LoginWithKakao from "@/components/buttons/LoginWithKakao";
 
 export default function LoginPage() {
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   if (status === "loading") {
     return <div>Loading...</div>;
@@ -26,7 +31,6 @@ export default function LoginPage() {
     );
   }
 
-  // User is authenticated, handle the authenticated state
   const username = localStorage.getItem('desiredUsername');
   const redirectUrl = username ? `/account?desiredUsername=${username}` : '/account';
   router.push(redirectUrl);
