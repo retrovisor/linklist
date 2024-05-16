@@ -2,12 +2,12 @@
 
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import LoginWithGoogle from "@/components/buttons/LoginWithGoogle";
 import LoginWithKakao from "@/components/buttons/LoginWithKakao";
 
 export default function LoginPage() {
-  const { data: session, status } = useSession();
+  const { data: session = null, status } = useSession();
   const router = useRouter();
 
   useEffect(() => {
