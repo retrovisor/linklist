@@ -1,7 +1,6 @@
-// 'use client';
-
+/* use client */
 import {signIn} from "next-auth/react";
-import {useRouter} from "next/router";  // Updated import to use 'next/router' instead of 'next/navigation'
+import {useRouter} from "next/router";
 import {useEffect} from "react";
 
 export default function HeroForm({user}) {
