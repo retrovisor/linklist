@@ -30,6 +30,7 @@ export const authOptions = {
   },
   jwt: {
     secret: process.env.SECRET,
+    encryption: true,
   },
   callbacks: {
     async jwt({ token, user }) {
