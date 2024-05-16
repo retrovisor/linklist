@@ -1,10 +1,12 @@
-/* use client */
-import {signIn} from "next-auth/react";
-import {useRouter} from "next/router";
-import {useEffect} from "react";
+// 'use client';
 
-export default function HeroForm({user}) {
+import { signIn } from "next-auth/react";
+import { redirect, useRouter } from "next/navigation";
+import { useEffect } from "react";
+
+export default function HeroForm({ user }) {
   const router = useRouter();
+
   useEffect(() => {
     if (
       'localStorage' in window &&
@@ -12,7 +14,7 @@ export default function HeroForm({user}) {
     ) {
       const username = window.localStorage.getItem('desiredUsername');
       window.localStorage.removeItem('desiredUsername');
-      router.push('/login?desiredUsername=' + encodeURIComponent(username));
+      redirect('/account?desiredUsername=' + username);
     }
   }, []);
 
@@ -23,19 +25,26 @@ export default function HeroForm({user}) {
     const username = input.value;
     if (username.length > 0) {
       window.localStorage.setItem('desiredUsername', username);
-      router.push('/login');  // Redirect to login page instead of directly signing in
+      if (user) {
+        router.push('/account?desiredUsername=' + username);
+      } else {
+        router.push('/login');  // Redirect to the login page
+      }
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="inline-flex items-center shadow-lg bg-white shadow-gray-500/20">
-      <span className="bg-white py-4 pl-4">linklist.to/</span>
+    <form
+      onSubmit={handleSubmit}
+      className="inline-flex items-center shadow-lg bg-white shadow-gray-500/20">
+      <span className="bg-white py-4 pl-4">
+        linklist.to/
+      </span>
       <input
         type="text"
         className=""
-        style={{backgroundColor: 'white', marginBottom: 0, paddingLeft: 0}}
-        placeholder="username"
-      />
+        style={{ backgroundColor: 'white', marginBottom: 0, paddingLeft: 0 }}
+        placeholder="username" />
       <button
         type="submit"
         className="bg-blue-500 text-white py-4 px-6 whitespace-nowrap">
