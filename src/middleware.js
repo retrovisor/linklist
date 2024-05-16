@@ -15,7 +15,7 @@ export async function middleware(req) {
   console.log('Parsed Token Cookie:', tokenCookie);
 
   // Ensure req is passed correctly to getToken
-  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET, cookie: tokenCookie });
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   console.log('Token:', token);
 
   const { pathname } = req.nextUrl;
