@@ -1,1 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* Ensure html and body elements take up full height and allow scrolling */
+html, body {
+  height: 100%;
+  overflow: auto;
+}
+
+body {
+  @apply bg-gray-100;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  margin: 0 auto;
+  /* Remove overflow: hidden to allow scrolling */
+  line-height: 1.2rem;
+  transform: skew(0);
+}
+
+/* Responsive design adjustment for smaller screens */
+@media screen and (max-width: 500px) {
+  body {
+    width: 100%;
+  }
+}
+
+/* Style adjustments for form inputs and labels */
+input[type="text"], textarea {
+  @apply bg-gray-100 w-full block py-2 px-2 mb-2;
+}
+
+label.input-label {
+  @apply uppercase text-gray-400 text-xs mb-2 font-semibold;
+}
+
+/* Style adjustments for radio buttons */
+.radio-togglers {
+  @apply p-1 bg-gray-200 inline-flex cursor-pointer;
+}
+
+.radio-togglers div {
+  @apply p-2 px-4 text-gray-500 block flex items-center gap-2 cursor-pointer;
+}
+
+.radio-togglers input[type="radio"] {
+  @apply hidden;
+}
+
+.radio-togglers input[type="radio"]:checked + div {
+  @apply bg-white text-blue-600;
+}
+
+/* Style for draggable ghost element */
+.sortable-ghost {
+  opacity: .2;
+}
+
+/* Styles for navigation checkbox interactions */
+input#navCb:checked ~ aside {
+  left: 0;
+}
+
+input#navCb:checked ~ .backdrop {
+  display: block;
+}
