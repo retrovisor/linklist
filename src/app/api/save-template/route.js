@@ -15,10 +15,16 @@ export async function POST(request) {
   const { template } = await request.json();
 
   try {
-    await Page.updateOne(
+    const page = await Page.findOneAndUpdate(
       { owner: session.user.email },
-      { $set: { template } }
+      { $set: { template } },
+      { new: true }
     );
+
+    if (!page) {
+      return NextResponse.json({ success: false, message: 'Page not found' });
+    }
+
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message });
