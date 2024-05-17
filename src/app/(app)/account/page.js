@@ -15,7 +15,7 @@ export default async function AccountPage({ searchParams }) {
   const session = await getServerSession(authOptions);
   console.log('Session:', session);
 
-  const desiredUsername = searchParams?.desiredUsername;
+  const desiredUsername = searchParams?.created;
   console.log('Desired Username:', desiredUsername);
 
   if (!session) {
@@ -25,7 +25,10 @@ export default async function AccountPage({ searchParams }) {
 
   // Ensure mongoose connection is established only once
   if (mongoose.connection.readyState === 0) {
-    await mongoose.connect(process.env.MONGO_URI);
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
   }
 
   try {
