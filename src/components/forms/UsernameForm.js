@@ -3,12 +3,10 @@
 import grabUsername from "@/actions/grabUsername";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import RightIcon from "@/components/icons/RightIcon";
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 export default function UsernameForm({ desiredUsername }) {
   const [taken, setTaken] = useState(false);
-  const router = useRouter();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -17,7 +15,7 @@ export default function UsernameForm({ desiredUsername }) {
 
     setTaken(result === false);
     if (result) {
-      router.push('/select-template?created=' + formData.get('username'));
+      window.location.href = '/select-template?created=' + formData.get('username');
     }
   }
 
