@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import {Lato} from 'next/font/google'
 import '../../globals.css'
-import '../../../styles/templates/global.css';
+import '@/styles/templates/global.css';
 
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] })
