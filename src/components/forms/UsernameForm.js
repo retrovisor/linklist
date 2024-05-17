@@ -2,19 +2,22 @@
 import grabUsername from "@/actions/grabUsername";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import RightIcon from "@/components/icons/RightIcon";
-import {redirect} from "next/navigation";
-import {useState} from "react";
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
-export default function UsernameForm({desiredUsername}) {
-  const [taken,setTaken] = useState(false);
+export default function UsernameForm({ desiredUsername }) {
+  const [taken, setTaken] = useState(false);
+  const router = useRouter();
+
   async function handleSubmit(formData) {
     const result = await grabUsername(formData);
 
     setTaken(result === false);
     if (result) {
-      redirect('/account?created='+formData.get('username'));
+      router.push('/select-template?created=' + formData.get('username'));
     }
   }
+
   return (
     <form action={handleSubmit}>
       <h1 className="text-4xl font-bold text-center mb-2">
@@ -29,7 +32,8 @@ export default function UsernameForm({desiredUsername}) {
           className="block p-2 mx-auto border w-full mb-2 text-center"
           defaultValue={desiredUsername}
           type="text"
-          placeholder="username" />
+          placeholder="username"
+        />
         {taken && (
           <div className="bg-red-200 border border-red-500 p-2 mb-2 text-center">
             This username is taken
