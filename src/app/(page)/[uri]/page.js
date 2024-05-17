@@ -17,8 +17,8 @@ import mongoose from "mongoose";
 import { btoa } from "next/dist/compiled/@edge-runtime/primitives";
 import Image from "next/image";
 import Link from "next/link";
-import "@/styles/templates/template1.css";
-import "@/styles/templates/template2.css";
+import "@/styles/template1.css";
+import "@/styles/template2.css";
 
 
 export const buttonsIcons = {
