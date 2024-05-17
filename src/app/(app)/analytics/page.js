@@ -14,10 +14,7 @@ async function connectToDatabase() {
   if (mongoose.connection.readyState >= 1) {
     return;
   }
-  return mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  return mongoose.connect(process.env.MONGO_URI);
 }
 
 export default async function AnalyticsPage() {
@@ -40,7 +37,21 @@ export default async function AnalyticsPage() {
     return redirect('/');
   }
 
-  const page = await Page.findOne({ owner: session.user.email });
+  let page;
+  try {
+    page = await Page.findOne({ owner: session.user.email });
+  } catch (error) {
+    console.error('Error fetching page:', error);
+    return (
+      <div>
+        <SectionBox>
+          <h2 className="text-xl mb-6 text-center">Error Loading Data</h2>
+          <p className="text-center">There was an error loading the page data. Please try again later.</p>
+        </SectionBox>
+      </div>
+    );
+  }
+
   if (!page) {
     return (
       <div>
@@ -52,41 +63,45 @@ export default async function AnalyticsPage() {
     );
   }
 
-  const groupedViews = await Event.aggregate([
-    {
-      $match: {
-        type: 'view',
-        uri: page.uri,
-      }
-    },
-    {
-      $group: {
-        _id: {
-          $dateToString: {
-            date: "$createdAt",
-            format: "%Y-%m-%d"
-          },
-        },
-        count: {
-          "$count": {},
+  let groupedViews = [];
+  try {
+    groupedViews = await Event.aggregate([
+      {
+        $match: {
+          type: 'view',
+          uri: page.uri,
         }
       },
-    },
-    {
-      $sort: { _id: 1 }
-    }
-  ]).catch(error => {
+      {
+        $group: {
+          _id: {
+            $dateToString: {
+              date: "$createdAt",
+              format: "%Y-%m-%d"
+            },
+          },
+          count: {
+            "$count": {},
+          }
+        },
+      },
+      {
+        $sort: { _id: 1 }
+      }
+    ]);
+  } catch (error) {
     console.error('Error fetching grouped views:', error);
-    return [];
-  });
+  }
 
-  const clicks = await Event.find({
-    page: page.uri,
-    type: 'click',
-  }).catch(error => {
+  let clicks = [];
+  try {
+    clicks = await Event.find({
+      page: page.uri,
+      type: 'click',
+    });
+  } catch (error) {
     console.error('Error fetching clicks:', error);
-    return [];
-  });
+  }
 
   return (
     <div>
