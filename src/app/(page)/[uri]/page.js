@@ -20,7 +20,6 @@ import Link from "next/link";
 import "@/styles/template1.css";
 import "@/styles/template2.css";
 
-
 export const buttonsIcons = {
   email: faEnvelope,
   mobile: faPhone,
@@ -46,14 +45,9 @@ function buttonLink(key, value) {
 
 export default async function UserPage({ params }) {
   const uri = params.uri;
-  
-  console.log("Connecting to database...");
-  await mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  });
-  
-  console.log("Fetching page for URI:", uri);
+
+  await mongoose.connect(process.env.MONGO_URI);
+
   const page = await Page.findOne({ uri });
 
   if (!page) {
@@ -61,7 +55,6 @@ export default async function UserPage({ params }) {
     return <div>Page not found</div>;
   }
 
-  console.log("Fetching user for email:", page.owner);
   const user = await User.findOne({ email: page.owner });
 
   if (!user) {
@@ -69,70 +62,69 @@ export default async function UserPage({ params }) {
     return <div>User not found</div>;
   }
 
-  console.log("Creating view event for URI:", uri);
   await Event.create({ uri: uri, page: uri, type: 'view' });
 
   const template = page.template || "template1"; // Default to template1 if not specified
 
   return (
-    <div className={`template ${template}`}>
+    <div className={`bg-blue-950 text-white min-h-screen template ${template}`}>
       <div
-        className="header-bg"
+        className="h-36 bg-gray-400 bg-cover bg-center"
         style={
           page.bgType === 'color'
             ? { backgroundColor: page.bgColor }
             : { backgroundImage: `url(${page.bgImage})` }
         }
       ></div>
-      <div className="avatar-container">
+      <div className="aspect-square w-36 h-36 mx-auto relative -top-16 -mb-12">
         <Image
-          className="avatar"
+          className="rounded-full w-full h-full object-cover"
           src={user.image}
           alt="avatar"
           width={256} height={256}
         />
       </div>
-      <h2 className="display-name">{page.displayName}</h2>
-      <h3 className="location">
-        <FontAwesomeIcon className="location-icon" icon={faLocationDot} />
+      <h2 className="text-2xl text-center mb-1">{page.displayName}</h2>
+      <h3 className="text-md flex gap-2 justify-center items-center text-white/70">
+        <FontAwesomeIcon className="h-4" icon={faLocationDot} />
         <span>{page.location}</span>
       </h3>
-      <div className="bio">
+      <div className="max-w-xs mx-auto text-center my-2">
         <p>{page.bio}</p>
       </div>
-      <div className="buttons-container">
+      <div className="flex gap-2 justify-center mt-4 pb-4">
         {Object.keys(page.buttons).map(buttonKey => (
           <Link key={buttonKey} href={buttonLink(buttonKey, page.buttons[buttonKey])}
-                className="button">
-            <FontAwesomeIcon className="button-icon" icon={buttonsIcons[buttonKey]} />
+                className="rounded-full bg-white text-blue-950 p-2 flex items-center justify-center">
+            <FontAwesomeIcon className="w-5 h-5" icon={buttonsIcons[buttonKey]} />
           </Link>
         ))}
       </div>
-      <div className="links-container">
+      <div className="max-w-2xl mx-auto grid md:grid-cols-2 gap-6 p-4 px-8">
         {page.links.map(link => (
           <Link
             key={link.url}
             target="_blank"
             ping={process.env.URL + 'api/click?url=' + btoa(link.url) + '&page=' + page.uri}
-            className="link"
+            className="bg-indigo-800 p-2 block flex"
             href={link.url}>
-            <div className="link-icon-container">
-              <div className="link-icon-wrapper">
+            <div className="relative -left-4 overflow-hidden w-16">
+              <div className="w-16 h-16 bg-blue-700 aspect-square relative flex items-center justify-center aspect-square">
                 {link.icon && (
                   <Image
-                    className="link-icon"
+                    className="w-full h-full object-cover"
                     src={link.icon}
                     alt={'icon'} width={64} height={64} />
                 )}
                 {!link.icon && (
-                  <FontAwesomeIcon icon={faLink} className="default-link-icon" />
+                  <FontAwesomeIcon icon={faLink} className="w-8 h-8" />
                 )}
               </div>
             </div>
-            <div className="link-content">
+            <div className="flex items-center justify-center shrink grow-0 overflow-hidden">
               <div>
                 <h3>{link.title}</h3>
-                <p className="link-subtitle">{link.subtitle}</p>
+                <p className="text-white/50 h-6 overflow-hidden">{link.subtitle}</p>
               </div>
             </div>
           </Link>
