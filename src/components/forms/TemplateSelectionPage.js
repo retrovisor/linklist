@@ -1,13 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import SubmitButton from "@/components/buttons/SubmitButton";
 import RightIcon from "@/components/icons/RightIcon";
 
 export default function TemplateSelectionPage() {
   const [selectedTemplate, setSelectedTemplate] = useState('');
-  const router = useRouter();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -22,7 +20,7 @@ export default function TemplateSelectionPage() {
     });
 
     if (response.ok) {
-      router.push('/account');
+      window.location.href = '/account';
     }
   }
 
