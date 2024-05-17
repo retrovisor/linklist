@@ -1,1 +1,14 @@
+/* template2.css */
+.template.template2 {
+  /* Styles specific to template2 */
+  background-color: #1e4028;
+  color: white;
+  /* ... */
+}
 
+.template.template2 .button {
+  /* Button styles for template2 */
+  /* ... */
+}
+
+/* ... */
