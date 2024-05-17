@@ -9,7 +9,9 @@ export default function UsernameForm({ desiredUsername }) {
   const [taken, setTaken] = useState(false);
   const router = useRouter();
 
-  async function handleSubmit(formData) {
+  async function handleSubmit(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
     const result = await grabUsername(formData);
 
     setTaken(result === false);
@@ -19,7 +21,7 @@ export default function UsernameForm({ desiredUsername }) {
   }
 
   return (
-    <form action={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <h1 className="text-4xl font-bold text-center mb-2">
         Grab your username
       </h1>
