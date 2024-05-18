@@ -20,6 +20,17 @@ body {
   transform: skew(0);
 }
 
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  max-width: 30%;
+  height: auto;
+}
+
 /* Responsive design adjustment for smaller screens */
 @media screen and (max-width: 500px) {
   body {
