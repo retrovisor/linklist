@@ -24,15 +24,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+    margin-bottom: 25px;
    overflow: visible; /* To check if SVG is being clipped */
 }
 
 .logo {
   width: auto; /* Adjust based on actual size */
   height: auto;
-  max-width: 30%;
-      margin-top: 15px;
+  max-width: 18%;
+    margin-top: 15px;
 
 }
 
