@@ -3,6 +3,7 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import KakaoProvider from "next-auth/providers/kakao";
+import FacebookProvider from "next-auth/providers/facebook";
 
 export const authOptions = {
   secret: process.env.SECRET,
@@ -23,6 +24,10 @@ export const authOptions = {
           image: profile.kakao_account.profile.profile_image_url.replace('http://', 'https://'),
         };
       },
+    }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
     }),
   ],
   session: {
