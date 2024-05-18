@@ -1,7 +1,7 @@
 import LoginWithGoogle from "@/components/buttons/LoginWithGoogle";
 import LoginWithKakao from "@/components/buttons/LoginWithKakao";
-import LoginWithFacebook from './LoginWithFacebook';
-
+import LoginWithFacebook from "@/components/buttons/LoginWithFacebook";
+ 
 
 export default function LoginPage() {
   return (
