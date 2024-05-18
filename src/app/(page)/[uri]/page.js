@@ -98,7 +98,7 @@ export default async function UserPage({ params }) {
           </Link>
         ))}
       </div>
-      <div className="max-w-2xl mx-auto p-4 px-8">
+      <div className="max-w-2xl mx-auto p-4 px-4">
         {page.links.map(link => (
           <Link
             key={link.url}
