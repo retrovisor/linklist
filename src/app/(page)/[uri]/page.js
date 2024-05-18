@@ -104,7 +104,7 @@ export default async function UserPage({ params }) {
             key={link.url}
             target="_blank"
             ping={process.env.URL + 'api/click?url=' + btoa(link.url) + '&page=' + page.uri}
-            className="bg-white border-slate-950 border-2 mb-4 p-2 block flex"
+            className="bg-white border-slate-950 border-2 shadow-lg mb-4 p-2 block flex"
             href={link.url}>
             <div className="relative overflow-hidden w-16">
               <div className="w-16 h-16 bg-blue-700 aspect-square relative flex items-center justify-center aspect-square">
@@ -121,7 +121,7 @@ export default async function UserPage({ params }) {
             </div>
             <div className="flex items-center justify-center shrink grow-0 overflow-hidden ml-4">
               <div>
-                <h3 className="text-black">{link.title}</h3>
+                <h3 className="text-black text-xl">{link.title}</h3>
                 <p className="text-white/50 h-6 overflow-hidden">{link.subtitle}</p>
               </div>
             </div>
