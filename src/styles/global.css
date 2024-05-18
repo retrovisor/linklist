@@ -23,16 +23,18 @@ body {
 .logo-container {
   display: flex;
   justify-content: center;
-  align-items: center; /* Add this to vertically center your logo if needed */
+  align-items: center;
   margin-bottom: 20px;
-  background-color: #0000ff; /* Optional: for better visibility */
+  background-color: #0000ff; /* For visibility */
+  overflow: visible; /* To check if SVG is being clipped */
 }
 
 .logo {
-  max-width: 100%; /* This can be adjusted based on your needs */
+  width: auto; /* Adjust based on actual size */
   height: auto;
-  aspect-ratio: 396 / 97; /* Add aspect ratio to maintain the ratio */
+  max-width: 100%;
 }
+
 
 
 /* Responsive design adjustment for smaller screens */
