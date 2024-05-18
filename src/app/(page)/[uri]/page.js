@@ -87,9 +87,7 @@ export default async function UserPage({ params }) {
         <FontAwesomeIcon className="h-4" icon={faLocationDot} />
         <span>{page.location}</span>
       </h3>
-      <div className="max-w-xs mx-auto text-center my-2">
-        <p>{page.bio}</p>
-      </div>
+    
       <div className="flex gap-2 justify-center mt-4 pb-4">
         {Object.keys(page.buttons).map(buttonKey => (
           <Link key={buttonKey} href={buttonLink(buttonKey, page.buttons[buttonKey])}
@@ -97,6 +95,10 @@ export default async function UserPage({ params }) {
             <FontAwesomeIcon className="w-5 h-5" icon={buttonsIcons[buttonKey]} />
           </Link>
         ))}
+      </div>
+
+            <div className="max-w-xs mx-auto text-center my-2">
+        <p>{page.bio}</p>
       </div>
       <div className="max-w-2xl mx-auto p-4 px-4">
         {page.links.map(link => (
