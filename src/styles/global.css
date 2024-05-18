@@ -23,13 +23,17 @@ body {
 .logo-container {
   display: flex;
   justify-content: center;
+  align-items: center; /* Add this to vertically center your logo if needed */
   margin-bottom: 20px;
+  background-color: #0000ff; /* Optional: for better visibility */
 }
 
 .logo {
-  max-width: 30%;
+  max-width: 100%; /* This can be adjusted based on your needs */
   height: auto;
+  aspect-ratio: 396 / 97; /* Add aspect ratio to maintain the ratio */
 }
+
 
 /* Responsive design adjustment for smaller screens */
 @media screen and (max-width: 500px) {
