@@ -81,7 +81,7 @@ export default async function UserPage({ params }) {
           className="rounded-full w-full h-full object-cover"
           src={user.image}
           alt="avatar"
-          width={256} height={256}
+          width={90} height={90}
         />
       </div>
       <h2 className="text-2xl text-center mb-1">{page.displayName}</h2>
