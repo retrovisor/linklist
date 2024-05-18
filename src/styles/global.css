@@ -20,28 +20,32 @@ body {
   transform: skew(0);
 }
 
+
 .logo-container {
   display: flex;
   justify-content: center;
   align-items: center;
-    margin-bottom: 25px;
-   overflow: visible; /* To check if SVG is being clipped */
+  padding: 15px;
+  overflow: visible;
 }
 
 .logo {
-  width: auto; /* Adjust based on actual size */
+  width: 100%;
+  max-width: 150px;
   height: auto;
-  max-width: 18%;
-    margin-top: 15px;
-
+  margin-top: 15px;
 }
-
-
+ 
 
 /* Responsive design adjustment for smaller screens */
 @media screen and (max-width: 500px) {
   body {
     width: 100%;
+  }
+
+  
+  .logo {
+    max-width: 100px;
   }
 }
 
