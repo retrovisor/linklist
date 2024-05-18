@@ -96,7 +96,7 @@ export default async function UserPage({ params }) {
  </div>
 
           
-      <div className="aspect-square w-24 h-24 mx-auto relative -top-16 -mb-12">
+      <div className="aspect-square w-24 h-24 mx-auto relative">
         <Image
           className="rounded-full w-full h-full object-cover"
           src={user.image}
