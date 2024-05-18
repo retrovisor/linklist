@@ -76,7 +76,7 @@ export default async function UserPage({ params }) {
         className="bg-cover bg-center"></div>
 
  <div className="logo-container">
-    <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 396 97" fill="none" style="border: 1px solid red;">
+    <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 396 97" fill="none">
 
 
     <path d="M0 0 C130.68 0 261.36 0 396 0 C396 32.01 396 64.02 396 97 C265.32 97 134.64 97 0 97 C0 64.99 0 32.98 0 0 Z" fill="transparent"/>
