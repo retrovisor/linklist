@@ -25,14 +25,15 @@ body {
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-  background-color: #0000ff; /* For visibility */
-  overflow: visible; /* To check if SVG is being clipped */
+   overflow: visible; /* To check if SVG is being clipped */
 }
 
 .logo {
   width: auto; /* Adjust based on actual size */
   height: auto;
-  max-width: 100%;
+  max-width: 30%;
+      margin-top: 15px;
+
 }
 
 
