@@ -19,6 +19,11 @@ body {
   transform: skew(0);
 }
 
+.max-wid {
+
+  max-width: 500px;
+}
+
 /* Responsive design adjustment for smaller screens */
 @media screen and (max-width: 500px) {
   body {
