@@ -19,6 +19,7 @@ body {
   line-height: 1.2rem;
   transform: skew(0);
 }
+
 .fixed-button {
   position: fixed !important;
   top: 1rem !important;
@@ -26,13 +27,12 @@ body {
   z-index: 50 !important;
 }
 
-
 .logo-container {
   display: flex;
   justify-content: center;
   align-items: center;
   padding-top: 5px;
-    padding-bottom: 20px;
+  padding-bottom: 20px;
   overflow: visible;
 }
 
@@ -42,7 +42,6 @@ body {
   height: auto;
   margin-top: 10px;
 }
- 
 
 /* Responsive design adjustment for smaller screens */
 @media screen and (max-width: 500px) {
@@ -50,7 +49,6 @@ body {
     width: 100%;
   }
 
-  
   .logo {
     max-width: 70px;
   }
