@@ -123,7 +123,7 @@ export default async function UserPage({ params }) {
         ))}
       </div>
 
-      <div className="max-wid mx-auto text-center my-2 p-4">
+      <div className="max-wid mx-auto text-center p-4">
         <p>{page.bio}</p>
       </div>
       <div className="max-wid mx-auto pt-4">
