@@ -10,8 +10,7 @@ html, body {
 
 body {
   @apply bg-gray-100;
-  width: 500px;
-  display: flex;
+   display: flex;
   flex-direction: column;
   background-color: #fff;
   margin: 0 auto;
