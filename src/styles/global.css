@@ -19,6 +19,12 @@ body {
   line-height: 1.2rem;
   transform: skew(0);
 }
+.fixed-button {
+  position: fixed !important;
+  top: 1rem !important;
+  right: 1rem !important;
+  z-index: 50 !important;
+}
 
 
 .logo-container {
