@@ -1,8 +1,11 @@
 'use client';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWhatsapp, faShare, faFacebook, faKakaoTalk } from "@fortawesome/free-solid-svg-icons";
+import { faWhatsapp, faShare, faFacebook, faComment } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
+
+// Declare the domain at the top
+const DOMAIN = 'https://yourdomain.com'; // Replace with your domain
 
 export default function ShareDialog({ uri }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,14 +39,14 @@ export default function ShareDialog({ uri }) {
 
   const shareOnWhatsApp = () => {
     const shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
-      `Check out my page on MomoFriends: ${process.env.URL}/${uri}`
+      `Check out my page on MomoFriends: ${DOMAIN}/${uri}`
     )}`;
     window.open(shareUrl, "_blank");
   };
 
   const shareOnFacebook = () => {
     const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-      `${process.env.URL}/${uri}`
+      `${DOMAIN}/${uri}`
     )}`;
     window.open(shareUrl, "_blank");
   };
@@ -54,11 +57,11 @@ export default function ShareDialog({ uri }) {
         objectType: 'feed',
         content: {
           title: 'MomoFriends',
-          description: `Check out my page on MomoFriends: ${process.env.URL}/${uri}`,
+          description: `Check out my page on MomoFriends: ${DOMAIN}/${uri}`,
           imageUrl: 'YOUR_IMAGE_URL', // Replace with your image URL
           link: {
-            mobileWebUrl: `${process.env.URL}/${uri}`,
-            webUrl: `${process.env.URL}/${uri}`
+            mobileWebUrl: `${DOMAIN}/${uri}`,
+            webUrl: `${DOMAIN}/${uri}`
           }
         }
       });
@@ -80,26 +83,26 @@ export default function ShareDialog({ uri }) {
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-40">
           <div className="bg-white rounded-lg p-6 w-96">
             <h3 className="text-xl font-semibold mb-4">Share</h3>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col gap-4">
               <button
-                className="bg-green-500 text-white px-4 py-2 rounded"
+                className="bg-green-500 text-white px-6 py-4 rounded flex items-center justify-center"
                 onClick={shareOnWhatsApp}
               >
                 <FontAwesomeIcon className="mr-2" icon={faWhatsapp} />
                 WhatsApp
               </button>
               <button
-                className="bg-blue-600 text-white px-4 py-2 rounded"
+                className="bg-blue-600 text-white px-6 py-4 rounded flex items-center justify-center"
                 onClick={shareOnFacebook}
               >
                 <FontAwesomeIcon className="mr-2" icon={faFacebook} />
                 Facebook
               </button>
               <button
-                className="bg-yellow-400 text-black px-4 py-2 rounded"
+                className="bg-yellow-400 text-black px-6 py-4 rounded flex items-center justify-center"
                 onClick={shareOnKakao}
               >
-                <FontAwesomeIcon className="mr-2" icon={faKakaoTalk} />
+                <FontAwesomeIcon className="mr-2" icon={faComment} />
                 Kakao
               </button>
               {/* Add more share buttons if needed */}
