@@ -1,5 +1,3 @@
-'use client';
-
 import { Page } from "@/models/Page";
 import { User } from "@/models/User";
 import { Event } from "@/models/Event";
