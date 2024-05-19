@@ -1,7 +1,7 @@
 'use client';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWhatsapp, faShare, faFacebook, faComment } from "@fortawesome/free-solid-svg-icons";
+import { faWhatsapp, faFacebook, faComment, faShare } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 
 // Declare the domain at the top
@@ -85,21 +85,21 @@ export default function ShareDialog({ uri }) {
             <h3 className="text-xl font-semibold mb-4">Share</h3>
             <div className="flex flex-col gap-4">
               <button
-                className="bg-green-500 text-white px-6 py-4 rounded flex items-center justify-center"
+                className="bg-green-500 text-white text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
                 onClick={shareOnWhatsApp}
               >
                 <FontAwesomeIcon className="mr-2" icon={faWhatsapp} />
                 WhatsApp
               </button>
               <button
-                className="bg-blue-600 text-white px-6 py-4 rounded flex items-center justify-center"
+                className="bg-blue-600 text-white text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
                 onClick={shareOnFacebook}
               >
                 <FontAwesomeIcon className="mr-2" icon={faFacebook} />
                 Facebook
               </button>
               <button
-                className="bg-yellow-400 text-black px-6 py-4 rounded flex items-center justify-center"
+                className="bg-yellow-400 text-black text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
                 onClick={shareOnKakao}
               >
                 <FontAwesomeIcon className="mr-2" icon={faComment} />
