@@ -1,7 +1,8 @@
 'use client';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWhatsapp, faFacebook, faComment, faShare } from "@fortawesome/free-solid-svg-icons";
+import { faShare } from "@fortawesome/free-solid-svg-icons";
+import { faWhatsapp, faFacebook, faComment } from "@fortawesome/free-brands-svg-icons"; // Correct import for brands icons
 import { useState, useEffect } from "react";
 
 // Declare the domain at the top
