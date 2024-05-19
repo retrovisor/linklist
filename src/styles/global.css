@@ -36,7 +36,7 @@ body {
   overflow: visible;
 }
 
-.logo-container {
+.logo-container2 {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,7 +54,7 @@ body {
 
 .logo2 {
   width: 100%;
-  max-width: 50px;
+  max-width: 55px;
   margin-top: 10px;
 }
 
