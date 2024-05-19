@@ -28,7 +28,7 @@ export default function ShareDialog({ uri }) {
   return (
     <>
       <button
-        className="bg-white text-blue-950 p-2 rounded-full flex items-center justify-center"
+        className="fixed top-4 right-4 bg-white text-blue-950 p-2 rounded-full flex items-center justify-center"
         onClick={openDialog}
       >
         <FontAwesomeIcon className="w-5 h-5" icon={faShare} />
