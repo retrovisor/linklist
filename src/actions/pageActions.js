@@ -1,7 +1,8 @@
 'use server';
+
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Page } from "@/models/Page";
-import { User } from "@/models/User";  // Assuming User model is used in other functions
+import { User } from "@/models/User";
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 
@@ -17,9 +18,12 @@ async function connectToDatabase() {
 
 export async function savePageButtons(formData) {
   await connectToDatabase();
+
   const session = await getServerSession(authOptions);
+
   if (session) {
     const buttonsValues = {};
+
     // Ensure formData is iterable and correctly processed
     if (formData && typeof formData.forEach === 'function') {
       formData.forEach((value, key) => {
@@ -31,6 +35,7 @@ export async function savePageButtons(formData) {
     }
 
     const dataToUpdate = { buttons: buttonsValues };
+
     await Page.updateOne(
       { owner: session?.user?.email },
       dataToUpdate,
@@ -42,10 +47,11 @@ export async function savePageButtons(formData) {
   return { success: false, message: 'Unauthorized' };
 }
 
-// Assuming savePageSettings and savePageLinks are also needed
 export async function savePageSettings(formData) {
   await connectToDatabase();
+
   const session = await getServerSession(authOptions);
+
   if (session) {
     const dataKeys = [
       'displayName', 'location',
@@ -53,6 +59,7 @@ export async function savePageSettings(formData) {
     ];
 
     const dataToUpdate = {};
+
     for (const key of dataKeys) {
       if (formData.has(key)) {
         dataToUpdate[key] = formData.get(key);
@@ -80,12 +87,32 @@ export async function savePageSettings(formData) {
 
 export async function savePageLinks(links) {
   await connectToDatabase();
+
   const session = await getServerSession(authOptions);
+
   if (session) {
     await Page.updateOne(
       { owner: session?.user?.email },
       { links },
     );
+
+    return { success: true };
+  } else {
+    return { success: false, message: 'Unauthorized' };
+  }
+}
+
+export async function saveTextBoxes(textBoxes) {
+  await connectToDatabase();
+
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    await Page.updateOne(
+      { owner: session?.user?.email },
+      { textBoxes },
+    );
+
     return { success: true };
   } else {
     return { success: false, message: 'Unauthorized' };
