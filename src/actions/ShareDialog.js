@@ -1,7 +1,7 @@
 'use client';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faInstagram, faTelegram, faTwitter, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faInstagram, faTelegram, faTwitter, faWhatsapp, faShare } from "@fortawesome/free-brands-svg-icons";
 import { useState } from "react";
 
 export default function ShareDialog({ uri }) {
