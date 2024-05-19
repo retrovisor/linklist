@@ -8,19 +8,19 @@ import {
   faInstagram,
   faTelegram,
   faTiktok,
-  faTwitter,
   faWhatsapp,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope, faLink, faLocationDot, faMobile, faPhone, faShare } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faLink, faLocationDot, faMobile, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import mongoose from "mongoose";
 import { btoa } from "next/dist/compiled/@edge-runtime/primitives";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import "@/styles/template1.css";
 import "@/styles/template2.css";
+import ShareDialog from "@/actions/ShareDialog";
+
 
 export const buttonsIcons = {
   email: faEnvelope,
@@ -47,7 +47,6 @@ function buttonLink(key, value) {
 
 export default async function UserPage({ params }) {
   const uri = params.uri;
-  const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
 
   await mongoose.connect(process.env.MONGO_URI);
 
@@ -69,19 +68,6 @@ export default async function UserPage({ params }) {
 
   const template = page.template || "template1"; // Default to template1 if not specified
 
-  const openShareDialog = () => {
-    setIsShareDialogOpen(!isShareDialogOpen);
-  };
-
-  const shareOnWhatsApp = () => {
-    const shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
-      `Check out my page on MomoFriends: ${process.env.URL}/${page.uri}`
-    )}`;
-    window.open(shareUrl, "_blank");
-  };
-
-  // Add more share functions for other platforms
-
   return (
     <div className={`text-white min-h-screen template ${template}`} style={
           page.bgType === 'color'
@@ -92,50 +78,11 @@ export default async function UserPage({ params }) {
         className="bg-cover bg-center"></div>
 
       <div className="fixed top-4 right-4 z-50">
-        <button
-          className="bg-white text-blue-950 p-2 rounded-full flex items-center justify-center"
-          onClick={openShareDialog}
-        >
-          <FontAwesomeIcon className="w-5 h-5" icon={faShare} />
-        </button>
+        <ShareDialog uri={page.uri} />
       </div>
 
-      {isShareDialogOpen && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-40">
-          <div className="bg-white rounded-lg p-6">
-            <h3 className="text-xl font-semibold mb-4">Share</h3>
-            <div className="flex flex-wrap gap-4">
-              <button
-                className="bg-green-500 text-white px-4 py-2 rounded"
-                onClick={shareOnWhatsApp}
-              >
-                <FontAwesomeIcon className="mr-2" icon={faWhatsapp} />
-                WhatsApp
-              </button>
-              <button className="bg-yellow-500 text-white px-4 py-2 rounded">
-                <FontAwesomeIcon className="mr-2" icon={faTelegram} />
-                Telegram
-              </button>
-              <button className="bg-blue-500 text-white px-4 py-2 rounded">
-                <FontAwesomeIcon className="mr-2" icon={faFacebook} />
-                Facebook
-              </button>
-              <button className="bg-purple-500 text-white px-4 py-2 rounded">
-                <FontAwesomeIcon className="mr-2" icon={faInstagram} />
-                Instagram
-              </button>
-              <button className="bg-blue-400 text-white px-4 py-2 rounded">
-                <FontAwesomeIcon className="mr-2" icon={faTwitter} />
-                Twitter
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       <div className="logo-container">
-        
-<svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 396 97" fill="none">
+        <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 396 97" fill="none">
 
 
     
@@ -151,7 +98,6 @@ export default async function UserPage({ params }) {
 <path d="M0 0 C0.33 0 0.66 0 1 0 C1.33 3.3 1.66 6.6 2 10 C3.32 9.67 4.64 9.34 6 9 C5.67 10.32 5.34 11.64 5 13 C3.35 12.67 1.7 12.34 0 12 C0 8.04 0 4.08 0 0 Z " fill="#909090" transform="translate(330,59)"/>
 <path d="M0 0 C0.66 0.33 1.32 0.66 2 1 C0.5459375 2.3303125 0.5459375 2.3303125 -0.9375 3.6875 C-3.60122242 6.32615209 -4.7731363 8.14331715 -5 12 C-5.33 12 -5.66 12 -6 12 C-6.3125 9.3125 -6.3125 9.3125 -6 6 C-3.5625 3.1875 -3.5625 3.1875 -1 1 C-0.67 0.67 -0.34 0.34 0 0 Z " fill="#707070" transform="translate(200,70)"/>
 </svg>
-        
       </div>
 
       <div className="aspect-square w-24 h-24 mx-auto relative my-2">
