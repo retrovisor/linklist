@@ -43,6 +43,13 @@ body {
   margin-top: 10px;
 }
 
+.logo2 {
+  width: 100%;
+  max-width: 40px;
+  height: auto;
+  margin-top: 10px;
+}
+
 /* Responsive design adjustment for smaller screens */
 @media screen and (max-width: 500px) {
   body {
