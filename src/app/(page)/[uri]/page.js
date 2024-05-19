@@ -126,7 +126,7 @@ export default async function UserPage({ params }) {
       <div className="max-wid mx-auto text-center p-4">
         <p>{page.bio}</p>
       </div>
-      <div className="max-wid mx-auto pt-4">
+      <div className="max-wid mx-auto pt-4 px-4">
         {page.links.map(link => (
           <Link
             key={link.url}
@@ -156,7 +156,7 @@ export default async function UserPage({ params }) {
           </Link>
         ))}
       </div>
-      <div className="max-wid mx-auto p-4 px-4">
+      <div className="max-wid mx-auto px-4">
         {page.textBoxes.map(textBox => (
           <div key={textBox.key} className="bg-white border-slate-950 border-2 shadow-lg mb-4 p-2">
             <h3 className="text-black text-xl font-semibold">{textBox.title}</h3>
