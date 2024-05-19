@@ -11,7 +11,7 @@ import {
   faWhatsapp,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope, faLink, faLocationDot, faMobile, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faLink, faLocationDot, faMobile, faPhone, faShare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import mongoose from "mongoose";
 import { btoa } from "next/dist/compiled/@edge-runtime/primitives";
