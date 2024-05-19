@@ -166,7 +166,7 @@ export default async function UserPage({ params }) {
       </div>
 
  <footer className="text-center text-white p-8">
-              <div className="logo-container">
+              <div className="logo-container2">
         <svg class="logo2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 396 97" fill="none">
 
 
