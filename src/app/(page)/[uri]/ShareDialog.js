@@ -35,7 +35,7 @@ export default function ShareDialog({ uri }) {
 
       {isOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-40">
-          <div className="bg-white rounded-lg p-6">
+          <div className="bg-white rounded-lg p-6 w-96">
             <h3 className="text-xl font-semibold mb-4">Share</h3>
             <div className="flex flex-wrap gap-4">
               <button
