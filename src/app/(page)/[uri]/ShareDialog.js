@@ -5,7 +5,7 @@ import { faWhatsapp, faFacebook, faComment, faShare } from "@fortawesome/free-so
 import { useState, useEffect } from "react";
 
 // Declare the domain at the top
-const DOMAIN = 'https://yourdomain.com'; // Replace with your domain
+const DOMAIN = 'https://linklist-wheat.vercel.app'; // Replace with your domain
 
 export default function ShareDialog({ uri }) {
   const [isOpen, setIsOpen] = useState(false);
