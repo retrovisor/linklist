@@ -4,8 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp, faFacebook } from "@fortawesome/free-brands-svg-icons"; // Correct import for brands icons
 import { useState, useEffect } from "react";
-import kakaoLogo from '/public/kakao.png'; // Ensure this path is correct
-
+ 
 
 // Declare the domain at the top
 const DOMAIN = 'https://linklist-wheat.vercel.app'; // Replace with your domain
@@ -105,8 +104,7 @@ export default function ShareDialog({ uri }) {
                 className="bg-yellow-400 text-black text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
                 onClick={shareOnKakao}
               >
-                <Image src={kakaoLogo} alt="Kakao" width={24} height={24} className="h-6" />
-                Kakao
+                 Kakao
               </button>
               {/* Add more share buttons if needed */}
             </div>
