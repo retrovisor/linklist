@@ -1,5 +1,3 @@
-'use server';
-
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { Page } from "@/models/Page";
 import { User } from "@/models/User";
