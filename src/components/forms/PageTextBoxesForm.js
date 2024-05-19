@@ -3,7 +3,7 @@
 import { saveTextBoxes } from "@/actions/pageActions";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import SectionBox from "@/components/layout/SectionBox";
-import { faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faGripLines, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import toast from "react-hot-toast";
