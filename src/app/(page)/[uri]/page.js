@@ -165,9 +165,9 @@ export default async function UserPage({ params }) {
         ))}
       </div>
 
- <footer className="text-center mt-8">
-        <p className="text-gray-500">Created by lit.link</p>
-        <p className="text-gray-500">© lit.link All Rights Reserved</p>
+ <footer className="text-center text-white m-8">
+        <p className="text-gray-500">Created by Nav.Link</p>
+        <p className="text-gray-500">© Nav.link All Rights Reserved</p>
       </footer>
         
     </div>
