@@ -75,8 +75,8 @@ export default async function UserPage({ params }) {
       <div
         className="bg-cover bg-center"></div>
 
- <div className="logo-container">
-    <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 396 97" fill="none">
+      <div className="logo-container">
+        <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 396 97" fill="none">
 
 
     
@@ -92,10 +92,8 @@ export default async function UserPage({ params }) {
 <path d="M0 0 C0.33 0 0.66 0 1 0 C1.33 3.3 1.66 6.6 2 10 C3.32 9.67 4.64 9.34 6 9 C5.67 10.32 5.34 11.64 5 13 C3.35 12.67 1.7 12.34 0 12 C0 8.04 0 4.08 0 0 Z " fill="#909090" transform="translate(330,59)"/>
 <path d="M0 0 C0.66 0.33 1.32 0.66 2 1 C0.5459375 2.3303125 0.5459375 2.3303125 -0.9375 3.6875 C-3.60122242 6.32615209 -4.7731363 8.14331715 -5 12 C-5.33 12 -5.66 12 -6 12 C-6.3125 9.3125 -6.3125 9.3125 -6 6 C-3.5625 3.1875 -3.5625 3.1875 -1 1 C-0.67 0.67 -0.34 0.34 0 0 Z " fill="#707070" transform="translate(200,70)"/>
 </svg>
+      </div>
 
- </div>
-
-          
       <div className="aspect-square w-24 h-24 mx-auto relative my-2">
         <Image
           className="rounded-full w-full h-full object-cover"
@@ -119,7 +117,7 @@ export default async function UserPage({ params }) {
         ))}
       </div>
 
-            <div className="max-w-xs mx-auto text-center my-2">
+      <div className="max-w-xs mx-auto text-center my-2">
         <p>{page.bio}</p>
       </div>
       <div className="max-w-2xl mx-auto p-4 px-4">
@@ -150,6 +148,14 @@ export default async function UserPage({ params }) {
               </div>
             </div>
           </Link>
+        ))}
+      </div>
+      <div className="max-w-2xl mx-auto p-4 px-4">
+        {page.textBoxes.map(textBox => (
+          <div key={textBox.key} className="bg-white border-slate-950 border-2 shadow-lg mb-4 p-2">
+            <h3 className="text-black text-xl font-semibold">{textBox.title}</h3>
+            <p className="text-black">{textBox.text}</p>
+          </div>
         ))}
       </div>
     </div>
