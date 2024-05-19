@@ -126,7 +126,7 @@ export default async function UserPage({ params }) {
       <div className="max-wid mx-auto text-center my-2 p-4">
         <p>{page.bio}</p>
       </div>
-      <div className="max-wid mx-auto p-4">
+      <div className="max-wid mx-auto pt-4">
         {page.links.map(link => (
           <Link
             key={link.url}
