@@ -28,14 +28,13 @@ export default function ShareDialog({ uri }) {
   return (
     <>
       <div className="fixed top-4 right-4 z-50">
-  <button
-    className="bg-white text-blue-950 p-2 rounded-full flex items-center justify-center"
-    onClick={openDialog}
-  >
-    <FontAwesomeIcon className="w-5 h-5" icon={faShare} />
-  </button>
-</div>
-
+        <button
+          className="bg-white text-blue-950 p-2 rounded-full flex items-center justify-center"
+          onClick={openDialog}
+        >
+          <FontAwesomeIcon className="w-5 h-5" icon={faShare} />
+        </button>
+      </div>
 
       {isOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-40">
