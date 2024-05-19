@@ -9,7 +9,7 @@ import {
   faTelegram,
   faTiktok,
   faWhatsapp,
-  faYoutube,
+  faYoutube
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faLink, faLocationDot, faMobile, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,8 +19,6 @@ import Image from "next/image";
 import Link from "next/link";
 import "@/styles/template1.css";
 import "@/styles/template2.css";
-import ShareDialog from "@/actions/ShareDialog";
-
 
 export const buttonsIcons = {
   email: faEnvelope,
@@ -76,10 +74,6 @@ export default async function UserPage({ params }) {
         }>
       <div
         className="bg-cover bg-center"></div>
-
-      <div className="fixed top-4 right-4 z-50">
-        <ShareDialog uri={page.uri} />
-      </div>
 
       <div className="logo-container">
         <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 396 97" fill="none">
