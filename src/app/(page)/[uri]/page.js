@@ -132,7 +132,7 @@ export default async function UserPage({ params }) {
             key={link.url}
             target="_blank"
             ping={process.env.URL + 'api/click?url=' + btoa(link.url) + '&page=' + page.uri}
-            className="bg-white border-slate-950 border-2 shadow-lg mb-4 p-2 block flex"
+            className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2 block flex"
             href={link.url}>
             <div className="relative overflow-hidden w-16">
               <div className="w-16 h-16 bg-blue-700 aspect-square relative flex items-center justify-center aspect-square">
@@ -158,7 +158,7 @@ export default async function UserPage({ params }) {
       </div>
       <div className="max-wid mx-auto px-5">
         {page.textBoxes.map(textBox => (
-          <div key={textBox.key} className="bg-white border-slate-950 border-2 shadow-lg mb-4 p-2">
+          <div key={textBox.key} className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2">
             <h3 className="text-black text-xl font-semibold">{textBox.title}</h3>
             <p className="text-black">{textBox.text}</p>
           </div>
