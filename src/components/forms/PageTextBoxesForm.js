@@ -1,3 +1,5 @@
+'use client';
+
 import { saveTextBoxes } from "@/actions/pageActions";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import SectionBox from "@/components/layout/SectionBox";
