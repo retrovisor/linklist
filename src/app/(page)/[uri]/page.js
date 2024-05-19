@@ -165,7 +165,7 @@ export default async function UserPage({ params }) {
         ))}
       </div>
 
- <footer className="text-center text-white m-8">
+ <footer className="text-center text-white p-8">
               <div className="logo-container">
         <svg class="logo2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 396 97" fill="none">
 
@@ -185,8 +185,8 @@ export default async function UserPage({ params }) {
 </svg>
       </div>
 
-        <p className="text-gray-500">Created by Nav.Link</p>
-        <p className="text-gray-500">© Nav.link All Rights Reserved</p>
+        <p>Created by Nav.Link</p>
+        <p>© Nav.link All Rights Reserved</p>
       </footer>
         
     </div>
