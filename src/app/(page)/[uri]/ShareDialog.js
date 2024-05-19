@@ -1,8 +1,7 @@
 'use client';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebook, faInstagram, faTelegram, faTwitter, faWhatsapp } from "@fortawesome/free-brands-svg-icons";
-import { faShare } from "@fortawesome/free-solid-svg-icons";
+import { faWhatsapp, faShare } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 export default function ShareDialog({ uri }) {
@@ -23,13 +22,11 @@ export default function ShareDialog({ uri }) {
     window.open(shareUrl, "_blank");
   };
 
-  // Add more share functions for other platforms
-
   return (
     <>
       <div className="fixed top-4 right-4 z-50">
         <button
-          className="bg-white text-blue-950 p-2 rounded-full flex items-center justify-center"
+          className="fixed-button bg-white text-blue-950 p-2 rounded-full flex items-center justify-center"
           onClick={openDialog}
         >
           <FontAwesomeIcon className="w-5 h-5" icon={faShare} />
