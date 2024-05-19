@@ -1,11 +1,30 @@
 'use client';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWhatsapp, faShare } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { faWhatsapp, faShare, faFacebook, faKakaoTalk } from "@fortawesome/free-solid-svg-icons";
+import { useState, useEffect } from "react";
 
 export default function ShareDialog({ uri }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    // Dynamically load the Kakao SDK script
+    const kakaoScript = document.createElement('script');
+    kakaoScript.src = 'https://developers.kakao.com/sdk/js/kakao.js';
+    kakaoScript.async = true;
+    document.body.appendChild(kakaoScript);
+
+    kakaoScript.onload = () => {
+      // Initialize Kakao SDK
+      if (window.Kakao) {
+        window.Kakao.init('YOUR_KAKAO_APP_KEY'); // Replace with your Kakao App Key
+      }
+    };
+
+    return () => {
+      document.body.removeChild(kakaoScript);
+    };
+  }, []);
 
   const openDialog = () => {
     setIsOpen(true);
@@ -20,6 +39,30 @@ export default function ShareDialog({ uri }) {
       `Check out my page on MomoFriends: ${process.env.URL}/${uri}`
     )}`;
     window.open(shareUrl, "_blank");
+  };
+
+  const shareOnFacebook = () => {
+    const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      `${process.env.URL}/${uri}`
+    )}`;
+    window.open(shareUrl, "_blank");
+  };
+
+  const shareOnKakao = () => {
+    if (window.Kakao) {
+      window.Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+          title: 'MomoFriends',
+          description: `Check out my page on MomoFriends: ${process.env.URL}/${uri}`,
+          imageUrl: 'YOUR_IMAGE_URL', // Replace with your image URL
+          link: {
+            mobileWebUrl: `${process.env.URL}/${uri}`,
+            webUrl: `${process.env.URL}/${uri}`
+          }
+        }
+      });
+    }
   };
 
   return (
@@ -45,7 +88,21 @@ export default function ShareDialog({ uri }) {
                 <FontAwesomeIcon className="mr-2" icon={faWhatsapp} />
                 WhatsApp
               </button>
-              {/* Add more share buttons */}
+              <button
+                className="bg-blue-600 text-white px-4 py-2 rounded"
+                onClick={shareOnFacebook}
+              >
+                <FontAwesomeIcon className="mr-2" icon={faFacebook} />
+                Facebook
+              </button>
+              <button
+                className="bg-yellow-400 text-black px-4 py-2 rounded"
+                onClick={shareOnKakao}
+              >
+                <FontAwesomeIcon className="mr-2" icon={faKakaoTalk} />
+                Kakao
+              </button>
+              {/* Add more share buttons if needed */}
             </div>
             <button
               className="mt-4 text-gray-500"
