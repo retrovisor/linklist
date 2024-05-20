@@ -2,9 +2,10 @@ import { Page } from "@/models/Page";
 import { User } from "@/models/User";
 import { Event } from "@/models/Event";
 import { faDiscord, faFacebook, faGithub, faInstagram, faTelegram, faTiktok, faWhatsapp, faYoutube } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope, faLink, faLocationDot, faMobile, faPhone, faBookmark } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faLink, faLocationDot, faMobile, faPhone, faBookmark, fas } from "@fortawesome/free-solid-svg-icons";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import mongoose from "mongoose";
 import { btoa } from "next/dist/compiled/@edge-runtime/primitives";
 import Image from "next/image";
@@ -12,6 +13,9 @@ import Link from "next/link";
 import "@/styles/template1.css";
 import "@/styles/template2.css";
 import ShareDialog from "./ShareDialog";
+
+// Add necessary icons to the library
+library.add(fas, faBookmark, faLink, faLocationDot, faEnvelope, faPhone, faDiscord, faFacebook, faGithub, faInstagram, faTelegram, faTiktok, faWhatsapp, faYoutube, faShare);
 
 export const buttonsIcons = {
   email: faEnvelope,
@@ -159,7 +163,7 @@ export default async function UserPage({ params }) {
 
       <footer className="text-center text-xs text-white p-6">
         <div className="text-center logo-container2">
-          <svg className="logo2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 396 97" fill="none">
+          <svg className="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 396 97" fill="none">
             {/* SVG paths */}
           </svg>
         </div>
