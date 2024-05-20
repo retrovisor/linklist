@@ -1,9 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas, far } from '@fortawesome/free-solid-svg-icons';
 import { commonIcons } from '@/utils/icons';
-
-library.add(fas, far);
 
 const IconModal = ({ currentIcon, onIconSelect, onClose, onUpload }) => {
   console.log('IconModal rendered');
@@ -46,7 +42,7 @@ const IconModal = ({ currentIcon, onIconSelect, onClose, onUpload }) => {
                     onIconSelect(`fa-${iconName}`);
                   }}
                 >
-                  <FontAwesomeIcon icon={iconName} size="2x" />
+                  <FontAwesomeIcon icon={['fas', iconName]} size="2x" />
                 </div>
               );
             })}
