@@ -1,45 +1,79 @@
 'use client';
-import {savePageLinks} from "@/actions/pageActions";
+import { savePageLinks } from "@/actions/pageActions";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import SectionBox from "@/components/layout/SectionBox";
-import {upload} from "@/libs/upload";
-import {faCloudArrowUp, faGripLines, faLink, faPlus, faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { upload } from "@/libs/upload";
+import { faCloudArrowUp, faGripLines, faIcons, faLink, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import {useState} from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import {ReactSortable} from "react-sortablejs";
+import { ReactSortable } from "react-sortablejs";
+import IconModal from "../modals/IconModal";
 
-export default function PageLinksForm({page,user}) {
-  const [links,setLinks] = useState(page.links || []);
+const commonIcons = [
+  'faAddressBook', 'faAnchor', 'faAppleAlt', 'faBell', 'faBookmark',
+  'faBriefcase', 'faBullhorn', 'faCalendarAlt', 'faCamera', 'faCloudDownloadAlt',
+  'faComments', 'faEnvelope', 'faGlobeAmericas', 'faHeart', 'faHome',
+  'faLaptopCode', 'faLock', 'faNewspaper', 'faSearch', 'faShoppingCart'
+];
+
+export default function PageLinksForm({ page, user }) {
+  const [links, setLinks] = useState(page.links || []);
+  const [showIconModal, setShowIconModal] = useState(false);
+  const [currentIconKey, setCurrentIconKey] = useState(null);
+
   async function save() {
     await savePageLinks(links);
     toast.success('Saved!');
   }
+
   function addNewLink() {
     setLinks(prev => {
       return [...prev, {
         key: Date.now().toString(),
-        title:'',
-        subtitle:'',
-        icon:'',
-        url:'',
+        title: '',
+        subtitle: '',
+        icon: '',
+        url: '',
       }];
     });
   }
+
   function handleUpload(ev, linkKeyForUpload) {
-    upload(ev, uploadedImageUrl => {
-      setLinks(prevLinks => {
-        const newLinks = [...prevLinks];
-        newLinks.forEach((link,index) => {
-          if (link.key === linkKeyForUpload) {
-            link.icon = uploadedImageUrl;
-          }
+    if (ev && ev.target.files && ev.target.files.length > 0) {
+      // User uploaded a custom image
+      upload(ev, uploadedImageUrl => {
+        setLinks(prevLinks => {
+          const newLinks = [...prevLinks];
+          newLinks.forEach((link, index) => {
+            if (link.key === linkKeyForUpload) {
+              link.icon = uploadedImageUrl;
+            }
+          });
+          return newLinks;
         });
-        return newLinks;
       });
-    });
+    } else {
+      // User wants to choose a common icon
+      setCurrentIconKey(linkKeyForUpload);
+      setShowIconModal(true);
+    }
   }
+
+  function handleIconSelect(icon) {
+    setLinks((prevLinks) => {
+      const newLinks = [...prevLinks];
+      newLinks.forEach((link) => {
+        if (link.key === currentIconKey) {
+          link.icon = icon;
+        }
+      });
+      return newLinks;
+    });
+    setShowIconModal(false);
+  }
+
   function handleLinkChange(keyOfLinkToChange, prop, ev) {
     setLinks(prev => {
       const newLinks = [...prev];
@@ -48,14 +82,16 @@ export default function PageLinksForm({page,user}) {
           link[prop] = ev.target.value;
         }
       });
-      return [...prev];
+      return newLinks;
     })
   }
+
   function removeLink(linkKeyToRemove) {
     setLinks(prevLinks =>
       [...prevLinks].filter(l => l.key !== linkKeyToRemove)
     );
   }
+
   return (
     <SectionBox>
       <form action={save}>
@@ -93,14 +129,23 @@ export default function PageLinksForm({page,user}) {
                   </div>
                   <div>
                     <input
-                      onChange={ev => handleUpload(ev,l.key)}
-                      id={'icon'+l.key}
+                      onChange={ev => handleUpload(ev, l.key)}
+                      id={'icon' + l.key}
                       type="file"
-                      className="hidden"/>
-                    <label htmlFor={'icon'+l.key} className="border mt-2 p-2 flex items-center gap-1 text-gray-600 cursor-pointer mb-2 justify-center">
+                      accept="image/*"
+                      className="hidden" />
+                    <label htmlFor={'icon' + l.key} className="border mt-2 p-2 flex items-center gap-1 text-gray-600 cursor-pointer mb-2 justify-center">
                       <FontAwesomeIcon icon={faCloudArrowUp} />
                       <span>Change icon</span>
                     </label>
+                    <button
+                      type="button"
+                      className="border mt-2 p-2 flex items-center gap-1 text-gray-600 cursor-pointer mb-2 justify-center"
+                      onClick={() => handleUpload(null, l.key)}
+                    >
+                      <FontAwesomeIcon icon={faIcons} />
+                      <span>Choose common icon</span>
+                    </button>
                     <button
                       onClick={() => removeLink(l.key)}
                       type="button" className="w-full bg-gray-300 py-2 px-3 mb-2 h-full flex gap-2 items-center justify-center">
@@ -114,17 +159,17 @@ export default function PageLinksForm({page,user}) {
                   <input
                     value={l.title}
                     onChange={ev => handleLinkChange(l.key, 'title', ev)}
-                    type="text" placeholder="title"/>
+                    type="text" placeholder="title" />
                   <label className="input-label">Subtitle:</label>
                   <input
                     value={l.subtitle}
                     onChange={ev => handleLinkChange(l.key, 'subtitle', ev)}
-                    type="text" placeholder="subtitle (optional)"/>
+                    type="text" placeholder="subtitle (optional)" />
                   <label className="input-label">URL:</label>
                   <input
                     value={l.url}
                     onChange={ev => handleLinkChange(l.key, 'url', ev)}
-                    type="text" placeholder="url"/>
+                    type="text" placeholder="url" />
                 </div>
               </div>
             ))}
@@ -137,6 +182,13 @@ export default function PageLinksForm({page,user}) {
           </SubmitButton>
         </div>
       </form>
+      {showIconModal && (
+        <IconModal
+          currentIcon={links.find((l) => l.key === currentIconKey)?.icon || ''}
+          onIconSelect={handleIconSelect}
+          onClose={() => setShowIconModal(false)}
+        />
+      )}
     </SectionBox>
   );
 }
