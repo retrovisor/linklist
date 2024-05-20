@@ -1,37 +1,15 @@
-// IconModal.js
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faCloudArrowUp,
-  faAddressBook,
-  faAnchor,
-  faAppleAlt,
-  faBell,
-  faBookmark
-} from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { commonIcons } from '@/utils/icons';
 
-const IconModal = ({ currentIcon, onIconSelect, onClose, onUpload }) => {
+library.add(fas);
+
+const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
   console.log('IconModal rendered');
   console.log('Current Icon in Modal:', currentIcon);
 
   const isCustomIcon = currentIcon.startsWith('http');
-
-  const iconMap = {
-    AddressBook: faAddressBook,
-    Anchor: faAnchor,
-    AppleAlt: faAppleAlt,
-    Bell: faBell,
-    Bookmark: faBookmark
-  };
-
-  const renderIcon = (icon) => {
-    const IconComponent = iconMap[icon];
-    if (IconComponent) {
-      return <FontAwesomeIcon icon={IconComponent} size="2x" />;
-    } else {
-      console.warn(`Icon not found: ${icon}`);
-      return null;
-    }
-  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -41,34 +19,24 @@ const IconModal = ({ currentIcon, onIconSelect, onClose, onUpload }) => {
           <div>
             <p>Custom icon:</p>
             <img src={currentIcon} alt="Custom Icon" className="w-16 h-16" />
-            <div>
-              <input
-                onChange={onUpload}
-                id="upload-icon"
-                type="file"
-                accept="image/*"
-                className="hidden"
-              />
-              <label htmlFor="upload-icon" className="border mt-2 p-2 flex items-center gap-1 text-gray-600 cursor-pointer mb-2 justify-center">
-                <FontAwesomeIcon icon={faCloudArrowUp} />
-                <span>Upload icon</span>
-              </label>
-            </div>
           </div>
         ) : (
           <div className="grid grid-cols-5 gap-4">
-            {commonIcons.map((icon) => (
-              <div
-                key={icon}
-                className={`cursor-pointer ${currentIcon === icon ? 'text-blue-500' : 'text-gray-500'}`}
-                onClick={() => {
-                  console.log('Icon selected:', icon);
-                  onIconSelect(icon);
-                }}
-              >
-                {renderIcon(icon)}
-              </div>
-            ))}
+            {commonIcons.map((icon) => {
+              const iconName = `fa${icon.slice(2)}`;
+              return (
+                <div
+                  key={icon}
+                  className={`cursor-pointer ${currentIcon === `fa-${iconName}` ? 'text-blue-500' : 'text-gray-500'}`}
+                  onClick={() => {
+                    console.log('Icon selected:', `fa-${iconName}`);
+                    onIconSelect(`fa-${iconName}`);
+                  }}
+                >
+                  <FontAwesomeIcon icon={iconName} size="2x" />
+                </div>
+              );
+            })}
           </div>
         )}
         <button
