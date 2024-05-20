@@ -1,4 +1,3 @@
-import { commonIcons } from '@/utils/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -6,6 +5,9 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 library.add(fas);
 
 const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
+  console.log('IconModal rendered'); // Debug log
+  console.log('Current Icon in Modal:', currentIcon); // Debug log
+
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-lg p-8">
@@ -15,7 +17,10 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
             <div
               key={icon}
               className={`cursor-pointer ${currentIcon === `fa-${icon.replace('fa', '')}` ? 'text-blue-500' : 'text-gray-500'}`}
-              onClick={() => onIconSelect(`fa-${icon.replace('fa', '')}`)}
+              onClick={() => {
+                console.log('Icon selected:', icon); // Debug log
+                onIconSelect(`fa-${icon.replace('fa', '')}`);
+              }}
             >
               <FontAwesomeIcon icon={`fa-solid fa-${icon.replace('fa', '')}`} size="2x" />
             </div>
