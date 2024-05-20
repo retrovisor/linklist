@@ -1,33 +1,41 @@
+import { commonIcons } from '@/utils/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faAddressBook, faAnchor, faAppleAlt, faBell, faBookmark, faBriefcase, faBullhorn, faCalendarAlt, faCamera, faCloudDownloadAlt, faComments, faEnvelope, faGlobeAmericas, faHeart, faHome, faLaptopCode, faLock, faNewspaper, faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { commonIcons } from '@/utils/icons';
+import { fas, far } from '@fortawesome/free-solid-svg-icons';
 
-// Add icons to the library
-library.add(faAddressBook, faAnchor, faAppleAlt, faBell, faBookmark, faBriefcase, faBullhorn, faCalendarAlt, faCamera, faCloudDownloadAlt, faComments, faEnvelope, faGlobeAmericas, faHeart, faHome, faLaptopCode, faLock, faNewspaper, faSearch, faShoppingCart);
+library.add(fas, far);
 
 const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
-  console.log('IconModal rendered'); // Debug log
-  console.log('Current Icon in Modal:', currentIcon); // Debug log
+  console.log('IconModal rendered');
+  console.log('Current Icon in Modal:', currentIcon);
+
+  const isCustomIcon = currentIcon.startsWith('http');
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-xl font-bold mb-4">Select an Icon</h2>
-        <div className="grid grid-cols-5 gap-4">
-          {commonIcons.map((icon) => (
-            <div
-              key={icon}
-              className={`cursor-pointer ${currentIcon === icon ? 'text-blue-500' : 'text-gray-500'}`}
-              onClick={() => {
-                console.log('Icon selected:', icon); // Debug log
-                onIconSelect(icon);
-              }}
-            >
-              <FontAwesomeIcon icon={icon} size="2x" />
-            </div>
-          ))}
-        </div>
+        {isCustomIcon ? (
+          <div>
+            <p>Custom icon:</p>
+            <img src={currentIcon} alt="Custom Icon" className="w-16 h-16" />
+          </div>
+        ) : (
+          <div className="grid grid-cols-5 gap-4">
+            {commonIcons.map((icon) => (
+              <div
+                key={icon}
+                className={`cursor-pointer ${currentIcon === `fa-${icon.replace('fa', '')}` ? 'text-blue-500' : 'text-gray-500'}`}
+                onClick={() => {
+                  console.log('Icon selected:', `fa-${icon.replace('fa', '')}`);
+                  onIconSelect(`fa-${icon.replace('fa', '')}`);
+                }}
+              >
+                <FontAwesomeIcon icon={`fa-solid fa-${icon.replace('fa', '')}`} size="2x" />
+              </div>
+            ))}
+          </div>
+        )}
         <button
           className="mt-4 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded"
           onClick={onClose}
