@@ -115,6 +115,7 @@ export default async function UserPage({ params }) {
             href={link.url}
           >
             <div className="relative overflow-hidden w-16 h-16">
+              {console.log("Rendering icon for link:", link)} {/* Debug log */}
               {link.icon && link.icon.startsWith('http') && (
                 <Image
                   className="w-full h-full object-cover"
