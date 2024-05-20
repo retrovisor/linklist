@@ -2,7 +2,7 @@ import { Page } from "@/models/Page";
 import { User } from "@/models/User";
 import { Event } from "@/models/Event";
 import { faDiscord, faFacebook, faGithub, faInstagram, faTelegram, faTiktok, faWhatsapp, faYoutube } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope, faLink, faLocationDot, faMobile, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faLink, faLocationDot, faMobile, faPhone, faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import mongoose from "mongoose";
@@ -127,11 +127,13 @@ export default async function UserPage({ params }) {
               )}
               {link.icon && !link.icon.startsWith('http') && (
                 <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center">
+                  {console.log("Rendering FontAwesome icon:", link.icon.replace('fa-', ''))} {/* Debug log */}
                   <FontAwesomeIcon icon={['fas', link.icon.replace('fa-', '')]} size="2x" className="text-white" />
                 </div>
               )}
               {!link.icon && (
                 <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center">
+                  {console.log("Rendering default link icon")} {/* Debug log */}
                   <FontAwesomeIcon icon={faLink} size="2x" className="text-white" />
                 </div>
               )}
