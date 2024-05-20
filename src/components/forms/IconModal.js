@@ -1,9 +1,9 @@
-import { commonIcons } from '@/utils/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas, far } from '@fortawesome/free-solid-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { commonIcons } from '@/utils/icons';
 
-library.add(fas, far);
+library.add(fas);
 
 const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
   console.log('IconModal rendered');
@@ -23,7 +23,7 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
         ) : (
           <div className="grid grid-cols-5 gap-4">
             {commonIcons.map((icon) => {
-              const iconName = icon.replace('fa', '');
+              const iconName = `fa${icon.slice(2)}`;
               return (
                 <div
                   key={icon}
@@ -33,7 +33,7 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
                     onIconSelect(`fa-${iconName}`);
                   }}
                 >
-                  <FontAwesomeIcon icon={['fas', iconName]} size="2x" />
+                  <FontAwesomeIcon icon={iconName} size="2x" />
                 </div>
               );
             })}
