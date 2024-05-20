@@ -21,6 +21,8 @@ import Link from "next/link";
 import "@/styles/template1.css";
 import "@/styles/template2.css";
 import ShareDialog from "./ShareDialog";
+import { commonIcons } from '@/utils/icons';
+
 
 export const buttonsIcons = {
   email: faEnvelope,
