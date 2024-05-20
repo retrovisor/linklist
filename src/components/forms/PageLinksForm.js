@@ -115,10 +115,7 @@ export default function PageLinksForm({ page, user }) {
                         width={64} height={64} />
                     )}
                     {l.icon && !l.icon.startsWith('http') && (
-                      <span className="fa-layers fa-fw">
-                        <FontAwesomeIcon icon={['fas', 'circle']} size="4x" className="text-blue-700" />
-                        <FontAwesomeIcon icon={['fas', l.icon.replace('fa-', '')]} size="2x" inverse transform="shrink-8" />
-                      </span>
+                      <FontAwesomeIcon icon={['fas', l.icon.replace('fa-', '')]} size="xl" />
                     )}
                     {!l.icon && (
                       <FontAwesomeIcon size="xl" icon={faLink} />
