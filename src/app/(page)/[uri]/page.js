@@ -149,7 +149,8 @@ export default async function UserPage({ params }) {
           />
         )}
         {link.icon && !link.icon.startsWith('http') && (
-          <FontAwesomeIcon icon={['fas', link.icon.replace('fa-', '')]} size="2x" className="text-blue-700" />
+        <FontAwesomeIcon icon={['fas', link.icon.startsWith('fa-') ? link.icon : `fa-${link.icon}`]} size="2x" className="text-white" />
+
         )}
         {!link.icon && (
           <FontAwesomeIcon icon={faLink} size="2x" className="text-blue-700" />
