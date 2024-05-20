@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
+import { fas, far } from '@fortawesome/free-solid-svg-icons';
 import { commonIcons } from '@/utils/icons';
 
-library.add(fas);
+library.add(fas, far);
 
-const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
+const IconModal = ({ currentIcon, onIconSelect, onClose, onUpload }) => {
   console.log('IconModal rendered');
   console.log('Current Icon in Modal:', currentIcon);
 
@@ -19,6 +19,19 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
           <div>
             <p>Custom icon:</p>
             <img src={currentIcon} alt="Custom Icon" className="w-16 h-16" />
+            <div>
+              <input
+                onChange={onUpload}
+                id="upload-icon"
+                type="file"
+                accept="image/*"
+                className="hidden"
+              />
+              <label htmlFor="upload-icon" className="border mt-2 p-2 flex items-center gap-1 text-gray-600 cursor-pointer mb-2 justify-center">
+                <FontAwesomeIcon icon={faCloudArrowUp} />
+                <span>Upload icon</span>
+              </label>
+            </div>
           </div>
         ) : (
           <div className="grid grid-cols-5 gap-4">
