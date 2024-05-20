@@ -52,6 +52,7 @@ export default function PageLinksForm({ page, user }) {
   }
 
   function handleIconSelect(icon) {
+    console.log('Selected Icon:', icon); // Debug log
     setLinks((prevLinks) => {
       const newLinks = [...prevLinks];
       newLinks.forEach((link) => {
@@ -122,6 +123,7 @@ export default function PageLinksForm({ page, user }) {
                       type="button"
                       className="border mt-2 p-2 flex items-center gap-1 text-gray-600 cursor-pointer mb-2 justify-center"
                       onClick={() => {
+                        console.log('Change Icon Clicked', l.key); // Debug log
                         setCurrentIconKey(l.key);
                         setShowIconModal(true);
                       }}
