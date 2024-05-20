@@ -115,7 +115,9 @@ export default function PageLinksForm({ page, user }) {
                         width={64} height={64} />
                     )}
                     {l.icon && !l.icon.startsWith('http') && (
-                      <FontAwesomeIcon icon={['fas', l.icon.replace('fa-', '')]} size="xl" />
+                      <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center">
+                        <FontAwesomeIcon icon={['fas', l.icon.replace('fa-', '')]} size="2x" className="text-white" />
+                      </div>
                     )}
                     {!l.icon && (
                       <FontAwesomeIcon size="xl" icon={faLink} />
