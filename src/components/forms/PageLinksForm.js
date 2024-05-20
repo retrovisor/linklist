@@ -10,7 +10,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { ReactSortable } from "react-sortablejs";
 import IconModal from "./IconModal";
-import { commonIcons } from '@/utils/icons';  // Ensure this line exists
+import { commonIcons } from '@/utils/icons';
 
 export default function PageLinksForm({ page, user }) {
   const [links, setLinks] = useState(page.links || []);
@@ -107,12 +107,15 @@ export default function PageLinksForm({ page, user }) {
                 </div>
                 <div className="text-center">
                   <div className="bg-gray-300 inline-block relative aspect-square overflow-hidden w-16 h-16 inline-flex justify-center items-center">
-                    {l.icon && (
+                    {l.icon && l.icon.startsWith('http') && (
                       <Image
                         className="w-full h-full object-cover"
                         src={l.icon}
                         alt={'icon'}
                         width={64} height={64} />
+                    )}
+                    {l.icon && !l.icon.startsWith('http') && (
+                      <FontAwesomeIcon icon={['fas', l.icon.replace('fa-', '')]} size="xl" />
                     )}
                     {!l.icon && (
                       <FontAwesomeIcon size="xl" icon={faLink} />
