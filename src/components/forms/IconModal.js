@@ -1,11 +1,11 @@
 import { commonIcons } from '@/utils/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas, far } from '@fortawesome/free-solid-svg-icons';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
-library.add(fas, far);
+library.add(fas);
 
-const IconModal = ({ currentIcon, onIconSelect, onClose, onUpload }) => {
+const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-lg p-8">
@@ -20,19 +20,6 @@ const IconModal = ({ currentIcon, onIconSelect, onClose, onUpload }) => {
               <FontAwesomeIcon icon={`fa-solid fa-${icon.replace('fa', '')}`} size="2x" />
             </div>
           ))}
-        </div>
-        <div>
-          <input
-            onChange={onUpload}
-            id="upload-icon"
-            type="file"
-            accept="image/*"
-            className="hidden"
-          />
-          <label htmlFor="upload-icon" className="border mt-2 p-2 flex items-center gap-1 text-gray-600 cursor-pointer mb-2 justify-center">
-            <FontAwesomeIcon icon={faCloudArrowUp} />
-            <span>Upload icon</span>
-          </label>
         </div>
         <button
           className="mt-4 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded"
