@@ -148,4 +148,31 @@ export default function PageLinksForm({ page, user }) {
                     value={l.subtitle}
                     onChange={ev => handleLinkChange(l.key, 'subtitle', ev)}
                     type="text" placeholder="subtitle (optional)" />
-                  <label className="inpu
+                  <label className="input-label">URL:</label>
+                  <input
+                    value={l.url}
+                    onChange={ev => handleLinkChange(l.key, 'url', ev)}
+                    type="text" placeholder="url" />
+                </div>
+              </div>
+            ))}
+          </ReactSortable>
+        </div>
+        <div className="border-t pt-4 mt-4">
+          <SubmitButton className="max-w-xs mx-auto">
+            <FontAwesomeIcon icon={faSave} />
+            <span>Save</span>
+          </SubmitButton>
+        </div>
+      </form>
+      {showIconModal && (
+        <IconModal
+          currentIcon={links.find((l) => l.key === currentIconKey)?.icon || ''}
+          onIconSelect={handleIconSelect}
+          onClose={() => setShowIconModal(false)}
+          onUpload={(ev) => handleUpload(ev, currentIconKey)}
+        />
+      )}
+    </SectionBox>
+  );
+}
