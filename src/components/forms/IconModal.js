@@ -1,9 +1,9 @@
 import { commonIcons } from '@/utils/icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
+import { fas, far } from '@fortawesome/free-solid-svg-icons';
 
-library.add(fas);
+library.add(fas, far);
 
 const IconModal = ({ currentIcon, onIconSelect, onClose, onUpload }) => {
   return (
