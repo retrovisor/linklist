@@ -3,19 +3,14 @@ import { savePageLinks } from "@/actions/pageActions";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import SectionBox from "@/components/layout/SectionBox";
 import { upload } from "@/libs/upload";
-import { faGripLines, faIcons, faLink, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faCloudArrowUp } from "@fortawesome/free-regular-svg-icons";
+import { faCloudArrowUp, faGripLines, faIcons, faLink, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas, far } from '@fortawesome/free-solid-svg-icons';
 import Image from "next/image";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { ReactSortable } from "react-sortablejs";
 import IconModal from "./IconModal";
 import { commonIcons } from '@/utils/icons';
-
-library.add(fas, far);
 
 export default function PageLinksForm({ page, user }) {
   const [links, setLinks] = useState(page.links || []);
