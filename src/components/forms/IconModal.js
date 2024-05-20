@@ -14,10 +14,10 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
           {commonIcons.map((icon) => (
             <div
               key={icon}
-              className={`cursor-pointer ${currentIcon === `fa-${icon}` ? 'text-blue-500' : 'text-gray-500'}`}
-              onClick={() => onIconSelect(`fa-${icon}`)}
+              className={`cursor-pointer ${currentIcon === `fa-${icon.replace('fa', '')}` ? 'text-blue-500' : 'text-gray-500'}`}
+              onClick={() => onIconSelect(`fa-${icon.replace('fa', '')}`)}
             >
-              <FontAwesomeIcon icon={`fa-solid fa-${icon}`} size="2x" />
+              <FontAwesomeIcon icon={`fa-solid fa-${icon.replace('fa', '')}`} size="2x" />
             </div>
           ))}
         </div>
