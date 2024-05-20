@@ -22,21 +22,18 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
           </div>
         ) : (
           <div className="grid grid-cols-5 gap-4">
-            {commonIcons.map((icon) => {
-              const iconName = `fa${icon.slice(2)}`;
-              return (
-                <div
-                  key={icon}
-                  className={`cursor-pointer ${currentIcon === `fa-${iconName}` ? 'text-blue-500' : 'text-gray-500'}`}
-                  onClick={() => {
-                    console.log('Icon selected:', `fa-${iconName}`);
-                    onIconSelect(`fa-${iconName}`);
-                  }}
-                >
-                  <FontAwesomeIcon icon={iconName} size="2x" />
-                </div>
-              );
-            })}
+            {commonIcons.map((icon) => (
+              <div
+                key={icon.iconName}
+                className={`cursor-pointer ${currentIcon === `fa-${icon.iconName}` ? 'text-blue-500' : 'text-gray-500'}`}
+                onClick={() => {
+                  console.log('Icon selected:', `fa-${icon.iconName}`);
+                  onIconSelect(`fa-${icon.iconName}`);
+                }}
+              >
+                <FontAwesomeIcon icon={icon} size="2x" />
+              </div>
+            ))}
           </div>
         )}
         <button
