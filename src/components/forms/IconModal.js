@@ -1,7 +1,13 @@
 // IconModal.js
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
-import * as SolidIcons from '@fortawesome/free-solid-svg-icons';
+import {
+  faCloudArrowUp,
+  faAddressBook,
+  faAnchor,
+  faAppleAlt,
+  faBell,
+  faBookmark
+} from '@fortawesome/free-solid-svg-icons';
 
 const IconModal = ({ currentIcon, onIconSelect, onClose, onUpload }) => {
   console.log('IconModal rendered');
@@ -9,21 +15,23 @@ const IconModal = ({ currentIcon, onIconSelect, onClose, onUpload }) => {
 
   const isCustomIcon = currentIcon.startsWith('http');
 
+  const iconMap = {
+    AddressBook: faAddressBook,
+    Anchor: faAnchor,
+    AppleAlt: faAppleAlt,
+    Bell: faBell,
+    Bookmark: faBookmark
+  };
+
   const renderIcon = (icon) => {
-  try {
-    const iconName = `fa${icon}`;
-    if (SolidIcons.hasOwnProperty(iconName)) {
-      const IconComponent = SolidIcons[iconName];
+    const IconComponent = iconMap[icon];
+    if (IconComponent) {
       return <FontAwesomeIcon icon={IconComponent} size="2x" />;
     } else {
-      console.warn(`Icon not found: ${iconName}`);
+      console.warn(`Icon not found: ${icon}`);
       return null;
     }
-  } catch (error) {
-    console.error('Error rendering icon:', icon, error);
-    return null;
-  }
-};
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
