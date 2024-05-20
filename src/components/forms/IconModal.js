@@ -1,9 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
+import { faAddressBook, faAnchor, faAppleAlt, faBell, faBookmark, faBriefcase, faBullhorn, faCalendarAlt, faCamera, faCloudDownloadAlt, faComments, faEnvelope, faGlobeAmericas, faHeart, faHome, faLaptopCode, faLock, faNewspaper, faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { commonIcons } from '@/utils/icons';
 
-library.add(fas);
+// Add icons to the library
+library.add(faAddressBook, faAnchor, faAppleAlt, faBell, faBookmark, faBriefcase, faBullhorn, faCalendarAlt, faCamera, faCloudDownloadAlt, faComments, faEnvelope, faGlobeAmericas, faHeart, faHome, faLaptopCode, faLock, faNewspaper, faSearch, faShoppingCart);
 
 const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
   console.log('IconModal rendered'); // Debug log
@@ -17,13 +18,13 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
           {commonIcons.map((icon) => (
             <div
               key={icon}
-              className={`cursor-pointer ${currentIcon === `fa-${icon.replace('fa', '')}` ? 'text-blue-500' : 'text-gray-500'}`}
+              className={`cursor-pointer ${currentIcon === icon ? 'text-blue-500' : 'text-gray-500'}`}
               onClick={() => {
                 console.log('Icon selected:', icon); // Debug log
-                onIconSelect(`fa-${icon.replace('fa', '')}`);
+                onIconSelect(icon);
               }}
             >
-              <FontAwesomeIcon icon={`fa-solid fa-${icon.replace('fa', '')}`} size="2x" />
+              <FontAwesomeIcon icon={icon} size="2x" />
             </div>
           ))}
         </div>
