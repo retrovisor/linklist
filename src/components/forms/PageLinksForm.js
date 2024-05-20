@@ -1,4 +1,3 @@
-'use client';
 import { savePageLinks } from "@/actions/pageActions";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import SectionBox from "@/components/layout/SectionBox";
@@ -10,7 +9,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { ReactSortable } from "react-sortablejs";
 import IconModal from "./IconModal";
-import { commonIcons } from '@/utils/icons';
+import { commonIcons } from '@/utils/icons';  // Ensure this line exists
 
 export default function PageLinksForm({ page, user }) {
   const [links, setLinks] = useState(page.links || []);
@@ -178,4 +177,3 @@ export default function PageLinksForm({ page, user }) {
     </SectionBox>
   );
 }
-
