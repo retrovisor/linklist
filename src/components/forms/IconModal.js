@@ -34,10 +34,10 @@ const IconModal = ({ currentIcon, onIconSelect, onClose, onUpload }) => {
             {commonIcons.map((icon) => (
               <div
                 key={icon}
-                className={`cursor-pointer ${currentIcon === `fa-${icon}` ? 'text-blue-500' : 'text-gray-500'}`}
+                className={`cursor-pointer ${currentIcon === icon ? 'text-blue-500' : 'text-gray-500'}`}
                 onClick={() => {
-                  console.log('Icon selected:', `fa-${icon}`);
-                  onIconSelect(`fa-${icon}`);
+                  console.log('Icon selected:', icon);
+                  onIconSelect(icon);
                 }}
               >
                 <FontAwesomeIcon icon={['fas', icon]} size="2x" />
