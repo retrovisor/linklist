@@ -10,14 +10,20 @@ const IconModal = ({ currentIcon, onIconSelect, onClose, onUpload }) => {
   const isCustomIcon = currentIcon.startsWith('http');
 
   const renderIcon = (icon) => {
-    try {
-      const IconComponent = SolidIcons[icon];
+  try {
+    const iconName = `fa${icon}`;
+    if (SolidIcons.hasOwnProperty(iconName)) {
+      const IconComponent = SolidIcons[iconName];
       return <FontAwesomeIcon icon={IconComponent} size="2x" />;
-    } catch (error) {
-      console.error('Error rendering icon:', icon, error);
+    } else {
+      console.warn(`Icon not found: ${iconName}`);
       return null;
     }
-  };
+  } catch (error) {
+    console.error('Error rendering icon:', icon, error);
+    return null;
+  }
+};
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50">
