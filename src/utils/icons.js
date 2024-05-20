@@ -1,8 +1,7 @@
-export const commonIcons = [
-  'AddressBook',
-  'Anchor',
-  'AppleAlt',
-  'Bell',
-  'Bookmark'
-];
+import { faBookmark, faPencil, faVideo } from '@fortawesome/free-solid-svg-icons';
 
+export const commonIcons = [
+  'faBookmark',
+  'faPencil',
+  'faVideo',
+];
