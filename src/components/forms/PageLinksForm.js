@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { ReactSortable } from "react-sortablejs";
-import IconModal from "../modals/IconModal";
+import IconModal from "./IconModal";
 
 const commonIcons = [
   'faAddressBook', 'faAnchor', 'faAppleAlt', 'faBell', 'faBookmark',
