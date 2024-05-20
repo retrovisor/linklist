@@ -10,13 +10,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { ReactSortable } from "react-sortablejs";
 import IconModal from "./IconModal";
-
-const commonIcons = [
-  'faAddressBook', 'faAnchor', 'faAppleAlt', 'faBell', 'faBookmark',
-  'faBriefcase', 'faBullhorn', 'faCalendarAlt', 'faCamera', 'faCloudDownloadAlt',
-  'faComments', 'faEnvelope', 'faGlobeAmericas', 'faHeart', 'faHome',
-  'faLaptopCode', 'faLock', 'faNewspaper', 'faSearch', 'faShoppingCart'
-];
+import { commonIcons } from '@/utils/icons';
 
 export default function PageLinksForm({ page, user }) {
   const [links, setLinks] = useState(page.links || []);
