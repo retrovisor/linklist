@@ -1,22 +1,39 @@
+import React, { useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { commonIcons } from '@/utils/icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons'; // Ensure the X icon is imported
 
 library.add(fas);
 
 const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
-  console.log('IconModal rendered');
-  console.log('Current Icon in Modal:', currentIcon);
+  const modalRef = useRef();
+
+  // Click outside to close modal
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        onClose();
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [modalRef, onClose]);
 
   const isCustomIcon = currentIcon.startsWith('http');
 
   return (
-    // Overlay container
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
-      // Dialog box
-      <div className="bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-xl font-bold mb-4">Select an Icon</h2>
+      <div ref={modalRef} className="bg-white rounded-lg shadow-lg p-8">
+        <div className="flex justify-between items-center border-b pb-3 mb-4">
+          <h2 className="text-xl font-bold">图标选择器</h2>
+          <button onClick={onClose} className="p-2">
+            <FontAwesomeIcon icon={faTimes} size="lg" />
+          </button>
+        </div>
         {isCustomIcon ? (
           <div>
             <p>Custom icon:</p>
@@ -28,10 +45,7 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
               <div
                 key={icon.iconName}
                 className={`cursor-pointer ${currentIcon === `fa-${icon.iconName}` ? 'text-blue-500' : 'text-gray-500'}`}
-                onClick={() => {
-                  console.log('Icon selected:', `fa-${icon.iconName}`);
-                  onIconSelect(`fa-${icon.iconName}`);
-                }}
+                onClick={() => onIconSelect(`fa-${icon.iconName}`)}
               >
                 <FontAwesomeIcon icon={icon} size="2x" />
               </div>
