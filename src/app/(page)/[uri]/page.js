@@ -13,6 +13,8 @@ import Link from "next/link";
 import "@/styles/template1.css";
 import "@/styles/template2.css";
 import ShareDialog from "./ShareDialog";
+import PageYouTubeForm from "@/components/forms/PageYouTubeForm";
+
 
 // Add necessary icons to the library
 library.add(fas, faBookmark, faLink, faLocationDot, faEnvelope, faPhone, faDiscord, faFacebook, faGithub, faInstagram, faTelegram, faTiktok, faWhatsapp, faYoutube, faShare);
