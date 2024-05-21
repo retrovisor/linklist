@@ -1353,6 +1353,11 @@
   dependencies:
     undici-types "~5.26.4"
 
+"@types/sortablejs@^1.15.8":
+  version "1.15.8"
+  resolved "https://registry.yarnpkg.com/@types/sortablejs/-/sortablejs-1.15.8.tgz#11ed555076046e00869a5ef85d1e7651e7a66ef6"
+  integrity sha512-b79830lW+RZfwaztgs1aVPgbasJ8e7AXtZYHTELNXZPsERt4ymJdjV4OccDbHQAvHrCcFpbF78jkm0R6h/pZVg==
+
 "@types/webidl-conversions@*":
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/@types/webidl-conversions/-/webidl-conversions-7.0.3.tgz#1306dbfa53768bcbcfc95a1c8cde367975581859"
@@ -1766,6 +1771,11 @@ cssesc@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/cssesc/-/cssesc-3.0.0.tgz#37741919903b868565e1c09ea747445cd18983ee"
   integrity sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
+
+csstype@3.0.10:
+  version "3.0.10"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.0.10.tgz#2ad3a7bed70f35b965707c092e5f30b327c290e5"
+  integrity sha512-2u44ZG2OcNUO9HDp/Jl8C07x6pU/eTR3ncV91SiK3dhG9TWvRVsCoJw14Ckx5DgWkzGA3waZWO3d7pgqpUI/XA==
 
 "d3-array@2 - 3", "d3-array@2.10.0 - 3", d3-array@^3.1.6:
   version "3.2.4"
