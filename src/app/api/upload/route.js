@@ -28,4 +28,7 @@ export async function POST(req) {
       Body: Buffer.concat(chunks),
       ContentType: file.type,
     }));
-    const link = `${process.env.R2_ENDPOINT}/${bucketName
+    const link = `${process.env.R2_ENDPOINT}/${bucketName}/${newFilename}`;
+    return Response.json({ link });
+  }
+}
