@@ -28,16 +28,20 @@ const IconModal = ({ currentIcon, onIconSelect, onClose, buttonRef }) => {
 
   // Ensure modal is centered by updating only once and when opening
   useEffect(() => {
-    const buttonRect = buttonRef.current.getBoundingClientRect();
-    const modalTop = window.pageYOffset + buttonRect.top - modalRef.current.offsetHeight / 2;
-    modalRef.current.style.top = `${modalTop}px`;
+    if (buttonRef && buttonRef.current) {
+      const buttonRect = buttonRef.current.getBoundingClientRect();
+      const modalTop = window.pageYOffset + buttonRect.top - modalRef.current.offsetHeight / 2;
+      modalRef.current.style.top = `${modalTop}px`;
+    }
   }, []);
 
   const handleIconSelect = (iconName) => {
     onIconSelect(`fa-${iconName}`);
     onClose();
     setTimeout(() => {
-      buttonRef.current.scrollIntoView({ behavior: 'smooth' });
+      if (buttonRef && buttonRef.current) {
+        buttonRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
     }, 0);
   };
 
