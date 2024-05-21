@@ -21,17 +21,19 @@ body {
 
 .icon-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #000; /* Black background */
-  border-radius: 50%; /* Round shape */
-  width: 40px; /* Adjust size as needed */
-  height: 40px; /* Adjust size as needed */
-  margin: 8px; /* Optional, adjust spacing */
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    border-radius: 10%;
+    width: 50px;
+    height: 50px;
+    margin: 8px;
 }
 
 .icon {
   color: #fff; /* White icon color */
+      font-size: 28px;
+
 }
 
 
