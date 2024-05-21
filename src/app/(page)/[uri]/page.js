@@ -154,8 +154,10 @@ export default async function UserPage({ params }) {
             <div className="flex items-center justify-center shrink grow-0 overflow-hidden ml-4">
               <div>
                 <h3 className="text-black text-xl font-semibold">{link.title}</h3>
-                <p className="text-black/50 h-6 overflow-hidden">{link.subtitle}</p>
-              </div>
+                  {link.subtitle && (
+                  <p className="text-black/50 h-6 overflow-hidden">{link.subtitle}</p>
+                    )}             
+</div>
             </div>
           </Link>
         ))}
