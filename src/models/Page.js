@@ -19,6 +19,13 @@ const PageSchema = new Schema({
       text: String,
     },
   ],
+
+   youTubeVideos: [
+    {
+      key: String,
+      url: String,
+    },
+  ],
 }, { timestamps: true });
 
 export const Page = models?.Page || model('Page', PageSchema);
