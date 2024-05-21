@@ -12,7 +12,8 @@ import {
   faHeart,
   faPoo,
   faComment,
-  faPaperclip
+  faPaperclip,
+  faTruckFast,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const commonIcons = [
@@ -29,5 +30,6 @@ export const commonIcons = [
   faHeart,
   faPoo,
   faComment,
-  faPaperclip
+  faPaperclip,
+  faTruckFast,
 ];
