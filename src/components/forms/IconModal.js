@@ -46,14 +46,14 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
             <img src={currentIcon} alt="Custom Icon" className="w-16 h-16" />
           </div>
         ) : (
-          <div className="grid grid-cols-6 gap-4">
+          <div className="grid grid-cols-5 gap-4">
             {commonIcons.map((icon) => (
               <div
                 key={icon.iconName}
-                className={`cursor-pointer ${currentIcon === `fa-${icon.iconName}` ? 'text-blue-500' : 'text-gray-500'}`}
+                className="icon-container cursor-pointer"
                 onClick={() => onIconSelect(`fa-${icon.iconName}`)}
               >
-                <FontAwesomeIcon icon={icon} size="2x" />
+                <FontAwesomeIcon icon={icon} className="icon" />
               </div>
             ))}
           </div>
