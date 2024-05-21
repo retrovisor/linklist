@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { commonIcons } from '@/utils/icons';
-import { faTimes } from '@fortawesome/free-solid-svg-icons'; // Import the X icon
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 library.add(fas);
 
@@ -17,6 +17,7 @@ const IconModal = ({ currentIcon, onIconSelect, onClose, buttonRef }) => {
         onClose();
       }
     }
+
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -27,12 +28,22 @@ const IconModal = ({ currentIcon, onIconSelect, onClose, buttonRef }) => {
 
   // Ensure modal is centered by updating only once and when opening
   useEffect(() => {
-    window.scrollTo(0, modalRef.current.offsetTop - 100); // Ensure it's slightly in view
+    const buttonRect = buttonRef.current.getBoundingClientRect();
+    const modalTop = window.pageYOffset + buttonRect.top - modalRef.current.offsetHeight / 2;
+    modalRef.current.style.top = `${modalTop}px`;
   }, []);
+
+  const handleIconSelect = (iconName) => {
+    onIconSelect(`fa-${iconName}`);
+    onClose();
+    setTimeout(() => {
+      buttonRef.current.scrollIntoView({ behavior: 'smooth' });
+    }, 0);
+  };
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
-      <div ref={modalRef} className="bg-white rounded-lg shadow-lg p-4" style={{ width: '90%', maxHeight: '90vh', overflowY: 'auto' }}>
+      <div ref={modalRef} className="bg-white rounded-lg shadow-lg p-4 absolute" style={{ width: '90%', maxHeight: '90vh', overflowY: 'auto' }}>
         <div className="flex justify-between items-center border-b pb-3 mb-4">
           <h2 className="text-xl font-bold">Select Icon</h2>
           <button onClick={onClose} className="p-2">
@@ -50,13 +61,7 @@ const IconModal = ({ currentIcon, onIconSelect, onClose, buttonRef }) => {
               <div
                 key={icon.iconName}
                 className="icon-container cursor-pointer"
-                onClick={() => {
-                  onIconSelect(`fa-${icon.iconName}`);
-                  if (buttonRef && buttonRef.current) {
-                    buttonRef.current.scrollIntoView({ behavior: 'smooth' });
-                  }
-                  onClose(); // Assuming you want to close the modal after selection
-                }}
+                onClick={() => handleIconSelect(icon.iconName)}
               >
                 <FontAwesomeIcon icon={icon} className="icon" />
               </div>
