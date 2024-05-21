@@ -10,6 +10,7 @@ import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import cloneDeep from 'clone-deep';
+import Head from 'next/head';
 
 export default async function AccountPage({ searchParams }) {
   console.log('AccountPage function started');
@@ -52,6 +53,10 @@ export default async function AccountPage({ searchParams }) {
 
     return (
       <>
+            <Head>
+        <title>{`Edit account - ${session.user.name}`}</title>
+      </Head>
+
         <PageSettingsForm page={leanPage} user={session.user} />
         <PageButtonsForm page={leanPage} user={session.user} />
         <PageLinksForm page={leanPage} user={session.user} />
