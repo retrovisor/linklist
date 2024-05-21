@@ -4,4 +4,5 @@ export const commonIcons = [
   faBookmark,
   faPencil,
   faVideo,
+  faMusic,
 ];
