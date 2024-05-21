@@ -7,7 +7,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 library.add(fas);
 
-const IconModal = ({ currentIcon, onIconSelect, onClose, buttonRef }) => {
+const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
   const modalRef = useRef();
 
   // Click outside to close modal
@@ -26,25 +26,10 @@ const IconModal = ({ currentIcon, onIconSelect, onClose, buttonRef }) => {
 
   // Scroll into view when opened
   useEffect(() => {
-    if (buttonRef && buttonRef.current) {
-      const buttonRect = buttonRef.current.getBoundingClientRect();
-      const modalTop = window.pageYOffset + buttonRect.top - modalRef.current.offsetHeight / 2;
-      modalRef.current.style.top = `${modalTop}px`;
-      modalRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
+    modalRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
   const isCustomIcon = currentIcon.startsWith('http');
-
-  const handleIconSelect = (iconName) => {
-    onIconSelect(`fa-${iconName}`);
-    onClose();
-    setTimeout(() => {
-      if (buttonRef && buttonRef.current) {
-        buttonRef.current.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, 0);
-  };
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
@@ -66,7 +51,7 @@ const IconModal = ({ currentIcon, onIconSelect, onClose, buttonRef }) => {
               <div
                 key={icon.iconName}
                 className={`cursor-pointer ${currentIcon === `fa-${icon.iconName}` ? 'text-blue-500' : 'text-gray-500'}`}
-                onClick={() => handleIconSelect(icon.iconName)}
+                onClick={() => onIconSelect(`fa-${icon.iconName}`)}
               >
                 <FontAwesomeIcon icon={icon} size="2x" />
               </div>
