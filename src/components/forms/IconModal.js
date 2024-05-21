@@ -23,11 +23,6 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
     };
   }, [modalRef, onClose]);
 
-  // Scroll into view when opened
-  useEffect(() => {
-    modalRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, []);
-
   const isCustomIcon = currentIcon.startsWith('http');
 
   return (
@@ -49,10 +44,10 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
             {commonIcons.map((icon) => (
               <div
                 key={icon.iconName}
-                className={`cursor-pointer ${currentIcon === `fa-${icon.iconName}` ? 'text-blue-500' : 'text-gray-500'}`}
+                className="icon-container cursor-pointer"
                 onClick={() => onIconSelect(`fa-${icon.iconName}`)}
               >
-                <FontAwesomeIcon icon={icon} size="2x" />
+                <FontAwesomeIcon icon={icon} className="icon" />
               </div>
             ))}
           </div>
