@@ -28,7 +28,8 @@ export async function POST(req) {
       Body: Buffer.concat(chunks),
       ContentType: file.type,
     }));
-    const link = `${process.env.R2_ENDPOINT}/${newFilename}`;
+    const customDomain = 'momofriends.com';
+    const link = `https://${customDomain}/${newFilename}`;
     return Response.json(link);
   }
 }
