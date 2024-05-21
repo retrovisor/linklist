@@ -40,7 +40,7 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
             <img src={currentIcon} alt="Custom Icon" className="w-16 h-16" />
           </div>
         ) : (
-          <div className="grid grid-cols-6 gap-4">
+          <div className="grid grid-cols-5 gap-4">
             {commonIcons.map((icon) => (
               <div
                 key={icon.iconName}
