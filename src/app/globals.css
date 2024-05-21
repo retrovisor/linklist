@@ -19,6 +19,21 @@ body {
   transform: skew(0);
 }
 
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000; /* Black background */
+  border-radius: 50%; /* Rounded corners */
+  width: 40px; /* Adjust size as needed */
+  height: 40px; /* Adjust size as needed */
+}
+
+.icon {
+  color: #FFFFFF; /* White icon color */
+}
+
+
 .max-wid {
 
   max-width: 500px;
