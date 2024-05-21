@@ -7,7 +7,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'; // Import the X ico
 
 library.add(fas);
 
-const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
+const IconModal = ({ currentIcon, onIconSelect, onClose, buttonRef }) => {
   const modalRef = useRef();
 
   // Click outside to close modal
@@ -23,18 +23,16 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
     };
   }, [modalRef, onClose]);
 
-  // Ensure modal centers in the viewport when opened
-  useEffect(() => {
-    if (modalRef.current) {
-      modalRef.current.style.top = `${window.scrollY + window.innerHeight / 2 - modalRef.current.offsetHeight / 2}px`;
-    }
-  }, []);
-
   const isCustomIcon = currentIcon.startsWith('http');
+
+  // Ensure modal is centered by updating only once and when opening
+  useEffect(() => {
+    window.scrollTo(0, modalRef.current.offsetTop - 100); // Ensure it's slightly in view
+  }, []);
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
-      <div ref={modalRef} className="bg-white rounded-lg shadow-lg max-h-full overflow-y-auto p-4" style={{ width: '90%', maxHeight: '90vh', position: 'absolute' }}>
+      <div ref={modalRef} className="bg-white rounded-lg shadow-lg p-4" style={{ width: '90%', maxHeight: '90vh', overflowY: 'auto' }}>
         <div className="flex justify-between items-center border-b pb-3 mb-4">
           <h2 className="text-xl font-bold">Select Icon</h2>
           <button onClick={onClose} className="p-2">
@@ -52,7 +50,13 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
               <div
                 key={icon.iconName}
                 className="icon-container cursor-pointer"
-                onClick={() => onIconSelect(`fa-${icon.iconName}`)}
+                onClick={() => {
+                  onIconSelect(`fa-${icon.iconName}`);
+                  if (buttonRef && buttonRef.current) {
+                    buttonRef.current.scrollIntoView({ behavior: 'smooth' });
+                  }
+                  onClose(); // Assuming you want to close the modal after selection
+                }}
               >
                 <FontAwesomeIcon icon={icon} className="icon" />
               </div>
