@@ -28,7 +28,7 @@ export async function POST(req) {
       Body: Buffer.concat(chunks),
       ContentType: file.type,
     }));
-    const customDomain = 'momofriends.com';
+    const customDomain = 'momofriends.com/naelink';
     const link = `https://${customDomain}/${newFilename}`;
     return Response.json(link);
   }
