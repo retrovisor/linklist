@@ -108,6 +108,7 @@ export default async function UserPage({ params }) {
           alt="avatar"
           width={90}
           height={90}
+           unoptimized
         />
       </div>
       <h2 className="text-2xl text-center mb-1">{page.displayName}</h2>
