@@ -40,6 +40,13 @@ function buttonLink(key, value) {
   return value;
 }
 
+function getYouTubeVideoId(url) {
+  const regex = /[?&]v=([^&#]*)/;
+  const match = url.match(regex);
+  return match ? match[1] : null;
+}
+
+
 export default async function UserPage({ params }) {
   const uri = params.uri;
 
@@ -171,6 +178,22 @@ export default async function UserPage({ params }) {
           </div>
         ))}
       </div>
+
+        <div className="max-wid mx-auto pt-5 px-5">
+  {page.youTubeVideos.map(video => (
+    <div key={video.key} className="mb-5">
+      <iframe
+        width="100%"
+        height="315"
+        src={`https://www.youtube.com/embed/${getYouTubeVideoId(video.url)}`}
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+      ></iframe>
+    </div>
+  ))}
+</div>
 
       <footer className="text-center text-xs text-white p-6">
         <div className="text-center logo-container2">
