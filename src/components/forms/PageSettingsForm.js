@@ -95,6 +95,16 @@ export default function PageSettingsForm({page,user}) {
                   src={avatar}
                   alt={'avatar'}
                   width={128} height={128} />
+
+                    <Image
+  className="w-full h-full object-cover"
+  src={avatar}
+  alt="avatar"
+  width={128}
+  height={128}
+  unoptimized
+/>
+    
               </div>
               <label
                 htmlFor="avatarIn"
