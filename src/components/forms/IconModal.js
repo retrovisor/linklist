@@ -12,7 +12,9 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
   const isCustomIcon = currentIcon.startsWith('http');
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
+    // Overlay container
+    <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
+      // Dialog box
       <div className="bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-xl font-bold mb-4">Select an Icon</h2>
         {isCustomIcon ? (
