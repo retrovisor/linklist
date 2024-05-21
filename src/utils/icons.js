@@ -1,4 +1,4 @@
-import { faBookmark, faPencil, faVideo } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark, faPencil, faVideo, faMusic } from '@fortawesome/free-solid-svg-icons';
 
 export const commonIcons = [
   faBookmark,
