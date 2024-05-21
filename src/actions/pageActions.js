@@ -47,6 +47,8 @@ export async function savePageButtons(formData) {
   return { success: false, message: 'Unauthorized' };
 }
 
+
+
 export async function savePageSettings(formData) {
   await connectToDatabase();
 
@@ -84,6 +86,22 @@ export async function savePageSettings(formData) {
 
   return { success: false, message: 'Unauthorized' };
 }
+
+export async function saveYouTubeVideos(youTubeVideos) {
+  await connectToDatabase();
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    await Page.updateOne(
+      { owner: session?.user?.email },
+      { youTubeVideos },
+    );
+    return { success: true };
+  } else {
+    return { success: false, message: 'Unauthorized' };
+  }
+}
+
 
 export async function savePageLinks(links) {
   await connectToDatabase();
