@@ -13,8 +13,7 @@ import Link from "next/link";
 import "@/styles/template1.css";
 import "@/styles/template2.css";
 import ShareDialog from "./ShareDialog";
-import PageYouTubeForm from "@/components/forms/PageYouTubeForm";
-
+ 
 
 // Add necessary icons to the library
 library.add(fas, faBookmark, faLink, faLocationDot, faEnvelope, faPhone, faDiscord, faFacebook, faGithub, faInstagram, faTelegram, faTiktok, faWhatsapp, faYoutube, faShare);
@@ -181,18 +180,19 @@ export default async function UserPage({ params }) {
         ))}
       </div>
 
-        <div className="max-wid mx-auto pt-5 px-5">
+        <div className="max-wid mx-auto px-5">
   {page.youTubeVideos.map(video => (
-    <div key={video.key} className="mb-5">
-      <iframe
-        width="100%"
-        height="315"
-        src={`https://www.youtube.com/embed/${getYouTubeVideoId(video.url)}`}
-        title="YouTube video player"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
-      ></iframe>
+    <div key={video.key} className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2">
+      <div className="relative" style={{ paddingTop: '56.25%' }}>
+        <iframe
+          className="absolute top-0 left-0 w-full h-full"
+          src={`https://www.youtube.com/embed/${getYouTubeVideoId(video.url)}`}
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        ></iframe>
+      </div>
     </div>
   ))}
 </div>
