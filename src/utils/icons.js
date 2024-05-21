@@ -49,7 +49,7 @@ import {
   faHand,
   faPaperPlane,
   faCode,
-  faThumbstack,
+  faThumbTack,
   faKey,
   faFolder,
   faCity,
@@ -76,10 +76,21 @@ import {
   faPassport,
   faFlag,
   faBuilding,
-  faStore
+  faStore,
+  faAddressCard,
+  faRocket,
+  faRegistered,
+  faDesktop,
+  faMoon,
+  faLanguage,
+  faSignal,
+  faTrain,
+  faTrophy,
+  faCrown,
+  faMask,
+  faCircleCheck,
+  faLightbulb
 } from '@fortawesome/free-solid-svg-icons';
-
-
 export const commonIcons = [
   // Media and Communication
   faBookmark, faPencil, faVideo, faMusic, faGuitar, faMicrophone, faPodcast,
@@ -87,21 +98,25 @@ export const commonIcons = [
 
   // UI Elements
   faXmark, faTag, faCircleUp, faCircleDown, faCircleExclamation, faCircle,
-  faCircleUser, faInfo, faQuestion,
+  faCircleUser, faCircleCheck, faInfo, faQuestion,
 
   // Everyday Objects & People
   faPhone, faCartShopping, faMugHot, faCar, faKey, faFolder, faAddressBook,
-  faBook, faPaperclip, faHand, faPaperPlane, faThumbstack,
+  faBook, faPaperclip, faHand, faPaperPlane, faThumbTack, faAddressCard,
 
   // Emotions & Signs
   faStar, faHeart, faPoo, faFaceSmile, faComment, faGhost, faBomb, faSun,
-  faSnowflake, faFish, faHandshake, faEarthAmericas,
+  faSnowflake, faFish, faHandshake, faEarthAmericas, faMoon, faMask, faLightbulb,
 
   // Commerce & Office
   faBarcode, faTrash, faInbox, faLock, faGear, faFile, faTicket, faStore,
   faBuilding, faPassport, faFlag,
 
-  // Nature & Geography
-  faTree, faWifi, faBicycle, faCompass, faBrush, faAnchor, faCity, faFire,
-  faLink, faPlane, faHashtag, faClock, faCross
+  // Technology and Transport
+  faWifi, faBicycle, faCompass, faBrush, faAnchor, faCity, faFire,
+  faLink, faPlane, faHashtag, faClock, faCross, faDesktop, faRocket,
+  faSignal, faTrain,
+
+  // Achievement and Organization
+  faTrophy, faCrown, faRegistered
 ];
