@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { commonIcons } from '@/utils/icons';
-import { faTimes } from '@fortawesome/free-solid-svg-icons'; // Ensure the X icon is imported
+import { faTimes } from '@fortawesome/free-solid-svg-icons'; // Import the X icon
 
 library.add(fas);
 
@@ -23,11 +23,18 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
     };
   }, [modalRef, onClose]);
 
+  // Ensure modal centers in the viewport when opened
+  useEffect(() => {
+    if (modalRef.current) {
+      modalRef.current.style.top = `${window.scrollY + window.innerHeight / 2 - modalRef.current.offsetHeight / 2}px`;
+    }
+  }, []);
+
   const isCustomIcon = currentIcon.startsWith('http');
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
-      <div ref={modalRef} className="bg-white rounded-lg shadow-lg max-h-full overflow-y-auto p-8" style={{ width: '90%', maxHeight: '90vh' }}>
+      <div ref={modalRef} className="bg-white rounded-lg shadow-lg max-h-full overflow-y-auto p-4" style={{ width: '90%', maxHeight: '90vh', position: 'absolute' }}>
         <div className="flex justify-between items-center border-b pb-3 mb-4">
           <h2 className="text-xl font-bold">Select Icon</h2>
           <button onClick={onClose} className="p-2">
