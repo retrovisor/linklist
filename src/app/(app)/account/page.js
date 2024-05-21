@@ -4,6 +4,7 @@ import PageLinksForm from "@/components/forms/PageLinksForm";
 import PageSettingsForm from "@/components/forms/PageSettingsForm";
 import PageTextBoxesForm from "@/components/forms/PageTextBoxesForm";
 import UsernameForm from "@/components/forms/UsernameForm";
+import PageYouTubeForm from "@/components/forms/PageYouTubeForm";
 import { Page } from "@/models/Page";
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
