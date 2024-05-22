@@ -1,16 +1,17 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import AppSidebar from "@/components/layout/AppSidebar";
-import { Page } from "@/models/Page";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {Page} from "@/models/Page";
+import {faBars, faLink} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import mongoose from "mongoose";
-import { getServerSession } from "next-auth";
-import { Lato } from 'next/font/google';
-import '../globals.css';
-import { headers } from "next/headers";
+import {getServerSession} from "next-auth";
+import {Lato} from 'next/font/google'
+import '../globals.css'
+import {headers} from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { Toaster } from "react-hot-toast";
+import {redirect} from "next/navigation";
+import {Toaster} from "react-hot-toast";
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
