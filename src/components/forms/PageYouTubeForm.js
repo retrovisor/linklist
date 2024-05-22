@@ -1,6 +1,6 @@
 'use client';
 
-import { saveImageLinks } from "@/actions/pageActions";
+import { saveYouTubeVideos } from "@/actions/pageActions";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import SectionBox from "@/components/layout/SectionBox";
 import { faGripLines, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -8,66 +8,49 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { ReactSortable } from "react-sortablejs";
-import { upload } from "@/actions/upload";
 
-export default function PageImageLinksForm({ page, user }) {
-  const [imageLinks, setImageLinks] = useState(page.imageLinks || []);
+export default function PageYouTubeForm({ page, user }) {
+  const [youTubeVideos, setYouTubeVideos] = useState(page.youTubeVideos || []);
 
-  async function save() {
-    await saveImageLinks(imageLinks);
-    toast.success('Saved!');
-  }
+async function save() {
+  await saveYouTubeVideos(youTubeVideos);
+  toast.success('Saved!');
+}
 
-  function addNewImageLink() {
-    setImageLinks(prev => [
+  function addNewYouTubeVideo() {
+    setYouTubeVideos(prev => [
       ...prev,
       {
         key: Date.now().toString(),
-        title: '',
         url: '',
-        linkUrl: '',
       },
     ]);
   }
 
-  function handleImageLinkChange(keyOfImageLinkToChange, prop, ev) {
-    setImageLinks(prev => {
-      const newImageLinks = [...prev];
-      newImageLinks.forEach(imageLink => {
-        if (imageLink.key === keyOfImageLinkToChange) {
-          imageLink[prop] = ev.target.value;
+  function handleYouTubeVideoChange(keyOfVideoToChange, ev) {
+    setYouTubeVideos(prev => {
+      const newYouTubeVideos = [...prev];
+      newYouTubeVideos.forEach(video => {
+        if (video.key === keyOfVideoToChange) {
+          video.url = ev.target.value;
         }
       });
-      return newImageLinks;
+      return newYouTubeVideos;
     });
   }
 
-  function removeImageLink(imageLinkKeyToRemove) {
-    setImageLinks(prevImageLinks =>
-      [...prevImageLinks].filter(il => il.key !== imageLinkKeyToRemove)
+  function removeYouTubeVideo(videoKeyToRemove) {
+    setYouTubeVideos(prevYouTubeVideos =>
+      [...prevYouTubeVideos].filter(video => video.key !== videoKeyToRemove)
     );
-  }
-
-  async function handleImageUpload(keyOfImageLinkToChange, ev) {
-    const link = await upload(ev, (link) => {
-      setImageLinks(prev => {
-        const newImageLinks = [...prev];
-        newImageLinks.forEach(imageLink => {
-          if (imageLink.key === keyOfImageLinkToChange) {
-            imageLink.url = link;
-          }
-        });
-        return newImageLinks;
-      });
-    });
   }
 
   return (
     <SectionBox>
       <form action={save}>
-        <h2 className="text-2xl font-bold mb-4">Image Links</h2>
+        <h2 className="text-2xl font-bold mb-4">YouTube Videos</h2>
         <button
-          onClick={addNewImageLink}
+          onClick={addNewYouTubeVideo}
           type="button"
           className="text-blue-500 text-lg flex gap-2 items-center cursor-pointer"
         >
@@ -75,9 +58,9 @@ export default function PageImageLinksForm({ page, user }) {
           <span>Add new</span>
         </button>
         <div className="">
-          <ReactSortable handle={'.handle'} list={imageLinks} setList={setImageLinks}>
-            {imageLinks.map(il => (
-              <div key={il.key} className="mt-8">
+          <ReactSortable handle={'.handle'} list={youTubeVideos} setList={setYouTubeVideos}>
+            {youTubeVideos.map(video => (
+              <div key={video.key} className="mt-8">
                 <div className="handle">
                   <FontAwesomeIcon
                     className="text-gray-500 mr-2 cursor-ns-resize"
@@ -85,33 +68,20 @@ export default function PageImageLinksForm({ page, user }) {
                   />
                 </div>
                 <div>
-                  <label className="input-label">Title:</label>
+                  <label className="input-label">YouTube Video URL:</label>
                   <input
-                    value={il.title}
-                    onChange={ev => handleImageLinkChange(il.key, 'title', ev)}
+                    value={video.url}
+                    onChange={ev => handleYouTubeVideoChange(video.key, ev)}
                     type="text"
-                    placeholder="Title"
-                  />
-                  <label className="input-label">Image:</label>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={ev => handleImageUpload(il.key, ev)}
-                  />
-                  <label className="input-label">Link URL:</label>
-                  <input
-                    value={il.linkUrl}
-                    onChange={ev => handleImageLinkChange(il.key, 'linkUrl', ev)}
-                    type="text"
-                    placeholder="Link URL"
+                    placeholder="YouTube Video URL"
                   />
                   <button
-                    onClick={() => removeImageLink(il.key)}
+                    onClick={() => removeYouTubeVideo(video.key)}
                     type="button"
                     className="bg-gray-300 py-2 px-3 mb-2 h-full flex gap-2 items-center justify-center"
                   >
                     <FontAwesomeIcon icon={faTrash} />
-                    <span>Remove this image link</span>
+                    <span>Remove this video</span>
                   </button>
                 </div>
               </div>
