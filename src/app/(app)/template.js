@@ -52,8 +52,8 @@ export default async function AppTemplate({ children, ...rest }) {
           <label htmlFor="navCb" className="hidden backdrop fixed inset-0 bg-black/80 z-10"></label>
           <aside className="bg-white w-48 p-4 pt-6 shadow fixed md:static -left-48 top-0 bottom-0 z-20 transition-all">
             <div className="sticky top-0 pt-2">
-              <div className="rounded-full overflow-hidden aspect-square w-24 mx-auto">
-                <Image src={session.user.image} className="object-cover w-full h-full rounded-full border border-white shadow shadow-black/50" width={256} height={256} alt={'avatar'} unoptimized />
+              <div className="rounded-full overflow-hidden aspect-square w-24 mx-auto border border-white shadow shadow-black/50">
+                <Image src={session.user.image} className="object-cover w-full h-full" width={256} height={256} alt={'avatar'} unoptimized />
               </div>
               {page && (
                 <div className="text-center mt-4 flex gap-1 items-center justify-center text-sm">
