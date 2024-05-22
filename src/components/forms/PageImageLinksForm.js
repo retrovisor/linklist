@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { ReactSortable } from "react-sortablejs";
+import { upload } from "@/actions/upload";
 
 export default function PageImageLinksForm({ page, user }) {
   const [imageLinks, setImageLinks] = useState(page.imageLinks || []);
@@ -47,6 +48,20 @@ export default function PageImageLinksForm({ page, user }) {
     );
   }
 
+  async function handleImageUpload(keyOfImageLinkToChange, ev) {
+    const link = await upload(ev, (link) => {
+      setImageLinks(prev => {
+        const newImageLinks = [...prev];
+        newImageLinks.forEach(imageLink => {
+          if (imageLink.key === keyOfImageLinkToChange) {
+            imageLink.url = link;
+          }
+        });
+        return newImageLinks;
+      });
+    });
+  }
+
   return (
     <SectionBox>
       <form action={save}>
@@ -77,12 +92,11 @@ export default function PageImageLinksForm({ page, user }) {
                     type="text"
                     placeholder="Title"
                   />
-                  <label className="input-label">Image URL:</label>
+                  <label className="input-label">Image:</label>
                   <input
-                    value={il.url}
-                    onChange={ev => handleImageLinkChange(il.key, 'url', ev)}
-                    type="text"
-                    placeholder="Image URL"
+                    type="file"
+                    accept="image/*"
+                    onChange={ev => handleImageUpload(il.key, ev)}
                   />
                   <label className="input-label">Link URL:</label>
                   <input
