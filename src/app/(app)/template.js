@@ -42,7 +42,7 @@ export default async function AppTemplate({ children, ...rest }) {
                   height={80}
                   alt={'avatar'}
                   unoptimized
-                  className="w-full h-full object-cover"
+                  className="object-cover w-full h-full rounded-full border-1 border-white shadow shadow-black/50"
                 />
               </div>
             </label>
