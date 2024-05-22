@@ -19,6 +19,14 @@ const PageSchema = new Schema({
       text: String,
     },
   ],
+  imageLinks: [
+    {
+      key: String,
+      title: String,
+      url: String,
+      linkUrl: String,
+    },
+  ],
 
    youTubeVideos: [
     {
