@@ -8,15 +8,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { ReactSortable } from "react-sortablejs";
-import {upload} from "@/libs/upload";
-
+import { upload } from "@/libs/upload";
 
 export default function PageImageLinksForm({ page, user }) {
   const [imageLinks, setImageLinks] = useState(page.imageLinks || []);
 
-  async function save() {
-    await saveImageLinks(imageLinks);
-    toast.success('Saved!');
+  async function save(ev) {
+    ev.preventDefault();
+    const result = await saveImageLinks(imageLinks);
+    if (result.success) {
+      toast.success('Saved!');
+    } else {
+      toast.error(result.message || 'Failed to save');
+    }
   }
 
   function addNewImageLink() {
@@ -43,12 +47,6 @@ export default function PageImageLinksForm({ page, user }) {
     });
   }
 
-  function removeImageLink(imageLinkKeyToRemove) {
-    setImageLinks(prevImageLinks =>
-      [...prevImageLinks].filter(il => il.key !== imageLinkKeyToRemove)
-    );
-  }
-
   async function handleImageUpload(keyOfImageLinkToChange, ev) {
     const link = await upload(ev, (link) => {
       setImageLinks(prev => {
@@ -63,9 +61,15 @@ export default function PageImageLinksForm({ page, user }) {
     });
   }
 
+  function removeImageLink(imageLinkKeyToRemove) {
+    setImageLinks(prevImageLinks =>
+      [...prevImageLinks].filter(il => il.key !== imageLinkKeyToRemove)
+    );
+  }
+
   return (
     <SectionBox>
-      <form action={save}>
+      <form onSubmit={save}>
         <h2 className="text-2xl font-bold mb-4">Image Links</h2>
         <button
           onClick={addNewImageLink}
