@@ -214,7 +214,7 @@ export default async function UserPage({ params }) {
                 alt={il.title}
                 className="custom-image w-full h-full object-contain"
               />
-              <div className="absolute top-0 left-0 bg-black bg-opacity-50 text-white p-2">
+              <div className="absolute top-3 left-3 rounded-md	bg-black bg-opacity-50 text-white p-2">
                 <h3 className="text-xl font-semibold">{il.title}</h3>
               </div>
             </div>
