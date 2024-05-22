@@ -46,7 +46,7 @@ export default async function AppTemplate({ children, ...rest }) {
             <Image src={session.user.image} width={256} height={256} alt={'avatar'} unoptimized />
           </div>
           {page && (
-           Nae.Link<Link
+           <span>Nae.Link</span> <Link
   target="_blank"
   href={'/' + page.uri}
   className="text-center mt-4 flex gap-1 items-center justify-center text-sm">
