@@ -198,6 +198,28 @@ export default async function UserPage({ params }) {
   ))}
 </div>
 
+
+       <div className="max-wid mx-auto pt-5 px-5">
+      {page.imageLinks.map(il => (
+        <a
+          key={il.key}
+          href={il.linkUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-white border-slate-950 border-2 shadow-lg mb-5 block"
+        >
+          <div
+            className="w-full h-64 bg-cover bg-center"
+            style={{ backgroundImage: `url(${il.url})` }}
+          ></div>
+          <div className="p-4">
+            <h3 className="text-black text-xl font-semibold">{il.title}</h3>
+          </div>
+        </a>
+      ))}
+    </div>
+
+
       <footer className="text-center text-xs text-white p-6">
         <div className="text-center logo-container2">
           <svg className="logo2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 396 97" fill="none">
