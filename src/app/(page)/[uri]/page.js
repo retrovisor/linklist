@@ -198,7 +198,7 @@ export default async function UserPage({ params }) {
   ))}
 </div>
 
- <div className="max-wid mx-auto px-5">
+      <div className="max-wid mx-auto pt-5 px-5">
         {page.imageLinks.map(il => (
           <a
             key={il.key}
@@ -213,8 +213,8 @@ export default async function UserPage({ params }) {
                 alt={il.title}
                 layout="fill"
                 objectFit="contain"
-                className="w-full h-full"
-                 unoptimized
+                className="custom-image"
+                unoptimized
               />
               <div className="absolute top-0 left-0 bg-black bg-opacity-50 text-white p-2">
                 <h3 className="text-xl font-semibold">{il.title}</h3>
@@ -223,6 +223,7 @@ export default async function UserPage({ params }) {
           </a>
         ))}
       </div>
+
 
 
 
