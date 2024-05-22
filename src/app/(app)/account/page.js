@@ -5,6 +5,7 @@ import PageSettingsForm from "@/components/forms/PageSettingsForm";
 import PageTextBoxesForm from "@/components/forms/PageTextBoxesForm";
 import UsernameForm from "@/components/forms/UsernameForm";
 import PageYouTubeForm from "@/components/forms/PageYouTubeForm";
+import PageImageLinksForm from "@/components/forms/PageImageLinksForm";
 import { Page } from "@/models/Page";
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
@@ -62,6 +63,8 @@ export default async function AccountPage({ searchParams }) {
         <PageLinksForm page={leanPage} user={session.user} />
         <PageTextBoxesForm page={leanPage} user={session.user} />
     <PageYouTubeForm page={leanPage} user={session.user} />
+          <PageImageLinksForm page={leanPage} user={session.user} />
+
 
       
       </>
