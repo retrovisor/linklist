@@ -46,15 +46,17 @@ export default async function AppTemplate({ children, ...rest }) {
             <Image src={session.user.image} width={256} height={256} alt={'avatar'} unoptimized />
           </div>
           {page && (
-           <div><span>Nae.Link</span> <Link
-  target="_blank"
-  href={'/' + page.uri}
-  className="text-center mt-4 flex gap-1 items-center justify-center text-sm">
-  <FontAwesomeIcon size="sm" icon={faLink} className="text-blue-500" />
-  <span className="text-sm text-gray-300">/</span>
-  <span className="text-sm">{page.uri}</span>
-</Link>
-    </div>
+              <div className="text-center mt-4 flex gap-1 items-center justify-center text-sm">
+                  <span className="text-sm">Nae.Link</span> 
+                  <Link
+                    target="_blank"
+                    href={'/' + page.uri}
+                    className="flex gap-1 items-center justify-center text-sm">
+                    <FontAwesomeIcon size="sm" icon={faLink} className="text-blue-500" />
+                    <span className="text-sm text-gray-300">/</span>
+                    <span className="text-sm">{page.uri}</span>
+                  </Link>
+                </div>
 
           )}
           <div className="text-center">
