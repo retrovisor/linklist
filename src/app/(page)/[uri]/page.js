@@ -198,7 +198,8 @@ export default async function UserPage({ params }) {
   ))}
 </div>
 
-      <div className="max-wid mx-auto pt-5 px-5">
+      
+      <div className="max-wid mx-auto px-5">
         {page.imageLinks.map(il => (
           <a
             key={il.key}
@@ -208,13 +209,10 @@ export default async function UserPage({ params }) {
             className="bg-white border-slate-950 border-2 shadow-lg mb-5 block relative"
           >
             <div className="relative">
-              <Image
+              <img
                 src={il.url}
                 alt={il.title}
-                layout="fill"
-                objectFit="contain"
-                className="custom-image"
-                unoptimized
+                className="custom-image w-full h-full object-contain"
               />
               <div className="absolute top-0 left-0 bg-black bg-opacity-50 text-white p-2">
                 <h3 className="text-xl font-semibold">{il.title}</h3>
