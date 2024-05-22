@@ -47,22 +47,23 @@ export async function savePageButtons(formData) {
   return { success: false, message: 'Unauthorized' };
 }
 
+
 export async function saveImageLinks(imageLinks) {
-  const res = await fetch('/api/page', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ imageLinks }),
-  });
+  await connectToDatabase();
 
-  if (!res.ok) {
-    throw new Error(await res.text());
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    await Page.updateOne(
+      { owner: session.user.email },
+      { imageLinks },
+    );
+
+    return { success: true };
   }
+
+  return { success: false, message: 'Unauthorized' };
 }
-
-
-
 
 
 export async function savePageSettings(formData) {
