@@ -1,17 +1,17 @@
-import {authOptions} from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import AppSidebar from "@/components/layout/AppSidebar";
-import {Page} from "@/models/Page";
-import {faBars, faLink} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { Page } from "@/models/Page";
+import { faBars, faLink } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import mongoose from "mongoose";
-import {getServerSession} from "next-auth";
-import {Lato} from 'next/font/google'
+import { getServerSession } from "next-auth";
+import { Lato } from 'next/font/google'
 import '../globals.css'
-import {headers} from "next/headers";
+import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
-import {redirect} from "next/navigation";
-import {Toaster} from "react-hot-toast";
+import { redirect } from "next/navigation";
+import { Toaster } from "react-hot-toast";
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -33,18 +33,20 @@ export default async function AppTemplate({ children, ...rest }) {
       <body className={lato.className}>
         <Toaster />
         <main className="md:flex min-h-screen">
-          <label htmlFor="navCb" className="md:hidden p-3 rounded-md bg-white inline-flex items-center gap-2 cursor-pointer">
-            <div className="rounded-full overflow-hidden w-12 h-12 shadow"> {/* Ensure the image does not exceed 80px in height */}
-              <Image
-                src={session.user.image}
-                width={80}
-                height={80}
-                alt={'avatar'}
-                unoptimized
-                className="object-cover"
-              />
-            </div>
-          </label>
+          <div className="w-full flex justify-end">
+            <label htmlFor="navCb" className="md:hidden p-3 rounded-md bg-white inline-flex items-center gap-2 cursor-pointer">
+              <div className="rounded-full overflow-hidden w-12 h-12 shadow"> {/* Ensure the image does not exceed 80px in height */}
+                <Image
+                  src={session.user.image}
+                  width={80}
+                  height={80}
+                  alt={'avatar'}
+                  unoptimized
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </label>
+          </div>
           
           <input id="navCb" type="checkbox" className="hidden" />
           <label htmlFor="navCb" className="hidden backdrop fixed inset-0 bg-black/80 z-10"></label>
