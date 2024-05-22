@@ -33,7 +33,7 @@ const IconModal = ({ currentIcon, onIconSelect, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex items-center justify-center z-50">
-      <div ref={modalRef} className="bg-white rounded-lg shadow-lg max-h-full overflow-y-auto p-8" style={{ width: '90%', maxHeight: '90vh' }}>
+      <div ref={modalRef} className="bg-white rounded-lg shadow-lg max-h-full overflow-y-auto p-6" style={{ width: '90%', maxHeight: '90vh' }}>
         <div className="flex justify-between items-center border-b pb-3 mb-4">
           <h2 className="text-xl font-bold">Select Icon</h2>
           <button onClick={onClose} className="p-2">
