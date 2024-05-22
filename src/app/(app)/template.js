@@ -46,7 +46,7 @@ export default async function AppTemplate({ children, ...rest }) {
             <Image src={session.user.image} width={256} height={256} alt={'avatar'} unoptimized />
           </div>
           {page && (
-           <span>Nae.Link</span> <Link
+           <div><span>Nae.Link</span> <Link
   target="_blank"
   href={'/' + page.uri}
   className="text-center mt-4 flex gap-1 items-center justify-center text-sm">
@@ -54,6 +54,7 @@ export default async function AppTemplate({ children, ...rest }) {
   <span className="text-sm text-gray-300">/</span>
   <span className="text-sm">{page.uri}</span>
 </Link>
+    </div>
 
           )}
           <div className="text-center">
