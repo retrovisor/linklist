@@ -198,8 +198,7 @@ export default async function UserPage({ params }) {
   ))}
 </div>
 
-
-   <div className="max-wid mx-auto pt-5 px-5">
+<div className="max-wid mx-auto pt-5 px-5">
   {page.imageLinks.map(il => (
     <a
       key={il.key}
@@ -208,20 +207,16 @@ export default async function UserPage({ params }) {
       rel="noopener noreferrer"
       className="bg-white border-slate-950 border-2 shadow-lg mb-5 block relative"
     >
-      <div
-        className="w-full h-64 bg-cover bg-center"
-        style={{ backgroundImage: `url(${il.url})` }}
-      >
+      <div className="relative">
+        <img src={il.url} alt={il.title} className="w-full h-64 object-cover" />
         <div className="absolute top-0 left-0 bg-black bg-opacity-50 text-white p-2">
           <h3 className="text-xl font-semibold">{il.title}</h3>
         </div>
       </div>
-      <div className="p-4">
-        <h3 className="text-black text-xl font-semibold">{il.title}</h3>
-      </div>
     </a>
   ))}
 </div>
+
 
 
 
