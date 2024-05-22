@@ -1,4 +1,5 @@
-// components/forms/PageImageLinksForm.js
+'use client';
+
 import { saveImageLinks } from "@/actions/pageActions";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import SectionBox from "@/components/layout/SectionBox";
