@@ -52,7 +52,7 @@ import {
   faThumbTack,
   faKey,
   faFolder,
-  faCity,
+  
   faTicket,
   faTree,
   faWifi,
@@ -60,7 +60,7 @@ import {
   faBicycle,
   faCompass,
   faAddressBook,
-  faBrush,
+  
   faEarthAmericas,
   faSnowflake,
   faFish,
@@ -70,7 +70,6 @@ import {
   faAnchor,
   faClock,
   faCross,
-  faCircle,
   faInfo,
   faQuestion,
   faPassport,
@@ -97,7 +96,7 @@ export const commonIcons = [
   faCameraRetro, faHeadphones, faBell,
 
   // UI Elements
-  faXmark, faTag, faCircleUp, faCircleDown, faCircleExclamation, faCircle,
+  faXmark, faTag, faCircleUp, faCircleDown, faCircleExclamation,
   faCircleUser, faCircleCheck, faInfo, faQuestion,
 
   // Everyday Objects & People
@@ -113,7 +112,7 @@ export const commonIcons = [
   faBuilding, faPassport, faFlag,
 
   // Technology and Transport
-  faWifi, faBicycle, faCompass, faBrush, faAnchor, faCity, faFire,
+  faWifi, faBicycle, faCompass,  faAnchor,  faFire,
   faLink, faPlane, faHashtag, faClock, faCross, faDesktop, faRocket,
   faSignal, faTrain,
 
