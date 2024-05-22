@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { ReactSortable } from "react-sortablejs";
-import { upload } from "@/actions/upload";
+import {upload} from "@/libs/upload";
+
 
 export default function PageImageLinksForm({ page, user }) {
   const [imageLinks, setImageLinks] = useState(page.imageLinks || []);
