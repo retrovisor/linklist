@@ -198,25 +198,30 @@ export default async function UserPage({ params }) {
   ))}
 </div>
 
-<div className="max-wid mx-auto pt-5 px-5">
-  {page.imageLinks.map(il => (
-    <a
-      key={il.key}
-      href={il.linkUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="bg-white border-slate-950 border-2 shadow-lg mb-5 block relative"
-    >
-      <div className="relative">
-        <img src={il.url} alt={il.title} className="w-full h-64 object-cover" />
-        <div className="absolute top-0 left-0 bg-black bg-opacity-50 text-white p-2">
-          <h3 className="text-xl font-semibold">{il.title}</h3>
-        </div>
+ <div className="max-wid mx-auto px-5">
+        {page.imageLinks.map(il => (
+          <a
+            key={il.key}
+            href={il.linkUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-white border-slate-950 border-2 shadow-lg mb-5 block relative"
+          >
+            <div className="relative">
+              <Image
+                src={il.url}
+                alt={il.title}
+                layout="fill"
+                objectFit="contain"
+                className="w-full h-full"
+              />
+              <div className="absolute top-0 left-0 bg-black bg-opacity-50 text-white p-2">
+                <h3 className="text-xl font-semibold">{il.title}</h3>
+              </div>
+            </div>
+          </a>
+        ))}
       </div>
-    </a>
-  ))}
-</div>
-
 
 
 
