@@ -72,20 +72,12 @@ export default async function UserPage({ params }) {
   const template = page.template || "template1"; // Default to template1 if not specified
 
   return (
-    <div className={`text-white min-h-screen bg-contain template ${template}`} style={{ position: "relative" }}>
-      <div
-        className="bg-cover bg-center"
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: -1,
-          backgroundImage: page.bgType === 'color' ? 'none' : `url(${page.bgImage})`,
-          backgroundColor: page.bgType === 'color' ? page.bgColor : 'transparent',
-        }}
-      ></div>
+    <div className={`text-white min-h-screen bg-contain template ${template}`} style={
+          page.bgType === 'color'
+            ? { backgroundColor: page.bgColor }
+            : { backgroundImage: `url(${page.bgImage})` }
+        }>
+      <div className="bg-cover bg-center"></div>
 
       <div className="fixed top-4 right-4 z-50">
         <ShareDialog uri={page.uri} />
