@@ -47,6 +47,22 @@ export async function savePageButtons(formData) {
   return { success: false, message: 'Unauthorized' };
 }
 
+export async function saveImageLinks(imageLinks) {
+  const res = await fetch('/api/page', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ imageLinks }),
+  });
+
+  if (!res.ok) {
+    throw new Error(await res.text());
+  }
+}
+
+
+
 
 
 export async function savePageSettings(formData) {
