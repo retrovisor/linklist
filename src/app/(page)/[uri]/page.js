@@ -214,6 +214,7 @@ export default async function UserPage({ params }) {
                 layout="fill"
                 objectFit="contain"
                 className="w-full h-full"
+                 unoptimized
               />
               <div className="absolute top-0 left-0 bg-black bg-opacity-50 text-white p-2">
                 <h3 className="text-xl font-semibold">{il.title}</h3>
