@@ -76,7 +76,7 @@ export default function PageSettingsForm({page,user}) {
                       type="file"
                       onChange={handleCoverImageChange}
                       className="hidden"/>
-                    <div className="flex gap-2 items-center cursor-pointer">
+                    <div className="flex gap-2 items-center bg-white cursor-pointer">
                       <FontAwesomeIcon
                         icon={faCloudArrowUp}
                         className="text-gray-700" />
