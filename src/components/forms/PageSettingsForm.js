@@ -37,8 +37,14 @@ export default function PageSettingsForm({page,user}) {
     <div>
       <SectionBox>
         <form action={saveBaseSettings}>
-                 <div className="py-4 -m-4 min-h-[300px] flex justify-center items-center">
-
+<div
+            className="py-4 -m-4 min-h-[300px] flex justify-center items-center bg-cover bg-center"
+            style={
+              bgType === 'color'
+                ? {backgroundColor:bgColor}
+                : {backgroundImage:`url(${bgImage})`}
+            }
+          >
             <div>
               <RadioTogglers
                 defaultValue={page.bgType}
