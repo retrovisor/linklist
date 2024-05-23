@@ -12,6 +12,8 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import cloneDeep from 'clone-deep';
 import Head from 'next/head';
+import { useState } from 'react';
+
 
 export default async function AccountPage({ searchParams }) {
   console.log('AccountPage function started');
