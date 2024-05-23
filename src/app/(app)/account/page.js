@@ -12,8 +12,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import cloneDeep from 'clone-deep';
 import Head from 'next/head';
-import { useState } from 'react';
-
+ 
 
 export default async function AccountPage({ searchParams }) {
   console.log('AccountPage function started');
@@ -21,16 +20,7 @@ export default async function AccountPage({ searchParams }) {
   const session = await getServerSession(authOptions);
   console.log('Session:', session);
 
-    const [bgType, setBgType] = useState(leanPage.bgType || 'color');
-  const [bgColor, setBgColor] = useState(leanPage.bgColor || '#ffffff');
-  const [bgImage, setBgImage] = useState(leanPage.bgImage || '');
-
-  const handleBgUpdate = (newBgType, newBgColor, newBgImage) => {
-    setBgType(newBgType);
-    setBgColor(newBgColor);
-    setBgImage(newBgImage);
-  };
-
+     
 
 
   const desiredUsername = searchParams?.desiredUsername;
@@ -71,20 +61,14 @@ export default async function AccountPage({ searchParams }) {
             <Head>
         <title>{`Edit account - ${session.user.name}`}</title>
       </Head>
-     <div
+      <div
         className="container h-full bg-center fixed top-0 z-10 bg-auto bg-no-repeat overflow-x-hidden min-h-screen mt-16"
         style={{
-          backgroundImage: bgType === 'image' ? `url(${bgImage})` : 'none',
-          backgroundColor: bgType === 'color' ? bgColor : 'transparent',
+          backgroundImage: `url(${leanPage.bgImage})`,
+          backgroundColor: leanPage.bgColor,
         }}
       >
-
-the way this did
- style={
-              bgType === 'color'
-                ? {backgroundColor:bgColor}
-                : {backgroundImage:`url(${bgImage})`}
-            }
+ 
       
 
         <PageSettingsForm page={leanPage} user={session.user} />
