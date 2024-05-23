@@ -1,4 +1,3 @@
-'use client';
 import { savePageLink, deletePageLink } from "@/actions/pageActions";
 import SectionBox from "@/components/layout/SectionBox";
 import { upload } from "@/libs/upload";
@@ -17,14 +16,32 @@ export default function PageLinksForm({ page, user }) {
   const [currentIconKey, setCurrentIconKey] = useState(null);
 
   async function saveLink(link) {
-    await savePageLink(link);
-    toast.success('Link saved!');
+    const result = await savePageLink(link);
+    if (result.success) {
+      toast.success('Link saved!');
+      setLinks(prevLinks => {
+        const newLinks = [...prevLinks];
+        const index = newLinks.findIndex(l => l.key === link.key);
+        if (index > -1) {
+          newLinks[index] = link;
+        } else {
+          newLinks.push(link);
+        }
+        return newLinks;
+      });
+    } else {
+      toast.error('Failed to save link');
+    }
   }
 
   async function confirmDeleteLink(linkToDelete) {
-    await deletePageLink(linkToDelete.key);
-    setLinks(prevLinks => prevLinks.filter(l => l.key !== linkToDelete.key));
-    toast.success('Link deleted!');
+    const result = await deletePageLink(linkToDelete.key);
+    if (result.success) {
+      setLinks(prevLinks => prevLinks.filter(l => l.key !== linkToDelete.key));
+      toast.success('Link deleted!');
+    } else {
+      toast.error('Failed to delete link');
+    }
   }
 
   function addNewLink() {
@@ -41,7 +58,6 @@ export default function PageLinksForm({ page, user }) {
 
   function handleUpload(ev, linkKeyForUpload) {
     if (ev && ev.target.files && ev.target.files.length > 0) {
-      // User uploaded a custom image
       upload(ev, uploadedImageUrl => {
         setLinks(prevLinks => {
           const newLinks = [...prevLinks];
@@ -57,7 +73,6 @@ export default function PageLinksForm({ page, user }) {
   }
 
   function handleIconSelect(icon) {
-    console.log('Selected Icon:', icon); // Debug log
     setLinks((prevLinks) => {
       const newLinks = [...prevLinks];
       newLinks.forEach((link) => {
@@ -117,7 +132,6 @@ export default function PageLinksForm({ page, user }) {
                 <div
                   className="bg-gray-300 inline-block relative aspect-square overflow-hidden w-16 h-16 inline-flex justify-center items-center cursor-pointer"
                   onClick={() => {
-                    console.log('Change Icon Clicked', l.key); // Debug log
                     setCurrentIconKey(l.key);
                     setShowIconModal(true);
                   }}
