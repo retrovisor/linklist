@@ -131,17 +131,19 @@ export async function saveYouTubeVideos(youTubeVideos) {
   }
 }
 
-export async function savePageLinks(links) {
+
+export async function savePageLink(link) {
   await connectToDatabase();
   const session = await getServerSession(authOptions);
 
   if (session) {
-    await Page.updateOne(
-      { owner: session?.user?.email },
-      { links },
+    const result = await Page.updateOne(
+      { owner: session.user.email, "links.key": link.key },
+      { $set: { "links.$": link } },
+      { upsert: true }  // Add this option to create the link if it doesn't exist
     );
 
-    return { success: true };
+    return { success: true, result };
   } else {
     return { success: false, message: 'Unauthorized' };
   }
