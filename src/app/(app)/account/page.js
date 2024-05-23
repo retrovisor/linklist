@@ -54,24 +54,22 @@ export default async function AccountPage({ searchParams }) {
 
     return (
       <>
-            <Head>
+           <Head>
         <title>{`Edit account - ${session.user.name}`}</title>
       </Head>
       <div className="container">
-
         <PageSettingsForm page={leanPage} user={session.user} />
         <PageButtonsForm page={leanPage} user={session.user} />
-        <PageLinksForm page={leanPage} user={session.user} />
+        <div className="page-links-form-wrapper">
+          <PageLinksForm page={leanPage} user={session.user} />
+        </div>
         <PageTextBoxesForm page={leanPage} user={session.user} />
-    <PageYouTubeForm page={leanPage} user={session.user} />
-          <PageImageLinksForm page={leanPage} user={session.user} />
+        <PageYouTubeForm page={leanPage} user={session.user} />
+        <PageImageLinksForm page={leanPage} user={session.user} />
       </div>
-
-
-      
-      </>
-    );
-  } catch (error) {
+    </>
+  );
+}catch (error) {
     console.error('Error:', error);
     return <div>An error occurred. Please try again later.</div>;
   }
