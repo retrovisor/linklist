@@ -61,16 +61,8 @@ export default async function AccountPage({ searchParams }) {
             <Head>
         <title>{`Edit account - ${session.user.name}`}</title>
       </Head>
-      <div
-        className="container h-full bg-center fixed top-0 z-10 bg-auto bg-no-repeat overflow-x-hidden min-h-screen mt-16"
-        style={{
-          backgroundImage: `url(${leanPage.bgImage})`,
-          backgroundColor: leanPage.bgColor,
-        }}
-      >
- 
-      
-
+      <div className="container">
+  
         <PageSettingsForm page={leanPage} user={session.user} />
         <PageButtonsForm page={leanPage} user={session.user} />
         <PageLinksForm page={leanPage} user={session.user} />
