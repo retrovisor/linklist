@@ -19,35 +19,17 @@ export default function PageLinksForm({ page, user }) {
   const [linkToDelete, setLinkToDelete] = useState(null);
 
   async function saveLink(link) {
-    const result = await savePageLink(link);
-    if (result.success) {
-      toast.success('Link saved!');
-      setLinks(prevLinks => {
-        const newLinks = [...prevLinks];
-        const index = newLinks.findIndex(l => l.key === link.key);
-        if (index > -1) {
-          newLinks[index] = link;
-        } else {
-          newLinks.push(link);
-        }
-        return newLinks;
-      });
-    } else {
-      toast.error('Failed to save link');
-    }
+    await savePageLink(link);
+    toast.success('Link saved!');
   }
 
   async function confirmDeleteLink() {
     if (linkToDelete) {
-      const result = await deletePageLink(linkToDelete.key);
-      if (result.success) {
-        setLinks(prevLinks => prevLinks.filter(l => l.key !== linkToDelete.key));
-        setShowDeleteConfirmation(false);
-        setLinkToDelete(null);
-        toast.success('Link deleted!');
-      } else {
-        toast.error('Failed to delete link');
-      }
+      await deletePageLink(linkToDelete.key);
+      setLinks(prevLinks => prevLinks.filter(l => l.key !== linkToDelete.key));
+      setShowDeleteConfirmation(false);
+      setLinkToDelete(null);
+      toast.success('Link deleted!');
     }
   }
 
@@ -65,6 +47,7 @@ export default function PageLinksForm({ page, user }) {
 
   function handleUpload(ev, linkKeyForUpload) {
     if (ev && ev.target.files && ev.target.files.length > 0) {
+      // User uploaded a custom image
       upload(ev, uploadedImageUrl => {
         setLinks(prevLinks => {
           const newLinks = [...prevLinks];
@@ -80,6 +63,7 @@ export default function PageLinksForm({ page, user }) {
   }
 
   function handleIconSelect(icon) {
+    console.log('Selected Icon:', icon); // Debug log
     setLinks((prevLinks) => {
       const newLinks = [...prevLinks];
       newLinks.forEach((link) => {
@@ -134,6 +118,7 @@ export default function PageLinksForm({ page, user }) {
                 <div
                   className="bg-gray-300 inline-block relative aspect-square overflow-hidden w-16 h-16 inline-flex justify-center items-center cursor-pointer"
                   onClick={() => {
+                    console.log('Change Icon Clicked', l.key); // Debug log
                     setCurrentIconKey(l.key);
                     setShowIconModal(true);
                   }}
@@ -208,15 +193,14 @@ export default function PageLinksForm({ page, user }) {
           onUpload={(ev) => handleUpload(ev, currentIconKey)}
         />
       )}
-
       {showDeleteConfirmation && (
         <div className="fixed z-10 inset-0 overflow-y-auto">
-          <div className="flex items-center justify-center min-h-screen px-4 text-center">
+          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div className="fixed inset-0 transition-opacity" aria-hidden="true">
               <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
             </div>
             <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div className="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
+            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
                   <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
