@@ -168,15 +168,7 @@ export async function savePageLink(link) {
     return { success: false, message: 'Unauthorized' };
   }
 }
-
-
-    
-    return { success: true };
-  } else {
-    return { success: false, message: 'Unauthorized' };
-  }
-}
-
+ 
  
 
 export async function saveTextBoxes(textBoxes) {
