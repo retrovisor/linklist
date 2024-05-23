@@ -131,16 +131,27 @@ export async function saveYouTubeVideos(youTubeVideos) {
   }
 }
 
-export async function savePageLinks(links) {
+export async function savePageLink(link) {
   await connectToDatabase();
   const session = await getServerSession(authOptions);
-
+  
   if (session) {
-    await Page.updateOne(
-      { owner: session?.user?.email },
-      { links },
-    );
-
+    const existingLink = await Page.findOne({ owner: session?.user?.email, "links.key": link.key });
+    
+    if (existingLink) {
+      // Update existing link
+      await Page.updateOne(
+        { owner: session?.user?.email, "links.key": link.key },
+        { $set: { "links.$": link } },
+      );
+    } else {
+      // Add new link
+      await Page.updateOne(
+        { owner: session?.user?.email },
+        { $push: { links: link } },
+      );
+    }
+    
     return { success: true };
   } else {
     return { success: false, message: 'Unauthorized' };
