@@ -69,7 +69,7 @@ export default function PageSettingsForm({page,user}) {
               {bgType === 'image' && (
                 <div className="flex justify-center">
                   <label
-                    className="shadow px-4 py-2 white mt-2 flex gap-2"
+                    className="shadow px-4 py-2 bg-white mt-2 flex gap-2"
                   >
                     <input type="hidden" name="bgImage" value={bgImage}/>
                     <input
