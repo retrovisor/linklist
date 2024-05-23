@@ -152,18 +152,16 @@ export async function savePageLink(link) {
   const session = await getServerSession(authOptions);
   
   if (session) {
-    const result = await Page.updateOne(
+    await Page.updateOne(
       { owner: session?.user?.email, "links.key": link.key },
       { $set: { "links.$": link } },
-      { upsert: true }  // Add this option to create the link if it doesn't exist
     );
     
-    return { success: true, result };
+    return { success: true };
   } else {
     return { success: false, message: 'Unauthorized' };
   }
 }
-
 
 export async function saveTextBoxes(textBoxes) {
   await connectToDatabase();
