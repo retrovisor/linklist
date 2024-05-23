@@ -33,10 +33,6 @@ export default async function AppTemplate({ children, ...rest }) {
 
   const page = await Page.findOne({ owner: session.user.email });
 
-  const searchParams = new URLSearchParams(rest.params);
-  const showConfirmationDialog = searchParams.get("showConfirmationDialog") === "true";
-  const confirmationDialogProps = JSON.parse(decodeURIComponent(searchParams.get("confirmationDialogProps") || "{}"));
-
   return (
     <html lang="en">
       <body className={lato.className}>
@@ -85,7 +81,7 @@ export default async function AppTemplate({ children, ...rest }) {
             {children}
           </div>
         </main>
-        {showConfirmationDialog && <ConfirmationDialog {...confirmationDialogProps} />}
+        <ConfirmationDialog />
       </body>
     </html>
   );
