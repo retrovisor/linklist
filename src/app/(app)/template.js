@@ -12,6 +12,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Toaster } from "react-hot-toast";
+import { useState, useEffect } from "react";
+import ConfirmationDialog from "@/components/ConfirmationDialog";
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -23,11 +25,31 @@ export const metadata = {
 export default async function AppTemplate({ children, ...rest }) {
   const headersList = headers();
   const session = await getServerSession(authOptions);
+
   if (!session) {
     return redirect('/');
   }
+
   mongoose.connect(process.env.MONGO_URI);
+
   const page = await Page.findOne({ owner: session.user.email });
+
+  const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
+  const [confirmationDialogProps, setConfirmationDialogProps] = useState({});
+
+  useEffect(() => {
+    const handleShowConfirmationDialog = (event) => {
+      setConfirmationDialogProps(event.detail);
+      setShowConfirmationDialog(true);
+    };
+
+    window.addEventListener("showConfirmationDialog", handleShowConfirmationDialog);
+
+    return () => {
+      window.removeEventListener("showConfirmationDialog", handleShowConfirmationDialog);
+    };
+  }, []);
+
   return (
     <html lang="en">
       <body className={lato.className}>
@@ -35,7 +57,7 @@ export default async function AppTemplate({ children, ...rest }) {
         <main className="md:flex min-h-screen">
           <div className="flex justify-end">
             <label htmlFor="navCb" className="md:hidden p-2 rounded-md bg-white inline-flex items-center gap-2 cursor-pointer">
-              <div className="rounded-full overflow-hidden w-12 h-12 shadow"> {/* Ensure the image does not exceed 80px in height */}
+              <div className="rounded-full overflow-hidden w-12 h-12 shadow">
                 <Image
                   src={session.user.image}
                   width={80}
@@ -47,7 +69,6 @@ export default async function AppTemplate({ children, ...rest }) {
               </div>
             </label>
           </div>
-          
           <input id="navCb" type="checkbox" className="hidden" />
           <label htmlFor="navCb" className="hidden backdrop fixed inset-0 bg-black/80 z-10"></label>
           <aside className="bg-white w-48 p-4 pt-6 shadow fixed md:static -left-48 top-0 bottom-0 z-20 transition-all">
@@ -77,6 +98,12 @@ export default async function AppTemplate({ children, ...rest }) {
             {children}
           </div>
         </main>
+        {showConfirmationDialog && (
+          <ConfirmationDialog
+            {...confirmationDialogProps}
+            onCancel={() => setShowConfirmationDialog(false)}
+          />
+        )}
       </body>
     </html>
   );
