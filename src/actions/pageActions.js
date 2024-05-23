@@ -131,24 +131,37 @@ export async function saveYouTubeVideos(youTubeVideos) {
   }
 }
 
-
-export async function savePageLink(link) {
+export async function savePageLinks(links) {
   await connectToDatabase();
   const session = await getServerSession(authOptions);
 
   if (session) {
-    const result = await Page.updateOne(
-      { owner: session.user.email, "links.key": link.key },
-      { $set: { "links.$": link } },
-      { upsert: true }  // Add this option to create the link if it doesn't exist
+    await Page.updateOne(
+      { owner: session?.user?.email },
+      { links },
     );
 
-    return { success: true, result };
+    return { success: true };
   } else {
     return { success: false, message: 'Unauthorized' };
   }
 }
- 
+
+export async function savePageLink(link) {
+  await connectToDatabase();
+  const session = await getServerSession(authOptions);
+  
+  if (session) {
+    await Page.updateOne(
+      { owner: session?.user?.email, "links.key": link.key },
+      { $set: { "links.$": link } },
+    );
+    
+    return { success: true };
+  } else {
+    return { success: false, message: 'Unauthorized' };
+  }
+}
 
 export async function saveTextBoxes(textBoxes) {
   await connectToDatabase();
