@@ -1,6 +1,5 @@
 'use client';
 import { savePageLink } from "@/actions/pageActions";
-import SubmitButton from "@/components/buttons/SubmitButton";
 import SectionBox from "@/components/layout/SectionBox";
 import { upload } from "@/libs/upload";
 import { faCloudArrowUp, faGripLines, faIcons, faLink, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -129,16 +128,6 @@ export default function PageLinksForm({ page, user }) {
                   )}
                   {!l.icon && <FontAwesomeIcon size="xl" icon={faLink} />}
                 </div>
-                <div>
-                  <button
-                    onClick={() => removeLink(l.key)}
-                    type="button"
-                    className="w-full bg-gray-300 py-2 px-3 mb-2 h-full flex gap-2 items-center justify-center"
-                  >
-                    <FontAwesomeIcon icon={faTrash} />
-                     
-                  </button>
-                </div>
               </div>
               <div className="grow">
                 <label className="input-label">Title:</label>
@@ -162,13 +151,24 @@ export default function PageLinksForm({ page, user }) {
                   type="text"
                   placeholder="url"
                 />
-                <button
-                  onClick={() => saveLink(l)}
-                  type="button"
-                  className="bg-blue-500 text-white px-4 py-2 rounded mt-2"
-                >
-                  Save Link
-                </button>
+                <div className="flex items-center mt-2">
+                  <button
+                    onClick={() => removeLink(l.key)}
+                    type="button"
+                    className="bg-red-500 text-white px-4 py-2 rounded mr-2 flex items-center"
+                  >
+                    <FontAwesomeIcon icon={faTrash} className="mr-2" />
+                    Remove
+                  </button>
+                  <button
+                    onClick={() => saveLink(l)}
+                    type="button"
+                    className="bg-blue-500 text-white px-4 py-2 rounded flex items-center"
+                  >
+                    <FontAwesomeIcon icon={faSave} className="mr-2" />
+                    Save Link
+                  </button>
+                </div>
               </div>
             </div>
           ))}
