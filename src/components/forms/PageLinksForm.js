@@ -136,7 +136,7 @@ export default function PageLinksForm({ page, user }) {
                     className="w-full bg-gray-300 py-2 px-3 mb-2 h-full flex gap-2 items-center justify-center"
                   >
                     <FontAwesomeIcon icon={faTrash} />
-                    <span>Remove this link</span>
+                     
                   </button>
                 </div>
               </div>
