@@ -12,7 +12,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Toaster } from "react-hot-toast";
-import { useState, useEffect } from "react";
 import ConfirmationDialog from "@/components/ConfirmationDialog";
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
@@ -33,22 +32,6 @@ export default async function AppTemplate({ children, ...rest }) {
   mongoose.connect(process.env.MONGO_URI);
 
   const page = await Page.findOne({ owner: session.user.email });
-
-  const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
-  const [confirmationDialogProps, setConfirmationDialogProps] = useState({});
-
-  useEffect(() => {
-    const handleShowConfirmationDialog = (event) => {
-      setConfirmationDialogProps(event.detail);
-      setShowConfirmationDialog(true);
-    };
-
-    window.addEventListener("showConfirmationDialog", handleShowConfirmationDialog);
-
-    return () => {
-      window.removeEventListener("showConfirmationDialog", handleShowConfirmationDialog);
-    };
-  }, []);
 
   return (
     <html lang="en">
@@ -98,12 +81,7 @@ export default async function AppTemplate({ children, ...rest }) {
             {children}
           </div>
         </main>
-        {showConfirmationDialog && (
-          <ConfirmationDialog
-            {...confirmationDialogProps}
-            onCancel={() => setShowConfirmationDialog(false)}
-          />
-        )}
+        <ConfirmationDialog />
       </body>
     </html>
   );
