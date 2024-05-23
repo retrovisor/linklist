@@ -19,6 +19,18 @@ export default async function AccountPage({ searchParams }) {
   const session = await getServerSession(authOptions);
   console.log('Session:', session);
 
+    const [bgType, setBgType] = useState(leanPage.bgType || 'color');
+  const [bgColor, setBgColor] = useState(leanPage.bgColor || '#ffffff');
+  const [bgImage, setBgImage] = useState(leanPage.bgImage || '');
+
+  const handleBgUpdate = (newBgType, newBgColor, newBgImage) => {
+    setBgType(newBgType);
+    setBgColor(newBgColor);
+    setBgImage(newBgImage);
+  };
+
+
+
   const desiredUsername = searchParams?.desiredUsername;
   console.log('Desired Username:', desiredUsername);
 
@@ -58,13 +70,20 @@ export default async function AccountPage({ searchParams }) {
         <title>{`Edit account - ${session.user.name}`}</title>
       </Head>
      <div
-      className="container container h-full bg-center fixed top-0 z-10 bg-auto bg-no-repeat overflow-x-hidden min-h-screen mt-16"
-      style={{
-        backgroundImage: `url(${leanPage.bgImage})`,
-        backgroundColor: leanPage.bgColor,
-        
-      }}
-    >
+        className="container h-full bg-center fixed top-0 z-10 bg-auto bg-no-repeat overflow-x-hidden min-h-screen mt-16"
+        style={{
+          backgroundImage: bgType === 'image' ? `url(${bgImage})` : 'none',
+          backgroundColor: bgType === 'color' ? bgColor : 'transparent',
+        }}
+      >
+
+the way this did
+ style={
+              bgType === 'color'
+                ? {backgroundColor:bgColor}
+                : {backgroundImage:`url(${bgImage})`}
+            }
+      
 
         <PageSettingsForm page={leanPage} user={session.user} />
         <PageButtonsForm page={leanPage} user={session.user} />
