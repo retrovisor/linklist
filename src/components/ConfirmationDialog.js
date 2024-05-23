@@ -1,8 +1,32 @@
+'use client';
+
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState, useEffect } from "react";
 
-export default function ConfirmationDialog({ onConfirm, onCancel }) {
-  return (
+export default function ConfirmationDialog() {
+  const [showDialog, setShowDialog] = useState(false);
+  const [dialogProps, setDialogProps] = useState({});
+
+  useEffect(() => {
+    const handleShowConfirmationDialog = (event) => {
+      setDialogProps(event.detail);
+      setShowDialog(true);
+    };
+
+    window.addEventListener("showConfirmationDialog", handleShowConfirmationDialog);
+
+    return () => {
+      window.removeEventListener("showConfirmationDialog", handleShowConfirmationDialog);
+    };
+  }, []);
+
+  if (!showDialog) {
+    return null;
+  }
+
+  const { onConfirm, onCancel } = dialogProps;
+
     <div className="fixed z-50 inset-0 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen px-4 text-center">
         <div className="fixed inset-0 transition-opacity" aria-hidden="true">
