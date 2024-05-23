@@ -46,6 +46,17 @@ export async function savePageButtons(formData) {
   return { success: false, message: 'Unauthorized' };
 }
 
+async function saveLink(link) {
+  const response = await savePageLink(link);
+  if (response.success) {
+    setLinks(prevLinks => prevLinks.map(l => l.key === link.key ? link : l));
+    toast.success('Link saved!');
+  } else {
+    toast.error('Failed to save link. Please try again.');
+  }
+}
+
+
 export async function saveImageLinks(imageLinks) {
   await connectToDatabase();
   const session = await getServerSession(authOptions);
@@ -151,6 +162,14 @@ export async function savePageLink(link) {
         { $push: { links: link } },
       );
     }
+    
+    return { success: true };
+  } else {
+    return { success: false, message: 'Unauthorized' };
+  }
+}
+
+
     
     return { success: true };
   } else {
