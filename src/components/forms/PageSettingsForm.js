@@ -34,7 +34,6 @@ export default function PageSettingsForm({page,user}) {
     });
   }
   return (
-    <div className="chinelao">
     <div>
       <SectionBox>
         <form action={saveBaseSettings}>
