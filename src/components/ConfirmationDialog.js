@@ -2,30 +2,30 @@
 
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect } from "react";
+import { useSearchParams } from 'next/navigation';
 
 export default function ConfirmationDialog() {
-  const [showDialog, setShowDialog] = useState(false);
-  const [dialogProps, setDialogProps] = useState({});
-
-  useEffect(() => {
-    const handleShowConfirmationDialog = (event) => {
-      setDialogProps(event.detail);
-      setShowDialog(true);
-    };
-
-    window.addEventListener("showConfirmationDialog", handleShowConfirmationDialog);
-
-    return () => {
-      window.removeEventListener("showConfirmationDialog", handleShowConfirmationDialog);
-    };
-  }, []);
+  const searchParams = useSearchParams();
+  const showDialog = searchParams.get("showConfirmationDialog") === "true";
+  const dialogProps = JSON.parse(decodeURIComponent(searchParams.get("confirmationDialogProps") || "{}"));
 
   if (!showDialog) {
     return null;
   }
 
   const { onConfirm, onCancel } = dialogProps;
+
+  function handleConfirm() {
+    onConfirm();
+    closeDialog();
+  }
+
+  function closeDialog() {
+    const newSearchParams = new URLSearchParams(searchParams);
+    newSearchParams.delete("showConfirmationDialog");
+    newSearchParams.delete("confirmationDialogProps");
+    window.history.replaceState({}, '', `?${newSearchParams.toString()}`);
+  }
 
   return (
     <div className="fixed z-50 inset-0 overflow-y-auto">
@@ -54,14 +54,14 @@ export default function ConfirmationDialog() {
             <button
               type="button"
               className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-              onClick={onConfirm}
+              onClick={handleConfirm}
             >
               Delete
             </button>
             <button
               type="button"
               className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-              onClick={onCancel}
+              onClick={closeDialog}
             >
               Cancel
             </button>
