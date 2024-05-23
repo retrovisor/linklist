@@ -72,7 +72,7 @@ export default async function UserPage({ params }) {
   const template = page.template || "template1"; // Default to template1 if not specified
 
   return (
-    <div className={`w-full bg-center bg-cover fixed top-0 z-10 bg-auto bg-no-repeat overflow-x-hidden text-white min-h-screen template ${template}`} style={
+    <div className={`w-full h-full bg-center bg-cover fixed top-0 z-10 bg-auto bg-no-repeat overflow-x-hidden text-white min-h-screen template ${template}`} style={
           page.bgType === 'color'
             ? { backgroundColor: page.bgColor }
             : { backgroundImage: `url(${page.bgImage})` }
