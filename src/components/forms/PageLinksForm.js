@@ -105,45 +105,44 @@ export default function PageLinksForm({ page, user }) {
                     className="text-gray-500 mr-2 cursor-ns-resize"
                     icon={faGripLines} />
                 </div>
-                <div className="text-center">
-                  <div className="bg-gray-300 inline-block relative aspect-square overflow-hidden w-16 h-16 inline-flex justify-center items-center">
-                    {l.icon && l.icon.startsWith('http') && (
-                      <Image
-                        className="w-full h-full object-cover"
-                        src={l.icon}
-                        alt={'icon'}
-                        width={64} height={64} />
-                    )}
-                    {l.icon && !l.icon.startsWith('http') && (
-                      <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center">
-                        <FontAwesomeIcon icon={['fas', l.icon.replace('fa-', '')]} size="2x" className="text-white" />
-                      </div>
-                    )}
-                    {!l.icon && (
-                      <FontAwesomeIcon size="xl" icon={faLink} />
-                    )}
-                  </div>
-                  <div>
-                    <button
-                      type="button"
-                      className="border mt-2 p-2 flex items-center gap-1 text-gray-600 cursor-pointer mb-2 justify-center"
-                      onClick={() => {
-                        console.log('Change Icon Clicked', l.key); // Debug log
-                        setCurrentIconKey(l.key);
-                        setShowIconModal(true);
-                      }}
-                    >
-                      <FontAwesomeIcon icon={faIcons} />
-                      <span>Change icon</span>
-                    </button>
-                    <button
-                      onClick={() => removeLink(l.key)}
-                      type="button" className="w-full bg-gray-300 py-2 px-3 mb-2 h-full flex gap-2 items-center justify-center">
-                      <FontAwesomeIcon icon={faTrash} />
-                      <span>Remove this link</span>
-                    </button>
-                  </div>
-                </div>
+               
+
+<div className="text-center">
+  <div
+    className="bg-gray-300 inline-block relative aspect-square overflow-hidden w-16 h-16 inline-flex justify-center items-center cursor-pointer"
+    onClick={() => {
+      console.log('Change Icon Clicked', l.key); // Debug log
+      setCurrentIconKey(l.key);
+      setShowIconModal(true);
+    }}
+  >
+    {l.icon && l.icon.startsWith('http') && (
+      <Image
+        className="w-full h-full object-cover"
+        src={l.icon}
+        alt={'icon'}
+        width={64} height={64} />
+    )}
+    {l.icon && !l.icon.startsWith('http') && (
+      <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center">
+        <FontAwesomeIcon icon={['fas', l.icon.replace('fa-', '')]} size="2x" className="text-white" />
+      </div>
+    )}
+    {!l.icon && (
+      <FontAwesomeIcon size="xl" icon={faLink} />
+    )}
+  </div>
+  <div>
+    <button
+      onClick={() => removeLink(l.key)}
+      type="button" className="w-full bg-gray-300 py-2 px-3 mb-2 h-full flex gap-2 items-center justify-center">
+      <FontAwesomeIcon icon={faTrash} />
+      <span>Remove this link</span>
+    </button>
+  </div>
+</div>
+
+                      
                 <div className="grow">
                   <label className="input-label">Title:</label>
                   <input
