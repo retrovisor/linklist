@@ -62,6 +62,22 @@ export async function saveImageLinks(imageLinks) {
   return { success: false, message: 'Unauthorized' };
 }
 
+export async function deletePageLink(linkKey) {
+  await connectToDatabase();
+  const session = await getServerSession(authOptions);
+  
+  if (session) {
+    await Page.updateOne(
+      { owner: session?.user?.email },
+      { $pull: { links: { key: linkKey } } },
+    );
+    
+    return { success: true };
+  } else {
+    return { success: false, message: 'Unauthorized' };
+  }
+}
+
 export async function savePageSettings(formData) {
   await connectToDatabase();
   const session = await getServerSession(authOptions);
