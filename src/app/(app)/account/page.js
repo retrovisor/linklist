@@ -61,7 +61,7 @@ export default async function AccountPage({ searchParams }) {
             <Head>
         <title>{`Edit account - ${session.user.name}`}</title>
       </Head>
-      <div className="container h-full bg-center fixed bg-auto overflow-x-hidden bg-no-repeat mb-10">
+      <div className="container h-full bg-center fixed bg-auto overflow-x-hidden bg-no-repeat pb-10">
   
         <PageSettingsForm page={leanPage} user={session.user} />
         <PageButtonsForm page={leanPage} user={session.user} />
