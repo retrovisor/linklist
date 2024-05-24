@@ -67,8 +67,8 @@ export default async function AccountPage({ searchParams }) {
         <PageButtonsForm page={leanPage} user={session.user} />
         <PageLinksForm page={leanPage} user={session.user} />
         <PageTextBoxesForm page={leanPage} user={session.user} />
-    <PageYouTubeForm page={leanPage} user={session.user} />
-          <PageImageLinksForm page={leanPage} user={session.user} />
+        <PageImageLinksForm page={leanPage} user={session.user} />
+        <PageYouTubeForm page={leanPage} user={session.user} />
       </div>
 
 
