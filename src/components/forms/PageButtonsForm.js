@@ -114,7 +114,7 @@ export default function PageButtonsForm({ user, page }) {
             </div>
           ))}
         </ReactSortable>
-        <div className="flex flex-wrap gap-2 mt-4 border-y">
+        <div className="flex flex-wrap gap-2 mt-4">
           {availableButtons.map(b => (
             <button
               key={b.key}
