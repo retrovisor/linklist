@@ -187,7 +187,7 @@ export async function saveTextBoxes(textBoxes) {
   }
 }
 
-export async function saveTextBox(textBox) {
+export async function savePageTextBox(textBox) {
   await connectToDatabase();
   const session = await getServerSession(authOptions);
   
@@ -207,22 +207,6 @@ export async function saveTextBox(textBox) {
         { $push: { textBoxes: textBox } },
       );
     }
-    
-    return { success: true };
-  } else {
-    return { success: false, message: 'Unauthorized' };
-  }
-}
-
-export async function deleteTextBox(textBoxKey) {
-  await connectToDatabase();
-  const session = await getServerSession(authOptions);
-  
-  if (session) {
-    await Page.updateOne(
-      { owner: session?.user?.email },
-      { $pull: { textBoxes: { key: textBoxKey } } },
-    );
     
     return { success: true };
   } else {
