@@ -37,6 +37,13 @@ body {
   border-radius: 10px;
 }
 
+.estica {
+
+    min-height: 100vw;
+
+  
+}
+
 
 .icon {
   color: #fff; /* White icon color */
