@@ -8,7 +8,7 @@ import {
   faTelegram, faTiktok, faWhatsapp, faYoutube,
   faKakao, faNaver, faWeChat, faLine // Assuming these icons are available
 } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope, faGripLines, faMobile, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faGripLines, faMobile, faComment, faN, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -17,8 +17,8 @@ import toast from "react-hot-toast";
 export const allButtons = [
   { key: 'email', label: 'e-mail', icon: faEnvelope, placeholder: 'test@example.com' },
    { key: 'instagram', label: 'instagram', icon: faInstagram, placeholder: 'https://instagram.com/profile/...' },
-  { key: 'kakao', label: 'kakao', icon: faKakao, placeholder: 'https://kakao.com/profile/...' },
-  { key: 'naver', label: 'naver', icon: faNaver, placeholder: 'https://naver.com/profile/...' },
+  { key: 'kakao', label: 'kakao', icon: faComment, placeholder: 'https://kakao.com/profile/...' },
+  { key: 'naver', label: 'naver', icon: faN, placeholder: 'https://naver.com/profile/...' },
   { key: 'tiktok', label: 'tiktok', icon: faTiktok },
   { key: 'facebook', label: 'facebook', icon: faFacebook },
   { key: 'discord', label: 'discord', icon: faDiscord },
