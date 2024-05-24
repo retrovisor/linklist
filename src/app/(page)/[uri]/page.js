@@ -15,8 +15,7 @@ import "@/styles/template2.css";
 import ShareDialog from "./ShareDialog";
  
 
-// Add necessary icons to the library
-library.add(fas, faBookmark, faLink, faLocationDot, faEnvelope, faPhone, faDiscord, faFacebook, faGithub, faInstagram, faTelegram, faTiktok, faWhatsapp, faYoutube, faShare);
+library.add(fas, faBookmark, faLink, faLocationDot, faEnvelope, faPhone, faDiscord, faFacebook, faGithub, faInstagram, faTelegram, faTiktok, faWhatsapp, faYoutube, faShare, faComment, faMugHot, faWeixin, faLine);
 
 export const buttonsIcons = {
   email: faEnvelope,
@@ -29,7 +28,12 @@ export const buttonsIcons = {
   whatsapp: faWhatsapp,
   github: faGithub,
   telegram: faTelegram,
+  kakao: faComment,
+  naver: faMugHot,
+  wechat: faWeixin,
+  line: faLine,
 };
+
 
 function buttonLink(key, value) {
   if (key === 'mobile') {
