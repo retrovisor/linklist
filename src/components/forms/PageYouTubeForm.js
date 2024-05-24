@@ -70,7 +70,7 @@ export default function PageYouTubeForm({ page, user }) {
         <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full aspect-square" icon={faPlus} />
         <span>Add new</span>
       </button>
-      <div className="">
+      <div className="estica">
         <ReactSortable handle={'.handle'} list={youTubeVideos} setList={setYouTubeVideos}>
           {youTubeVideos.map(video => (
             <div key={video.key} className="mt-8">
