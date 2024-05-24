@@ -41,6 +41,13 @@ body {
   z-index: 0;
 }
 
+.add_button {
+		background:  aliceblue;
+		     padding:  10px;
+		     border-radius:  10px;
+
+}
+
 .max-wid {
 
   max-width: 500px;
