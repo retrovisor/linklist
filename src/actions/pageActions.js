@@ -56,21 +56,47 @@ async function saveLink(link) {
   }
 }
 
+export async function savePageImageLink(imageLink) {
+  await connectToDatabase();
+  const session = await getServerSession(authOptions);
 
-export async function saveImageLinks(imageLinks) {
+  if (session) {
+    const existingImageLink = await Page.findOne({ owner: session?.user?.email, "imageLinks.key": imageLink.key });
+
+    if (existingImageLink) {
+      // Update existing image link
+      await Page.updateOne(
+        { owner: session?.user?.email, "imageLinks.key": imageLink.key },
+        { $set: { "imageLinks.$": imageLink } },
+      );
+    } else {
+      // Add new image link
+      await Page.updateOne(
+        { owner: session?.user?.email },
+        { $push: { imageLinks: imageLink } },
+      );
+    }
+
+    return { success: true };
+  } else {
+    return { success: false, message: 'Unauthorized' };
+  }
+}
+
+export async function deletePageImageLink(imageLinkKey) {
   await connectToDatabase();
   const session = await getServerSession(authOptions);
 
   if (session) {
     await Page.updateOne(
-      { owner: session.user.email },
-      { imageLinks },
+      { owner: session?.user?.email },
+      { $pull: { imageLinks: { key: imageLinkKey } } },
     );
 
     return { success: true };
+  } else {
+    return { success: false, message: 'Unauthorized' };
   }
-
-  return { success: false, message: 'Unauthorized' };
 }
 
 export async function deletePageLink(linkKey) {
