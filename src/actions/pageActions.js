@@ -186,3 +186,47 @@ export async function saveTextBoxes(textBoxes) {
     return { success: false, message: 'Unauthorized' };
   }
 }
+
+export async function saveTextBox(textBox) {
+  await connectToDatabase();
+  const session = await getServerSession(authOptions);
+  
+  if (session) {
+    const existingTextBox = await Page.findOne({ owner: session?.user?.email, "textBoxes.key": textBox.key });
+    
+    if (existingTextBox) {
+      // Update existing text box
+      await Page.updateOne(
+        { owner: session?.user?.email, "textBoxes.key": textBox.key },
+        { $set: { "textBoxes.$": textBox } },
+      );
+    } else {
+      // Add new text box
+      await Page.updateOne(
+        { owner: session?.user?.email },
+        { $push: { textBoxes: textBox } },
+      );
+    }
+    
+    return { success: true };
+  } else {
+    return { success: false, message: 'Unauthorized' };
+  }
+}
+
+export async function deleteTextBox(textBoxKey) {
+  await connectToDatabase();
+  const session = await getServerSession(authOptions);
+  
+  if (session) {
+    await Page.updateOne(
+      { owner: session?.user?.email },
+      { $pull: { textBoxes: { key: textBoxKey } } },
+    );
+    
+    return { success: true };
+  } else {
+    return { success: false, message: 'Unauthorized' };
+  }
+}
+
