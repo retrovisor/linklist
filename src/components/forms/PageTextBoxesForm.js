@@ -65,10 +65,10 @@ export default function PageTextBoxesForm({ page, user }) {
       <h2 className="text-2xl font-bold mb-4">Text Boxes</h2>
       <button
         onClick={addNewTextBox}
-        type="button add_button"
+        type="button"
         className="text-blue-500 text-lg flex gap-2 items-center cursor-pointer"
       >
-        <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full aspect-square" icon={faPlus} />
+        <FontAwesomeIcon className="bg-blue-500 add_button text-white p-1 rounded-full aspect-square" icon={faPlus} />
         <span>Add new</span>
       </button>
       <div className="">
