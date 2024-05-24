@@ -6,7 +6,7 @@ import { ReactSortable } from "react-sortablejs";
 import {
   faDiscord, faFacebook, faGithub, faInstagram,
   faTelegram, faTiktok, faWhatsapp, faYoutube,
-  faKakao, faNaver, faWeChat, faLine // Assuming these icons are available
+  faKakao, faNaver, faWeixin, faLine // Assuming these icons are available
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faGripLines, faMobile, faMugHot, faComment, faN, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -24,7 +24,7 @@ export const allButtons = [
   { key: 'discord', label: 'discord', icon: faDiscord },
   { key: 'youtube', label: 'youtube', icon: faYoutube },
    { key: 'telegram', label: 'telegram', icon: faTelegram },
-    { key: 'wechat', label: 'wechat', icon: faWeChat, placeholder: 'https://wechat.com/profile/...' },
+    { key: 'wechat', label: 'wechat', icon: faWeixin, placeholder: 'https://wechat.com/profile/...' },
   { key: 'line', label: 'line', icon: faLine, placeholder: 'https://line.me/profile/...' },
 ];
 
