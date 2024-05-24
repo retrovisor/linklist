@@ -32,8 +32,8 @@ export default async function AppTemplate({ children, ...rest }) {
     <html lang="en">
       <body className={lato.className}>
         <Toaster />
-        <main className="md:flex min-h-screen">
-          <div className="flex justify-end">
+        <main className="md:flex">
+          <div className="flex justify-end sticky bg-white top-0 z-10">
             <label htmlFor="navCb" className="md:hidden p-2 rounded-md bg-white inline-flex items-center gap-2 cursor-pointer">
               <div className="rounded-full overflow-hidden w-12 h-12 shadow"> {/* Ensure the image does not exceed 80px in height */}
                 <Image
