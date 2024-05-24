@@ -5,7 +5,8 @@ import SectionBox from "@/components/layout/SectionBox";
 import { ReactSortable } from "react-sortablejs";
 import {
   faDiscord, faFacebook, faGithub, faInstagram,
-  faTelegram, faTiktok, faWhatsapp, faYoutube
+  faTelegram, faTiktok, faWhatsapp, faYoutube,
+  faKakao, faNaver, faBand, faVlive, faWeChat, faLine // Assuming these icons are available
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faGripLines, faMobile, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -24,6 +25,12 @@ export const allButtons = [
   { key: 'whatsapp', label: 'whatsapp', icon: faWhatsapp },
   { key: 'github', label: 'github', icon: faGithub },
   { key: 'telegram', label: 'telegram', icon: faTelegram },
+  { key: 'kakao', label: 'kakao', icon: faKakao, placeholder: 'https://kakao.com/profile/...' },
+  { key: 'naver', label: 'naver', icon: faNaver, placeholder: 'https://naver.com/profile/...' },
+  { key: 'band', label: 'band', icon: faBand, placeholder: 'https://band.us/profile/...' },
+  { key: 'vlive', label: 'vlive', icon: faVlive, placeholder: 'https://vlive.tv/profile/...' },
+  { key: 'wechat', label: 'wechat', icon: faWeChat, placeholder: 'https://wechat.com/profile/...' },
+  { key: 'line', label: 'line', icon: faLine, placeholder: 'https://line.me/profile/...' },
 ];
 
 // Helper function to capitalize the first letter of a string
@@ -136,4 +143,4 @@ export default function PageButtonsForm({ user, page }) {
       </form>
     </SectionBox>
   );
-} 
+}
