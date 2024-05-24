@@ -126,16 +126,43 @@ export async function savePageSettings(formData) {
   return { success: false, message: 'Unauthorized' };
 }
 
-export async function saveYouTubeVideos(youTubeVideos) {
+export async function savePageYouTubeVideo(video) {
   await connectToDatabase();
   const session = await getServerSession(authOptions);
+  
+  if (session) {
+    const existingVideo = await Page.findOne({ owner: session?.user?.email, "youTubeVideos.key": video.key });
+    
+    if (existingVideo) {
+      // Update existing video
+      await Page.updateOne(
+        { owner: session?.user?.email, "youTubeVideos.key": video.key },
+        { $set: { "youTubeVideos.$": video } },
+      );
+    } else {
+      // Add new video
+      await Page.updateOne(
+        { owner: session?.user?.email },
+        { $push: { youTubeVideos: video } },
+      );
+    }
+    
+    return { success: true };
+  } else {
+    return { success: false, message: 'Unauthorized' };
+  }
+}
 
+export async function deletePageYouTubeVideo(videoKey) {
+  await connectToDatabase();
+  const session = await getServerSession(authOptions);
+  
   if (session) {
     await Page.updateOne(
       { owner: session?.user?.email },
-      { youTubeVideos },
+      { $pull: { youTubeVideos: { key: videoKey } } },
     );
-
+    
     return { success: true };
   } else {
     return { success: false, message: 'Unauthorized' };
