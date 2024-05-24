@@ -6,7 +6,7 @@ import { ReactSortable } from "react-sortablejs";
 import {
   faDiscord, faFacebook, faGithub, faInstagram,
   faTelegram, faTiktok, faWhatsapp, faYoutube,
-  faKakao, faNaver, faBand, faVlive, faWeChat, faLine // Assuming these icons are available
+  faKakao, faNaver, faWeChat, faLine // Assuming these icons are available
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faGripLines, faMobile, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,20 +16,15 @@ import toast from "react-hot-toast";
 // Define all available buttons with their properties
 export const allButtons = [
   { key: 'email', label: 'e-mail', icon: faEnvelope, placeholder: 'test@example.com' },
-  { key: 'mobile', label: 'mobile', icon: faMobile, placeholder: '+46 123 123 123' },
-  { key: 'instagram', label: 'instagram', icon: faInstagram, placeholder: 'https://instagram.com/profile/...' },
-  { key: 'facebook', label: 'facebook', icon: faFacebook },
-  { key: 'discord', label: 'discord', icon: faDiscord },
-  { key: 'tiktok', label: 'tiktok', icon: faTiktok },
-  { key: 'youtube', label: 'youtube', icon: faYoutube },
-  { key: 'whatsapp', label: 'whatsapp', icon: faWhatsapp },
-  { key: 'github', label: 'github', icon: faGithub },
-  { key: 'telegram', label: 'telegram', icon: faTelegram },
+   { key: 'instagram', label: 'instagram', icon: faInstagram, placeholder: 'https://instagram.com/profile/...' },
   { key: 'kakao', label: 'kakao', icon: faKakao, placeholder: 'https://kakao.com/profile/...' },
   { key: 'naver', label: 'naver', icon: faNaver, placeholder: 'https://naver.com/profile/...' },
-  { key: 'band', label: 'band', icon: faBand, placeholder: 'https://band.us/profile/...' },
-  { key: 'vlive', label: 'vlive', icon: faVlive, placeholder: 'https://vlive.tv/profile/...' },
-  { key: 'wechat', label: 'wechat', icon: faWeChat, placeholder: 'https://wechat.com/profile/...' },
+  { key: 'tiktok', label: 'tiktok', icon: faTiktok },
+  { key: 'facebook', label: 'facebook', icon: faFacebook },
+  { key: 'discord', label: 'discord', icon: faDiscord },
+  { key: 'youtube', label: 'youtube', icon: faYoutube },
+   { key: 'telegram', label: 'telegram', icon: faTelegram },
+    { key: 'wechat', label: 'wechat', icon: faWeChat, placeholder: 'https://wechat.com/profile/...' },
   { key: 'line', label: 'line', icon: faLine, placeholder: 'https://line.me/profile/...' },
 ];
 
