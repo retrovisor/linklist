@@ -14,7 +14,7 @@ export default function PageTextBoxesForm({ page, user }) {
   const [textBoxToDelete, setTextBoxToDelete] = useState(null);
 
   async function saveTextBox(textBox) {
-  const response = await saveTextBox(textBox);
+  const response = await savePageTextBox(textBox);
   if (response.success) {
     toast.success('Text box saved!');
   } else {
