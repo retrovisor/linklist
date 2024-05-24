@@ -73,7 +73,7 @@ export default async function AppTemplate({ children, ...rest }) {
               </div>
             </div>
           </aside>
-          <div className="grow">
+          <div className="grow min-h-screen">
             {children}
           </div>
         </main>
