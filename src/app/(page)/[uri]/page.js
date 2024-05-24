@@ -1,13 +1,8 @@
 import { Page } from "@/models/Page";
 import { User } from "@/models/User";
 import { Event } from "@/models/Event";
-import {
-  faDiscord, faFacebook, faGithub, faInstagram,
-  faTelegram, faTiktok, faWhatsapp, faYoutube,
-  faKakao, faNaver, faWeixin, faLine // Assuming these icons are available
-} from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope, faGripLines, faMobile, faMugHot, faComment, faN, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
-
+import { faDiscord, faFacebook, faGithub, faInstagram, faTelegram, faTiktok, faWhatsapp, faYoutube } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope, faLink, faLocationDot, faMobile, faPhone, faBookmark, fas } from "@fortawesome/free-solid-svg-icons";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
