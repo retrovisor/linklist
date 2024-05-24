@@ -64,7 +64,7 @@ export default function PageYouTubeForm({ page, user }) {
       <h2 className="text-2xl font-bold mb-4">YouTube Videos</h2>
       <button
         onClick={addNewYouTubeVideo}
-        type="button"
+        type="button add_button"
         className="text-blue-500 text-lg flex gap-2 items-center cursor-pointer"
       >
         <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full aspect-square" icon={faPlus} />
