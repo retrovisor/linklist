@@ -1,6 +1,6 @@
 'use client';
 
-import { saveTextBox, deleteTextBox } from "@/actions/pageActions";
+import { savePageTextBox, deleteTextBox } from "@/actions/pageActions";
 import SectionBox from "@/components/layout/SectionBox";
 import { faGripLines, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
