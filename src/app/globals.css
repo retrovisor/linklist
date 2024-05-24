@@ -30,6 +30,14 @@ body {
     margin: 8px;
 }
 
+/* Ensure you have a proper selector */
+.add_button {
+  background-color: #F0F8FF;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+
 .icon {
   color: #fff; /* White icon color */
       font-size: 28px;
@@ -40,12 +48,6 @@ body {
   position: relative;
   z-index: 0;
 }
-
-.add_button {
-background: aliceblue;
-padding: 10px;		 
-border-radius: 10px; }
-
 
 .max-wid {
 
