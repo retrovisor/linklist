@@ -115,7 +115,7 @@ export default async function UserPage({ params }) {
            unoptimized
         />
       </div>
-      <h2 className="text-2xl text-center mb-1">{page.displayName}</h2>
+      <h2 className="text-2xl text-center font-bold mb-1">{page.displayName}</h2>
       <h3 className="text-md flex gap-2 justify-center items-center text-white/70">
         <FontAwesomeIcon className="h-4" icon={faLocationDot} />
         <span>{page.location}</span>
@@ -124,8 +124,8 @@ export default async function UserPage({ params }) {
       <div className="flex gap-2 justify-center mt-4 pb-4">
         {Object.keys(page.buttons).map(buttonKey => (
           <Link key={buttonKey} href={buttonLink(buttonKey, page.buttons[buttonKey])}
-                className="rounded-full bg-white text-blue-950 p-2 flex items-center justify-center">
-            <FontAwesomeIcon className="w-5 h-5" icon={buttonsIcons[buttonKey]} />
+                className="rounded-full bg-white text-blue-950 p-3 flex items-center justify-center">
+            <FontAwesomeIcon className="w-8 h-8" icon={buttonsIcons[buttonKey]} />
           </Link>
         ))}
       </div>
