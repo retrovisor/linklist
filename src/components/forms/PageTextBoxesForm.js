@@ -62,8 +62,11 @@ export default function PageTextBoxesForm({ page, user }) {
 
   return (
     <SectionBox>
-      <h2 className="text-2xl font-bold mb-4">Text Boxes</h2>
-      <button
+  <div class="inline-block p-2">
+            <h2 class="text-2xl font-bold mb-4 border-b-4 border-cyan-200">✍️ Text Boxes</h2>
+    </div>      
+    
+    <button
         onClick={addNewTextBox}
         type="button"
         className="text-blue-500 text-lg flex add_button gap-2 items-center cursor-pointer"
