@@ -61,8 +61,9 @@ export default function PageYouTubeForm({ page, user }) {
 
   return (
     <SectionBox>
-      <h2 className="text-2xl font-bold mb-4">YouTube Videos</h2>
-      <button
+<div class="inline-block p-2">
+            <h2 class="text-2xl font-bold mb-4 border-b-4 border-cyan-200">📺 Youtube Videos</h2>
+    </div>            <button
         onClick={addNewYouTubeVideo}
         type="button"
         className="text-blue-500 text-lg flex gap-2 add_button items-center cursor-pointer"
