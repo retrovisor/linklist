@@ -9,7 +9,7 @@ const CopyLinkButton = ({ uri }) => {
   const [copied, setCopied] = useState(false);
 
   const copyLink = () => {
-    navigator.clipboard.writeText(`https://yoursite.com/${uri}`);
+    navigator.clipboard.writeText(`https://fizz.link/${uri}`);
     setCopied(true);
     toast.success('Link copied to clipboard!');
     setTimeout(() => setCopied(false), 2000);
