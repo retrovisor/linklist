@@ -78,23 +78,23 @@ export default async function AppTemplate({ children, ...rest }) {
                 <Image src={session.user.image} className="object-cover w-full h-full" width={256} height={256} alt={'avatar'} unoptimized />
               </div>
               {page && (
-                <div className="text-center mt-4 flex gap-1 items-center justify-center text-sm">
-                <FontAwesomeIcon size="sm" icon={faLink} className="text-blue-500" />
-                  <span className="text-sm">Fizz.link</span>
-                  <Link
-                    target="_blank"
-                    href={'/' + page.uri}
-                    className="flex gap-1 items-center justify-center text-sm"
-                  >
-                    
-                    <span className="text-sm text-gray-300">/</span>
-                    <span className="text-sm">{page.uri}</span>
-                  </Link>
-                      <br />
-
-<div className="mt-2">
+              <div className="text-center mt-4">
+  <div className="flex gap-1 items-center justify-center text-sm">
+    <FontAwesomeIcon size="sm" icon={faLink} className="text-blue-500" />
+    <span className="text-sm">Fizz.link</span>
+    <Link
+      target="_blank"
+      href={'/' + page.uri}
+      className="flex gap-1 items-center justify-center text-sm"
+    >
+      <span className="text-sm text-gray-300">/</span>
+      <span className="text-sm">{page.uri}</span>
+    </Link>
+  </div>
+  <div className="mt-2 flex justify-center">
     <CopyLinkButton uri={page.uri} />
   </div>
+</div>
                 </div>
               )}
               <div className="text-center">
