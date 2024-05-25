@@ -1,10 +1,18 @@
+'use client';
+
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 const CopyLinkButton = ({ uri }) => {
+  const [copied, setCopied] = useState(false);
+
   const copyLink = () => {
     navigator.clipboard.writeText(`https://yoursite.com/${uri}`);
-    // You can show a success message or perform any other actions here
+    setCopied(true);
+    toast.success('Link copied to clipboard!');
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -13,7 +21,7 @@ const CopyLinkButton = ({ uri }) => {
       onClick={copyLink}
     >
       <FontAwesomeIcon icon={faLink} className="mr-1" />
-      <span>Copy Link</span>
+      <span>{copied ? 'Copied!' : 'Copy Link'}</span>
     </button>
   );
 };
