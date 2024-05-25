@@ -47,7 +47,9 @@ export default async function AppTemplate({ children, ...rest }) {
                 <Link href="/analytics">
                   <FontAwesomeIcon icon={faChartSimple} className="text-slate-500	w-6 h-6" />
                 </Link>
-                <ShareDialog uri={page.uri} />
+                <ShareDialog uri={page.uri}>
+  <FontAwesomeIcon icon={faShareFromSquare} className="text-slate-500	w-6 h-6" />
+</ShareDialog>
                 <div className="rounded-full overflow-hidden w-12 h-12 shadow">
                   <Image
                     src={session.user.image}
