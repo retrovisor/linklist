@@ -5,37 +5,10 @@ import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { useState, useEffect } from "react";
 
+
 const DOMAIN = 'https://linklist-wheat.vercel.app';
 
-function ShareDialog({ uri }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
-
-  useEffect(() => {
-    const kakaoScript = document.createElement('script');
-    kakaoScript.src = 'https://developers.kakao.com/sdk/js/kakao.js';
-    kakaoScript.async = true;
-    document.body.appendChild(kakaoScript);
-
-    kakaoScript.onload = () => {
-      if (window.Kakao) {
-        window.Kakao.init('YOUR_KAKAO_APP_KEY');
-      }
-    };
-
-    return () => {
-      document.body.removeChild(kakaoScript);
-    };
-  }, []);
-
-  const openDialog = () => {
-    setIsOpen(true);
-  };
-
-  const closeDialog = () => {
-    setIsOpen(false);
-  };
-
+function ShareDialog({ uri, children }) {
   const shareOnWhatsApp = () => {
     const shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
       `Check out my page on MomoFriends: ${DOMAIN}/${uri}`
@@ -69,63 +42,42 @@ function ShareDialog({ uri }) {
 
   const copyLink = () => {
     navigator.clipboard.writeText(`${DOMAIN}/${uri}`);
-    setCopied(true);
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
   };
 
   return (
     <>
-      <div className="fixed top-4 right-4 z-50">
-        <button
-          className="fixed-button bg-white text-blue-950 p-2 rounded-full flex items-center justify-center"
-          onClick={openDialog}
-        >
-          <FontAwesomeIcon className="w-5 h-5" icon={faShare} />
-        </button>
-      </div>
-      {isOpen && (
-        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-40">
-          <div className="bg-white rounded-lg p-6 w-96">
-            <h3 className="text-xl font-semibold mb-4 text-black">Share your Nae.Link</h3>
-            <div className="flex flex-col gap-4">
-              <button
-                className="bg-green-500 text-white text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
-                onClick={shareOnWhatsApp}
-              >
-                <FontAwesomeIcon className="mr-2" icon={faWhatsapp} />
-                WhatsApp
-              </button>
-              <button
-                className="bg-blue-600 text-white text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
-                onClick={shareOnFacebook}
-              >
-                <FontAwesomeIcon className="mr-2" icon={faFacebook} />
-                Facebook
-              </button>
-              <button
-                className="bg-yellow-400 text-black text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
-                onClick={shareOnKakao}
-              >
-                Kakao
-              </button>
-              <button
-                className="bg-gray-200 text-black text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
-                onClick={copyLink}
-              >
-                {copied ? 'Copied!' : 'Copy Link'}
-              </button>
-            </div>
+      {children}
+      <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-40">
+        <div className="bg-white rounded-lg p-6 w-96">
+          <h3 className="text-xl font-semibold mb-4 text-black">Share your Nae.Link</h3>
+          <div className="flex flex-col gap-4">
             <button
-              className="mt-4 text-gray-500"
-              onClick={closeDialog}
+              className="bg-green-500 text-white text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
+              onClick={shareOnWhatsApp}
             >
-              Close
+              WhatsApp
+            </button>
+            <button
+              className="bg-blue-600 text-white text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
+              onClick={shareOnFacebook}
+            >
+              Facebook
+            </button>
+            <button
+              className="bg-yellow-400 text-black text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
+              onClick={shareOnKakao}
+            >
+              Kakao
+            </button>
+            <button
+              className="bg-gray-200 text-black text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
+              onClick={copyLink}
+            >
+              Copy Link
             </button>
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 }
