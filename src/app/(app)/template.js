@@ -1,7 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import AppSidebar from "@/components/layout/AppSidebar";
 import { Page } from "@/models/Page";
-import { faBars, faLink, faChartSimple, faShareFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faLink, faChartSimple, faFileLines, faShareFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
@@ -40,6 +40,9 @@ export default async function AppTemplate({ children, ...rest }) {
           <div className="flex justify-end sticky bg-white top-0 z-10">
             <label htmlFor="navCb" className="md:hidden p-2 rounded-md bg-white inline-flex items-center gap-2 cursor-pointer">
               <div className="flex items-center gap-5">
+                <Link href="/account">
+                  <FontAwesomeIcon icon={faFileLines} className="text-slate-500	w-6 h-6" />
+                </Link>
                 <Link href="/analytics">
                   <FontAwesomeIcon icon={faChartSimple} className="text-slate-500	w-6 h-6" />
                 </Link>
