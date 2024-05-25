@@ -83,9 +83,21 @@ export default async function UserPage({ params }) {
         }>
       <div className="bg-cover bg-center"></div>
 
-      <div className="fixed top-4 right-4 z-50">
-        <ShareDialog uri={page.uri} />
-      </div>
+
+<div className="fixed top-4 right-4 z-50">
+  <ShareDialog uri={page.uri}>
+    <button className="fixed-button bg-white text-blue-950 p-2 rounded-full flex items-center justify-center">
+      <FontAwesomeIcon icon={faShareFromSquare} className="w-6 h-6" />
+    </button>
+  </ShareDialog>
+</div>
+
+         
+<ShareDialog uri={page.uri}>
+  <button>
+    <FontAwesomeIcon icon={faShareFromSquare} className="text-slate-500 w-6 h-6" />
+  </button>
+</ShareDialog>
 
       <div className="logo-container">
         <svg className="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 396 97" fill="none">
