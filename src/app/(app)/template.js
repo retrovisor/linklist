@@ -1,7 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import AppSidebar from "@/components/layout/AppSidebar";
 import { Page } from "@/models/Page";
-import { faBars, faLink, faChartSimple, faFileLines, faShareFromSquare, faCopy } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faLink, faChartSimple, faFileLines, faShareFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
@@ -33,8 +33,6 @@ export default async function AppTemplate({ children, ...rest }) {
   mongoose.connect(process.env.MONGO_URI);
 
   const page = await Page.findOne({ owner: session.user.email });
-
-   
 
   return (
     <html lang="en">
@@ -90,20 +88,6 @@ export default async function AppTemplate({ children, ...rest }) {
                     <span className="text-sm text-gray-300">/</span>
                     <span className="text-sm">{page.uri}</span>
                   </Link>
-                       <button onClick={() => {
-                    const el = document.createElement('textarea');
-                    document.body.appendChild(el);
-                    el.value = `${process.env.NEXT_PUBLIC_DOMAIN}/${page.uri}`;
-                    el.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(el);
-                    alert('Link copied!');
-                  }} className="ml-2">
-                    <FontAwesomeIcon icon={faCopy} className="text-gray-500" />
-                  </button>  
-
-
-                      
                 </div>
               )}
               <div className="text-center">
