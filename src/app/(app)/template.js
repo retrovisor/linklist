@@ -41,10 +41,10 @@ export default async function AppTemplate({ children, ...rest }) {
             <label htmlFor="navCb" className="md:hidden p-2 rounded-md bg-white inline-flex items-center gap-2 cursor-pointer">
               <div className="flex items-center gap-3">
                 <Link href="/analytics">
-                  <FontAwesomeIcon size="lg" icon={faChartSimple} className="text-slate-500	" />
+                  <FontAwesomeIcon size="2x" icon={faChartSimple} className="text-slate-500	" />
                 </Link>
                 <button>
-                  <FontAwesomeIcon size="lg" icon={faShareFromSquare} className="text-slate-500	" />
+                  <FontAwesomeIcon size="2x" icon={faShareFromSquare} className="text-slate-500	" />
                 </button>
                 <div className="rounded-full overflow-hidden w-12 h-12 shadow"> {/* Ensure the image does not exceed 80px in height */}
                   <Image
