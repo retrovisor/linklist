@@ -227,6 +227,7 @@ export default async function UserPage({ params }) {
       <footer className="text-center text-xs text-white p-6">
         <div className="text-center logo-container2">
           <span class="bold pt-2">Fizz.link</span>
+         </div>
         <p>Created by Fizz.Link</p>
         <p>© Fizz.link All Rights Reserved</p>
       </footer>
