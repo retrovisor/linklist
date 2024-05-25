@@ -13,6 +13,8 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import ShareDialog from '../(page)/[uri]/ShareDialog';
+import CopyLinkButton from './CopyLinkButton'; // Import the CopyLinkButton component
+
 
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
@@ -88,6 +90,9 @@ export default async function AppTemplate({ children, ...rest }) {
                     <span className="text-sm text-gray-300">/</span>
                     <span className="text-sm">{page.uri}</span>
                   </Link>
+
+                          <CopyLinkButton uri={page.uri} /> {/* Use the CopyLinkButton component */}
+
                 </div>
               )}
               <div className="text-center">
