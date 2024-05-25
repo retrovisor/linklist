@@ -125,7 +125,7 @@ export default async function UserPage({ params }) {
         ))}
       </div>
 
-      <div className="max-w-4xl mx-auto text-center m-5 bg-black bg-opacity-25 m-5">
+      <div className="max-w-4xl p-5 text-center m-5 bg-black bg-opacity-25 m-5">
         <p>{page.bio}</p>
       </div>
       
