@@ -1,7 +1,7 @@
 'use client';
 import LogoutButton from "@/components/buttons/LogoutButton";
 import {faFileLines} from "@fortawesome/free-regular-svg-icons";
-import {faArrowLeft, faChartLine} from "@fortawesome/free-solid-svg-icons";
+import {faArrowLeft, faChartSimple} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
@@ -31,7 +31,7 @@ export default function AppSidebar() {
         }>
         <FontAwesomeIcon
           fixedWidth={true}
-          icon={faChartLine}
+          icon={faChartSimple}
           className={'w-6 h-6'}
         />
         <span className="">Analytics</span>
