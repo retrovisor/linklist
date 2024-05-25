@@ -74,21 +74,19 @@ export default async function AppTemplate({ children, ...rest }) {
 
           <aside className="bg-white w-48 p-4 pt-6 shadow fixed md:static -left-48 top-0 bottom-0 z-20 transition-all">
             <div className="sticky top-0 pt-2">
-              <div className="rounded-full overflow-hidden aspect-square w-24 mx-auto border border-white shadow shadow-black/50">
+              <div className="rounded-full overflow-hidden aspect-square w-24 mx-auto border-2 border-white shadow shadow-black/50">
                 <Image src={session.user.image} className="object-cover w-full h-full" width={256} height={256} alt={'avatar'} unoptimized />
               </div>
               {page && (
-              <div className="text-center mt-4">
-  <div className="flex gap-1 items-center justify-center text-sm">
-    <FontAwesomeIcon size="sm" icon={faLink} className="text-blue-500" />
-    <span className="text-sm">Fizz.link</span>
+             <div className="text-center mt-4">
+  <div className="flex items-center justify-center space-x-2">
+    <FontAwesomeIcon icon={faLink} className="text-blue-500" />
     <Link
       target="_blank"
       href={'/' + page.uri}
-      className="flex gap-1 items-center justify-center text-sm"
+      className="text-lg font-semibold text-blue-500 hover:text-blue-600 transition duration-200"
     >
-      <span className="text-sm text-gray-300">/</span>
-      <span className="text-sm">{page.uri}</span>
+      <span>Fizz.link/{page.uri}</span>
     </Link>
   </div>
   <div className="mt-2 flex justify-center">
