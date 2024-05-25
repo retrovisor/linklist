@@ -88,7 +88,7 @@ export default async function UserPage({ params }) {
 
 <div className="fixed top-4 right-4 z-50">
   <ShareDialog uri={page.uri}>
-    <button className="fixed-button bg-white text-blue-950 p-2 rounded-full flex items-center justify-center">
+    <button className="fixed-button bg-white text-slate-500 p-2 rounded-full flex items-center justify-center">
       <FontAwesomeIcon icon={faShareFromSquare} className="w-6 h-6" />
     </button>
   </ShareDialog>
