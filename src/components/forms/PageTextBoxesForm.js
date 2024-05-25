@@ -77,7 +77,7 @@ export default function PageTextBoxesForm({ page, user }) {
       <div className="">
         <ReactSortable handle={'.handle'} list={textBoxes} setList={setTextBoxes}>
           {textBoxes.map(tb => (
-            <div key={tb.key} className="mt-8">
+            <div key={tb.key} className="mt-6">
               <div className="handle">
                 <FontAwesomeIcon
                   className="text-gray-500 mr-2 cursor-ns-resize"
