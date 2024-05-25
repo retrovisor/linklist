@@ -90,8 +90,9 @@ export default async function AppTemplate({ children, ...rest }) {
                     <span className="text-sm text-gray-300">/</span>
                     <span className="text-sm">{page.uri}</span>
                   </Link>
+                      <br />
 
-                          <CopyLinkButton uri={page.uri} /> {/* Use the CopyLinkButton component */}
+                          <CopyLinkButton uri={page.uri} /> 
 
                 </div>
               )}
