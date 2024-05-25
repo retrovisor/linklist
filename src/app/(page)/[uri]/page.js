@@ -168,7 +168,7 @@ export default async function UserPage({ params }) {
               )}
               {!link.icon && (
                 <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center">
-                  <FontAwesomeIcon icon={faLink} size="2x" className="text-white" />
+                  <FontAwesomeIcon icon={faLink} size="lg" className="text-white" />
                 </div>
               )}
             </div>
