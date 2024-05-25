@@ -1,7 +1,7 @@
 'use client';
 
-import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
@@ -17,10 +17,10 @@ const CopyLinkButton = ({ uri }) => {
 
   return (
     <button
-      className="flex items-center text-blue-500 hover:text-blue-700"
+      className="flex items-center justify-center px-3 py-1 rounded-md bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
       onClick={copyLink}
     >
-      <FontAwesomeIcon icon={faLink} className="mr-1" />
+      <FontAwesomeIcon icon={faCopy} className="mr-2" />
       <span>{copied ? 'Copied!' : 'Copy Link'}</span>
     </button>
   );
