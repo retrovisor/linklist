@@ -12,7 +12,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Toaster } from "react-hot-toast";
-import { useState } from 'react';
 import ShareDialog from '../(page)/[uri]/ShareDialog';
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
@@ -25,7 +24,6 @@ export const metadata = {
 export default async function AppTemplate({ children, ...rest }) {
   const headersList = headers();
   const session = await getServerSession(authOptions);
-  const [showShareDialog, setShowShareDialog] = useState(false);
 
   if (!session) {
     return redirect('/');
@@ -49,9 +47,7 @@ export default async function AppTemplate({ children, ...rest }) {
                 <Link href="/analytics">
                   <FontAwesomeIcon icon={faChartSimple} className="text-slate-500	w-6 h-6" />
                 </Link>
-                <button onClick={() => setShowShareDialog(!showShareDialog)}>
-                  <FontAwesomeIcon icon={faShareFromSquare} className="text-slate-500	w-6 h-6" />
-                </button>
+                <ShareDialog uri={page.uri} />
                 <div className="rounded-full overflow-hidden w-12 h-12 shadow">
                   <Image
                     src={session.user.image}
@@ -99,7 +95,6 @@ export default async function AppTemplate({ children, ...rest }) {
           </div>
         </main>
 
-        {showShareDialog && <ShareDialog uri={page.uri} />}
       </body>
     </html>
   );
