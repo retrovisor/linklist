@@ -1,4 +1,4 @@
-use client';
+'use client';
 import { savePageLink, deletePageLink } from "@/actions/pageActions";
 import SectionBox from "@/components/layout/SectionBox";
 import { upload } from "@/libs/upload";
