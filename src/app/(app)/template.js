@@ -72,13 +72,13 @@ export default async function AppTemplate({ children, ...rest }) {
           <input id="navCb" type="checkbox" className="hidden" />
           <label htmlFor="navCb" className="hidden backdrop fixed inset-0 bg-black/80 z-10"></label>
 
-          <aside className="bg-white w-48 p-4 pt-6 shadow fixed md:static -left-48 top-0 bottom-0 z-20 transition-all">
+          <aside className="bg-white w-48 p-2 pt-6 shadow fixed md:static -left-48 top-0 bottom-0 z-20 transition-all">
             <div className="sticky top-0 pt-2">
               <div className="rounded-full overflow-hidden aspect-square w-24 mx-auto border-3 border-white shadow shadow-black/50">
                 <Image src={session.user.image} className="object-cover w-full h-full" width={256} height={256} alt={'avatar'} unoptimized />
               </div>
               {page && (
-             <div className="text-center mt-4">
+             <div className="text-center mt-4 bg-custom-gray p-4 rounded-lg">
   <div className="flex items-center justify-center space-x-2">
     <FontAwesomeIcon icon={faLink} className="text-blue-900" />
     <Link
