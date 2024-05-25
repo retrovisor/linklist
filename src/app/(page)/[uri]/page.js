@@ -163,7 +163,7 @@ export default async function UserPage({ params }) {
               )}
               {link.icon && !link.icon.startsWith('http') && (
                 <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center">
-                  <FontAwesomeIcon icon={['fas', link.icon.replace('fa-', '')]} size="2x" className="text-white" />
+                  <FontAwesomeIcon icon={['fas', link.icon.replace('fa-', '')]} size="lg" className="text-white" />
                 </div>
               )}
               {!link.icon && (
