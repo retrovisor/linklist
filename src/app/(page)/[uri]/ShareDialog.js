@@ -7,24 +7,19 @@ import { useState, useEffect } from "react";
 
 const DOMAIN = 'https://linklist-wheat.vercel.app';
 
-export default function ShareDialog({ uri }) {
+function ShareDialog({ uri }) {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
-export default function ShareDialog({ uri }) {
-  const [isOpen, setIsOpen] = useState(false);
-
   useEffect(() => {
-    // Dynamically load the Kakao SDK script
     const kakaoScript = document.createElement('script');
     kakaoScript.src = 'https://developers.kakao.com/sdk/js/kakao.js';
     kakaoScript.async = true;
     document.body.appendChild(kakaoScript);
 
     kakaoScript.onload = () => {
-      // Initialize Kakao SDK
       if (window.Kakao) {
-        window.Kakao.init('YOUR_KAKAO_APP_KEY'); // Replace with your Kakao App Key
+        window.Kakao.init('YOUR_KAKAO_APP_KEY');
       }
     };
 
@@ -62,7 +57,7 @@ export default function ShareDialog({ uri }) {
         content: {
           title: 'MomoFriends',
           description: `Check out my page on MomoFriends: ${DOMAIN}/${uri}`,
-          imageUrl: 'YOUR_IMAGE_URL', // Replace with your image URL
+          imageUrl: 'YOUR_IMAGE_URL',
           link: {
             mobileWebUrl: `${DOMAIN}/${uri}`,
             webUrl: `${DOMAIN}/${uri}`
@@ -72,7 +67,6 @@ export default function ShareDialog({ uri }) {
     }
   };
 
- 
   const copyLink = () => {
     navigator.clipboard.writeText(`${DOMAIN}/${uri}`);
     setCopied(true);
@@ -91,7 +85,6 @@ export default function ShareDialog({ uri }) {
           <FontAwesomeIcon className="w-5 h-5" icon={faShare} />
         </button>
       </div>
-
       {isOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-40">
           <div className="bg-white rounded-lg p-6 w-96">
@@ -115,17 +108,15 @@ export default function ShareDialog({ uri }) {
                 className="bg-yellow-400 text-black text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
                 onClick={shareOnKakao}
               >
-                 Kakao
+                Kakao
               </button>
-
-        <button
+              <button
                 className="bg-gray-200 text-black text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
                 onClick={copyLink}
               >
                 {copied ? 'Copied!' : 'Copy Link'}
               </button>
-                 
-                 </div>
+            </div>
             <button
               className="mt-4 text-gray-500"
               onClick={closeDialog}
@@ -138,3 +129,5 @@ export default function ShareDialog({ uri }) {
     </>
   );
 }
+
+export default ShareDialog;
