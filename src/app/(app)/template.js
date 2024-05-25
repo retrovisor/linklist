@@ -79,7 +79,7 @@ export default async function AppTemplate({ children, ...rest }) {
               </div>
               {page && (
              <div className="text-center mt-4 bg-custom-gray p-4 rounded-lg">
-  <div className="flex items-center justify-center space-x-2">
+  <div className="flex items-center justify-center space-x">
     <FontAwesomeIcon icon={faLink} className="text-blue-900" />
     <Link
       target="_blank"
