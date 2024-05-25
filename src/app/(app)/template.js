@@ -80,7 +80,7 @@ export default async function AppTemplate({ children, ...rest }) {
               {page && (
              <div className="text-center mt-4">
   <div className="flex items-center justify-center space-x-2">
-    <FontAwesomeIcon icon={faLink} className="text-blue-500" />
+    <FontAwesomeIcon icon={faLink} className="text-blue-900" />
     <Link
       target="_blank"
       href={'/' + page.uri}
