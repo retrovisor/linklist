@@ -1,7 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import AppSidebar from "@/components/layout/AppSidebar";
 import { Page } from "@/models/Page";
-import { faBars, faLink, faChartLine, faShare } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faLink, faChartSimple, faShareFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
@@ -39,12 +39,12 @@ export default async function AppTemplate({ children, ...rest }) {
         <main className="md:flex">
           <div className="flex justify-end sticky bg-white top-0 z-10">
             <label htmlFor="navCb" className="md:hidden p-2 rounded-md bg-white inline-flex items-center gap-2 cursor-pointer">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <Link href="/analytics">
-                  <FontAwesomeIcon size="lg" icon={faChartLine} className="text-blue-500" />
+                  <FontAwesomeIcon size="lg" icon={faChartSimple} className="text-slate-500	" />
                 </Link>
                 <button>
-                  <FontAwesomeIcon size="lg" icon={faShare} className="text-blue-500" />
+                  <FontAwesomeIcon size="lg" icon={faShareFromSquare} className="text-slate-500	" />
                 </button>
                 <div className="rounded-full overflow-hidden w-12 h-12 shadow"> {/* Ensure the image does not exceed 80px in height */}
                   <Image
