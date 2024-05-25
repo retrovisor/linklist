@@ -96,7 +96,7 @@ export default async function UserPage({ params }) {
  
 
       <div className="logo-container">
-        <span class="bold pt-2">Fizz.link</span>
+        <span class="bold pt-3">Fizz.link</span>
          
       </div>
 
