@@ -84,7 +84,7 @@ export default async function AppTemplate({ children, ...rest }) {
     <Link
       target="_blank"
       href={'/' + page.uri}
-      className="text-lg font-semibold text-blue-500 hover:text-blue-600 transition duration-200"
+      className="text-base font-semibold text-blue-500 hover:text-blue-600 transition duration-200"
     >
       <span>Fizz.link/{page.uri}</span>
     </Link>
