@@ -70,13 +70,14 @@ export default async function AppTemplate({ children, ...rest }) {
               </div>
               {page && (
                 <div className="text-center mt-4 flex gap-1 items-center justify-center text-sm">
+                <FontAwesomeIcon size="sm" icon={faLink} className="text-blue-500" />
                   <span className="text-sm">Fizz.link</span>
                   <Link
                     target="_blank"
                     href={'/' + page.uri}
                     className="flex gap-1 items-center justify-center text-sm"
                   >
-                    <FontAwesomeIcon size="sm" icon={faLink} className="text-blue-500" />
+                    
                     <span className="text-sm text-gray-300">/</span>
                     <span className="text-sm">{page.uri}</span>
                   </Link>
