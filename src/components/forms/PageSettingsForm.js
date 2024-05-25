@@ -23,16 +23,20 @@ export default function PageSettingsForm({page,user}) {
     }
   }
 
-  async function handleCoverImageChange(ev) {
-    await upload(ev, link => {
+    async function handleCoverImageChange(ev) {
+    await upload(ev, async (link) => {
       setBgImage(link);
+      await savePageSettings(new FormData(ev.target.form));
+      toast.success('Background image saved!');
     });
   }
+
   async function handleAvatarImageChange(ev) {
-    await upload(ev, link => {
+    await upload(ev, (link) => {
       setAvatar(link);
     });
   }
+
   return (
     <div>
       <SectionBox>
@@ -58,11 +62,16 @@ export default function PageSettingsForm({page,user}) {
                 <div className="bg-gray-200 shadow text-gray-700 p-2 mt-2">
                   <div className="flex gap-2 justify-center">
                     <span>Background color:</span>
-                    <input
-                      type="color"
-                      name="bgColor"
-                      onChange={ev => setBgColor(ev.target.value)}
-                      defaultValue={page.bgColor} />
+                   <input
+                  type="color"
+                  name="bgColor"
+                  onChange={async (ev) => {
+                    setBgColor(ev.target.value);
+                    await savePageSettings(new FormData(ev.target.form));
+                    toast.success('Background color saved!');
+                  }}
+                  defaultValue={page.bgColor}
+                />
                   </div>
                 </div>
               )}
