@@ -39,7 +39,7 @@ export default async function AppTemplate({ children, ...rest }) {
         <main className="md:flex">
           <div className="flex justify-end sticky bg-white top-0 z-10">
             <label htmlFor="navCb" className="md:hidden p-2 rounded-md bg-white inline-flex items-center gap-2 cursor-pointer">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-5">
                 <Link href="/analytics">
                   <FontAwesomeIcon size="2x" icon={faChartSimple} className="text-slate-500	" />
                 </Link>
