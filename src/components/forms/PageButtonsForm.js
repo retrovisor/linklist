@@ -86,9 +86,9 @@ export default function PageButtonsForm({ user, page }) {
   return (
     <SectionBox>
       <form onSubmit={saveButtons}>
-    <div class="inline-block bg-alice-blue p-2">
+    <div class="inline-block p-2">
 
-            <h2 class="text-2xl font-bold mb-4 border-b-4 border-yellow-500">⭐️ Social Links</h2>
+            <h2 class="text-2xl font-bold mb-4 border-b-4 border-cyan-200">⭐️ Social Links</h2>
     </div>
     
         <ReactSortable
