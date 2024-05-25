@@ -2,12 +2,14 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
-import { faWhatsapp, faFacebook } from "@fortawesome/free-brands-svg-icons"; // Correct import for brands icons
+import { faWhatsapp, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { useState, useEffect } from "react";
- 
 
-// Declare the domain at the top
-const DOMAIN = 'https://linklist-wheat.vercel.app'; // Replace with your domain
+const DOMAIN = 'https://linklist-wheat.vercel.app';
+
+export default function ShareDialog({ uri }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
 
 export default function ShareDialog({ uri }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -70,6 +72,15 @@ export default function ShareDialog({ uri }) {
     }
   };
 
+ 
+  const copyLink = () => {
+    navigator.clipboard.writeText(`${DOMAIN}/${uri}`);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  };
+
   return (
     <>
       <div className="fixed top-4 right-4 z-50">
@@ -106,8 +117,15 @@ export default function ShareDialog({ uri }) {
               >
                  Kakao
               </button>
-              {/* Add more share buttons if needed */}
-            </div>
+
+        <button
+                className="bg-gray-200 text-black text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
+                onClick={copyLink}
+              >
+                {copied ? 'Copied!' : 'Copy Link'}
+              </button>
+                 
+                 </div>
             <button
               className="mt-4 text-gray-500"
               onClick={closeDialog}
