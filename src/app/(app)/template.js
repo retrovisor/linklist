@@ -12,7 +12,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Toaster } from "react-hot-toast";
-import ShareDialog from '../(page)/[uri]/ShareDialog';
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -47,10 +46,10 @@ export default async function AppTemplate({ children, ...rest }) {
                 <Link href="/analytics">
                   <FontAwesomeIcon icon={faChartSimple} className="text-slate-500	w-6 h-6" />
                 </Link>
-                <ShareDialog uri={page.uri}>
-  <FontAwesomeIcon icon={faShareFromSquare} className="text-slate-500	w-6 h-6" />
-</ShareDialog>
-                <div className="rounded-full overflow-hidden w-12 h-12 shadow">
+                <button>
+                  <FontAwesomeIcon icon={faShareFromSquare} className="text-slate-500	w-6 h-6" />
+                </button>
+                <div className="rounded-full overflow-hidden w-12 h-12 shadow"> {/* Ensure the image does not exceed 80px in height */}
                   <Image
                     src={session.user.image}
                     width={80}
@@ -74,13 +73,14 @@ export default async function AppTemplate({ children, ...rest }) {
               </div>
               {page && (
                 <div className="text-center mt-4 flex gap-1 items-center justify-center text-sm">
-                  <FontAwesomeIcon size="sm" icon={faLink} className="text-blue-500" />
+                <FontAwesomeIcon size="sm" icon={faLink} className="text-blue-500" />
                   <span className="text-sm">Fizz.link</span>
                   <Link
                     target="_blank"
                     href={'/' + page.uri}
                     className="flex gap-1 items-center justify-center text-sm"
                   >
+                    
                     <span className="text-sm text-gray-300">/</span>
                     <span className="text-sm">{page.uri}</span>
                   </Link>
@@ -96,7 +96,6 @@ export default async function AppTemplate({ children, ...rest }) {
             {children}
           </div>
         </main>
-
       </body>
     </html>
   );
