@@ -12,6 +12,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Toaster } from "react-hot-toast";
+import ShareDialog from '../(page)/[uri]/ShareDialog';
+
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -46,9 +48,11 @@ export default async function AppTemplate({ children, ...rest }) {
                 <Link href="/analytics">
                   <FontAwesomeIcon icon={faChartSimple} className="text-slate-500	w-6 h-6" />
                 </Link>
+                    <ShareDialog uri={page.uri}>
                 <button>
-                  <FontAwesomeIcon icon={faShareFromSquare} className="text-slate-500	w-6 h-6" />
+                <FontAwesomeIcon icon={faShareFromSquare} className="text-slate-500 w-6 h-6" />
                 </button>
+                </ShareDialog>
                 <div className="rounded-full overflow-hidden w-12 h-12 shadow"> {/* Ensure the image does not exceed 80px in height */}
                   <Image
                     src={session.user.image}
