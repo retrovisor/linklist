@@ -93,101 +93,95 @@ export default function PageLinksForm({ page, user }) {
     setShowDeleteConfirmation(true);
   }
 
+
   return (
     <SectionBox>
-      <div class="inline-block p-2">
-
- 
-            <h2 class="text-2xl font-bold mb-4 border-b-4 border-cyan-200">🔗 Links</h2>
-     </div>
+      <div className="p-2">
+        <h2 className="text-2xl font-bold mb-4 border-b-4 border-cyan-200">🔗 Links</h2>
+      </div>
       <button
         onClick={addNewLink}
         type="button"
-        className="text-blue-500 add_button text-lg flex gap-2 items-center cursor-pointer"
+        className="text-blue-500 text-lg flex gap-2 items-center cursor-pointer mb-4"
       >
-        <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full aspect-square" icon={faPlus} />
-        <span>Add new</span>
+        <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full" icon={faPlus} />
+        Add new
       </button>
-      <div className="">
-        <ReactSortable handle={'.handle'} list={links} setList={setLinks}>
-          {links.map(l => (
-            <div key={l.key} className="mt-8 md:flex gap-2 items-center">
-              <div className="handle">
-                <FontAwesomeIcon
-                  className="text-gray-500 mr-2 cursor-ns-resize"
-                  icon={faGripLines}
-                />
-              </div>
-              <div className="text-center">
+      <ReactSortable handle={'.handle'} list={links} setList={setLinks}>
+        {links.map(l => (
+          <div key={l.key} className="mt-8 flex flex-col gap-2 md:flex-row md:items-center">
+            <div className="flex-grow md:flex md:items-center">
+              <div className="flex-none">
                 <div
-                  className="bg-gray-300 inline-block relative aspect-square overflow-hidden w-16 h-16 inline-flex justify-center items-center cursor-pointer"
+                  className="bg-gray-300 relative aspect-square overflow-hidden w-16 h-16 flex justify-center items-center cursor-pointer"
                   onClick={() => {
-                    console.log('Change Icon Clicked', l.key); // Debug log
                     setCurrentIconKey(l.key);
                     setShowIconModal(true);
                   }}
                 >
-                  {l.icon && l.icon.startsWith('http') && (
+                  {l.icon && l.icon.startsWith('http') ? (
                     <Image
                       className="w-full h-full object-cover"
                       src={l.icon}
-                      alt={'icon'}
+                      alt="icon"
                       width={64}
                       height={64}
                     />
-                  )}
-                  {l.icon && !l.icon.startsWith('http') && (
-                    <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center">
-                      <FontAwesomeIcon icon={['fas', l.icon.replace('fa-', '')]} size="2x" className="text-white" />
-                    </div>
+                  ) : (
+                    <FontAwesomeIcon icon={['fas', l.icon.replace('fa-', '')]} size="2x" className="text-white" />
                   )}
                   {!l.icon && <FontAwesomeIcon size="xl" icon={faLink} />}
                 </div>
               </div>
-              <div className="grow">
-                <label className="input-label">Title:</label>
+              <div className="flex-grow md:ml-4">
                 <input
                   value={l.title}
                   onChange={ev => handleLinkChange(l.key, 'title', ev)}
                   type="text"
-                  placeholder="title"
+                  placeholder="Title"
+                  className="w-full p-2 border rounded"
                 />
-                <label className="input-label">Subtitle:</label>
                 <input
                   value={l.subtitle}
                   onChange={ev => handleLinkChange(l.key, 'subtitle', ev)}
                   type="text"
-                  placeholder="subtitle (optional)"
+                  placeholder="Subtitle (optional)"
+                  className="w-full p-2 border rounded mt-2"
                 />
-                <label className="input-label">URL:</label>
-                <input
-                  value={l.url}
-                  onChange={ev => handleLinkChange(l.key, 'url', ev)}
-                  type="text"
-                  placeholder="url"
-                />
-                <div className="flex items-center mt-2">
-                  <button
-                    onClick={() => removeLink(l)}
-                    type="button"
-                    className="bg-red-500 text-white px-4 py-2 rounded mr-2 flex items-center"
-                  >
-                    <FontAwesomeIcon icon={faTrash} className="mr-2" />
-                    Remove
-                  </button>
-                  <button
-                    onClick={() => saveLink(l)}
-                    type="button"
-                    className="bg-blue-500 text-white px-4 py-2 rounded flex items-center"
-                  >
-                    <FontAwesomeIcon icon={faSave} className="mr-2" />
-                    Save Link
-                  </button>
-                </div>
               </div>
             </div>
-          ))}
-        </ReactSortable>
+            <div className="flex-grow">
+              <input
+                value={l.url}
+                onChange={ev => handleLinkChange(l.key, 'url', ev)}
+                type="text"
+                placeholder="URL"
+                className="w-full p-2 border rounded"
+              />
+              <div className="flex gap-2 mt-2">
+                <button
+                  onClick={() => removeLink(l)}
+                  type="button"
+                  className="bg-red-500 text-white px-4 py-2 rounded flex items-center"
+                >
+                  <FontAwesomeIcon icon={faTrash} className="mr-2" />
+                  Remove
+                </button>
+                <button
+                  onClick={() => saveLink(l)}
+                  type="button"
+                  className="bg-blue-500 text-white px-4 py-2 rounded flex items-center"
+                >
+                  <FontAwesomeIcon icon={faSave} className="mr-2" />
+                  Save Link
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </ReactSortable>
+
+  
       </div>
       {showIconModal && (
         <IconModal
