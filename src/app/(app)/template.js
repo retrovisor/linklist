@@ -34,14 +34,7 @@ export default async function AppTemplate({ children, ...rest }) {
 
   const page = await Page.findOne({ owner: session.user.email });
 
-  const copyToClipboard = (text) => {
-    const el = document.createElement('textarea');
-    el.value = text;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-  };
+   
 
   return (
     <html lang="en">
@@ -97,9 +90,20 @@ export default async function AppTemplate({ children, ...rest }) {
                     <span className="text-sm text-gray-300">/</span>
                     <span className="text-sm">{page.uri}</span>
                   </Link>
-                        <button onClick={() => copyToClipboard(`${process.env.NEXT_PUBLIC_DOMAIN}/${page.uri}`)} className="ml-2">
+                       <button onClick={() => {
+                    const el = document.createElement('textarea');
+                    document.body.appendChild(el);
+                    el.value = `${process.env.NEXT_PUBLIC_DOMAIN}/${page.uri}`;
+                    el.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(el);
+                    alert('Link copied!');
+                  }} className="ml-2">
                     <FontAwesomeIcon icon={faCopy} className="text-gray-500" />
-                  </button>
+                  </button>  
+
+
+                      
                 </div>
               )}
               <div className="text-center">
