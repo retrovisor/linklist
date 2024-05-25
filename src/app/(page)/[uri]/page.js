@@ -93,13 +93,7 @@ export default async function UserPage({ params }) {
     </button>
   </ShareDialog>
 </div>
-
-         
-<ShareDialog uri={page.uri}>
-  <button>
-    <FontAwesomeIcon icon={faShareFromSquare} className="text-slate-500 w-6 h-6" />
-  </button>
-</ShareDialog>
+ 
 
       <div className="logo-container">
         <svg className="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 396 97" fill="none">
