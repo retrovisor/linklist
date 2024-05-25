@@ -11,11 +11,12 @@ import {useState} from "react";
 import toast from "react-hot-toast";
 
 
-export default function PageSettingsForm({page,user}) {
+export default function PageSettingsForm({ page, user }) {
   const [bgType, setBgType] = useState(page.bgType);
   const [bgColor, setBgColor] = useState(page.bgColor);
   const [bgImage, setBgImage] = useState(page.bgImage);
   const [avatar, setAvatar] = useState(user?.image);
+
   async function saveBaseSettings(formData) {
     const result = await savePageSettings(formData);
     if (result) {
@@ -23,20 +24,25 @@ export default function PageSettingsForm({page,user}) {
     }
   }
 
-    async function handleCoverImageChange(ev) {
+  async function handleCoverImageChange(ev) {
     await upload(ev, async (link) => {
       setBgImage(link);
-      await savePageSettings(new FormData(ev.target.form));
+      const formData = new FormData();
+      formData.append('bgImage', link);
+      await savePageSettings(formData);
       toast.success('Background image saved!');
     });
   }
 
   async function handleAvatarImageChange(ev) {
-    await upload(ev, (link) => {
+    await upload(ev, async (link) => {
       setAvatar(link);
+      const formData = new FormData();
+      formData.append('avatar', link);
+      await savePageSettings(formData);
+      toast.success('Avatar image saved!');
     });
   }
-
   return (
     <div>
       <SectionBox>
