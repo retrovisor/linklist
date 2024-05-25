@@ -92,8 +92,9 @@ export default async function AppTemplate({ children, ...rest }) {
                   </Link>
                       <br />
 
-                          <CopyLinkButton uri={page.uri} /> 
-
+<div className="mt-2">
+    <CopyLinkButton uri={page.uri} />
+  </div>
                 </div>
               )}
               <div className="text-center">
