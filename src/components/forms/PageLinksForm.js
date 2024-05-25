@@ -97,7 +97,10 @@ export default function PageLinksForm({ page, user }) {
     <SectionBox>
       <div class="inline-block p-2">
 
+               <div class="inline-block p-2">
+
             <h2 class="text-2xl font-bold mb-4 border-b-4 border-cyan-200">🔗 Links</h2>
+    </div>
     </div>
       <button
         onClick={addNewLink}
