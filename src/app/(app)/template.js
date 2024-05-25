@@ -13,7 +13,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import ShareDialog from '../(page)/[uri]/ShareDialog';
-import CopyLinkButton from './CopyLinkButton'; // Import the CopyLinkButton component
+import CopyLinkButton from '@/components/buttons/CopyLinkButton';
 
 
 
