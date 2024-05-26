@@ -23,7 +23,7 @@ useEffect(() => {
   if (newLinkRef) {
     const element = document.querySelector(`[data-key="${newLinkRef}"]`);
     if (element) {
-      const headerHeight = 60; // Adjust this value based on your header height
+      const headerHeight = 60; 
       const scrollPosition = element.offsetTop - headerHeight;
       window.scrollTo({
         top: scrollPosition,
