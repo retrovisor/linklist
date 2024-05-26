@@ -22,6 +22,16 @@ export default function PageLinksForm({ page, user }) {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [linkToDelete, setLinkToDelete] = useState(null);
 
+    useEffect(() => {
+    if (newLinkRef) {
+      const element = document.querySelector(`[data-key="${newLinkRef}"]`);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        setNewLinkRef(null);
+      }
+    }
+  }, [newLinkRef]);
+
   async function saveLink(link) {
     await savePageLink(link);
     toast.success('Link saved!');
@@ -51,15 +61,7 @@ export default function PageLinksForm({ page, user }) {
   });
 }
 
-  useEffect(() => {
-    if (newLinkRef) {
-      const element = document.querySelector(`[data-key="${newLinkRef}"]`);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-        setNewLinkRef(null);
-      }
-    }
-  }, [newLinkRef]);
+
 
   function handleUpload(ev, linkKeyForUpload) {
     if (ev && ev.target.files && ev.target.files.length > 0) {
