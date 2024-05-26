@@ -85,38 +85,41 @@ export default function PageTextBoxesForm({ page, user }) {
                 />
               </div>
               <div>
-                <label className="input-label">Title:</label>
-                <input
-                  value={tb.title}
-                  onChange={ev => handleTextBoxChange(tb.key, 'title', ev)}
-                  type="text"
-                  placeholder="Title"
-                />
-                <label className="input-label">Text:</label>
-                <textarea
-                  value={tb.text}
-                  onChange={ev => handleTextBoxChange(tb.key, 'text', ev)}
-                  placeholder="Text"
-                ></textarea>
-                <div className="flex items-center mt-2">
-                  <button
-                    onClick={() => removeTextBox(tb)}
-                    type="button"
-                    className="bg-red-500 text-white px-4 py-2 rounded mr-2 flex items-center"
-                  >
-                    <FontAwesomeIcon icon={faTrash} className="mr-2" />
-                    Remove
-                  </button>
-                  <button
-                    onClick={() => saveTextBox(tb)}
-                    type="button"
-                    className="bg-blue-500 text-white px-4 py-2 rounded flex items-center"
-                  >
-                    <FontAwesomeIcon icon={faSave} className="mr-2" />
-                    Save Text Box
-                  </button>
-                </div>
-              </div>
+  <label className="input-label">Title:</label>
+  <input
+    value={tb.title}
+    onChange={ev => handleTextBoxChange(tb.key, 'title', ev)}
+    type="text"
+    placeholder="Title"
+  />
+  <label className="input-label">Text:</label>
+  <textarea
+    value={tb.text}
+    onChange={ev => handleTextBoxChange(tb.key, 'text', ev)}
+    placeholder="Text"
+    rows={3}
+    className="min-h-[90px]"
+  ></textarea>
+  <div className="flex items-center mt-2">
+    <button
+      onClick={() => removeTextBox(tb)}
+      type="button"
+      className="bg-red-500 text-white px-4 py-2 rounded mr-2 flex items-center"
+    >
+      <FontAwesomeIcon icon={faTrash} className="mr-2" />
+      Remove
+    </button>
+    <button
+      onClick={() => saveTextBox(tb)}
+      type="button"
+      className="bg-blue-500 text-white px-4 py-2 rounded flex items-center"
+    >
+      <FontAwesomeIcon icon={faSave} className="mr-2" />
+      Save Text Box
+    </button>
+  </div>
+</div>
+
             </div>
           ))}
         </ReactSortable>
