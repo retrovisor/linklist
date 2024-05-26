@@ -115,7 +115,7 @@ function ShareDialog({ uri, children }) {
                 className="bg-gray-200 text-black text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
                 onClick={copyLink}
               >
-                <FontAwesomeIcon icon={faCopy} className="mr-2" />  // Added faCopy icon
+                <FontAwesomeIcon icon={faCopy} className="mr-2" />  
                 {copySuccess ? 'Copied!' : 'Copy Link'}
               </button>
             </div>
