@@ -120,7 +120,7 @@ export default function PageLinksForm({ page, user }) {
           />
         </div>
         <div className="flex flex-col md:flex-row gap-2 items-center">
-          <div className="flex items-center">
+          <div className="flex items-center w-full">
             <div className="text-center w-16 flex-shrink-0">
               <div
                 className="bg-gray-300 inline-block relative aspect-square overflow-hidden w-16 h-16 inline-flex justify-center items-center cursor-pointer"
@@ -141,10 +141,10 @@ export default function PageLinksForm({ page, user }) {
                 )}
                 {l.icon && !l.icon.startsWith('http') && (
                   <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center">
-                    <FontAwesomeIcon icon={['fas', l.icon.replace('fa-', '')]} size="lg" className="text-white" />
+                    <FontAwesomeIcon icon={['fas', l.icon.replace('fa-', '')]} size="2x" className="text-white" />
                   </div>
                 )}
-                {!l.icon && <FontAwesomeIcon size="lg" icon={faLink} />}
+                {!l.icon && <FontAwesomeIcon size="2x" icon={faLink} />}
               </div>
             </div>
             <div className="flex-1 ml-2">
