@@ -120,7 +120,7 @@ export default function PageLinksForm({ page, user }) {
           />
         </div>
         <div className="flex flex-col items-center">
-          <div className="flex items-center w-full mb-4">
+          <div className="flex items-center w-full mb-1">
             <div className="text-center w-16 flex-shrink-0">
               <div
                 className="bg-gray-100 inline-block relative aspect-square overflow-hidden w-16 h-16 inline-flex justify-center items-center cursor-pointer"
