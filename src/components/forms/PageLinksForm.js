@@ -11,6 +11,10 @@ import { ReactSortable } from "react-sortablejs";
 import IconModal from "./IconModal";
 import { commonIcons } from '@/utils/icons';
 
+const [newLinkRef, setNewLinkRef] = useState(null);
+
+
+
 export default function PageLinksForm({ page, user }) {
   const [links, setLinks] = useState(page.links || []);
   const [showIconModal, setShowIconModal] = useState(false);
@@ -34,16 +38,28 @@ export default function PageLinksForm({ page, user }) {
   }
 
   function addNewLink() {
-    setLinks(prev => {
-      return [...prev, {
-        key: Date.now().toString(),
-        title: '',
-        subtitle: '',
-        icon: '',
-        url: '',
-      }];
-    });
-  }
+  setLinks(prev => {
+    const newLink = {
+      key: Date.now().toString(),
+      title: '',
+      subtitle: '',
+      icon: '',
+      url: '',
+    };
+    setNewLinkRef(newLink.key);
+    return [...prev, newLink];
+  });
+}
+
+  useEffect(() => {
+    if (newLinkRef) {
+      const element = document.querySelector(`[data-key="${newLinkRef}"]`);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        setNewLinkRef(null);
+      }
+    }
+  }, [newLinkRef]);
 
   function handleUpload(ev, linkKeyForUpload) {
     if (ev && ev.target.files && ev.target.files.length > 0) {
@@ -110,7 +126,7 @@ export default function PageLinksForm({ page, user }) {
 <div className="">
   <ReactSortable handle={'.handle'} list={links} setList={setLinks}>
     {links.map(l => (
-      <div key={l.key} className="mt-4">
+      <div key={l.key} className="mt-4" data-key={l.key}>
         <div className="handle">
           <FontAwesomeIcon
             className="text-gray-500 mr-2 cursor-ns-resize"
