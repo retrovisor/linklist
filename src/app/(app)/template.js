@@ -80,11 +80,11 @@ export default async function AppTemplate({ children, ...rest }) {
               {page && (
              <div className="text-center mt-4 bg-custom-gray p-4 rounded-lg">
   <div className="flex items-center justify-center space-x-1">
-    <FontAwesomeIcon icon={faLink} className="text-blue-900" />
+    <FontAwesomeIcon icon={faLink} className="text-blue-500" />
     <Link
       target="_blank"
       href={'/' + page.uri}
-      className="text-base font-semibold text-blue-500 hover:text-blue-600 transition duration-200"
+      className="text-base font-semibold text-blue-900 hover:text-blue-600 transition duration-200"
     >
       <span>Fizz.link/{page.uri}</span>
     </Link>
