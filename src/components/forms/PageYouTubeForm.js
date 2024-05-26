@@ -78,7 +78,7 @@ export default function PageYouTubeForm({ page, user }) {
       <div className="estica">
         <ReactSortable handle={'.handle'} list={youTubeVideos} setList={setYouTubeVideos}>
           {youTubeVideos.map(video => (
-            <div key={video.key} className="mt-8">
+            <div key={video.key} className="mt-4">
               <div className="handle">
                 <FontAwesomeIcon
                   className="text-gray-500 mr-2 cursor-ns-resize"
