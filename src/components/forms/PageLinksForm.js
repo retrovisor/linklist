@@ -119,8 +119,8 @@ export default function PageLinksForm({ page, user }) {
             icon={faGripLines}
           />
         </div>
-        <div className="flex flex-col md:flex-row items-center">
-          <div className="flex items-center w-full">
+        <div className="flex flex-col items-center">
+          <div className="flex items-center w-full mb-4">
             <div className="text-center w-16 flex-shrink-0">
               <div
                 className="bg-gray-100 inline-block relative aspect-square overflow-hidden w-16 h-16 inline-flex justify-center items-center cursor-pointer"
@@ -168,7 +168,7 @@ export default function PageLinksForm({ page, user }) {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-auto">
+          <div className="w-full">
             <label className="input-label">URL:</label>
             <input
               value={l.url}
