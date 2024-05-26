@@ -61,20 +61,19 @@ export default function PageTextBoxesForm({ page, user }) {
   }
 
   return (
-    <SectionBox>
-  <div class="inline-block p-2">
-            <h2 class="text-2xl font-bold mb-4 border-b-4 border-cyan-200">✍️ Text Boxes</h2>
-    </div>      
-    
+<SectionBox>
+  <div className="flex items-center justify-between mb-4">
+    <h2 className="text-2xl font-bold border-b-4 border-cyan-200 inline-block">✍️ Text Boxes</h2>
     <button
-        onClick={addNewTextBox}
-        type="button"
-        className="text-blue-500 text-lg flex add_button gap-2 items-center cursor-pointer"
-      >
-        <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full aspect-square" icon={faPlus} />
-        <span>Add new</span>
-      </button>
-      <div className="">
+      onClick={addNewLink}
+      type="button"
+      className="text-blue-500 add_button text-lg flex gap-2 items-center cursor-pointer"
+    >
+      <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full aspect-square" icon={faPlus} />
+      <span>Add new</span>
+    </button>
+  </div>
+       <div className="">
         <ReactSortable handle={'.handle'} list={textBoxes} setList={setTextBoxes}>
           {textBoxes.map(tb => (
             <div key={tb.key} className="mt-6">
