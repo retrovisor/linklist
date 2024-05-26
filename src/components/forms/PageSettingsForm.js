@@ -133,16 +133,18 @@ export default function PageSettingsForm({ page, user }) {
               id="nameIn"
               name="displayName"
               defaultValue={page.displayName}
-              placeholder="John Doe"/>
+              placeholder="Your Name"/>
             <label className="input-label" htmlFor="locationIn">Location</label>
             <input
               type="text"
               id="locationIn"
               name="location"
               defaultValue={page.location}
-              placeholder="Somewhere in the world"/>
+              placeholder="Your location"/>
             <label className="input-label" htmlFor="bioIn">Bio</label>
             <textarea
+              rows={2}
+              className="min-h-[70px]"
               name="bio"
               defaultValue={page.bio}
               id="bioIn"
