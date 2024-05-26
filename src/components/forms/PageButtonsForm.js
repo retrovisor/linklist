@@ -28,7 +28,7 @@ export const allButtons = [
   { key: 'line', label: 'line', icon: faLine, placeholder: 'Line ID: your_id' },
   { key: 'pinterest', label: 'pinterest', icon: faPinterest, placeholder: 'https://www.pinterest.com/{username}' },
   { key: 'twitch', label: 'twitch', icon: faTwitch, placeholder: 'https://www.twitch.tv/{username}' },
-  { key: 'soundcloud', label: 'soundcloud', icon: faCloud, placeholder: 'https://soundcloud.com/{username}' },
+  { key: 'soundcloud', label: 'soundcloud', icon: faSoundCloud, placeholder: 'https://soundcloud.com/{username}' },
   { key: 'twitter', label: 'twitter', icon: faTwitter, placeholder: 'https://twitter.com/{username}' }
 
 ];
