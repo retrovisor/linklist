@@ -6,7 +6,7 @@ import { ReactSortable } from "react-sortablejs";
 import {
   faDiscord, faFacebook, faGithub, faInstagram,
   faTelegram, faTiktok, faWhatsapp, faYoutube,
-  faKakao, faNaver, faWeixin, faLine, faPinterest, faTwitch, faSoundCloud, faTwitter // Assuming these icons are available
+  faKakao, faNaver, faWeixin, faLine, faPinterest, faTwitch, faSoundcloud, faTwitter // Assuming these icons are available
 } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faGripLines, faMobile, faMugHot, faComment, faN, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,18 +17,18 @@ import toast from "react-hot-toast";
 export const allButtons = [
   { key: 'email', label: 'e-mail', icon: faEnvelope, placeholder: 'name@example.com' },
   { key: 'instagram', label: 'instagram', icon: faInstagram, placeholder: '@username' },
-  { key: 'kakao', label: 'kakao', icon: faComment, placeholder: 'https://kakao.com/profile/{your_id}' },
-  { key: 'naver', label: 'naver', icon: faMugHot, placeholder: 'https://blog.naver.com/{username}' },
+  { key: 'kakao', label: 'kakao', icon: faComment, placeholder: 'https://kakao.com/profile/your_id' },
+  { key: 'naver', label: 'naver', icon: faMugHot, placeholder: 'https://blog.naver.com/username' },
   { key: 'tiktok', label: 'tiktok', icon: faTiktok, placeholder: '@username' },
   { key: 'facebook', label: 'facebook', icon: faFacebook, placeholder: 'https://' },
   { key: 'discord', label: 'discord', icon: faDiscord },
   { key: 'youtube', label: 'youtube', icon: faYoutube, placeholder: 'https://' },
   { key: 'telegram', label: 'telegram', icon: faTelegram, placeholder: '@username' },
-  { key: 'wechat', label: 'wechat', icon: faWeixin, placeholder: 'WeChat ID: your_id' },
-  { key: 'line', label: 'line', icon: faLine, placeholder: 'Line ID: your_id' },
-  { key: 'pinterest', label: 'pinterest', icon: faPinterest, placeholder: 'https://www.pinterest.com/{username}' },
-  { key: 'twitch', label: 'twitch', icon: faTwitch, placeholder: 'https://www.twitch.tv/{username}' },
-  { key: 'soundcloud', label: 'soundcloud', icon: faSoundCloud, placeholder: 'https://soundcloud.com/{username}' },
+  { key: 'wechat', label: 'wechat', icon: faWeixin, placeholder: 'your_id' },
+  { key: 'line', label: 'line', icon: faLine, placeholder: 'your_id' },
+  { key: 'pinterest', label: 'pinterest', icon: faPinterest, placeholder: 'username' },
+  { key: 'twitch', label: 'twitch', icon: faTwitch, placeholder: 'username' },
+  { key: 'soundcloud', label: 'soundcloud', icon: faSoundcloud, placeholder: 'username' },
   { key: 'twitter', label: 'twitter', icon: faTwitter, placeholder: 'https://twitter.com/{username}' }
 
 ];
