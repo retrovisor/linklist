@@ -172,7 +172,7 @@ export default function PageLinksForm({ page, user }) {
               value={l.url}
               onChange={ev => handleLinkChange(l.key, 'url', ev)}
               type="text"
-              placeholder="url"
+              placeholder="https://"
             />
           </div>
         </div>
