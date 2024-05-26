@@ -81,7 +81,7 @@ export default function PageImageLinksForm({ page, user }) {
   <div className="flex items-center justify-between mb-4">
     <h2 className="text-2xl font-bold border-b-4 border-cyan-200 inline-block">🖼️ Image Links</h2>
     <button
-      onClick={addNewLink}
+      onClick={addNewImageLink}
       type="button"
       className="text-blue-500 add_button text-lg flex gap-2 items-center cursor-pointer"
     >
