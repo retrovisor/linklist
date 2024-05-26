@@ -97,8 +97,8 @@ export default function PageTextBoxesForm({ page, user }) {
     value={tb.text}
     onChange={ev => handleTextBoxChange(tb.key, 'text', ev)}
     placeholder="Text"
-    rows={3}
-    className="min-h-[90px]"
+    rows={2}
+    className="min-h-[70px]"
   ></textarea>
   <div className="flex items-center mt-2">
     <button
