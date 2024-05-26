@@ -91,7 +91,7 @@ export default function PageYouTubeForm({ page, user }) {
                   value={video.url}
                   onChange={ev => handleYouTubeVideoChange(video.key, ev)}
                   type="text"
-                  placeholder="YouTube Video URL"
+                  placeholder="https://"
                 />
                 <div className="flex items-center mt-2">
                   <button
