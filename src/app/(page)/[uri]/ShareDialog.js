@@ -1,11 +1,11 @@
 'use client';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShare } from "@fortawesome/free-solid-svg-icons";
+import { faShare, faCopy, faComment } from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { useState, useEffect, useRef } from "react";
 
-const DOMAIN = 'https://linklist-wheat.vercel.app';
+const DOMAIN = 'https://fizz.link';
 
 function ShareDialog({ uri, children }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +48,7 @@ function ShareDialog({ uri, children }) {
         objectType: 'feed',
         content: {
           title: 'MomoFriends',
-          description: `Check out my page on MomoFriends: ${DOMAIN}/${uri}`,
+          description: `Check out my Fizz.link page: ${DOMAIN}/${uri}`,
           imageUrl: 'YOUR_IMAGE_URL',
           link: {
             mobileWebUrl: `${DOMAIN}/${uri}`,
@@ -86,7 +86,7 @@ function ShareDialog({ uri, children }) {
       {isOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-40">
           <div ref={dialogRef} className="bg-white rounded-lg p-6 w-96">
-            <h3 className="text-xl font-semibold mb-4 text-black">Share your Nae.Link</h3>
+            <h3 className="text-xl font-semibold mb-4 text-black">Share your Fizz.Link</h3>
             <div className="flex flex-col gap-4">
 <button
   className="bg-green-500 text-white text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
@@ -107,12 +107,15 @@ function ShareDialog({ uri, children }) {
                 className="bg-yellow-400 text-black text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
                 onClick={shareOnKakao}
               >
+                <FontAwesomeIcon icon={faComment} className="mr-2" />  // Changed to faComment
                 Kakao
               </button>
+                  
               <button
                 className="bg-gray-200 text-black text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
                 onClick={copyLink}
               >
+                <FontAwesomeIcon icon={faCopy} className="mr-2" />  // Added faCopy icon
                 {copySuccess ? 'Copied!' : 'Copy Link'}
               </button>
             </div>
