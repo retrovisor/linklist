@@ -95,10 +95,12 @@ export default async function UserPage({ params }) {
 </div>
  
 
-      <div className="logo-container">
-        <span class="bold pt-3">Fizz.link</span>
-         
-      </div>
+     <div className="logo-container">
+  <a href="https://fizz.link/" className="bold pt-3 block">
+    Fizz.link
+  </a>
+</div>
+
 
       <div className="aspect-square w-24 h-24 mx-auto relative my-2">
         <Image
@@ -226,8 +228,11 @@ export default async function UserPage({ params }) {
 
       <footer className="text-center text-xs text-white p-6">
         <div className="text-center logo-container2">
-          <span class="bold pt-2">Fizz.link</span>
-         </div>
+  <a href="https://fizz.link/" className="bold pt-2 inline-block">
+    Fizz.link
+  </a>
+</div>
+
         <p>Created by Fizz.Link</p>
         <p>© Fizz.link All Rights Reserved</p>
       </footer>
