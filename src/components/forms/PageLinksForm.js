@@ -119,7 +119,7 @@ export default function PageLinksForm({ page, user }) {
             icon={faGripLines}
           />
         </div>
-        <div className="flex flex-col md:flex-row gap-2 items-center">
+        <div className="flex flex-col md:flex-row items-center">
           <div className="flex items-center w-full">
             <div className="text-center w-16 flex-shrink-0">
               <div
