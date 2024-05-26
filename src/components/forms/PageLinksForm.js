@@ -19,20 +19,15 @@ export default function PageLinksForm({ page, user }) {
   const [linkToDelete, setLinkToDelete] = useState(null);
   const [newLinkRef, setNewLinkRef] = useState(null);
 
-useEffect(() => {
-  if (newLinkRef) {
-    const element = document.querySelector(`[data-key="${newLinkRef}"]`);
-    if (element) {
-      const headerHeight = 60; 
-      const scrollPosition = element.offsetTop - headerHeight;
-      window.scrollTo({
-        top: scrollPosition,
-        behavior: 'smooth',
-      });
-      setNewLinkRef(null);
+  useEffect(() => {
+    if (newLinkRef) {
+      const element = document.querySelector(`[data-key="${newLinkRef}"]`);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        setNewLinkRef(null);
+      }
     }
-  }
-}, [newLinkRef]);
+  }, [newLinkRef]);
 
   async function saveLink(link) {
     await savePageLink(link);
