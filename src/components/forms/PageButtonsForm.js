@@ -17,19 +17,19 @@ import toast from "react-hot-toast";
 export const allButtons = [
   { key: 'email', label: 'e-mail', icon: faEnvelope, placeholder: 'name@example.com' },
   { key: 'instagram', label: 'instagram', icon: faInstagram, placeholder: '@username' },
-  { key: 'kakao', label: 'kakao', icon: faComment, placeholder: 'https://kakao.com/profile/your_id' },
-  { key: 'naver', label: 'naver', icon: faMugHot, placeholder: 'https://blog.naver.com/username' },
+  { key: 'kakao', label: 'kakao', icon: faComment, placeholder: 'https://kakao.com/profile/your_id' },  
   { key: 'tiktok', label: 'tiktok', icon: faTiktok, placeholder: '@username' },
+  { key: 'twitter', label: 'twitter', icon: faTwitter, placeholder: 'https://twitter.com/{username}' }  
   { key: 'facebook', label: 'facebook', icon: faFacebook, placeholder: 'https://' },
-  { key: 'discord', label: 'discord', icon: faDiscord },
   { key: 'youtube', label: 'youtube', icon: faYoutube, placeholder: 'https://' },
   { key: 'telegram', label: 'telegram', icon: faTelegram, placeholder: '@username' },
+  { key: 'naver', label: 'naver', icon: faMugHot, placeholder: 'https://blog.naver.com/username' },
   { key: 'wechat', label: 'wechat', icon: faWeixin, placeholder: 'your_id' },
   { key: 'line', label: 'line', icon: faLine, placeholder: 'your_id' },
   { key: 'pinterest', label: 'pinterest', icon: faPinterest, placeholder: 'username' },
   { key: 'twitch', label: 'twitch', icon: faTwitch, placeholder: 'username' },
   { key: 'soundcloud', label: 'soundcloud', icon: faSoundcloud, placeholder: 'username' },
-  { key: 'twitter', label: 'twitter', icon: faTwitter, placeholder: 'https://twitter.com/{username}' }
+  { key: 'discord', label: 'discord', icon: faDiscord },
 
 ];
 
