@@ -123,7 +123,7 @@ export default function PageLinksForm({ page, user }) {
           <div className="flex items-center w-full">
             <div className="text-center w-16 flex-shrink-0">
               <div
-                className="bg-gray-300 inline-block relative aspect-square overflow-hidden w-16 h-16 inline-flex justify-center items-center cursor-pointer"
+                className="bg-gray-100 inline-block relative aspect-square overflow-hidden w-16 h-16 inline-flex justify-center items-center cursor-pointer"
                 onClick={() => {
                   console.log('Change Icon Clicked', l.key); // Debug log
                   setCurrentIconKey(l.key);
