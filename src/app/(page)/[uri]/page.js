@@ -6,7 +6,7 @@ import { faEnvelope, faLink, faLocationDot, faMobile, faPhone, faComment, faMugH
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faShareFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { faShareFromSquare } from "@fortawesome/free-regular-svg-icons";
 
 import mongoose from "mongoose";
 import { btoa } from "next/dist/compiled/@edge-runtime/primitives";
