@@ -142,7 +142,11 @@ export default function PageLinksForm({ page, user }) {
                     <FontAwesomeIcon icon={['fas', l.icon.replace('fa-', '')]} size="2x" className="text-white" />
                   </div>
                 )}
-                {!l.icon && <FontAwesomeIcon size="2x" icon={faLink} />}
+                {!l.icon && 
+            <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center">
+                  <FontAwesomeIcon size="2x" icon={faLink} />
+                </div>
+                  }
               </div>
             </div>
             <div className="flex-1 ml-2">
