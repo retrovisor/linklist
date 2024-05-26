@@ -17,7 +17,7 @@ async function connectToDatabase() {
 }
 
 const serviceUrlMap = {
-  email: 'mailto:{{value}}',
+  email: '{{value}}',
   instagram: 'https://instagram.com/{{value}}',
   kakao: 'https://pf.kakao.com/{{value}}',
   naver: '{{value}}',
