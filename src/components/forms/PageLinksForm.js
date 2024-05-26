@@ -144,7 +144,7 @@ export default function PageLinksForm({ page, user }) {
                 )}
                 {!l.icon && 
             <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center">
-                  <FontAwesomeIcon size="2x" icon={faLink} />
+                  <FontAwesomeIcon size="2x" className="text-white" icon={faLink} />
                 </div>
                   }
               </div>
