@@ -24,12 +24,12 @@ export const allButtons = [
   { key: 'youtube', label: 'youtube', icon: faYoutube, placeholder: 'https://' },
   { key: 'telegram', label: 'telegram', icon: faTelegram, placeholder: '@username' },
   { key: 'naver', label: 'naver', icon: faMugHot, placeholder: 'https://blog.naver.com/...' },
-  { key: 'wechat', label: 'wechat', icon: faWeixin, placeholder: 'your_id' },
-  { key: 'line', label: 'line', icon: faLine, placeholder: 'your_id' },
+  { key: 'wechat', label: 'wechat', icon: faWeixin, placeholder: 'https://' },
+  { key: 'line', label: 'line', icon: faLine, placeholder: 'https://' },
   { key: 'pinterest', label: 'pinterest', icon: faPinterest, placeholder: 'username' },
   { key: 'twitch', label: 'twitch', icon: faTwitch, placeholder: 'username' },
   { key: 'soundcloud', label: 'soundcloud', icon: faSoundcloud, placeholder: 'username' },
-  { key: 'discord', label: 'discord', icon: faDiscord },
+  { key: 'discord', label: 'discord', icon: faDiscord, placeholder: 'https://' },
 
 ];
 
