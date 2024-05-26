@@ -119,7 +119,7 @@ export default function PageImageLinksForm({ page, user }) {
                   value={il.linkUrl}
                   onChange={ev => handleImageLinkChange(il.key, 'linkUrl', ev)}
                   type="text"
-                  placeholder="Link URL"
+                  placeholder="https://"
                 />
                 <div className="flex items-center mt-2">
                   <button
