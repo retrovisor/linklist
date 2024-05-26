@@ -108,72 +108,75 @@ export default function PageLinksForm({ page, user }) {
         <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full aspect-square" icon={faPlus} />
         <span>Add new</span>
       </button>
-     <div className="">
+     
+<div className="">
   <ReactSortable handle={'.handle'} list={links} setList={setLinks}>
     {links.map(l => (
-  <div key={l.key} className="mt-8">
-    <div className="handle">
-      <FontAwesomeIcon
-        className="text-gray-500 mr-2 cursor-ns-resize"
-        icon={faGripLines}
-      />
-    </div>
-    <div className="md:flex gap-2 items-center">
-      <div className="text-center md:w-16 md:flex-shrink-0">
-        <div
-          className="bg-gray-300 inline-block relative aspect-square overflow-hidden w-16 h-16 inline-flex justify-center items-center cursor-pointer"
-          onClick={() => {
-            console.log('Change Icon Clicked', l.key); // Debug log
-            setCurrentIconKey(l.key);
-            setShowIconModal(true);
-          }}
-        >
-          {l.icon && l.icon.startsWith('http') && (
-            <Image
-              className="w-full h-full object-cover"
-              src={l.icon}
-              alt={'icon'}
-              width={64}
-              height={64}
-            />
-          )}
-          {l.icon && !l.icon.startsWith('http') && (
-            <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center">
-              <FontAwesomeIcon icon={['fas', l.icon.replace('fa-', '')]} size="lg" className="text-white" />
-            </div>
-          )}
-          {!l.icon && <FontAwesomeIcon size="lg" icon={faLink} />}
-        </div>
-      </div>
-      <div className="grow">
-        <div className="md:flex gap-2">
-          <div className="flex-1">
-            <label className="input-label">Title:</label>
-            <input
-              value={l.title}
-              onChange={ev => handleLinkChange(l.key, 'title', ev)}
-              type="text"
-              placeholder="title"
-            />
-          </div>
-          <div className="flex-1">
-            <label className="input-label">Subtitle:</label>
-            <input
-              value={l.subtitle}
-              onChange={ev => handleLinkChange(l.key, 'subtitle', ev)}
-              type="text"
-              placeholder="subtitle (optional)"
-            />
-          </div>
-        </div>
-        <div className="mt-2">
-          <label className="input-label">URL:</label>
-          <input
-            value={l.url}
-            onChange={ev => handleLinkChange(l.key, 'url', ev)}
-            type="text"
-            placeholder="url"
+      <div key={l.key} className="mt-8">
+        <div className="handle">
+          <FontAwesomeIcon
+            className="text-gray-500 mr-2 cursor-ns-resize"
+            icon={faGripLines}
           />
+        </div>
+        <div className="flex flex-col md:flex-row gap-2 items-center">
+          <div className="flex items-center">
+            <div className="text-center w-16 flex-shrink-0">
+              <div
+                className="bg-gray-300 inline-block relative aspect-square overflow-hidden w-16 h-16 inline-flex justify-center items-center cursor-pointer"
+                onClick={() => {
+                  console.log('Change Icon Clicked', l.key); // Debug log
+                  setCurrentIconKey(l.key);
+                  setShowIconModal(true);
+                }}
+              >
+                {l.icon && l.icon.startsWith('http') && (
+                  <Image
+                    className="w-full h-full object-cover"
+                    src={l.icon}
+                    alt={'icon'}
+                    width={64}
+                    height={64}
+                  />
+                )}
+                {l.icon && !l.icon.startsWith('http') && (
+                  <div className="w-16 h-16 bg-blue-700 rounded-full flex items-center justify-center">
+                    <FontAwesomeIcon icon={['fas', l.icon.replace('fa-', '')]} size="lg" className="text-white" />
+                  </div>
+                )}
+                {!l.icon && <FontAwesomeIcon size="lg" icon={faLink} />}
+              </div>
+            </div>
+            <div className="flex-1 ml-2">
+              <div>
+                <label className="input-label">Title:</label>
+                <input
+                  value={l.title}
+                  onChange={ev => handleLinkChange(l.key, 'title', ev)}
+                  type="text"
+                  placeholder="title"
+                />
+              </div>
+              <div>
+                <label className="input-label">Subtitle:</label>
+                <input
+                  value={l.subtitle}
+                  onChange={ev => handleLinkChange(l.key, 'subtitle', ev)}
+                  type="text"
+                  placeholder="subtitle (optional)"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="w-full md:w-auto">
+            <label className="input-label">URL:</label>
+            <input
+              value={l.url}
+              onChange={ev => handleLinkChange(l.key, 'url', ev)}
+              type="text"
+              placeholder="url"
+            />
+          </div>
         </div>
         <div className="flex items-center mt-2">
           <button
@@ -194,11 +197,10 @@ export default function PageLinksForm({ page, user }) {
           </button>
         </div>
       </div>
-    </div>
-  </div>
-))}
-        </ReactSortable>
-      </div>
+    ))}
+  </ReactSortable>
+</div>
+  
       {showIconModal && (
         <IconModal
           currentIcon={links.find((l) => l.key === currentIconKey)?.icon || ''}
