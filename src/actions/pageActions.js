@@ -19,7 +19,7 @@ async function connectToDatabase() {
 const serviceUrlMap = {
   email: 'mailto:{{value}}',
   instagram: 'https://instagram.com/{{value}}',
-  kakao: '{{value}}',
+  kakao: 'https://pf.kakao.com/{{value}}',
   naver: '{{value}}',
   tiktok: 'https://www.tiktok.com/@{{value}}',
   facebook: '{{value}}',
@@ -28,6 +28,13 @@ const serviceUrlMap = {
   telegram: 'https://t.me/{{value}}',
   wechat: '{{value}}',
   line: '{{value}}',
+  pinterest: 'https://www.pinterest.com/{{value}}',
+  twitch: 'https://www.twitch.tv/{{value}}',
+  soundcloud: 'https://soundcloud.com/{{value}}',
+  twitter: 'https://twitter.com/{{value}}',
+
+
+
 };
 
 export async function savePageButtons(formData) {
