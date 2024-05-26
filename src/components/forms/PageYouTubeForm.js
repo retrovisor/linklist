@@ -60,17 +60,21 @@ export default function PageYouTubeForm({ page, user }) {
   }
 
   return (
-    <SectionBox>
-<div class="inline-block p-2">
-            <h2 class="text-2xl font-bold mb-4 border-b-4 border-cyan-200">📺 Youtube Videos</h2>
-    </div>            <button
-        onClick={addNewYouTubeVideo}
-        type="button"
-        className="text-blue-500 text-lg flex gap-2 add_button items-center cursor-pointer"
-      >
-        <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full aspect-square" icon={faPlus} />
-        <span>Add new</span>
-      </button>
+
+          <SectionBox>
+  <div className="flex items-center justify-between mb-4">
+    <h2 className="text-2xl font-bold border-b-4 border-cyan-200 inline-block">📺 Youtube Videos</h2>
+    <button
+      onClick={addNewYouTubeVideo}
+      type="button"
+      className="text-blue-500 add_button text-lg flex gap-2 items-center cursor-pointer"
+    >
+      <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full aspect-square" icon={faPlus} />
+      <span>Add new</span>
+    </button>
+  </div>
+
+          
       <div className="estica">
         <ReactSortable handle={'.handle'} list={youTubeVideos} setList={setYouTubeVideos}>
           {youTubeVideos.map(video => (
