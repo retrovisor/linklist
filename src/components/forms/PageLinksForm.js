@@ -5,15 +5,11 @@ import { upload } from "@/libs/upload";
 import { faExclamationTriangle, faGripLines, faLink, faPlus, faSave, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { ReactSortable } from "react-sortablejs";
 import IconModal from "./IconModal";
 import { commonIcons } from '@/utils/icons';
-
-const [newLinkRef, setNewLinkRef] = useState(null);
-
-
 
 export default function PageLinksForm({ page, user }) {
   const [links, setLinks] = useState(page.links || []);
@@ -21,8 +17,9 @@ export default function PageLinksForm({ page, user }) {
   const [currentIconKey, setCurrentIconKey] = useState(null);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [linkToDelete, setLinkToDelete] = useState(null);
+  const [newLinkRef, setNewLinkRef] = useState(null);
 
-    useEffect(() => {
+  useEffect(() => {
     if (newLinkRef) {
       const element = document.querySelector(`[data-key="${newLinkRef}"]`);
       if (element) {
@@ -48,20 +45,18 @@ export default function PageLinksForm({ page, user }) {
   }
 
   function addNewLink() {
-  setLinks(prev => {
-    const newLink = {
-      key: Date.now().toString(),
-      title: '',
-      subtitle: '',
-      icon: '',
-      url: '',
-    };
-    setNewLinkRef(newLink.key);
-    return [...prev, newLink];
-  });
-}
-
-
+    setLinks(prev => {
+      const newLink = {
+        key: Date.now().toString(),
+        title: '',
+        subtitle: '',
+        icon: '',
+        url: '',
+      };
+      setNewLinkRef(newLink.key);
+      return [...prev, newLink];
+    });
+  }
 
   function handleUpload(ev, linkKeyForUpload) {
     if (ev && ev.target.files && ev.target.files.length > 0) {
