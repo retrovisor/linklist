@@ -110,7 +110,7 @@ export default function PageLinksForm({ page, user }) {
 <div className="">
   <ReactSortable handle={'.handle'} list={links} setList={setLinks}>
     {links.map(l => (
-      <div key={l.key} className="mt-8">
+      <div key={l.key} className="mt-4">
         <div className="handle">
           <FontAwesomeIcon
             className="text-gray-500 mr-2 cursor-ns-resize"
