@@ -15,18 +15,19 @@ import toast from "react-hot-toast";
 
 // Define all available buttons with their properties
 export const allButtons = [
-  { key: 'email', label: 'e-mail', icon: faEnvelope, placeholder: 'test@example.com' },
-   { key: 'instagram', label: 'instagram', icon: faInstagram, placeholder: 'https://instagram.com/profile/...' },
-  { key: 'kakao', label: 'kakao', icon: faComment, placeholder: 'https://kakao.com/profile/...' },
-  { key: 'naver', label: 'naver', icon: faMugHot, placeholder: 'https://naver.com/profile/...' },
-  { key: 'tiktok', label: 'tiktok', icon: faTiktok },
-  { key: 'facebook', label: 'facebook', icon: faFacebook },
+  { key: 'email', label: 'e-mail', icon: faEnvelope, placeholder: 'name@example.com' },
+  { key: 'instagram', label: 'instagram', icon: faInstagram, placeholder: '@username' },
+  { key: 'kakao', label: 'kakao', icon: faComment, placeholder: 'https://kakao.com/profile/{your_id}' },
+  { key: 'naver', label: 'naver', icon: faMugHot, placeholder: 'https://blog.naver.com/{username}' },
+  { key: 'tiktok', label: 'tiktok', icon: faTiktok, placeholder: '@username' },
+  { key: 'facebook', label: 'facebook', icon: faFacebook, placeholder: 'https://' },
   { key: 'discord', label: 'discord', icon: faDiscord },
-  { key: 'youtube', label: 'youtube', icon: faYoutube },
-   { key: 'telegram', label: 'telegram', icon: faTelegram },
-    { key: 'wechat', label: 'wechat', icon: faWeixin, placeholder: 'https://wechat.com/profile/...' },
-  { key: 'line', label: 'line', icon: faLine, placeholder: 'https://line.me/profile/...' },
+  { key: 'youtube', label: 'youtube', icon: faYoutube, placeholder: 'https://' },
+  { key: 'telegram', label: 'telegram', icon: faTelegram, placeholder: '@username' },
+  { key: 'wechat', label: 'wechat', icon: faWeixin, placeholder: 'WeChat ID: your_id' },
+  { key: 'line', label: 'line', icon: faLine, placeholder: 'Line ID: your_id' },
 ];
+
 
 // Helper function to capitalize the first letter of a string
 function upperFirst(str) {
