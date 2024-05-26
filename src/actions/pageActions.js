@@ -16,6 +16,20 @@ async function connectToDatabase() {
   }
 }
 
+const serviceUrlMap = {
+  email: 'mailto:{{value}}',
+  instagram: 'https://instagram.com/{{value}}',
+  kakao: '{{value}}',
+  naver: '{{value}}',
+  tiktok: 'https://www.tiktok.com/@{{value}}',
+  facebook: '{{value}}',
+  discord: '{{value}}',
+  youtube: '{{value}}',
+  telegram: 'https://t.me/{{value}}',
+  wechat: '{{value}}',
+  line: '{{value}}',
+};
+
 export async function savePageButtons(formData) {
   await connectToDatabase();
   const session = await getServerSession(authOptions);
@@ -23,10 +37,16 @@ export async function savePageButtons(formData) {
   if (session) {
     const buttonsValues = {};
 
-    // Ensure formData is iterable and correctly processed
     if (formData && typeof formData.forEach === 'function') {
       formData.forEach((value, key) => {
-        buttonsValues[key] = value;
+        if (value) {
+          const urlTemplate = serviceUrlMap[key];
+          if (urlTemplate) {
+            buttonsValues[key] = urlTemplate.replace('{{value}}', value);
+          } else {
+            buttonsValues[key] = value;
+          }
+        }
       });
     } else {
       console.error('Form data is not iterable:', formData);
@@ -45,6 +65,7 @@ export async function savePageButtons(formData) {
 
   return { success: false, message: 'Unauthorized' };
 }
+
 
 async function saveLink(link) {
   const response = await savePageLink(link);
