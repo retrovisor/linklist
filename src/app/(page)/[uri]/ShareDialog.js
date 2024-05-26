@@ -88,18 +88,21 @@ function ShareDialog({ uri, children }) {
           <div ref={dialogRef} className="bg-white rounded-lg p-6 w-96">
             <h3 className="text-xl font-semibold mb-4 text-black">Share your Nae.Link</h3>
             <div className="flex flex-col gap-4">
-              <button
-                className="bg-green-500 text-white text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
-                onClick={shareOnWhatsApp}
-              >
-                WhatsApp
-              </button>
-              <button
-                className="bg-blue-600 text-white text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
-                onClick={shareOnFacebook}
-              >
-                Facebook
-              </button>
+<button
+  className="bg-green-500 text-white text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
+  onClick={shareOnWhatsApp}
+>
+  <FontAwesomeIcon icon={faWhatsapp} className="mr-2" />
+  WhatsApp
+</button>
+<button
+  className="bg-blue-600 text-white text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
+  onClick={shareOnFacebook}
+>
+  <FontAwesomeIcon icon={faFacebook} className="mr-2" />
+  Facebook
+</button>
+
               <button
                 className="bg-yellow-400 text-black text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
                 onClick={shareOnKakao}
