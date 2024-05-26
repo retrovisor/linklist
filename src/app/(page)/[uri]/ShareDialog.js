@@ -9,6 +9,7 @@ const DOMAIN = 'https://linklist-wheat.vercel.app';
 
 function ShareDialog({ uri, children }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
   const dialogRef = useRef(null);
 
   useEffect(() => {
@@ -59,7 +60,14 @@ function ShareDialog({ uri, children }) {
   };
 
   const copyLink = () => {
-    navigator.clipboard.writeText(`${DOMAIN}/${uri}`);
+    navigator.clipboard.writeText(`${DOMAIN}/${uri}`)
+      .then(() => {
+        setCopySuccess(true);
+        setTimeout(() => setCopySuccess(false), 2000);
+      })
+      .catch((err) => {
+        console.error('Failed to copy link: ', err);
+      });
   };
 
   const handleClick = () => {
@@ -75,7 +83,6 @@ function ShareDialog({ uri, children }) {
       <div onClick={handleClick}>
         {children}
       </div>
-
       {isOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-40">
           <div ref={dialogRef} className="bg-white rounded-lg p-6 w-96">
@@ -103,7 +110,7 @@ function ShareDialog({ uri, children }) {
                 className="bg-gray-200 text-black text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
                 onClick={copyLink}
               >
-                Copy Link
+                {copySuccess ? 'Copied!' : 'Copy Link'}
               </button>
             </div>
             <button className="mt-4" onClick={handleClose}>
