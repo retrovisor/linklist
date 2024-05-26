@@ -77,23 +77,23 @@ export default function PageImageLinksForm({ page, user }) {
   }
 
   return (
-    <SectionBox>
-         <div class="inline-block p-2">
-
-            <h2 class="text-2xl font-bold mb-4 border-b-4 border-cyan-200">🖼️ Image Links</h2>
-    </div>
-      <button
-        onClick={addNewImageLink}
-        type="button"
-        className="add_button text-blue-500 text-lg flex gap-2 items-center cursor-pointer"
-      >
-        <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full aspect-square" icon={faPlus} />
-        <span>Add new</span>
-      </button>
+ <SectionBox>
+  <div className="flex items-center justify-between mb-4">
+    <h2 className="text-2xl font-bold border-b-4 border-cyan-200 inline-block">🖼️ Image Links</h2>
+    <button
+      onClick={addNewLink}
+      type="button"
+      className="text-blue-500 add_button text-lg flex gap-2 items-center cursor-pointer"
+    >
+      <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full aspect-square" icon={faPlus} />
+      <span>Add new</span>
+    </button>
+  </div>
+           
       <div className="">
         <ReactSortable handle={'.handle'} list={imageLinks} setList={setImageLinks}>
           {imageLinks.map(il => (
-            <div key={il.key} className="mt-8">
+            <div key={il.key} className="mt-4">
               <div className="handle">
                 <FontAwesomeIcon
                   className="text-gray-500 mr-2 cursor-ns-resize"
