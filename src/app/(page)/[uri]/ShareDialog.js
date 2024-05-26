@@ -107,7 +107,7 @@ function ShareDialog({ uri, children }) {
                 className="bg-yellow-400 text-black text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
                 onClick={shareOnKakao}
               >
-                <FontAwesomeIcon icon={faComment} className="mr-2" />  // Changed to faComment
+                <FontAwesomeIcon icon={faComment} className="mr-2" />  
                 Kakao
               </button>
                   
