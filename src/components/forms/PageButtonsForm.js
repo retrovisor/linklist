@@ -16,14 +16,14 @@ import toast from "react-hot-toast";
 // Define all available buttons with their properties
 export const allButtons = [
   { key: 'email', label: 'e-mail', icon: faEnvelope, placeholder: 'name@example.com' },
-  { key: 'instagram', label: 'instagram', icon: faInstagram, placeholder: '@username' },
-  { key: 'kakao', label: 'kakao', icon: faComment, placeholder: 'https://kakao.com/profile/your_id' },  
+  { key: 'instagram', label: 'instagram', icon: faInstagram, placeholder: 'username' },
+  { key: 'kakao', label: 'kakao', icon: faComment, placeholder: 'https://kakao.com/...' },  
   { key: 'tiktok', label: 'tiktok', icon: faTiktok, placeholder: '@username' },
-  { key: 'twitter', label: 'twitter', icon: faTwitter, placeholder: 'https://twitter.com/{username}' }  
+  { key: 'twitter', label: 'twitter', icon: faTwitter, placeholder: 'username' },  
   { key: 'facebook', label: 'facebook', icon: faFacebook, placeholder: 'https://' },
   { key: 'youtube', label: 'youtube', icon: faYoutube, placeholder: 'https://' },
   { key: 'telegram', label: 'telegram', icon: faTelegram, placeholder: '@username' },
-  { key: 'naver', label: 'naver', icon: faMugHot, placeholder: 'https://blog.naver.com/username' },
+  { key: 'naver', label: 'naver', icon: faMugHot, placeholder: 'https://blog.naver.com/...' },
   { key: 'wechat', label: 'wechat', icon: faWeixin, placeholder: 'your_id' },
   { key: 'line', label: 'line', icon: faLine, placeholder: 'your_id' },
   { key: 'pinterest', label: 'pinterest', icon: faPinterest, placeholder: 'username' },
