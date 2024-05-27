@@ -1,3 +1,4 @@
+// app/(app)/account/page.js
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import PageButtonsForm from "@/components/forms/PageButtonsForm";
 import PageLinksForm from "@/components/forms/PageLinksForm";
@@ -6,7 +7,7 @@ import PageTextBoxesForm from "@/components/forms/PageTextBoxesForm";
 import UsernameForm from "@/components/forms/UsernameForm";
 import PageYouTubeForm from "@/components/forms/PageYouTubeForm";
 import PageImageLinksForm from "@/components/forms/PageImageLinksForm";
-import { Page } from "@/models/Page";
+import Page from "@/models/Page";
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -61,6 +62,7 @@ export default async function AccountPage({ searchParams }) {
     if (leanPage._id) {
       leanPage._id = leanPage._id.toString();
     }
+
     console.log('Lean Page:', leanPage);
 
     return (
