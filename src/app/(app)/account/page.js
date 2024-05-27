@@ -1,4 +1,3 @@
-// app/(app)/account/page.js
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import PageButtonsForm from "@/components/forms/PageButtonsForm";
 import PageLinksForm from "@/components/forms/PageLinksForm";
@@ -7,24 +6,13 @@ import PageTextBoxesForm from "@/components/forms/PageTextBoxesForm";
 import UsernameForm from "@/components/forms/UsernameForm";
 import PageYouTubeForm from "@/components/forms/PageYouTubeForm";
 import PageImageLinksForm from "@/components/forms/PageImageLinksForm";
-import Page from "@/models/Page";
+import { Page } from "@/models/Page";
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import cloneDeep from 'clone-deep';
 import Head from 'next/head';
-
-async function connectToDatabase() {
-  if (mongoose.connection.readyState === 0) {
-    try {
-      await mongoose.connect(process.env.MONGO_URI);
-      console.log('MongoDB connected successfully');
-    } catch (error) {
-      console.error('Error connecting to MongoDB:', error);
-      throw new Error('Database connection error');
-    }
-  }
-}
+ 
 
 export default async function AccountPage({ searchParams }) {
   console.log('AccountPage function started');
@@ -32,69 +20,59 @@ export default async function AccountPage({ searchParams }) {
   const session = await getServerSession(authOptions);
   console.log('Session:', session);
 
-  const desiredUsername = searchParams?.desiredUsername || '';
+     
+
+
+  const desiredUsername = searchParams?.desiredUsername;
   console.log('Desired Username:', desiredUsername);
 
   if (!session) {
-    console.log('No session, redirecting to /login');
-    redirect(`/login?desiredUsername=${desiredUsername}`);
+    console.log('No session, redirecting to /');
+    return redirect('/');
+  }
+
+  // Ensure mongoose connection is established only once
+  if (mongoose.connection.readyState === 0) {
+    await mongoose.connect(process.env.MONGO_URI);
   }
 
   try {
-    console.log('Connecting to database...');
-    await connectToDatabase();
-    console.log('Connected to database');
-
-    console.log('Checking if Page model is defined...');
-    if (!Page) {
-      console.error('Page model is undefined');
-      throw new Error('Page model is undefined');
-    }
-
-    let page;
-    try {
-      console.log('Executing findOne query...');
-      page = await Page.findOne({ owner: session.user.email });
-      console.log('Query executed successfully');
-      console.log('Page:', page);
-    } catch (error) {
-      console.error('Error executing findOne query:', error);
-      throw new Error('Database query error');
-    }
+    const page = await Page.findOne({ owner: session?.user?.email });
+    console.log('Query executed successfully');
+    console.log('Page:', page);
 
     if (!page) {
       console.log('Page not found for the user');
-      console.log('Rendering UsernameForm with desiredUsername:', desiredUsername);
-      return <UsernameForm desiredUsername={desiredUsername} />;
+      return (
+        <div>
+          <UsernameForm desiredUsername={desiredUsername} />
+        </div>
+      );
     }
 
     console.log('Page found:', page);
 
-    console.log('Cloning page object...');
-    const leanPage = cloneDeep(page.toObject());
-    console.log('Cloned page object');
-
-    if (leanPage._id) {
-      console.log('Converting _id to string...');
-      leanPage._id = leanPage._id.toString();
-      console.log('Converted _id to string');
-    }
-
+    const leanPage = cloneDeep(page.toJSON());
+    leanPage._id = leanPage._id.toString();
     console.log('Lean Page:', leanPage);
 
     return (
       <>
-        <Head>
-          <title>{`Edit account - ${session.user.name}`}</title>
-        </Head>
-        <div className="container h-full bg-center fixed bg-auto overflow-x-hidden bg-no-repeat pb-10">
-          <PageSettingsForm page={leanPage} user={session.user} />
-          <PageButtonsForm page={leanPage} user={session.user} />
-          <PageLinksForm page={leanPage} user={session.user} />
-          <PageTextBoxesForm page={leanPage} user={session.user} />
-          <PageImageLinksForm page={leanPage} user={session.user} />
-          <PageYouTubeForm page={leanPage} user={session.user} />
-        </div>
+            <Head>
+        <title>{`Edit account - ${session.user.name}`}</title>
+      </Head>
+      <div className="container h-full bg-center fixed bg-auto overflow-x-hidden bg-no-repeat pb-10">
+  
+        <PageSettingsForm page={leanPage} user={session.user} />
+        <PageButtonsForm page={leanPage} user={session.user} />
+        <PageLinksForm page={leanPage} user={session.user} />
+        <PageTextBoxesForm page={leanPage} user={session.user} />
+        <PageImageLinksForm page={leanPage} user={session.user} />
+        <PageYouTubeForm page={leanPage} user={session.user} />
+      </div>
+
+
+      
       </>
     );
   } catch (error) {
