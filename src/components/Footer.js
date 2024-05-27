@@ -6,10 +6,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getServerSession} from "next-auth";
 import Link from "next/link";
 
-export default async function Header() {
+export default async function Footer() {
   const session = await getServerSession(authOptions);
   return (
-    <header className="bg-white border-b py-2">
+    <footer className="bg-white border-b py-2">
       <div className="max-w-4xl flex justify-between mx-auto px-4">
         <div className="flex items-center gap-6">
           <Link href={'/'} className="flex items-center gap-1 text-blue-500">
@@ -37,6 +37,6 @@ export default async function Header() {
           )}
         </nav>
       </div>
-    </header>
+    </footer>
   );
 }
