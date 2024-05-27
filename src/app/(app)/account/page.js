@@ -29,23 +29,32 @@ export default async function AccountPage({ searchParams }) {
 
   // Ensure mongoose connection is established only once
   if (mongoose.connection.readyState === 0) {
-    await mongoose.connect(process.env.MONGO_URI);
+    try {
+      await mongoose.connect(process.env.MONGO_URI);
+      console.log('MongoDB connected successfully');
+    } catch (error) {
+      console.error('Error connecting to MongoDB:', error);
+      return <div>An error occurred. Please try again later.</div>;
+    }
   }
 
   try {
-  const page = await Page.findOne({ owner: session?.user?.email });
-  console.log('Query executed successfully');
-  console.log('Page:', page);
+    const page = await Page.findOne({ owner: session?.user?.email });
+    console.log('Query executed successfully');
+    console.log('Page:', page);
 
-  if (!page) {
-    console.log('Page not found for the user');
-    return (
-      <div>
-        <UsernameForm desiredUsername={desiredUsername} />
-      </div>
-    );
-  }
-
+    if (!page) {
+      console.log('Page not found for the user');
+      return (
+        <div>
+          {desiredUsername ? (
+            <UsernameForm desiredUsername={desiredUsername} />
+          ) : (
+            <div>Page not found. Please choose a username.</div>
+          )}
+        </div>
+      );
+    }
 
     console.log('Page found:', page);
 
@@ -70,9 +79,9 @@ export default async function AccountPage({ searchParams }) {
     );
   } catch (error) {
     console.error('Error:', error);
-      console.error('Error message:', error.message);
-  console.error('Error stack:', error.stack);
-  return <div>An error occurred. Please try again later.</div>;
-
+    // Log additional details about the error
+    console.error('Error message:', error.message);
+    console.error('Error stack:', error.stack);
+    return <div>An error occurred. Please try again later.</div>;
   }
 }
