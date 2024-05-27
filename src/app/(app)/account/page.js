@@ -58,11 +58,19 @@ export default async function AccountPage({ searchParams }) {
 
     console.log('Page found:', page);
 
-    const leanPage = cloneDeep(page.toObject());
-    if (leanPage._id) {
-      leanPage._id = leanPage._id.toString();
+    if (!page.toObject) {
+      console.error('page.toObject is not a function');
+      return <div>An error occurred. Please try again later.</div>;
     }
 
+    const leanPage = cloneDeep(page.toObject());
+
+    if (!leanPage || !leanPage._id) {
+      console.error('leanPage or leanPage._id is undefined');
+      return <div>An error occurred. Please try again later.</div>;
+    }
+
+    leanPage._id = leanPage._id.toString();
     console.log('Lean Page:', leanPage);
 
     return (
