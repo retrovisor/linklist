@@ -11,7 +11,6 @@ export async function middleware(req) {
   const cookieHeader = req.headers.get('cookie');
   const cookies = parse(cookieHeader || '');
   const tokenCookie = cookies['__Secure-next-auth.session-token'] || cookies['next-auth.session-token'];
-
   console.log('Parsed Token Cookie:', tokenCookie);
 
   // Ensure req is passed correctly to getToken
@@ -19,8 +18,7 @@ export async function middleware(req) {
   console.log('Token:', token);
 
   const { pathname } = req.nextUrl;
-
-  if (token && pathname === '/login') {
+  if (token !== null && pathname === '/login') {
     console.log('Redirecting to /account');
     return NextResponse.redirect(new URL('/account', req.url));
   }
