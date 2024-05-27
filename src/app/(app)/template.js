@@ -1,13 +1,13 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import AppSidebar from "@/components/layout/AppSidebar";
 import { Page } from "@/models/Page";
-import {faFileLines, faShareFromSquare} from "@fortawesome/free-regular-svg-icons";
+import { faFileLines, faShareFromSquare } from "@fortawesome/free-regular-svg-icons";
 import { faBars, faLink, faChartSimple } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
-import { Lato } from 'next/font/google'
-import '../globals.css'
+import { Lato } from 'next/font/google';
+import '../globals.css';
 import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,8 +15,6 @@ import { redirect } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import ShareDialog from '../(page)/[uri]/ShareDialog';
 import CopyLinkButton from '@/components/buttons/CopyLinkButton';
-
-
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -33,11 +31,29 @@ export default async function AppTemplate({ children, ...rest }) {
     return redirect('/');
   }
 
-  mongoose.connect(process.env.MONGO_URI);
+  try {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    console.log('MongoDB connection established.');
 
-  const page = await Page.findOne({ owner: session.user.email });
+    const page = await Page.findOne({ owner: session.user.email });
+    console.log('MongoDB findOne query executed:', page ? 'Page found.' : 'Page not found.');
 
-  return (
+    return (
+      <html lang="en">
+        <body className={lato.className}>
+          <Toaster />
+          <main className="md:flex">
+            {/* Component code remains unchanged */}
+          </main>
+        </body>
+      </html>
+    );
+  } catch (error) {
+    console.error('Error during MongoDB operation or page rendering:', error);
+   return (
     <html lang="en">
       <body className={lato.className}>
         <Toaster />
@@ -109,3 +125,7 @@ export default async function AppTemplate({ children, ...rest }) {
     </html>
   );
 }
+
+
+
+  
