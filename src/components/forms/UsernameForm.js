@@ -9,15 +9,20 @@ export default function UsernameForm({ desiredUsername }) {
   const [taken, setTaken] = useState(false);
 
   async function handleSubmit(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const result = await grabUsername(formData);
+  event.preventDefault();
+  const formData = new FormData(event.target);
 
+  try {
+    const result = await grabUsername(formData);
     setTaken(result === false);
+
     if (result) {
       window.location.href = '/select-template?created=' + formData.get('username');
     }
-  }
+  } catch (error) {
+    console.error('Error in handleSubmit:', error);
+   }
+}
 
   return (
     <form onSubmit={handleSubmit}>
