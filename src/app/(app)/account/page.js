@@ -36,14 +36,20 @@ export default async function AccountPage({ searchParams }) {
   console.log('Desired Username:', desiredUsername);
 
   if (!session) {
-    console.log('No session, redirecting to /');
-    return redirect('/');
+    console.log('No session, redirecting to /login');
+    redirect(`/login?desiredUsername=${desiredUsername}`);
   }
 
   try {
     console.log('Connecting to database...');
     await connectToDatabase();
     console.log('Connected to database');
+
+    console.log('Checking if Page model is defined...');
+    if (!Page) {
+      console.error('Page model is undefined');
+      throw new Error('Page model is undefined');
+    }
 
     let page;
     try {
