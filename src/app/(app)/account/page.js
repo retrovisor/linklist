@@ -17,10 +17,7 @@ import Head from 'next/head';
 async function connectToDatabase() {
   if (mongoose.connection.readyState === 0) {
     try {
-      await mongoose.connect(process.env.MONGO_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
+      await mongoose.connect(process.env.MONGO_URI);
       console.log('MongoDB connected successfully');
     } catch (error) {
       console.error('Error connecting to MongoDB:', error);
@@ -46,9 +43,15 @@ export default async function AccountPage({ searchParams }) {
   try {
     await connectToDatabase();
 
-    const page = await Page.findOne({ owner: session.user.email });
-    console.log('Query executed successfully');
-    console.log('Page:', page);
+    let page;
+    try {
+      page = await Page.findOne({ owner: session.user.email });
+      console.log('Query executed successfully');
+      console.log('Page:', page);
+    } catch (error) {
+      console.error('Error executing findOne query:', error);
+      throw new Error('Database query error');
+    }
 
     if (!page) {
       console.log('Page not found for the user');
