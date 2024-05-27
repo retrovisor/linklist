@@ -45,12 +45,24 @@ export default async function AccountPage({ searchParams }) {
 
     if (!page) {
       console.log('Page not found for the user');
+      console.log('Rendering UsernameForm with desiredUsername:', desiredUsername);
       return <UsernameForm desiredUsername={desiredUsername} />;
     }
 
     console.log('Page found:', page);
 
+    if (!page.toObject) {
+      console.error('page.toObject is not a function');
+      return <div>An error occurred. Please try again later.</div>;
+    }
+
     const leanPage = cloneDeep(page.toObject());
+
+    if (!leanPage || !leanPage._id) {
+      console.error('leanPage or leanPage._id is undefined');
+      return <div>An error occurred. Please try again later.</div>;
+    }
+
     leanPage._id = leanPage._id.toString();
     console.log('Lean Page:', leanPage);
 
