@@ -13,6 +13,21 @@ import { redirect } from "next/navigation";
 import cloneDeep from 'clone-deep';
 import Head from 'next/head';
 
+async function connectToDatabase() {
+  if (mongoose.connection.readyState === 0) {
+    try {
+      await mongoose.connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+      console.log('MongoDB connected successfully');
+    } catch (error) {
+      console.error('Error connecting to MongoDB:', error);
+      throw new Error('Database connection error');
+    }
+  }
+}
+
 export default async function AccountPage({ searchParams }) {
   console.log('AccountPage function started');
 
@@ -27,22 +42,10 @@ export default async function AccountPage({ searchParams }) {
     return redirect('/');
   }
 
-  // Ensure mongoose connection is established only once
-  if (mongoose.connection.readyState === 0) {
-    try {
-      await mongoose.connect(process.env.MONGO_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      });
-      console.log('MongoDB connected successfully');
-    } catch (error) {
-      console.error('Error connecting to MongoDB:', error);
-      return <div>An error occurred. Please try again later.</div>;
-    }
-  }
-
   try {
-    let page = await Page.findOne({ owner: session.user.email });
+    await connectToDatabase();
+
+    const page = await Page.findOne({ owner: session.user.email });
     console.log('Query executed successfully');
     console.log('Page:', page);
 
@@ -53,11 +56,6 @@ export default async function AccountPage({ searchParams }) {
     }
 
     console.log('Page found:', page);
-
-    if (!page.uri) {
-      console.log('Page.uri is not defined');
-      return <div>Page data is corrupted. Please contact support.</div>;
-    }
 
     const leanPage = cloneDeep(page.toObject());
     if (leanPage._id) {
@@ -82,8 +80,6 @@ export default async function AccountPage({ searchParams }) {
     );
   } catch (error) {
     console.error('Error:', error);
-    console.error('Error message:', error.message);
-    console.error('Error stack:', error.stack);
     return <div>An error occurred. Please try again later.</div>;
   }
 }
