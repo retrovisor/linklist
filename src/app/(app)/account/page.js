@@ -1,3 +1,4 @@
+// Imports
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import PageButtonsForm from "@/components/forms/PageButtonsForm";
 import PageLinksForm from "@/components/forms/PageLinksForm";
@@ -12,71 +13,60 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import cloneDeep from 'clone-deep';
 import Head from 'next/head';
- 
 
 export default async function AccountPage({ searchParams }) {
   console.log('AccountPage function started');
 
+  // Get user session
   const session = await getServerSession(authOptions);
   console.log('Session:', session);
 
-     
-
-
-  const desiredUsername = searchParams?.desiredUsername;
-  console.log('Desired Username:', desiredUsername);
-
+  // Check for active session, redirect if not found
   if (!session) {
-    console.log('No session, redirecting to /');
-    return redirect('/');
+    console.log('No session, redirecting to /login');
+    return redirect('/login');
   }
 
-  // Ensure mongoose connection is established only once
+  // Connect to MongoDB if not already connected
   if (mongoose.connection.readyState === 0) {
     await mongoose.connect(process.env.MONGO_URI);
   }
 
   try {
-    const page = await Page.findOne({ owner: session?.user?.email });
-    console.log('Query executed successfully');
-    console.log('Page:', page);
+    // Find the Page document for the logged-in user
+    const page = await Page.findOne({ owner: session.user.email });
+    console.log('Query executed successfully', page ? 'Page found.' : 'Page not found.');
 
+    // If no Page found, return UsernameForm to let user create one
     if (!page) {
-      console.log('Page not found for the user');
-      return (
-        <div>
-          <UsernameForm desiredUsername={desiredUsername} />
-        </div>
-      );
+      console.log('Page not found for the user, showing UsernameForm');
+      return <UsernameForm desiredUsername={searchParams?.desiredUsername} />;
     }
 
-    console.log('Page found:', page);
-
-    const leanPage = cloneDeep(page.toJSON());
+    // Prepare the page data for rendering
+    const leanPage = cloneDeep(page.toObject());
     leanPage._id = leanPage._id.toString();
     console.log('Lean Page:', leanPage);
 
+    // Return the JSX component tree with all page forms loaded
     return (
       <>
-            <Head>
-        <title>{`Edit account - ${session.user.name}`}</title>
-      </Head>
-      <div className="container h-full bg-center fixed bg-auto overflow-x-hidden bg-no-repeat pb-10">
-  
-        <PageSettingsForm page={leanPage} user={session.user} />
-        <PageButtonsForm page={leanPage} user={session.user} />
-        <PageLinksForm page={leanPage} user={session.user} />
-        <PageTextBoxesForm page={leanPage} user={session.user} />
-        <PageImageLinksForm page={leanPage} user={session.user} />
-        <PageYouTubeForm page={leanPage} user={session.user} />
-      </div>
-
-
-      
+        <Head>
+          <title>Edit account - {session.user.name}</title>
+        </Head>
+        <div className="container h-full bg-center fixed bg-auto overflow-x-hidden bg-no-repeat pb-10">
+          <PageSettingsForm page={leanPage} user={session.user} />
+          <PageButtonsForm page={leanPage} user={session.user} />
+          <PageLinksForm page={leanPage} user={session.user} />
+          <PageTextBoxesForm page={leanPage} user={session.user} />
+          <PageImageLinksForm page={leanPage} user={session.user} />
+          <PageYouTubeForm page={leanPage} user={session.user} />
+        </div>
       </>
     );
   } catch (error) {
-    console.error('Error:', error);
+    // Log and handle any error that occurred during the process
+    console.error('Error during MongoDB operation or page rendering:', error);
     return <div>An error occurred. Please try again later.</div>;
   }
 }
