@@ -45,6 +45,7 @@ export default async function AccountPage({ searchParams }) {
 
     if (!page) {
       console.log('Page not found for the user');
+      console.log('Returning UsernameForm or "Page not found" message');
       return (
         <div>
           {desiredUsername ? (
@@ -65,6 +66,7 @@ export default async function AccountPage({ searchParams }) {
     leanPage._id = leanPage._id.toString();
     console.log('Lean Page:', leanPage);
 
+    console.log('Rendering page components');
     return (
       <>
         <Head>
