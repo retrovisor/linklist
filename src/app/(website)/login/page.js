@@ -1,5 +1,3 @@
-'use client';
-
 import { useSession } from "next-auth/react";
 import LoginWithGoogle from "@/components/buttons/LoginWithGoogle";
 import LoginWithKakao from "@/components/buttons/LoginWithKakao";
