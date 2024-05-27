@@ -27,11 +27,12 @@ const PageSchema = new Schema({
       linkUrl: String,
     },
   ],
-
-   youTubeVideos: [
+  youTubeVideos: [
     {
       key: String,
       url: String,
     },
   ],
 }, { timestamps: true });
+
+export default models.Page || model('Page', PageSchema);
