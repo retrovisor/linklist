@@ -1,16 +1,51 @@
-import {model, models, Schema} from "mongoose";
+import { model, models, Schema } from "mongoose";
 
 const PageSchema = new Schema({
-  uri: {type: String, required: true, min: 1, unique: true},
-  owner: {type: String, required: true},
-  displayName: {type: String, default: ''},
-  location: {type: String, default: ''},
-  bio: {type: String, default: ''},
-  bgType: {type: String, default: 'color'},
-  bgColor: {type: String, default: '#000'},
-  bgImage: {type: String, default: ''},
-  buttons: {type: Object, default: {}},
-  links: {type: Object, default: []},
-}, {timestamps: true});
+  uri: { type: String, required: true, unique: true, minlength: 1 },
+  owner: { type: String, required: true },
+  displayName: { type: String, default: '' },
+  location: { type: String, default: '' },
+  bio: { type: String, default: '' },
+  bgType: { type: String, default: 'color' },  // Assuming bgType could be 'color', 'image', etc.
+  bgColor: { type: String, default: '#000' },  // Default black color
+  bgImage: { type: String, default: '' },      // URL to a background image
+  buttons: { 
+    type: Map,
+    of: new Schema({
+      label: { type: String, required: true },
+      action: { type: String, required: true },  // Could be a URL or a JavaScript action
+    }),
+    default: {}
+  },
+  links: [
+    {
+      label: { type: String, required: true },
+      url: { type: String, required: true }
+    }
+  ],
+  template: { type: String, default: '' },
+  textBoxes: [
+    {
+      key: { type: String, required: true },
+      title: { type: String, required: true },
+      text: { type: String, required: true }
+    }
+  ],
+  imageLinks: [
+    {
+      key: { type: String, required: true },
+      title: { type: String, required: true },
+      url: { type: String, required: true },
+      linkUrl: { type: String, required: true }
+    }
+  ],
+  youTubeVideos: [
+    {
+      key: { type: String, required: true },
+      url: { type: String, required: true }
+    }
+  ],
+}, { timestamps: true });
+
 
 export const Page = models?.Page || model('Page', PageSchema);
