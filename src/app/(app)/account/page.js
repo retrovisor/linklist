@@ -58,6 +58,15 @@ export default async function AccountPage({ searchParams }) {
 
     console.log('Page found:', page);
 
+    // Log the value of page before accessing its properties
+    console.log('Page object:', JSON.stringify(page, null, 2));
+
+    // Check if the uri field exists and is not null
+    if (!page.uri) {
+      console.error('Page uri is missing or null');
+      return <div>An error occurred. Please try again later.</div>;
+    }
+
     const leanPage = cloneDeep(page.toObject());
     leanPage._id = leanPage._id.toString();
     console.log('Lean Page:', leanPage);
@@ -79,7 +88,6 @@ export default async function AccountPage({ searchParams }) {
     );
   } catch (error) {
     console.error('Error:', error);
-    // Log additional details about the error
     console.error('Error message:', error.message);
     console.error('Error stack:', error.stack);
     return <div>An error occurred. Please try again later.</div>;
