@@ -33,18 +33,19 @@ export default async function AccountPage({ searchParams }) {
   }
 
   try {
-    const page = await Page.findOne({ owner: session?.user?.email });
-    console.log('Query executed successfully');
-    console.log('Page:', page);
+  const page = await Page.findOne({ owner: session?.user?.email });
+  console.log('Query executed successfully');
+  console.log('Page:', page);
 
-    if (!page) {
-      console.log('Page not found for the user');
-      return (
-        <div>
-          <UsernameForm desiredUsername={desiredUsername} />
-        </div>
-      );
-    }
+  if (!page) {
+    console.log('Page not found for the user');
+    return (
+      <div>
+        <UsernameForm desiredUsername={desiredUsername} />
+      </div>
+    );
+  }
+
 
     console.log('Page found:', page);
 
@@ -69,6 +70,9 @@ export default async function AccountPage({ searchParams }) {
     );
   } catch (error) {
     console.error('Error:', error);
-    return <div>An error occurred. Please try again later.</div>;
+      console.error('Error message:', error.message);
+  console.error('Error stack:', error.stack);
+  return <div>An error occurred. Please try again later.</div>;
+
   }
 }
