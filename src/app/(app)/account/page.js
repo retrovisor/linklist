@@ -39,33 +39,53 @@ export default async function AccountPage({ searchParams }) {
   }
 
   try {
-    const page = await Page.findOne({ owner: session?.user?.email });
-    console.log('Query executed successfully');
-    console.log('Page:', page);
+  const page = await Page.findOne({ owner: session?.user?.email });
+  console.log('Query executed successfully');
+  console.log('Page:', page);
 
-    if (!page) {
-      console.log('Page not found for the user');
-      return (
-        <div>
-          {desiredUsername ? (
-            <UsernameForm desiredUsername={desiredUsername} />
-          ) : (
-            <div>Page not found. Please choose a username.</div>
-          )}
-        </div>
-      );
-    }
+  if (!page) {
+    console.log('Page not found for the user');
+    return (
+      <div>
+        {desiredUsername ? (
+          <UsernameForm desiredUsername={desiredUsername} />
+        ) : (
+          <div>Page not found. Please choose a username.</div>
+        )}
+      </div>
+    );
+  }
 
-    console.log('Page found:', page);
+  console.log('Page found:', page);
 
-    // Log the value of page before accessing its properties
-    console.log('Page object:', JSON.stringify(page, null, 2));
+  // Log the value of page before accessing its properties
+  console.log('Page object:', JSON.stringify(page, null, 2));
 
-    // Check if the uri field exists and is not null
-    if (!page.uri) {
-      console.error('Page uri is missing or null');
-      return <div>An error occurred. Please try again later.</div>;
-    }
+  const leanPage = cloneDeep(page.toObject());
+  leanPage._id = leanPage._id.toString();
+  console.log('Lean Page:', leanPage);
+
+  return (
+    <>
+      <Head>
+        <title>{`Edit account - ${session.user.name}`}</title>
+      </Head>
+      <div className="container h-full bg-center fixed bg-auto overflow-x-hidden bg-no-repeat pb-10">
+        <PageSettingsForm page={leanPage} user={session.user} />
+        <PageButtonsForm page={leanPage} user={session.user} />
+        <PageLinksForm page={leanPage} user={session.user} />
+        <PageTextBoxesForm page={leanPage} user={session.user} />
+        <PageImageLinksForm page={leanPage} user={session.user} />
+        <PageYouTubeForm page={leanPage} user={session.user} />
+      </div>
+    </>
+  );
+} catch (error) {
+  console.error('Error:', error);
+  console.error('Error message:', error.message);
+  console.error('Error stack:', error.stack);
+  return <div>An error occurred. Please try again later.</div>;
+}
 
     const leanPage = cloneDeep(page.toObject());
     leanPage._id = leanPage._id.toString();
