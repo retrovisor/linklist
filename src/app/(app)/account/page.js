@@ -12,16 +12,12 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import cloneDeep from 'clone-deep';
 import Head from 'next/head';
- 
 
 export default async function AccountPage({ searchParams }) {
   console.log('AccountPage function started');
 
   const session = await getServerSession(authOptions);
   console.log('Session:', session);
-
-     
-
 
   const desiredUsername = searchParams?.desiredUsername;
   console.log('Desired Username:', desiredUsername);
@@ -52,27 +48,23 @@ export default async function AccountPage({ searchParams }) {
 
     console.log('Page found:', page);
 
-    const leanPage = cloneDeep(page.toJSON());
+    const leanPage = cloneDeep(page.toObject());
     leanPage._id = leanPage._id.toString();
     console.log('Lean Page:', leanPage);
 
     return (
       <>
-            <Head>
-        <title>{`Edit account - ${session.user.name}`}</title>
-      </Head>
-      <div className="container h-full bg-center fixed bg-auto overflow-x-hidden bg-no-repeat pb-10">
-  
-        <PageSettingsForm page={leanPage} user={session.user} />
-        <PageButtonsForm page={leanPage} user={session.user} />
-        <PageLinksForm page={leanPage} user={session.user} />
-        <PageTextBoxesForm page={leanPage} user={session.user} />
-        <PageImageLinksForm page={leanPage} user={session.user} />
-        <PageYouTubeForm page={leanPage} user={session.user} />
-      </div>
-
-
-      
+        <Head>
+          <title>{`Edit account - ${session.user.name}`}</title>
+        </Head>
+        <div className="container h-full bg-center fixed bg-auto overflow-x-hidden bg-no-repeat pb-10">
+          <PageSettingsForm page={leanPage} user={session.user} />
+          <PageButtonsForm page={leanPage} user={session.user} />
+          <PageLinksForm page={leanPage} user={session.user} />
+          <PageTextBoxesForm page={leanPage} user={session.user} />
+          <PageImageLinksForm page={leanPage} user={session.user} />
+          <PageYouTubeForm page={leanPage} user={session.user} />
+        </div>
       </>
     );
   } catch (error) {
