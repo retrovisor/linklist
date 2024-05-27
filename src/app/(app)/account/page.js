@@ -27,7 +27,6 @@ export default async function AccountPage({ searchParams }) {
     return redirect('/');
   }
 
-  // Ensure mongoose connection is established only once
   if (mongoose.connection.readyState === 0) {
     try {
       await mongoose.connect(process.env.MONGO_URI);
@@ -45,7 +44,6 @@ export default async function AccountPage({ searchParams }) {
 
     if (!page) {
       console.log('Page not found for the user');
-      console.log('Returning UsernameForm or "Page not found" message');
       return (
         <div>
           {desiredUsername ? (
@@ -59,14 +57,13 @@ export default async function AccountPage({ searchParams }) {
 
     console.log('Page found:', page);
 
-    // Log the value of page before accessing its properties
-    console.log('Page object:', JSON.stringify(page, null, 2));
-
-    const leanPage = cloneDeep(page.toObject());
-    leanPage._id = leanPage._id.toString();
+    // Check page properties existence before accessing them
+    const leanPage = page ? cloneDeep(page.toObject()) : {};
+    if (leanPage._id) {
+      leanPage._id = leanPage._id.toString();
+    }
     console.log('Lean Page:', leanPage);
 
-    console.log('Rendering page components');
     return (
       <>
         <Head>
