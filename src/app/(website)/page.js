@@ -8,7 +8,7 @@ export default async function Home() {
     <main>
       <section className="py-16">
         <div className="max-w-md mb-8">
-          <h1 className="text-6xl font-bold">
+          <h1 className="text-5xl font-bold">
             Your one link<br />for everything
           </h1>
           <h2 className="text-gray-500 text-xl mt-6">
