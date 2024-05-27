@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { getSession, useSession } from "next-auth/react";
+'use client';
+
+import { useSession } from "next-auth/react";
 import LoginWithGoogle from "@/components/buttons/LoginWithGoogle";
 import LoginWithKakao from "@/components/buttons/LoginWithKakao";
 import LoginWithFacebook from "@/components/buttons/LoginWithFacebook";
@@ -7,13 +8,6 @@ import UsernameForm from "@/components/forms/UsernameForm";
 
 export default function LoginPage() {
   const { data: session, status } = useSession();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    if (status === "authenticated") {
-      setIsLoggedIn(true);
-    }
-  }, [status]);
 
   if (status === "loading") {
     return <div>Loading...</div>;
@@ -22,7 +16,7 @@ export default function LoginPage() {
   return (
     <div>
       <div className="p-4 max-w-xs mx-auto">
-        {isLoggedIn ? (
+        {status === "authenticated" ? (
           <UsernameForm desiredUsername="" />
         ) : (
           <>
