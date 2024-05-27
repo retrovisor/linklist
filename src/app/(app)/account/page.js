@@ -58,16 +58,11 @@ export default async function AccountPage({ searchParams }) {
 
     console.log('Page found:', page);
 
-    // Check page properties existence before accessing them
-    if (!page.uri) {
-      console.log('Page.uri is not defined');
-      return <div>Page data is corrupted. Please contact support.</div>;
-    }
-
     const leanPage = cloneDeep(page.toObject());
     if (leanPage._id) {
       leanPage._id = leanPage._id.toString();
     }
+
     console.log('Lean Page:', leanPage);
 
     return (
