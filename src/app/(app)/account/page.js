@@ -41,10 +41,13 @@ export default async function AccountPage({ searchParams }) {
   }
 
   try {
+    console.log('Connecting to database...');
     await connectToDatabase();
+    console.log('Connected to database');
 
     let page;
     try {
+      console.log('Executing findOne query...');
       page = await Page.findOne({ owner: session.user.email });
       console.log('Query executed successfully');
       console.log('Page:', page);
@@ -61,9 +64,14 @@ export default async function AccountPage({ searchParams }) {
 
     console.log('Page found:', page);
 
+    console.log('Cloning page object...');
     const leanPage = cloneDeep(page.toObject());
+    console.log('Cloned page object');
+
     if (leanPage._id) {
+      console.log('Converting _id to string...');
       leanPage._id = leanPage._id.toString();
+      console.log('Converted _id to string');
     }
 
     console.log('Lean Page:', leanPage);
