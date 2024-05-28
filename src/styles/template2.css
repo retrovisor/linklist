@@ -32,8 +32,9 @@
   margin-bottom: 20px;
 }
 
-.template.template2 .fundo-item {
+.template.template2 .fundo-link {
  border-radius: 10px;
+ color: red;
 }
 
 
