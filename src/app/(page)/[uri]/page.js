@@ -142,49 +142,46 @@ export default async function UserPage({ params }) {
         </div>
 
         <div className="max-wid mx-auto px-5">
-  {pageData.links.map(link => (
-    <Link
-      key={link.url}
-      target="_blank"
-      ping={process.env.URL + 'api/click?url=' + btoa(link.url) + '&page=' + pageData.uri}
-      className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2 block flex link-item"
-      href={link.url}
-    >
-      <div className="relative overflow-hidden w-16 h-16">
-        {link.icon && link.icon.startsWith('http') && (
-          <img
-            className="icon-standard"
-            src={link.icon}
-            alt="icon"
-          />
-        )}
-        {link.icon && !link.icon.startsWith('http') && (
-          <div className="icon-container">
-            <svg className="icon-standard" aria-hidden="true">
-              <use href={`/path/to/sprite.svg#${link.icon.replace('fa-', '')}`}></use>
-            </svg>
-          </div>
-        )}
-        {!link.icon && (
-          <div className="icon-container">
-            <svg className="icon-standard" aria-hidden="true">
-              <use href="/path/to/sprite.svg#link-icon"></use>
-            </svg>
-          </div>
-        )}
-      </div>
-      <div className="flex items-center justify-center shrink grow-0 overflow-hidden ml-4">
-        <div>
-          <h3 className="text-black text-xl font-semibold">{link.title}</h3>
-          {link.subtitle && (
-            <p className="text-black/50 h-6 overflow-hidden">{link.subtitle}</p>
-          )}
+          {pageData.links.map(link => (
+            <Link
+              key={link.url}
+              target="_blank"
+              ping={process.env.URL + 'api/click?url=' + btoa(link.url) + '&page=' + pageData.uri}
+              className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2 block flex link-item"
+              href={link.url}
+            >
+              <div className="relative overflow-hidden w-16 h-16">
+                {link.icon && link.icon.startsWith('http') && (
+                  <Image
+                    className="w-full h-full object-cover"
+                    src={link.icon}
+                    alt="icon"
+                    width={64}
+                    height={64}
+                  />
+                )}
+                {link.icon && !link.icon.startsWith('http') && (
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center fundo-link">
+                    <FontAwesomeIcon icon={['fas', link.icon.replace('fa-', '')]} size="2x" className="text-white" />
+                  </div>
+                )}
+                {!link.icon && (
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center fundo-link">
+                    <FontAwesomeIcon icon={faLink} size="2x" className="text-white" />
+                  </div>
+                )}
+              </div>
+              <div className="flex items-center justify-center shrink grow-0 overflow-hidden ml-4">
+                <div>
+                  <h3 className="text-black text-xl font-semibold">{link.title}</h3>
+                  {link.subtitle && (
+                    <p className="text-black/50 h-6 overflow-hidden">{link.subtitle}</p>
+                  )}
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
-      </div>
-    </Link>
-  ))}
-</div>
-
 
         <div className="max-wid mx-auto px-5">
           {pageData.textBoxes.map(textBox => (
