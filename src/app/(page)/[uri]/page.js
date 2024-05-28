@@ -194,8 +194,8 @@ export default async function UserPage({ params }) {
 
         <div className="max-wid mx-auto px-5">
           {pageData.youTubeVideos.map(video => (
-            <div key={video.key} className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2">
-              <div className="relative video-wrapper" style={{ paddingTop: '56.25%' }}>
+            <div key={video.key} className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2 video-wrapper">
+              <div className="relative" style={{ paddingTop: '56.25%' }}>
                 <iframe
                   className="absolute top-0 left-0 w-full h-full"
                   src={`https://www.youtube.com/embed/${getYouTubeVideoId(video.url)}`}
