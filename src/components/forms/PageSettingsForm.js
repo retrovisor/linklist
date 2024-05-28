@@ -25,14 +25,16 @@ export default function PageSettingsForm({ page, user }) {
   }
 
   async function handleCoverImageChange(ev) {
-    await upload(ev, async (link) => {
-      setBgImage(link);
-      const formData = new FormData();
-      formData.append('bgImage', link);
-      await savePageSettings(formData);
-      toast.success('Background image saved!');
-    });
-  }
+  await upload(ev, async (link) => {
+    setBgImage(link);
+    setBgType('image'); // Update bgType to 'image'
+    const formData = new FormData();
+    formData.append('bgImage', link);
+    formData.append('bgType', 'image'); // Add bgType to the form data
+    await savePageSettings(formData);
+    toast.success('Background image saved!');
+  });
+}
 
   async function handleAvatarImageChange(ev) {
     await upload(ev, async (link) => {
