@@ -1,4 +1,4 @@
-/* template3.css */
+Need this style of div box shadow/border applied to all boxes and links here // /* template3.css */
 
 .template.template3 .button-container {
   display: flex;
@@ -115,31 +115,7 @@
   margin: 0;
 }
 
-.template.template3 .warning {
-  background-color: #f39c12;
-  color: #fff;
-  padding: 30px;
-  border-radius: 25px;
-  margin-bottom: 30px;
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
-  text-transform: uppercase;
-}
-
-.template.template3 .tip {
-  background-color: #27ae60;
-  color: white;
-  padding: 30px;
-  border-radius: 25px;
-  margin-bottom: 30px;
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
-  text-transform: uppercase;
-}
+ 
 
 .template.template3 .video-wrapper {
   background-color: rgba(231, 76, 60, 0.8);
@@ -157,11 +133,4 @@
   width: 100%;
   height: 100%;
 }
-
-.template.template3 footer {
-  text-align: center;
-  padding: 30px;
-  font-size: 20px;
-  color: white;
-  background-color: #34495e;
-}
+ 
