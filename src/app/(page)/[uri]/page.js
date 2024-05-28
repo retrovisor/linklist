@@ -15,6 +15,7 @@ import Link from "next/link";
 import "@/styles/template1.css";
 import "@/styles/template2.css";
 import "@/styles/template3.css";
+import "@/styles/template4.css";
 import ShareDialog from "./ShareDialog";
 
 library.add(fas, faBookmark, faLink, faLocationDot, faEnvelope, faPhone, faDiscord, faFacebook, faGithub, faInstagram, faTelegram, faTiktok, faWhatsapp, faYoutube, faShare, faComment, faMugHot, faWeixin, faLine);
