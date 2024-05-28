@@ -9,20 +9,8 @@ const PageSchema = new Schema({
   bgType: { type: String, default: 'color' },  // Assuming bgType could be 'color', 'image', etc.
   bgColor: { type: String, default: '#000' },  // Default black color
   bgImage: { type: String, default: '' },      // URL to a background image
-  buttons: { 
-    type: Map,
-    of: new Schema({
-      label: { type: String, required: true },
-      action: { type: String, required: true },  // Could be a URL or a JavaScript action
-    }),
-    default: {}
-  },
-  links: [
-    {
-      label: { type: String, required: true },
-      url: { type: String, required: true }
-    }
-  ],
+    buttons: { type: Object, default: {} },
+    links: { type: Array, default: [] },
   template: { type: String, default: '' },
   textBoxes: [
     {
