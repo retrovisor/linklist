@@ -32,9 +32,6 @@ const serviceUrlMap = {
   twitch: 'https://www.twitch.tv/{{value}}',
   soundcloud: 'https://soundcloud.com/{{value}}',
   twitter: 'https://twitter.com/{{value}}',
-
-
-
 };
 
 export async function savePageButtons(formData) {
@@ -63,9 +60,9 @@ export async function savePageButtons(formData) {
     const dataToUpdate = { buttons: buttonsValues };
 
     await Page.updateOne(
-      { owner: session?.user?.email },
-      dataToUpdate,
-    );
+  { owner: session?.user?.email },
+  dataToUpdate,
+);
 
     return { success: true };
   }
