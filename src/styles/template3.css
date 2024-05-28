@@ -138,6 +138,7 @@
     margin-bottom: 20px;
     text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 10px;
 }
 
 .image-link:hover {
