@@ -112,9 +112,9 @@ export default async function UserPage({ params }) {
           </a>
         </div>
 
-        <div className="aspect-square w-24 h-24 mx-auto relative my-2">
+        <div className="aspect-square w-24 h-24 mx-auto relative my-2 avatar-container">
           <Image
-            className="rounded-full w-full h-full object-cover border-3 border-white shadow shadow-black/50"
+            className="rounded-full w-full h-full object-cover border-3 border-white shadow shadow-black/50 avatar"
             src={user.image}
             alt="avatar"
             width={90}
@@ -128,16 +128,16 @@ export default async function UserPage({ params }) {
           <span>{pageData.location}</span>
         </h3>
 
-        <div className="flex gap-2 justify-center mt-4 pb-4">
+        <div className="flex gap-2 justify-center mt-4 pb-4 button-container">
           {pageData.buttons && Object.keys(pageData.buttons).map(buttonKey => (
             <Link key={buttonKey} href={buttonLink(buttonKey, pageData.buttons[buttonKey])}
-              className="rounded-full bg-white text-blue-950 p-3 flex items-center justify-center">
+              className="rounded-full bg-white text-blue-950 p-3 flex items-center justify-center button">
               <FontAwesomeIcon className="w-8 h-8" icon={buttonsIcons[buttonKey]} />
             </Link>
           ))}
         </div>
 
-        <div className="max-w-4xl p-5 text-center m-5 bg-black bg-opacity-25 m-5">
+        <div className="max-w-4xl p-5 text-center m-5 bg-black bg-opacity-25 m-5 bio">
           <p>{pageData.bio}</p>
         </div>
 
@@ -147,7 +147,7 @@ export default async function UserPage({ params }) {
               key={link.url}
               target="_blank"
               ping={process.env.URL + 'api/click?url=' + btoa(link.url) + '&page=' + pageData.uri}
-              className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2 block flex"
+              className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2 block flex link-item"
               href={link.url}
             >
               <div className="relative overflow-hidden w-16 h-16">
@@ -185,7 +185,7 @@ export default async function UserPage({ params }) {
 
         <div className="max-wid mx-auto px-5">
           {pageData.textBoxes.map(textBox => (
-            <div key={textBox.key} className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2">
+            <div key={textBox.key} className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2 text-box">
               <h3 className="text-black text-xl font-semibold">{textBox.title}</h3>
               <p className="text-black">{textBox.text}</p>
             </div>
@@ -195,7 +195,7 @@ export default async function UserPage({ params }) {
         <div className="max-wid mx-auto px-5">
           {pageData.youTubeVideos.map(video => (
             <div key={video.key} className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2">
-              <div className="relative" style={{ paddingTop: '56.25%' }}>
+              <div className="relative video-wrapper" style={{ paddingTop: '56.25%' }}>
                 <iframe
                   className="absolute top-0 left-0 w-full h-full"
                   src={`https://www.youtube.com/embed/${getYouTubeVideoId(video.url)}`}
@@ -216,7 +216,7 @@ export default async function UserPage({ params }) {
               href={il.linkUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white border-slate-950 border-2 shadow-lg mb-5 block relative"
+              className="bg-white border-slate-950 border-2 shadow-lg mb-5 block relative image-link"
             >
               <div className="relative">
                 <img
