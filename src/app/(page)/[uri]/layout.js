@@ -15,17 +15,17 @@ export async function generateMetadata({ params }) {
 
     if (!page) {
       return {
-        title: 'Page Not Found | Mysite.com',
+        title: 'Page Not Found | Fizz.link',
       };
     }
 
     return {
-      title: `${page.displayName} (@${page.uri}) | Mysite.com`,
+      title: `${page.displayName} (@${page.uri}) | Fizz.link`,
     };
   } catch (error) {
     console.error('Error generating metadata:', error);
     return {
-      title: 'Error | Mysite.com',
+      title: 'Error | Fizz.link',
     };
   }
 }
