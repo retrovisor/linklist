@@ -1,7 +1,7 @@
 import { Page } from "@/models/Page";
 import { User } from "@/models/User";
 import { Event } from "@/models/Event";
-import { faDiscord, faFacebook, faGithub, faInstagram, faTelegram, faTiktok, faWhatsapp, faYoutube, faWeixin, faLine } from "@fortawesome/free-brands-svg-icons";
+import { faDiscord, faFacebook, faGithub, faInstagram, faTelegram, faTiktok, faWhatsapp, faYoutube, faWeixin, faLine, faPinterest, faTwitch, faSoundcloud, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope, faLink, faLocationDot, faMobile, faPhone, faComment, faMugHot, faBookmark, fas } from "@fortawesome/free-solid-svg-icons";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -33,6 +33,10 @@ export const buttonsIcons = {
   naver: faMugHot,
   wechat: faWeixin,
   line: faLine,
+  pinterest: faPinterest,
+  twitch: faTwitch,
+  soundcloud: faSoundcloud,
+  twitter: faTwitter,
 };
 
 function buttonLink(key, value) {
