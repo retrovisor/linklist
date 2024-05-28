@@ -12,7 +12,7 @@ export default async function Home() {
             Your one link<br />for everything
           </h1>
           <h2 className="text-gray-500 text-xl mt-6">
-            Share your links, social profiles, contact info and more on one page
+            Share your links, social profiles, contact info and more on a single page
           </h2>
         </div>
         <HeroForm user={session?.user} />
