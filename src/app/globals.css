@@ -8,6 +8,24 @@ html, body {
   overflow: auto;
 }
 
+.icon-standard {
+  width: 64px; /* or use rem for relative sizing */
+  height: 64px;
+  object-fit: cover;
+}
+
+.icon-container {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--icon-background, #f0f0f0); /* default background color */
+  border-radius: 50%;
+}
+
+
+
 body {
   @apply bg-gray-100;
    display: flex;
