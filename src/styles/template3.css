@@ -46,7 +46,8 @@
   text-decoration: none;
   transition: transform 0.3s ease;
   color: #333;
-  background-color: rgba(142, 68, 173, 0.1);
+      background-color: wheat;
+
   border: 2px solid black;
   box-shadow: 5px 5px 0 black;
 }
