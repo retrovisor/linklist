@@ -17,6 +17,18 @@ export default async function Home() {
         </div>
         <HeroForm user={session?.user} />
       </section>
+
+  <section className="py-16">
+        <div className="max-w-md mb-8">
+          <h1 className="text-5xl font-bold bg-blue-200">
+            Bilu-bily
+          </h1>
+          <h2 className="text-gray-500 text-xl mt-6">
+            Share your links, social profiles, contact info and more on a single page
+          </h2>
+        </div>
+        <HeroForm user={session?.user} />
+      </section>
     </main>
   )
 }
