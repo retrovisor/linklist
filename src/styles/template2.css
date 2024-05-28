@@ -32,6 +32,11 @@
   margin-bottom: 20px;
 }
 
+.template.template2 .fundo-item {
+ border-radius: 10px;
+}
+
+
 .template.template2 .button {
   background-color: #FF4081;
   color: white;
