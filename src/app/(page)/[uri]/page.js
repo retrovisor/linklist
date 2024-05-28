@@ -15,7 +15,7 @@ import Link from "next/link";
 import "@/styles/template1.css";
 import "@/styles/template2.css";
 import ShareDialog from "./ShareDialog";
- 
+
 library.add(fas, faBookmark, faLink, faLocationDot, faEnvelope, faPhone, faDiscord, faFacebook, faGithub, faInstagram, faTelegram, faTiktok, faWhatsapp, faYoutube, faShare, faComment, faMugHot, faWeixin, faLine);
 
 export const buttonsIcons = {
@@ -83,24 +83,25 @@ export default async function UserPage({ params }) {
     await Event.create({ uri: uri, page: uri, type: 'view' });
     console.log("Event created");
 
-    const template = page.template || "template1"; // Default to template1 if not specified
+    const pageData = page.toObject(); // Convert the page object to a plain JavaScript object
+    const template = pageData.template || "template1"; // Default to template1 if not specified
 
     return (
       <div className={`w-full h-full bg-center bg-cover fixed top-0 z-10 bg-auto bg-no-repeat overflow-x-hidden text-white template ${template}`} style={
-            page.bgType === 'color'
-              ? { backgroundColor: page.bgColor }
-              : { backgroundImage: `url(${page.bgImage})` }
-          }>
+        pageData.bgType === 'color'
+          ? { backgroundColor: pageData.bgColor }
+          : { backgroundImage: `url(${pageData.bgImage})` }
+      }>
         <div className="bg-cover bg-center"></div>
 
         <div className="fixed top-4 right-4 z-50">
-          <ShareDialog uri={page.uri}>
+          <ShareDialog uri={pageData.uri}>
             <button className="fixed-button bg-white text-slate-500 p-2 rounded-full flex items-center justify-center">
               <FontAwesomeIcon icon={faShareFromSquare} className="w-6 h-6" />
             </button>
           </ShareDialog>
         </div>
- 
+
         <div className="logo-container">
           <a href="https://fizz.link/" className="bold pt-3 block">
             Fizz.link
@@ -117,31 +118,31 @@ export default async function UserPage({ params }) {
             unoptimized
           />
         </div>
-        <h2 className="text-2xl text-center font-bold mb-1">{page.displayName}</h2>
+        <h2 className="text-2xl text-center font-bold mb-1">{pageData.displayName}</h2>
         <h3 className="text-md flex gap-2 justify-center items-center text-white/70">
           <FontAwesomeIcon className="h-4" icon={faLocationDot} />
-          <span>{page.location}</span>
+          <span>{pageData.location}</span>
         </h3>
-    
+
         <div className="flex gap-2 justify-center mt-4 pb-4">
-          {Object.keys(page.buttons).map(buttonKey => (
-            <Link key={buttonKey} href={buttonLink(buttonKey, page.buttons[buttonKey])}
-                  className="rounded-full bg-white text-blue-950 p-3 flex items-center justify-center">
+          {pageData.buttons && Object.keys(pageData.buttons).map(buttonKey => (
+            <Link key={buttonKey} href={buttonLink(buttonKey, pageData.buttons[buttonKey])}
+              className="rounded-full bg-white text-blue-950 p-3 flex items-center justify-center">
               <FontAwesomeIcon className="w-8 h-8" icon={buttonsIcons[buttonKey]} />
             </Link>
           ))}
         </div>
 
         <div className="max-w-4xl p-5 text-center m-5 bg-black bg-opacity-25 m-5">
-          <p>{page.bio}</p>
+          <p>{pageData.bio}</p>
         </div>
-      
+
         <div className="max-wid mx-auto px-5">
-          {page.links.map(link => (
+          {pageData.links.map(link => (
             <Link
               key={link.url}
               target="_blank"
-              ping={process.env.URL + 'api/click?url=' + btoa(link.url) + '&page=' + page.uri}
+              ping={process.env.URL + 'api/click?url=' + btoa(link.url) + '&page=' + pageData.uri}
               className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2 block flex"
               href={link.url}
             >
@@ -171,7 +172,7 @@ export default async function UserPage({ params }) {
                   <h3 className="text-black text-xl font-semibold">{link.title}</h3>
                   {link.subtitle && (
                     <p className="text-black/50 h-6 overflow-hidden">{link.subtitle}</p>
-                  )}             
+                  )}
                 </div>
               </div>
             </Link>
@@ -179,7 +180,7 @@ export default async function UserPage({ params }) {
         </div>
 
         <div className="max-wid mx-auto px-5">
-          {page.textBoxes.map(textBox => (
+          {pageData.textBoxes.map(textBox => (
             <div key={textBox.key} className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2">
               <h3 className="text-black text-xl font-semibold">{textBox.title}</h3>
               <p className="text-black">{textBox.text}</p>
@@ -188,7 +189,7 @@ export default async function UserPage({ params }) {
         </div>
 
         <div className="max-wid mx-auto px-5">
-          {page.youTubeVideos.map(video => (
+          {pageData.youTubeVideos.map(video => (
             <div key={video.key} className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2">
               <div className="relative" style={{ paddingTop: '56.25%' }}>
                 <iframe
@@ -204,9 +205,8 @@ export default async function UserPage({ params }) {
           ))}
         </div>
 
-      
         <div className="max-wid mx-auto px-5">
-          {page.imageLinks.map(il => (
+          {pageData.imageLinks.map(il => (
             <a
               key={il.key}
               href={il.linkUrl}
