@@ -14,6 +14,12 @@ html, body {
   object-fit: cover;
 }
 
+.fundo-home {
+
+background-color: #f3f3f1;
+  
+}
+
 .icon-container {
   width: 64px;
   height: 64px;
