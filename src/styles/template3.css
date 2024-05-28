@@ -2,8 +2,7 @@
   display: flex;
   justify-content: center;
   gap: 10px; /* Reduced gap */
-  margin-bottom: 20px; /* Reduced margin */
-}
+ }
 
 .template.template3 .fundo-link {
    background-color: #ff4f4f;
