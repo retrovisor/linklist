@@ -1,16 +1,5 @@
 /* template2.css */
 
-.template.template2 {
- }
-
-.template.template2 .logo-container {
-   
-}
-
-.template.template2 .logo-container a {
-   
-}
-
 .template.template2 h2 {
   font-size: 32px;
   text-align: center;
@@ -33,7 +22,8 @@
 
 .template.template2 .fundo-link {
  border-radius: 10px;
- color: red;
+ background-color: red;
+ color: white;
 }
 
 
@@ -67,28 +57,21 @@
   text-decoration: none;
   transition: transform 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-color: black;
-
- background-color: #82fee2ba;
-  
+  color: black;
+  background-color: #82fee2ba;
 }
 
 .template.template2 .link-item {
   display: flex;
   align-items: center;
-     border: 2px solid black;
+  border: 2px solid black;
   border-radius: 10px;
   padding: 15px;
   margin-bottom: 20px;
   text-decoration: none;
   transition: transform 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-
- background-color: #e5fe82;
-  
-
-  
+  background-color: #e5fe82; 
 }
 
 .template.template2 .link-item:hover {
@@ -163,16 +146,12 @@ color: black;
 }
 
 .template.template2 .video-wrapper {
-  
-
     background-color: #ef8733;
     border: 2px solid black;
     border-radius: 10px;
     padding: 15px;
     margin-bottom: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, .1);
-
-  
 }
 
 .template.template2 .video-wrapper iframe {
@@ -182,8 +161,6 @@ color: black;
   width: 100%;
   height: 100%;
 }
-
-  
 
 .template.template2 footer {
   text-align: center;
