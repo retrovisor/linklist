@@ -6,21 +6,18 @@
 }
 
 .template.template3 .fundo-link {
-  border-radius: 30px; /* Reduced border radius */
-  background-color: #ff4f4f;
+   background-color: #ff4f4f;
   color: white;
-  padding: 10px 20px; /* Reduced padding */
-  font-size: 16px; /* Reduced font size */
+   font-size: 16px; /* Reduced font size */
   font-weight: bold;
   text-transform: uppercase;
   border: 2px solid black;
-  box-shadow: 5px 5px 0 black;
-}
+ }
 
 .template.template3 .button {
   background-color: #1abc9c;
   color: white;
-  border-radius: 10px;
+  border-radius: 20px;
   width: 60px; /* Reduced width */
   height: 60px; /* Reduced height */
   display: flex;
@@ -57,9 +54,8 @@
 .template.template3 .link-item {
   display: flex;
   align-items: center;
-  border-radius: 10px; /* Reduced border radius */
-  padding: 20px; /* Reduced padding */
-  margin-bottom: 20px; /* Reduced margin */
+  border-radius: 20px; /* Reduced border radius */
+   margin-bottom: 20px; /* Reduced margin */
   text-decoration: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   background-color: #3498db; /* Changed background color */
@@ -96,7 +92,7 @@
 
 .template.template3 .text-box {
   background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 15px; /* Reduced border radius */
+  border-radius: 20px; /* Reduced border radius */
   padding: 20px; /* Reduced padding */
   margin-bottom: 20px; /* Reduced margin */
   border: 2px solid black;
