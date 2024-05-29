@@ -30,7 +30,7 @@ export default async function Home() {
       <section className="py-16">
         <div className="max-w-md mb-8 mx-auto text-center">
           <h1 className="text-5xl font-bold">
-            Your one link<br />for everything
+            Your one link<br />for <span className="italic">everything</span>
           </h1>
           <h2 className="text-gray-500 text-xl mt-6">
             Share your links, social profiles, creations, contact info and more on a single page
