@@ -37,7 +37,7 @@ export default async function Home() {
           </h2>
           <div className="font-bold mt-4 text-xl">It&apos;s free! 🎉</div>
         </div>
-        <div className="w-full flex justify-center mt-8">
+        <div className="w-full flex justify-center mt-8 px-8">
           <HeroForm user={session?.user} />
         </div>
       </section>
