@@ -38,12 +38,23 @@ background-color: #f3f3f1;
 }
 
 .btn-link2 {
+   color: black; /* Button text color */
+  padding: 10px 20px; /* Padding around the text */
+  border: none; /* Remove default border */
+   
+  text-decoration: none; /* Remove underline */
+  font-size: 18px; /* Font size */
+  font-weight: bold; /* Bold text */
+ }
+
+.btn-link3 {
       background-color: #2e2ee5; /* Button background color */
   font-size: 18px; /* Font size */
   border-radius: 5px; /* Rounded corners */
 
     font-weight: bold; /* Bold text */
  }
+
 
 .w-layout-hflex {
     flex-direction: row;
