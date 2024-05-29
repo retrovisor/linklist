@@ -31,7 +31,7 @@ export default function HeroForm({user}) {
     }
   }
   return (
-
+<div>
     <form
   onSubmit={handleSubmit}
   className="inline-flex flex-col sm:flex-row items-center sm:space-x-4 space-y-4 sm:space-y-0">
@@ -48,6 +48,7 @@ export default function HeroForm({user}) {
     Join for Free
   </button>
 </form>
+      </div>
 
 
   );
