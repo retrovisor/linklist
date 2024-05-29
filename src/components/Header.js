@@ -20,14 +20,14 @@ export default async function Header() {
           {session ? (
             <>
               <Link href={'/account'} className="btn-link">
-                My Links
+                My Page
               </Link>
               <LogoutButton />
             </>
           ) : (
             <>
               <Link href={'/login'} className="btn-link">Sign In</Link>
-              <Link href={'/login'} className="btn-link">Create Account</Link>
+              <Link href={'/signup'} className="btn-link">Create Account</Link>
             </>
           )}
         </nav>
