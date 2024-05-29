@@ -16,7 +16,7 @@ export default async function Header() {
             <span className="font-bold">Fizz.link</span>
           </Link>
         </div>
-        <nav className="flex items-center gap-2 text-sm text-slate-500">
+        <nav className="flex items-center text-sm text-slate-500">
           {session ? (
             <>
               <Link href={'/account'} className="btn-link">
