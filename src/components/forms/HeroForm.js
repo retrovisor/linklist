@@ -41,13 +41,13 @@ export default function HeroForm({ user }) {
       >
         <input
   type="text"
-  className="!bg-white border rounded-md flex-1 py-2 px-4 sm:py-4 sm:px-6 !w-auto !mb-0 !p-0"
+  className="!bg-white border rounded-md flex-1 !py-4 !px-4 sm:py-4 sm:px-6 !w-auto !mb-0 !p-0"
   placeholder="Enter username"
 />
 
         <button
           type="submit"
-          className="btn-link text-white whitespace-nowrap"
+          className="btn-link3 text-white whitespace-nowrap"
         >
           Join for Free
         </button>
