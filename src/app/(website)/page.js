@@ -23,7 +23,7 @@ export default async function Home() {
               ))}
             </div>
           </div>
-          <div className="text-center mt-2">&ldquo;Best link-in-bio tool I&apos;ve used&rdquo;</div>
+          <div className="text-center mt-1">&ldquo;Best link-in-bio tool I&apos;ve used&rdquo;</div>
         </div>
       </div>
 
@@ -32,7 +32,7 @@ export default async function Home() {
           <h1 className="text-5xl font-bold">
             Your one link<br />for <span className="italic">everything</span>
           </h1>
-          <h2 className="text-gray-500 text-xl mt-6">
+          <h2 className="text-gray-500 text-base mt-6">
             Share your links, social profiles, creations, contact info and more on a single page
           </h2>
           <div className="font-bold mt-4 text-xl">It&apos;s free! 🎉</div>
