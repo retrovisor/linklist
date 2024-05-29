@@ -37,10 +37,10 @@ export default async function Home() {
           </h2>
           <div className="text-center font-bold">It&apos;s free! 🎉</div>
         </div>
-        <HeroForm user={session?.user} />
+        <div className="w-full flex justify-center mt-8"> {/* Add this div to center the form */}
+          <HeroForm user={session?.user} />
+        </div>
       </section>
-
-       
     </main>
   );
 }
