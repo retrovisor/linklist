@@ -40,10 +40,11 @@ export default function HeroForm({ user }) {
         className="flex flex-col sm:flex-row items-stretch sm:space-x-4 space-y-4 sm:space-y-0"
       >
         <input
-          type="text"
-          className="bg-white border rounded-md flex-1 py-2 px-4 sm:py-4 sm:px-6"
-          placeholder="Enter username"
-        />
+  type="text"
+  className="!bg-white border rounded-md flex-1 py-2 px-4 sm:py-4 sm:px-6 !w-auto !mb-0 !p-0"
+  placeholder="Enter username"
+/>
+
         <button
           type="submit"
           className="btn-link text-white whitespace-nowrap"
