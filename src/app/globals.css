@@ -14,6 +14,13 @@ html, body {
   object-fit: cover;
 }
 
+.logout {
+border-radius: 5px;
+    border-color: #2e2ee5;
+    color: #1b256c;
+  
+}
+
 .fundo-home {
 
 background-color: #f3f3f1;
