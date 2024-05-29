@@ -27,17 +27,17 @@ export default async function Home() {
         </div>
       </div>
 
-      <section className="py-16 w-layout-hflex flex-block">
-        <div className="max-w-md mb-8">
-          <h1 className="text-5xl text-center font-bold">
+      <section className="py-16">
+        <div className="max-w-md mb-8 mx-auto text-center">
+          <h1 className="text-5xl font-bold">
             Your one link<br />for everything
           </h1>
-          <h2 className="text-gray-500 text-xl text-center mt-6">
+          <h2 className="text-gray-500 text-xl mt-6">
             Share your links, social profiles, contact info and more on a single page
           </h2>
-          <div className="text-center font-bold mt-4 text-xl">It&apos;s free! 🎉</div>
+          <div className="font-bold mt-4 text-xl">It&apos;s free! 🎉</div>
         </div>
-        <div className="w-full flex justify-center mt-8"> {/* Add this div to center the form */}
+        <div className="w-full flex justify-center mt-8">
           <HeroForm user={session?.user} />
         </div>
       </section>
