@@ -14,7 +14,7 @@ export default async function Footer() {
         <div className="flex items-center gap-6">
           <Link href={'/'} className="flex items-center gap-1 text-blue-500">
             <FontAwesomeIcon icon={faLink} className="cor-roxa" />
-            <span className="font-bold">Fizz.link</span>
+            <span className="font-bold cor-roxa">Fizz.link</span>
           </Link>
           <nav className="flex items-center gap-4 text-slate-500 text-sm">
             <Link href={'/about'}>About</Link>
