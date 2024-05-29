@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {signOut} from "next-auth/react";
 
 export default function LogoutButton({
-  className = 'flex items-center gap-2 border p-2 px-4',
+  className = 'flex items-center gap-2 border p-2 px-4 layout',
   iconLeft = false,
   iconClasses = '',
 }) {
