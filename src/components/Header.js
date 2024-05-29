@@ -19,7 +19,7 @@ export default async function Header() {
         <nav className="flex items-center text-sm text-slate-500">
           {session ? (
             <>
-              <Link href={'/account'} className="btn-link">
+              <Link href={'/account'} className="btn-link2 mr-2">
                 My Page
               </Link>
               <LogoutButton />
