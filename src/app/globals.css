@@ -60,6 +60,7 @@ background-color: #f3f3f1;
     justify-content: center;
 }
 
+
 @media screen and (max-width: 991px) {
 
    .testimonial1-item {
@@ -92,12 +93,18 @@ background-color: #f3f3f1;
     margin-bottom: 12px;
     display: flex;
 }
+}
 
   @media screen and (max-width: 767px) {
     .testimonial1-item {
         width: auto;
     }
 }
+
+  
+   
+
+
 
   
    
