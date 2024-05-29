@@ -21,7 +21,7 @@ background-color: #f3f3f1;
 }
 
 .btn-link {
-  background-color: #1abc9c; /* Button background color */
+  background-color: #2e2ee5; /* Button background color */
   color: white; /* Button text color */
   padding: 10px 20px; /* Padding around the text */
   border: none; /* Remove default border */
@@ -36,6 +36,16 @@ background-color: #f3f3f1;
   background-color: #16a085; /* Darker background color on hover */
   transform: translateY(-2px); /* Slightly move up on hover */
 }
+
+.btn-link2 {
+   color: black; /* Button text color */
+  padding: 10px 20px; /* Padding around the text */
+  border: none; /* Remove default border */
+   
+  text-decoration: none; /* Remove underline */
+  font-size: 14px; /* Font size */
+  font-weight: bold; /* Bold text */
+ }
 
 
 .icon-container {
