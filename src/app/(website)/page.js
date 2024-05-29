@@ -23,7 +23,7 @@ export default async function Home() {
               ))}
             </div>
           </div>
-          <div className="text-center mt-2">&ldquo;Best wishlist page I&apos;ve used&rdquo;</div>
+          <div className="text-center mt-2">&ldquo;Best link-in-bio I&apos;ve used&rdquo;</div>
         </div>
       </div>
 
