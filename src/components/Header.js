@@ -26,8 +26,8 @@ export default async function Header() {
             </>
           ) : (
             <>
-              <Link href={'/login'} className="btn-link">Login</Link>
-              <Link href={'/signup'} className="btn-link">Sign up</Link>
+              <Link href={'/login'} className="btn-link2">Login</Link>
+              <Link href={'/signup'} className="btn-link">Sign Up</Link>
             </>
           )}
         </nav>
