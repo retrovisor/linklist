@@ -1,11 +1,12 @@
 'use client';
 
-import {signIn} from "next-auth/react";
-import {redirect, useRouter} from "next/navigation";
-import {useEffect} from "react";
+import { signIn } from "next-auth/react";
+import { redirect, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-export default function HeroForm({user}) {
+export default function HeroForm({ user }) {
   const router = useRouter();
+
   useEffect(() => {
     if (
       'localStorage' in window
@@ -16,6 +17,7 @@ export default function HeroForm({user}) {
       redirect('/account?desiredUsername=' + username);
     }
   }, []);
+
   async function handleSubmit(ev) {
     ev.preventDefault();
     const form = ev.target;
@@ -23,33 +25,31 @@ export default function HeroForm({user}) {
     const username = input.value;
     if (username.length > 0) {
       if (user) {
-        router.push('/account?desiredUsername='+username);
+        router.push('/account?desiredUsername=' + username);
       } else {
         window.localStorage.setItem('desiredUsername', username);
         await signIn('google');
       }
     }
   }
+
   return (
-<div>
-    <form
-  onSubmit={handleSubmit}
-  className="inline-flex flex-col sm:flex-row items-center sm:space-x-4 space-y-4 sm:space-y-0">
-  
-  <input
-    type="text"
-    className="bg-white border rounded-md flex-1 py-2 px-4 sm:py-4 sm:px-6"
-    style={{marginBottom: 0}}
-    placeholder="username"
-  />
-  <button
-    type="submit"
-    className="bg-blue-500 text-white py-2 px-4 sm:py-4 sm:px-6 whitespace-nowrap rounded-md">
-    Join for Free
-  </button>
-</form>
-      </div>
-
-
+    <div className="w-full">
+      <form
+        onSubmit={handleSubmit}
+        className="inline-flex flex-col sm:flex-row items-center sm:space-x-4 space-y-4 sm:space-y-0 w-full max-w-lg mx-auto">
+        <input
+          type="text"
+          className="bg-white border rounded-md flex-1 py-2 px-4 sm:py-4 sm:px-6"
+          style={{ marginBottom: 0 }}
+          placeholder="username"
+        />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white py-2 px-4 sm:py-4 sm:px-6 whitespace-nowrap rounded-md">
+          Join for Free
+        </button>
+      </form>
+    </div>
   );
 }
