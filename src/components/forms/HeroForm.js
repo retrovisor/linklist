@@ -34,20 +34,21 @@ export default function HeroForm({user}) {
 
     <form
   onSubmit={handleSubmit}
-  className="inline-flex flex-col sm:flex-row items-center shadow-lg shadow-gray-500/20 sm:space-x-4 space-y-4 sm:space-y-0">
+  className="inline-flex flex-col sm:flex-row items-center sm:space-x-4 space-y-4 sm:space-y-0">
   
   <input
     type="text"
-    className="bg-white border rounded-md flex-1 py-4 pl-4"
-    style={{marginBottom: 0, paddingLeft: 0}}
+    className="bg-white border rounded-md flex-1 py-2 px-4 sm:py-4 sm:px-6"
+    style={{marginBottom: 0}}
     placeholder="username"
   />
   <button
     type="submit"
-    className="bg-blue-500 text-white py-4 px-6 whitespace-nowrap rounded-md">
+    className="bg-blue-500 text-white py-2 px-4 sm:py-4 sm:px-6 whitespace-nowrap rounded-md">
     Join for Free
   </button>
 </form>
+
 
   );
 }
