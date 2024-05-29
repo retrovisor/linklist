@@ -27,7 +27,7 @@ background-color: #f3f3f1;
   border: none; /* Remove default border */
   border-radius: 5px; /* Rounded corners */
   text-decoration: none; /* Remove underline */
-  font-size: 14px; /* Font size */
+  font-size: 18px; /* Font size */
   font-weight: bold; /* Bold text */
   transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for background and transform */
 }
@@ -43,9 +43,61 @@ background-color: #f3f3f1;
   border: none; /* Remove default border */
    
   text-decoration: none; /* Remove underline */
-  font-size: 14px; /* Font size */
+  font-size: 18px; /* Font size */
   font-weight: bold; /* Bold text */
  }
+
+.w-layout-hflex {
+    flex-direction: row;
+    align-items: flex-start;
+    display: flex;
+}
+
+.flex-block {
+    grid-column-gap: 18px;
+    grid-row-gap: 18px;
+    flex: none;
+    justify-content: center;
+}
+
+@media screen and (max-width: 991px) {
+    .flex-block {
+        grid-column-gap: 15px;
+        grid-row-gap: 15px;
+        flex-flow: column wrap-reverse;
+        flex: 0 auto;
+        align-items: center;
+        display: flex;
+        overflow: visible;
+    }
+
+  .testimonial1-logo-wrap {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+    display: flex;
+}
+
+  @media screen and (max-width: 767px) {
+    .testimonial1-item {
+        width: auto;
+    }
+}
+
+  @media screen and (max-width: 991px) {
+    .testimonial1-item {
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 60%;
+        margin-bottom: 0;
+        margin-left: auto;
+        margin-right: auto;
+        padding-right: 0;
+        display: flex;
+    }
 
 
 .icon-container {
