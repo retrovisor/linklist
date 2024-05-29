@@ -13,6 +13,9 @@ const nextConfig = {
         hostname: '*.momofriends.com',
       },
       {
+        hostname: '*.fizz.link',
+      },
+      {
         hostname: '9057fd132931df3b08aa7529889a637f.r2.cloudflarestorage.com',
       },
       {
