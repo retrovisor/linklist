@@ -7,22 +7,22 @@ export default async function Home() {
   return (
     <main>
 
-
-    <div className="w-layout-hflex flex-block">
+<div className="w-layout-hflex flex-block">
     <div>
 
 
      <div className="testimonial1-item">
-    <div className="testimonial1-logo-wrap"><img src="https://assets-global.website-files.com/65fdc14a5172c12ead07d01d/65fdc14b5172c12ead07d07c_star-filled.svg" width="24" height="24" alt="" className="star-rating"><img src="https://assets-global.website-files.com/65fdc14a5172c12ead07d01d/65fdc14b5172c12ead07d07c_star-filled.svg" width="24" height="24" alt="" className="star-rating"><img src="https://assets-global.website-files.com/65fdc14a5172c12ead07d01d/65fdc14b5172c12ead07d07c_star-filled.svg" width="24" height="24" alt="" className="star-rating"><img src="https://assets-global.website-files.com/65fdc14a5172c12ead07d01d/65fdc14b5172c12ead07d07c_star-filled.svg" width="24" height="24" alt="" className="star-rating"><img src="https://assets-global.website-files.com/65fdc14a5172c12ead07d01d/65fdc14b5172c12ead07d07c_star-filled.svg" width="24" height="24" alt="" className="star-rating"></div>
-    </div>
-
-     <div "text-center">"Best wishlist page I've used"
-    </div>
-
+    <div className="testimonial1-logo-wrap"><img src="https://assets-global.website-files.com/65fdc14a5172c12ead07d01d/65fdc14b5172c12ead07d07c_star-filled.svg" width="24" height="24" alt="" className="star-rating"><img src="https://assets-global.website-files.com/65fdc14a5172c12ead07d01d/65fdc14b5172c12ead07d07c_star-filled.svg" width="24" height="24" alt="" className="star-rating"><img src="https://assets-global.website-files.com/65fdc14a5172c12ead07d01d/65fdc14b5172c12ead07d07c_star-filled.svg" width="24" height="24" alt="" className="star-rating"><img src="https://assets-global.website-files.com/65fdc14a5172c12ead07d01d/65fdc14b5172c12ead07d07c_star-filled.svg" width="24" height="24" alt="" className="star-rating"><img src="https://assets-global.website-files.com/65fdc14a5172c12ead07d01d/65fdc14b5172c12ead07d07c_star-filled.svg" width="24" height="24" alt="" className="star-rating">
+         </div>
     </div>
     
     
+
+     <div className="text-center">"Best wishlist page I've used"</div>
+
     </div>
+    </div>
+ 
 
     
       <section className="py-16">
