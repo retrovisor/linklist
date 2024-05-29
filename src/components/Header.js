@@ -8,7 +8,7 @@ import Link from "next/link";
 export default async function Header() {
   const session = await getServerSession(authOptions);
   return (
-    <header className="py-5 sticky top-0 z-50 fundo-igual">
+    <header className="py-5 sticky top-0 z-50 fundo-home">
       <div className="max-w-4xl flex justify-between mx-auto px-4 text-xl">
         <div className="flex items-center gap-6">
           <Link href={'/'} className="flex items-center gap-1 text-blue-500">
