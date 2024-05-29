@@ -42,7 +42,7 @@ export default function HeroForm({ user }) {
           type="text"
           className="bg-white border rounded-md flex-1 py-2 px-4 sm:py-4 sm:px-6"
           style={{ marginBottom: 0 }}
-          placeholder="username"
+          placeholder="Enter username"
         />
         <button
           type="submit"
