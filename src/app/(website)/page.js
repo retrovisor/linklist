@@ -27,7 +27,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <section className="py-16">
+      <section className="py-16 px-6">
         <div className="max-w-md mb-8 mx-auto text-center">
           <h1 className="text-5xl font-bold">
             Your one link<br />for <span className="italic">everything</span>
@@ -43,7 +43,7 @@ export default async function Home() {
       </section>
 
 
-      <section className="py-16 bg-slate-200">
+      <section className="py-16 bg-slate-200 px-6">
         <div className="max-w-md mb-8 mx-auto text-center">
           <h1 className="text-5xl font-bold">
            Join 10 000 creators
