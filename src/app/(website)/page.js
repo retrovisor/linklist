@@ -9,7 +9,7 @@ export default async function Home() {
 
   return (
     <main>
-      <div className="w-layout-hflex flex-block text-center">
+      <div className="w-layout-hflex flex-block text-center py-6">
         <div>
           <div className="testimonial1-item">
             <div className="testimonial1-logo-wrap flex items-center">
@@ -27,7 +27,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <section className="py-16 px-6">
+      <section className="py-14 px-6">
         <div className="max-w-md mb-8 mx-auto text-center">
           <h1 className="text-5xl font-bold">
             Your one link<br />for <span className="italic">everything</span>
