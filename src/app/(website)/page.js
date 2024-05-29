@@ -9,7 +9,7 @@ export default async function Home() {
 
   return (
     <main>
-      <div className="w-layout-hflex flex-block">
+      <div className="w-layout-hflex flex-block text-center">
         <div>
           <div className="testimonial1-item">
             <div className="testimonial1-logo-wrap flex items-center">
@@ -23,7 +23,7 @@ export default async function Home() {
               ))}
             </div>
           </div>
-          <div className="text-center">&ldquo;Best wishlist page I&apos;ve used&rdquo;</div>
+          <div className="text-center mt-2">&ldquo;Best wishlist page I&apos;ve used&rdquo;</div>
         </div>
       </div>
 
@@ -40,17 +40,7 @@ export default async function Home() {
         <HeroForm user={session?.user} />
       </section>
 
-      <section className="py-16">
-        <div className="max-w-md mb-8">
-          <h1 className="text-5xl font-bold bg-blue-200">
-            Bilu-bily
-          </h1>
-          <h2 className="text-gray-500 text-xl mt-6">
-            Share your links, social profiles, contact info and more on a single page
-          </h2>
-        </div>
-        <HeroForm user={session?.user} />
-      </section>
+       
     </main>
   );
 }
