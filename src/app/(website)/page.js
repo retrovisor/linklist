@@ -27,7 +27,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <section className="py-16">
+      <section className="py-16 w-layout-hflex flex-block">
         <div className="max-w-md mb-8">
           <h1 className="text-5xl text-center font-bold">
             Your one link<br />for everything
@@ -35,7 +35,7 @@ export default async function Home() {
           <h2 className="text-gray-500 text-xl text-center mt-6">
             Share your links, social profiles, contact info and more on a single page
           </h2>
-          <p className="text-center bold">It&apos;s free! 🎉</p>
+          <div className="text-center font-bold">It&apos;s free! 🎉</div>
         </div>
         <HeroForm user={session?.user} />
       </section>
