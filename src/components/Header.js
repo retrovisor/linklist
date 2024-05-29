@@ -12,8 +12,8 @@ export default async function Header() {
       <div className="max-w-4xl flex justify-between mx-auto px-4 text-xl">
         <div className="flex items-center gap-6">
           <Link href={'/'} className="flex items-center gap-1 text-blue-500">
-            <FontAwesomeIcon icon={faLink} className="text-blue-500" />
-            <span className="font-bold">Fizz.link</span>
+            <FontAwesomeIcon icon={faLink} className="cor-roxa" />
+            <span className="font-bold cor-roxa">Fizz.link</span>
           </Link>
         </div>
         <nav className="flex items-center text-sm text-slate-500">
