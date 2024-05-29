@@ -15,18 +15,16 @@ export default async function Header() {
             <FontAwesomeIcon icon={faLink} className="text-blue-500" />
             <span className="font-bold">Fizz.link</span>
           </Link>
-           
         </div>
         <nav className="flex items-center gap-4 text-sm text-slate-500">
-          {!!session && (
+          {session ? (
             <>
               <Link href={'/account'}>
                 My Links
               </Link>
               <LogoutButton />
             </>
-          )}
-          {!session && (
+          ) : (
             <>
               <Link href={'/login'}>Sign In</Link>
               <Link href={'/login'}>Create Account</Link>
