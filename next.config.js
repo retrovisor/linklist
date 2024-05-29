@@ -6,6 +6,9 @@ const nextConfig = {
         hostname: '*.googleusercontent.com',
       },
       {
+        hostname: '*.fizz.link',
+      },
+      {
         hostname: 'linklist-files.s3.amazonaws.com',
       },
       {
