@@ -17,8 +17,8 @@ export default async function Home() {
                 <FontAwesomeIcon
                   key={index}
                   icon={faStar}
-                  color="#FFD700"
-                  className="star-rating w-4 h-4 mr-1"
+                  color="#feae32"
+                  className="star-rating w-6 h-6 mr-1"
                 />
               ))}
             </div>
