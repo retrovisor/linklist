@@ -46,7 +46,7 @@ export default function HeroForm({ user }) {
         />
         <button
           type="submit"
-          className="bg-blue-500 text-white py-2 px-4 sm:py-4 sm:px-6 whitespace-nowrap rounded-md"
+          className="btn-link text-white whitespace-nowrap"
         >
           Join for Free
         </button>
