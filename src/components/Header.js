@@ -19,15 +19,15 @@ export default async function Header() {
         <nav className="flex items-center gap-4 text-sm text-slate-500">
           {session ? (
             <>
-              <Link href={'/account'}>
+              <Link href={'/account'} className="btn-link">
                 My Links
               </Link>
               <LogoutButton />
             </>
           ) : (
             <>
-              <Link href={'/login'}>Sign In</Link>
-              <Link href={'/login'}>Create Account</Link>
+              <Link href={'/login'} className="btn-link">Sign In</Link>
+              <Link href={'/login'} className="btn-link">Create Account</Link>
             </>
           )}
         </nav>
