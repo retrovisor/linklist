@@ -41,6 +41,21 @@ export default async function Home() {
           <HeroForm user={session?.user} />
         </div>
       </section>
+
+
+      <section className="py-16 bg-slate-200">
+        <div className="max-w-md mb-8 mx-auto text-center">
+          <h1 className="text-5xl font-bold">
+           Join 10 000 creators
+          </h1>
+          <h2 className="text-gray-500 text-xl mt-6">
+Creators from 80+ countries and all popular platforms are already using Throne. Check out their profiles and discover their Wishlists!
+          </h2>
+          <div className="font-bold mt-4 text-xl">It&apos;s free! 🎉</div>
+        </div>
+         
+      </section>
+              
     </main>
   );
 }
