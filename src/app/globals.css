@@ -20,6 +20,24 @@ background-color: #f3f3f1;
   
 }
 
+.btn-link {
+  background-color: #1abc9c; /* Button background color */
+  color: white; /* Button text color */
+  padding: 10px 20px; /* Padding around the text */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  text-decoration: none; /* Remove underline */
+  font-size: 14px; /* Font size */
+  font-weight: bold; /* Bold text */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for background and transform */
+}
+
+.btn-link:hover {
+  background-color: #16a085; /* Darker background color on hover */
+  transform: translateY(-2px); /* Slightly move up on hover */
+}
+
+
 .icon-container {
   width: 64px;
   height: 64px;
