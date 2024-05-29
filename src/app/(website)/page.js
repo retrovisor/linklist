@@ -12,12 +12,15 @@ export default async function Home() {
       <div className="w-layout-hflex flex-block">
         <div>
           <div className="testimonial1-item">
-            <div className="testimonial1-logo-wrap">
-              <FontAwesomeIcon icon={faStar} color="#FFD700" className="star-rating" />
-              <FontAwesomeIcon icon={faStar} color="#FFD700" className="star-rating" />
-              <FontAwesomeIcon icon={faStar} color="#FFD700" className="star-rating" />
-              <FontAwesomeIcon icon={faStar} color="#FFD700" className="star-rating" />
-              <FontAwesomeIcon icon={faStar} color="#FFD700" className="star-rating" />
+            <div className="testimonial1-logo-wrap flex items-center">
+              {[...Array(5)].map((_, index) => (
+                <FontAwesomeIcon
+                  key={index}
+                  icon={faStar}
+                  color="#FFD700"
+                  className="star-rating w-4 h-4 mr-1"
+                />
+              ))}
             </div>
           </div>
           <div className="text-center">&ldquo;Best wishlist page I&apos;ve used&rdquo;</div>
@@ -32,7 +35,7 @@ export default async function Home() {
           <h2 className="text-gray-500 text-xl text-center mt-6">
             Share your links, social profiles, contact info and more on a single page
           </h2>
-          <p className="text-bold">It&apos;s free! 🎉</p>
+          <p className="text-center bold">It&apos;s free! 🎉</p>
         </div>
         <HeroForm user={session?.user} />
       </section>
