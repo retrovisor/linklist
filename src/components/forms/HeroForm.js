@@ -31,22 +31,25 @@ export default function HeroForm({user}) {
     }
   }
   return (
+
     <form
-      onSubmit={handleSubmit}
-      className="inline-flex items-center shadow-lg bg-white shadow-gray-500/20">
-          <span className="bg-white py-4 pl-4">
-            linklist.to/
-          </span>
-      <input
-        type="text"
-        className=""
-        style={{backgroundColor:'white',marginBottom:0,paddingLeft:0}}
-        placeholder="username"/>
-      <button
-        type="submit"
-        className="bg-blue-500 text-white py-4 px-6 whitespace-nowrap">
-        Join for Free
-      </button>
-    </form>
+  onSubmit={handleSubmit}
+  className="inline-flex flex-col sm:flex-row items-center shadow-lg bg-white shadow-gray-500/20 sm:space-x-4 space-y-4 sm:space-y-0">
+  <span className="bg-white py-4 pl-4">
+    linklist.to/
+  </span>
+  <input
+    type="text"
+    className="bg-white border rounded-md flex-1 py-4 pl-4"
+    style={{marginBottom: 0, paddingLeft: 0}}
+    placeholder="username"
+  />
+  <button
+    type="submit"
+    className="bg-blue-500 text-white py-4 px-6 whitespace-nowrap rounded-md">
+    Join for Free
+  </button>
+</form>
+
   );
 }
