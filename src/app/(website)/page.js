@@ -35,7 +35,7 @@ export default async function Home() {
           <h2 className="text-gray-500 text-xl text-center mt-6">
             Share your links, social profiles, contact info and more on a single page
           </h2>
-          <div className="text-center font-bold">It&apos;s free! 🎉</div>
+          <div className="text-center font-bold mt-4 text-xl">It&apos;s free! 🎉</div>
         </div>
         <div className="w-full flex justify-center mt-8"> {/* Add this div to center the form */}
           <HeroForm user={session?.user} />
