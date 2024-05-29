@@ -34,10 +34,8 @@ export default function HeroForm({user}) {
 
     <form
   onSubmit={handleSubmit}
-  className="inline-flex flex-col sm:flex-row items-center shadow-lg bg-white shadow-gray-500/20 sm:space-x-4 space-y-4 sm:space-y-0">
-  <span className="bg-white py-4 pl-4">
-    linklist.to/
-  </span>
+  className="inline-flex flex-col sm:flex-row items-center shadow-lg shadow-gray-500/20 sm:space-x-4 space-y-4 sm:space-y-0">
+  
   <input
     type="text"
     className="bg-white border rounded-md flex-1 py-4 pl-4"
