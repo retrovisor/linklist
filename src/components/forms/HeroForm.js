@@ -33,23 +33,25 @@ export default function HeroForm({ user }) {
     }
   }
 
-  return (
-    <div className="w-full">
+    return (
+    <div className="w-full max-w-lg mx-auto">
       <form
         onSubmit={handleSubmit}
-        className="inline-flex flex-col sm:flex-row items-center sm:space-x-4 space-y-4 sm:space-y-0 w-full max-w-lg mx-auto">
+        className="flex flex-col sm:flex-row items-stretch sm:space-x-4 space-y-4 sm:space-y-0"
+      >
         <input
           type="text"
           className="bg-white border rounded-md flex-1 py-2 px-4 sm:py-4 sm:px-6"
-          style={{ marginBottom: 0 }}
           placeholder="Enter username"
         />
         <button
           type="submit"
-          className="bg-blue-500 text-white py-2 px-4 sm:py-4 sm:px-6 whitespace-nowrap rounded-md">
+          className="bg-blue-500 text-white py-2 px-4 sm:py-4 sm:px-6 whitespace-nowrap rounded-md"
+        >
           Join for Free
         </button>
       </form>
     </div>
   );
 }
+
