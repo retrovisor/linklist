@@ -39,7 +39,8 @@ export default function TemplateSelectionPage() {
             checked={selectedTemplate === 'template1'}
             onChange={(e) => setSelectedTemplate(e.target.value)}
           />
-          Template 1
+            <img src="/template1.jpg" />
+          <p>Template 1</p>
         </label>
         <label className="block p-2 mx-auto border w-full mb-2 text-center">
           <input
@@ -49,7 +50,8 @@ export default function TemplateSelectionPage() {
             checked={selectedTemplate === 'template2'}
             onChange={(e) => setSelectedTemplate(e.target.value)}
           />
-          Template 2
+            <img src="/template1.jpg" />
+          <p>Template 2</p>
         </label>
         <SubmitButton>
           <span>Save Template</span>
