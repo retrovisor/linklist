@@ -10,7 +10,7 @@ export default function TemplateSelectionPage() {
 
   const templates = [
     { name: 'Template 1', image: '/template1.jpg' },
-    { name: 'Template 2', image: '/template2.jpg' },
+    { name: 'Template 2', image: '/template1.jpg' },
     // Add more templates as needed
   ];
 
@@ -42,7 +42,7 @@ export default function TemplateSelectionPage() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <form onSubmit={handleSubmit}>
-        <h1 className="text-4xl font-bold text-center mb-2">Choose Your Template</h1>
+        <h1 className="text-2xl font-bold text-center my-4">Choose Your Template</h1>
         <div className="max-w-xs mx-auto">
           <div className="relative">
             <button
@@ -52,9 +52,9 @@ export default function TemplateSelectionPage() {
             >
               {'<'}
             </button>
-            <div className="block p-2 mx-auto border w-full mb-2 text-center">
+            <div className="block p-6 mx-auto border w-full m-2 text-center">
               <img src={templates[selectedTemplate].image} alt={templates[selectedTemplate].name} />
-              <p>{templates[selectedTemplate].name}</p>
+              <p className="text-bold text-base pt-2">{templates[selectedTemplate].name}</p>
             </div>
             <button
               type="button"
