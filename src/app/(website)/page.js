@@ -71,7 +71,7 @@ Get started quickly with templates. Edit your own page with just your smartphone
          
       </section>
 
-               <section className="py-16 fundo-home px-6">
+               <section className="py-16 fundo-home px-6 colorido">
         <div className="max-w-md mb-8 mx-auto text-center">
 
  
