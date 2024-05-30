@@ -45,6 +45,10 @@ export default async function Home() {
 
       <section className="py-16 bg-slate-200 px-6">
         <div className="max-w-md mb-8 mx-auto text-center">
+
+<img class="hero-links" src="/hero-links.png">
+
+              
           <h1 className="text-5xl font-bold">
            Join 10 000 creators
           </h1>
