@@ -42,7 +42,7 @@ export default function TemplateSelectionPage() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1 className="text-4xl font-bold text-center mb-2">Choose Your Template</h1>
+      <h1 className="text-4xl font-bold text-center mb-2">Choosae Your Template</h1>
       <div className="max-w-xs mx-auto">
         <div className="relative">
           <button
