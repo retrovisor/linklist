@@ -41,7 +41,7 @@ export default function UsernameForm({ desiredUsername }) {
           </div>
         )}
         <SubmitButton>
-          <span>Claim your username</span>
+          <span>Continue</span>
           <RightIcon />
         </SubmitButton>
       </div>
