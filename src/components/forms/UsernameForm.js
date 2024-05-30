@@ -20,6 +20,7 @@ export default function UsernameForm({ desiredUsername }) {
   }
 
   return (
+    <div className="py-12">
     <form onSubmit={handleSubmit}>
       <h1 className="text-4xl font-bold text-center mb-2">
         Grab your username
@@ -46,5 +47,6 @@ export default function UsernameForm({ desiredUsername }) {
         </SubmitButton>
       </div>
     </form>
+          </div>
   );
 }
