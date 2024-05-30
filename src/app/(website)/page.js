@@ -63,7 +63,7 @@ export default async function Home() {
            Amazingly easy design
 
           </h1>
-          <h2 className="text-gray-500 text-xl mt-6">
+          <h2 className="text-gray-500 text-base mt-6">
 Get started quickly with templates. Edit your own page with just your smartphone.  Simply select your favorite design and set it to change the design all at once.
 
           </h2>
@@ -76,13 +76,16 @@ Get started quickly with templates. Edit your own page with just your smartphone
 
  
               
-          <h1 className="text-5xl font-bold">
-           Join 10 000 creators
+          <h1 className="text-5xl font-bold text-white">
+           Join 10 000 users
           </h1>
-          <h2 className="text-gray-500 text-xl mt-6">
-Creators from 80+ countries and all popular platforms are already using Throne. Check out their profiles and discover their Wishlists!
+          <h2 className="text-gray-500 text-base mt-6 text-white">
+Users from 20+ countries and all popular platforms are already using Fizz.link. Check out their profiles and discover their pages!
           </h2>
-          <div className="font-bold mt-4 text-xl">It&apos;s free! 🎉</div>
+          <div className="font-bold mt-4 text-xl text-white">It&apos;s free! 🎉</div>
+        </div>
+              <div className="w-full flex justify-center mt-8 px-8">
+          <HeroForm user={session?.user} />
         </div>
          
       </section>
