@@ -67,6 +67,9 @@ export default async function Home() {
 Get started quickly with templates. Edit your own page with just your smartphone.  Simply select your favorite design and set it to change the design all at once.
 
           </h2>
+
+              <img class="hero-links" src="/templates.png" /> 
+
          </div>
          
       </section>
