@@ -49,7 +49,7 @@ export default function TemplateSelectionPage() {
           <div className="relative">
             <button
               type="button"
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 !text-4xl p-2 btn-link"
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 !text-4xl p-2 btn-seta"
               onClick={handlePrevTemplate}
             >
               <FontAwesomeIcon icon={faChevronLeft} />
@@ -60,7 +60,7 @@ export default function TemplateSelectionPage() {
             </div>
             <button
               type="button"
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 !text-4xl p-2 btn-link"
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 !text-4xl p-2 btn-seta"
               onClick={handleNextTemplate}
             >
               <FontAwesomeIcon icon={faChevronRight} />
