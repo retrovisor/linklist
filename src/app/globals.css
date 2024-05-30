@@ -42,6 +42,16 @@ color: #2e2ee5;
   
 }
 
+.btn-seta {
+  background-color: #2e2ee5; /* Button background color */
+  color: white; /* Button text color */
+  padding: 10px 20px; /* Padding around the text */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Bold text */
+}
+
 .btn-link {
   background-color: #2e2ee5; /* Button background color */
   color: white; /* Button text color */
