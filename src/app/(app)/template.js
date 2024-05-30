@@ -41,24 +41,30 @@ export default async function AppTemplate({ children, ...rest }) {
     console.log('MongoDB findOne query executed:', page ? `Page found for ${session.user.email}.` : 'Page not found.');
 
     return (
-      <html lang="en">
+       <html lang="en">
         <body className={lato.className}>
           <Toaster />
           <main className="md:flex">
             <div className="flex justify-end sticky bg-white top-0 z-10 shadow">
-              <label htmlFor="navCb" className="md:hidden p-2 rounded-md bg-white inline-flex items-center gap-2 cursor-pointer">
-                <div className="flex items-center gap-5">
-                  <Link href="/account">
-                    <FontAwesomeIcon icon={faFileLines} className="text-slate-500 w-6 h-6" />
+              <div className="flex items-center justify-between w-full">
+                <div className="flex items-center">
+                  <Link href="/">
+                    <img src="/logo4.png" alt="Website Logo" className="h-10" />
                   </Link>
-                  <Link href="/analytics">
-                    <FontAwesomeIcon icon={faChartSimple} className="text-slate-500 w-6 h-6" />
-                  </Link>
-                  <ShareDialog uri={page.uri}>
-                    <button>
-                      <FontAwesomeIcon icon={faShareFromSquare} className="text-slate-500 w-6 h-6" />
-                    </button>
-                  </ShareDialog>
+                </div>
+                <label htmlFor="navCb" className="md:hidden p-2 rounded-md bg-white inline-flex items-center gap-2 cursor-pointer">
+                  <div className="flex items-center gap-5">
+                    <Link href="/account">
+                      <FontAwesomeIcon icon={faFileLines} className="text-slate-500 w-6 h-6" />
+                    </Link>
+                    <Link href="/analytics">
+                      <FontAwesomeIcon icon={faChartSimple} className="text-slate-500 w-6 h-6" />
+                    </Link>
+                    <ShareDialog uri={page.uri}>
+                      <button>
+                        <FontAwesomeIcon icon={faShareFromSquare} className="text-slate-500 w-6 h-6" />
+                      </button>
+                    </ShareDialog>
                   <div className="rounded-full overflow-hidden w-12 h-12 shadow"> {/* Ensure the image does not exceed 80px in height */}
                     <Image
                       src={session.user.image}
