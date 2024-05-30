@@ -1,11 +1,19 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import SubmitButton from "@/components/buttons/SubmitButton";
 import RightIcon from "@/components/icons/RightIcon";
 
 export default function TemplateSelectionPage() {
-  const [selectedTemplate, setSelectedTemplate] = useState('');
+  const [selectedTemplate, setSelectedTemplate] = useState(0);
+  const router = useRouter();
+
+  const templates = [
+    { name: 'Template 1', image: '/template1.jpg' },
+    { name: 'Template 2', image: '/template1.jpg' },
+    // Add more templates as needed
+  ];
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -16,42 +24,48 @@ export default function TemplateSelectionPage() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ template: selectedTemplate }),
+      body: JSON.stringify({ template: templates[selectedTemplate].name }),
     });
 
     if (response.ok) {
-      window.location.href = '/account';
+      router.push('/account');
     }
+  }
+
+  function handlePrevTemplate() {
+    setSelectedTemplate((prevTemplate) => (prevTemplate === 0 ? templates.length - 1 : prevTemplate - 1));
+  }
+
+  function handleNextTemplate() {
+    setSelectedTemplate((prevTemplate) => (prevTemplate === templates.length - 1 ? 0 : prevTemplate + 1));
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1 className="text-4xl font-bold text-center mb-2">
-        Choose Your Template
-      </h1>
+      <h1 className="text-4xl font-bold text-center mb-2">Choosae Your Template</h1>
       <div className="max-w-xs mx-auto">
-        <label className="block p-2 mx-auto border w-full mb-2 text-center">
-          <input
-            type="radio"
-            name="template"
-            value="template1"
-            checked={selectedTemplate === 'template1'}
-            onChange={(e) => setSelectedTemplate(e.target.value)}
-          />
-          Template 1
-        </label>
-        <label className="block p-2 mx-auto border w-full mb-2 text-center">
-          <input
-            type="radio"
-            name="template"
-            value="template2"
-            checked={selectedTemplate === 'template2'}
-            onChange={(e) => setSelectedTemplate(e.target.value)}
-          />
-          Template 2
-        </label>
+        <div className="relative">
+          <button
+            type="button"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2"
+            onClick={handlePrevTemplate}
+          >
+            {'<'}
+          </button>
+          <div className="block p-2 mx-auto border w-full mb-2 text-center">
+            <img src={templates[selectedTemplate].image} alt={templates[selectedTemplate].name} />
+            <p>{templates[selectedTemplate].name}</p>
+          </div>
+          <button
+            type="button"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2"
+            onClick={handleNextTemplate}
+          >
+            {'>'}
+          </button>
+        </div>
         <SubmitButton>
-          <span>Save Template</span>
+          <span>Choose Template</span>
           <RightIcon />
         </SubmitButton>
       </div>
