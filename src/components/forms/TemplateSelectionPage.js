@@ -54,7 +54,7 @@ export default function TemplateSelectionPage() {
             >
               <FontAwesomeIcon icon={faChevronLeft} />
             </button>
-            <div className="block px-8 pb-8 mx-auto w-full m-2 text-center">
+            <div className="block px-8 pb-4 mx-auto w-full m-2 text-center">
               <img src={templates[selectedTemplate].image} alt={templates[selectedTemplate].name} />
               <p className="font-bold text-2xl pt-2">{templates[selectedTemplate].name}</p>
             </div>
