@@ -45,29 +45,29 @@ export default function TemplateSelectionPage() {
     <Suspense fallback={<div>Loading...</div>}>
       <form onSubmit={handleSubmit}>
         <h1 className="text-2xl font-bold text-center my-4">Choose Your Template</h1>
-        <div className="max-w-xs mx-auto">
+        <div className="max-w-sm mx-auto">
           <div className="relative">
             <button
               type="button"
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 text-2xl"
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 !text-4xl p-2 btn-link"
               onClick={handlePrevTemplate}
             >
               <FontAwesomeIcon icon={faChevronLeft} />
             </button>
             <div className="block p-6 mx-auto border w-full m-2 text-center">
               <img src={templates[selectedTemplate].image} alt={templates[selectedTemplate].name} />
-              <p className="text-bold text-base pt-2">{templates[selectedTemplate].name}</p>
+              <p className="font-bold text-2xl pt-2">{templates[selectedTemplate].name}</p>
             </div>
             <button
               type="button"
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 text-2xl"
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 !text-4xl p-2 btn-link"
               onClick={handleNextTemplate}
             >
               <FontAwesomeIcon icon={faChevronRight} />
             </button>
           </div>
           <SubmitButton>
-            <span>Save Template</span>
+            <span>Use this template</span>
             <RightIcon />
           </SubmitButton>
         </div>
