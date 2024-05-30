@@ -28,7 +28,7 @@ export default async function Home() {
       </div>
 
       <section className="pt-8 pb-12 px-6">
-        <div className="max-w-md mb-8 mx-auto text-center">
+        <div className="max-w-md mx-auto text-center">
           <h1 className="text-5xl font-bold">
             Your one link<br />for <span className="italic">everything</span>
           </h1>
@@ -50,6 +50,23 @@ export default async function Home() {
 
               
            
+         </div>
+         
+      </section>
+
+                <section className="py-16 fundo-home px-6">
+        <div className="max-w-md mb-8 mx-auto text-center">
+
+ 
+              
+          <h1 className="text-5xl font-bold">
+           Amazingly easy design
+
+          </h1>
+          <h2 className="text-gray-500 text-xl mt-6">
+Get started quickly with templates. Edit your own page with just your smartphone.  Simply select your favorite design and set it to change the design all at once.
+
+          </h2>
          </div>
          
       </section>
