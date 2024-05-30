@@ -30,6 +30,8 @@ background-color: #f3f3f1;
 .colorido {
 
 background-image: url('https://assets-global.website-files.com/647dfd182460b45da7ca7613/648739118455a30988d78ef9_Gradient_Background.svg');
+background-position: 50%;
+  background-size: cover;
   
 }
 
