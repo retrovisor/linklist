@@ -54,7 +54,7 @@ export default async function Home() {
          
       </section>
 
-                <section className="py-16 fundo-home px-6">
+                <section className="pt-16 pb-12 fundo-home px-6">
         <div className="max-w-md mb-8 mx-auto text-center">
 
  
