@@ -65,18 +65,19 @@ export default async function AppTemplate({ children, ...rest }) {
                         <FontAwesomeIcon icon={faShareFromSquare} className="text-slate-500 w-6 h-6" />
                       </button>
                     </ShareDialog>
-                  <div className="rounded-full overflow-hidden w-12 h-12 shadow"> {/* Ensure the image does not exceed 80px in height */}
-                    <Image
-                      src={session.user.image}
-                      width={80}
-                      height={80}
-                      alt={'avatar'}
-                      unoptimized
-                      className="object-cover w-full h-full rounded-full border border-white shadow shadow-black/50"
-                    />
+                    <div className="rounded-full overflow-hidden w-12 h-12 shadow">
+                      <Image
+                        src={session.user.image}
+                        width={80}
+                        height={80}
+                        alt={'avatar'}
+                        unoptimized
+                        className="object-cover w-full h-full rounded-full border border-white shadow shadow-black/50"
+                      />
+                    </div>
                   </div>
-                </div>
-              </label>
+                </label>
+              </div>
             </div>
             <input id="navCb" type="checkbox" className="hidden" />
             <label htmlFor="navCb" className="hidden backdrop fixed inset-0 bg-black/80 z-10"></label>
