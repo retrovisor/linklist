@@ -4,13 +4,15 @@ import { useState, Suspense } from 'react';
 import { useRouter } from 'next/router';
 import SubmitButton from "@/components/buttons/SubmitButton";
 import RightIcon from "@/components/icons/RightIcon";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 export default function TemplateSelectionPage() {
   const [selectedTemplate, setSelectedTemplate] = useState(0);
 
   const templates = [
-    { name: 'Template 1', image: '/template1.jpg' },
-    { name: 'Template 2', image: '/template1.jpg' },
+    { name: 'Template 1', value: 'template1', image: '/template1.jpg' },
+    { name: 'Template 2', value: 'template2', image: '/template1.jpg' },
     // Add more templates as needed
   ];
 
@@ -23,7 +25,7 @@ export default function TemplateSelectionPage() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ template: templates[selectedTemplate].name }),
+      body: JSON.stringify({ template: templates[selectedTemplate].value }),
     });
 
     if (response.ok) {
@@ -47,10 +49,10 @@ export default function TemplateSelectionPage() {
           <div className="relative">
             <button
               type="button"
-              className="absolute left-0 top-1/2 transform -translate-y-1/2"
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 text-2xl"
               onClick={handlePrevTemplate}
             >
-              {'<'}
+              <FontAwesomeIcon icon={faChevronLeft} />
             </button>
             <div className="block p-6 mx-auto border w-full m-2 text-center">
               <img src={templates[selectedTemplate].image} alt={templates[selectedTemplate].name} />
@@ -58,10 +60,10 @@ export default function TemplateSelectionPage() {
             </div>
             <button
               type="button"
-              className="absolute right-0 top-1/2 transform -translate-y-1/2"
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 text-2xl"
               onClick={handleNextTemplate}
             >
-              {'>'}
+              <FontAwesomeIcon icon={faChevronRight} />
             </button>
           </div>
           <SubmitButton>
