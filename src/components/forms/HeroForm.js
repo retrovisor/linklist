@@ -28,7 +28,8 @@ export default function HeroForm({ user }) {
         router.push('/account?desiredUsername=' + username);
       } else {
         window.localStorage.setItem('desiredUsername', username);
-        await signIn('google');
+        router.push('/login?desiredUsername=' + username);
+
       }
     }
   }
