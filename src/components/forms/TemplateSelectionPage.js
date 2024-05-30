@@ -1,17 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useRouter } from 'next/router';
 import SubmitButton from "@/components/buttons/SubmitButton";
 import RightIcon from "@/components/icons/RightIcon";
 
 export default function TemplateSelectionPage() {
   const [selectedTemplate, setSelectedTemplate] = useState(0);
-  const router = useRouter();
 
   const templates = [
     { name: 'Template 1', image: '/template1.jpg' },
-    { name: 'Template 2', image: '/template1.jpg' },
+    { name: 'Template 2', image: '/template2.jpg' },
     // Add more templates as needed
   ];
 
@@ -28,7 +27,7 @@ export default function TemplateSelectionPage() {
     });
 
     if (response.ok) {
-      router.push('/account');
+      window.location.href = '/account';
     }
   }
 
@@ -41,34 +40,36 @@ export default function TemplateSelectionPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1 className="text-4xl font-bold text-center mb-2">Choosae Your Template</h1>
-      <div className="max-w-xs mx-auto">
-        <div className="relative">
-          <button
-            type="button"
-            className="absolute left-0 top-1/2 transform -translate-y-1/2"
-            onClick={handlePrevTemplate}
-          >
-            {'<'}
-          </button>
-          <div className="block p-2 mx-auto border w-full mb-2 text-center">
-            <img src={templates[selectedTemplate].image} alt={templates[selectedTemplate].name} />
-            <p>{templates[selectedTemplate].name}</p>
+    <Suspense fallback={<div>Loading...</div>}>
+      <form onSubmit={handleSubmit}>
+        <h1 className="text-4xl font-bold text-center mb-2">Choose Your Template</h1>
+        <div className="max-w-xs mx-auto">
+          <div className="relative">
+            <button
+              type="button"
+              className="absolute left-0 top-1/2 transform -translate-y-1/2"
+              onClick={handlePrevTemplate}
+            >
+              {'<'}
+            </button>
+            <div className="block p-2 mx-auto border w-full mb-2 text-center">
+              <img src={templates[selectedTemplate].image} alt={templates[selectedTemplate].name} />
+              <p>{templates[selectedTemplate].name}</p>
+            </div>
+            <button
+              type="button"
+              className="absolute right-0 top-1/2 transform -translate-y-1/2"
+              onClick={handleNextTemplate}
+            >
+              {'>'}
+            </button>
           </div>
-          <button
-            type="button"
-            className="absolute right-0 top-1/2 transform -translate-y-1/2"
-            onClick={handleNextTemplate}
-          >
-            {'>'}
-          </button>
+          <SubmitButton>
+            <span>Save Template</span>
+            <RightIcon />
+          </SubmitButton>
         </div>
-        <SubmitButton>
-          <span>Choose Template</span>
-          <RightIcon />
-        </SubmitButton>
-      </div>
-    </form>
+      </form>
+    </Suspense>
   );
 }
