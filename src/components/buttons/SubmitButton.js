@@ -6,7 +6,7 @@ export default function SubmitButton({children, className=''}) {
     <button
       type="submit"
       disabled={pending}
-      className={"btn-link text-white py-2 px-4 block text-2xl mx-auto flex gap-2 items-center justify-center " + className}
+      className={"btn-link text-white py-2 px-4 block !text-2xl mx-auto flex gap-2 items-center justify-center " + className}
     >
       {pending && (
         <span>Saving...</span>
