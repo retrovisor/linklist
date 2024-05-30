@@ -13,7 +13,7 @@ export default async function Footer() {
       <div className="max-w-4xl flex justify-between mx-auto px-4">
         <div className="flex items-center gap-6">
           <Link href={'/'} className="flex items-center gap-1 text-blue-500">
-            <FontAwesomeIcon icon={faLink} className="cor-roxa" />
+          <img src="/logo4.png" alt="Logo" style={{ width: '1em' }} />
             <span className="font-bold cor-roxa">Fizz.link</span>
           </Link>
           <nav className="flex items-center gap-4 text-slate-500 text-sm">
