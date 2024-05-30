@@ -6,7 +6,7 @@ import '../globals.css';
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
 export const metadata = {
-  title: 'Fizz.link',
+  title: 'Fizz.link - Your one link for everything',
   description: 'Share your links, social profiles, contact info and more on one page',
 };
 
