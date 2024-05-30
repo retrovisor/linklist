@@ -63,7 +63,7 @@ export default async function Home() {
            Amazingly easy design
 
           </h1>
-          <h2 className="text-gray-500 text-base mt-6">
+          <h2 className="text-gray-500 text-base my-6">
 Get started quickly with templates. Edit your own page with just your smartphone.  Simply select your favorite design and set it to change the design all at once.
 
           </h2>
