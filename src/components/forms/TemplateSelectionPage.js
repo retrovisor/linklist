@@ -12,7 +12,7 @@ export default function TemplateSelectionPage() {
 
   const templates = [
     { name: 'Template 1', value: 'template1', image: '/template1.jpg' },
-    { name: 'Template 2', value: 'template2', image: '/template1.jpg' },
+    { name: 'Template 2', value: 'template2', image: '/template2.jpg' },
     // Add more templates as needed
   ];
 
