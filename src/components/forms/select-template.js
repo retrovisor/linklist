@@ -65,7 +65,7 @@ export default function TemplateSelectionPage() {
           </button>
         </div>
         <SubmitButton>
-          <span>Save Template</span>
+          <span>Choose Template</span>
           <RightIcon />
         </SubmitButton>
       </div>
