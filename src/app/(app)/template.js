@@ -112,7 +112,7 @@ export default async function AppTemplate({ children, ...rest }) {
               </div>
             </aside>
             <div className="grow min-h-screen">
-              {React.cloneElement(children, { page, user })}
+              {children({ page, user })}
             </div>
           </main>
         </body>
