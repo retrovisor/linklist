@@ -90,7 +90,7 @@ export default async function AppTemplate({ children, ...rest }) {
                 {page && (
                   <div className="text-center mt-4 bg-custom-gray p-4 rounded-lg">
                     <div className="flex items-center justify-center space-x-1">
-                          <img src="/logo4.png" alt="Logo" style={{ width: '0.8em' }} />
+                          <img src="/logo4.png" alt="Logo" style={{ width: '1em' }} />
 
                       <Link
                         target="_blank"
