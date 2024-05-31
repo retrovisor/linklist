@@ -41,11 +41,16 @@ export const authOptions = {
     },
     async session({ session, token }) {
       session.user.id = token.id;
+      
+      // Check if the user's image URL exists, otherwise set the default image URL
+      if (!session.user.image) {
+        session.user.image = 'https://fizz.link/avatar.png';
+      }
+      
       return session;
     },
   },
 };
 
 const handler = NextAuth(authOptions);
-
 export { handler as GET, handler as POST };
