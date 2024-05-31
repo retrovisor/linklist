@@ -47,12 +47,12 @@ export default async function AppTemplate({ children, ...rest }) {
           <main className="md:flex">
             <div className="flex justify-end sticky bg-white top-0 z-10 shadow">
               <div className="flex items-center justify-between w-full">
-                <div className="flex items-center gap-6">
-                   <Link href={'/'} className="flex items-center gap-1 text-blue-500 ml-4">
-                    <img src="/logo4.png" alt="Logo" style={{ width: '1.2em' }} />
-                  <span className="font-bold cor-roxa" style={{ fontSize: '20px' }}>Fizz.link</span>
-                  </Link>
-                </div>
+                <div className="flex items-center gap-6 md:hidden">
+  <Link href={'/'} className="flex items-center gap-1 text-blue-500 ml-4">
+    <img src="/logo4.png" alt="Logo" style={{ width: '1.2em' }} />
+    <span className="font-bold cor-roxa" style={{ fontSize: '20px' }}>Fizz.link</span>
+  </Link>
+</div>
                 <label htmlFor="navCb" className="md:hidden p-2 rounded-md bg-white inline-flex items-center gap-2 cursor-pointer">
                   <div className="flex items-center gap-5">
                     <Link href="/account">
