@@ -15,7 +15,8 @@ export default function PageSettingsForm({ page, user }) {
   const [bgType, setBgType] = useState(page.bgType);
   const [bgColor, setBgColor] = useState(page.bgColor);
   const [bgImage, setBgImage] = useState(page.bgImage);
-  const [avatar, setAvatar] = useState(user?.image);
+  const [avatar, setAvatar] = useState(page.avatar || user?.image);
+
 
   async function saveBaseSettings(formData) {
     const result = await savePageSettings(formData);
@@ -37,14 +38,14 @@ export default function PageSettingsForm({ page, user }) {
 }
 
   async function handleAvatarImageChange(ev) {
-    await upload(ev, async (link) => {
-      setAvatar(link);
-      const formData = new FormData();
-      formData.append('avatar', link);
-      await savePageSettings(formData);
-      toast.success('Avatar image saved!');
-    });
-  }
+  await upload(ev, async (link) => {
+    setAvatar(link);
+    const formData = new FormData();
+    formData.append('avatar', link);
+    await savePageSettings(formData);
+    toast.success('Avatar image saved!');
+  });
+}
   return (
     <div>
       <SectionBox>
@@ -111,7 +112,7 @@ export default function PageSettingsForm({ page, user }) {
 
                     <Image
   className="w-full h-full object-cover"
-  src={user?.image || 'https://fizz.link/avatar.png'}
+  src={avatar || 'https://fizz.link/avatar.png'}
 
                 
 
