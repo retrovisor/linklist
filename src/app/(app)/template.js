@@ -1,6 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import AppSidebar from "@/components/layout/AppSidebar";
 import { Page } from "@/models/Page";
+import { User } from "@/models/User";
 import { faFileLines, faShareFromSquare, faBars, faLink, faChartSimple } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import mongoose from "mongoose";
@@ -38,21 +39,22 @@ export default async function AppTemplate({ children, ...rest }) {
     console.log('MongoDB connection established.');
 
     const page = await Page.findOne({ owner: session.user.email });
+    const user = await User.findOne({ email: session.user.email });
     console.log('MongoDB findOne query executed:', page ? `Page found for ${session.user.email}.` : 'Page not found.');
 
     return (
-       <html lang="en">
+      <html lang="en">
         <body className={lato.className}>
           <Toaster />
           <main className="md:flex">
             <div className="flex justify-end sticky bg-white top-0 z-10 shadow">
               <div className="flex items-center justify-between w-full">
                 <div className="flex items-center gap-6 md:hidden">
-  <Link href={'/'} className="flex items-center gap-1 text-blue-500 ml-4">
-    <img src="/logo4.png" alt="Logo" style={{ width: '1.2em' }} />
-    <span className="font-bold cor-roxa" style={{ fontSize: '20px' }}>Fizz.link</span>
-  </Link>
-</div>
+                  <Link href={'/'} className="flex items-center gap-1 text-blue-500 ml-4">
+                    <img src="/logo4.png" alt="Logo" style={{ width: '1.2em' }} />
+                    <span className="font-bold cor-roxa" style={{ fontSize: '20px' }}>Fizz.link</span>
+                  </Link>
+                </div>
                 <label htmlFor="navCb" className="md:hidden p-2 rounded-md bg-white inline-flex items-center gap-2 cursor-pointer">
                   <div className="flex items-center gap-5">
                     <Link href="/account">
@@ -68,7 +70,7 @@ export default async function AppTemplate({ children, ...rest }) {
                     </ShareDialog>
                     <div className="rounded-full overflow-hidden w-12 h-12 shadow">
                       <Image
-                        src={session.user.image}
+                        src={user?.image || 'https://fizz.link/avatar.png'}
                         width={80}
                         height={80}
                         alt={'avatar'}
@@ -85,13 +87,12 @@ export default async function AppTemplate({ children, ...rest }) {
             <aside className="bg-white w-48 p-2 pt-6 shadow fixed md:static -left-48 top-0 bottom-0 z-20 transition-all">
               <div className="sticky top-0 pt-2">
                 <div className="rounded-full overflow-hidden aspect-square w-24 mx-auto border-3 border-white shadow shadow-black/50">
-                  <Image src={session.user.image} className="object-cover w-full h-full" width={256} height={256} alt={'avatar'} unoptimized />
+                  <Image src={user?.image || 'https://fizz.link/avatar.png'} className="object-cover w-full h-full" width={256} height={256} alt={'avatar'} unoptimized />
                 </div>
                 {page && (
                   <div className="text-center mt-4 bg-custom-gray p-4 rounded-lg">
                     <div className="flex items-center justify-center space-x-1">
-                          <img src="/logo4.png" alt="Logo" style={{ width: '1em' }} />
-
+                      <img src="/logo4.png" alt="Logo" style={{ width: '1em' }} />
                       <Link
                         target="_blank"
                         href={'/' + page.uri}
@@ -111,7 +112,7 @@ export default async function AppTemplate({ children, ...rest }) {
               </div>
             </aside>
             <div className="grow min-h-screen">
-              {children}
+              {React.cloneElement(children, { page, user })}
             </div>
           </main>
         </body>
