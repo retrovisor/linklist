@@ -12,6 +12,7 @@ const PageSchema = new Schema({
     buttons: { type: Object, default: {} },
     links: { type: Array, default: [] },
   template: { type: String, default: '' },
+  avatar: { type: String, default: '' },
   textBoxes: [
     {
       key: { type: String, required: true },
