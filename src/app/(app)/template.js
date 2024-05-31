@@ -112,7 +112,7 @@ export default async function AppTemplate({ children, ...rest }) {
               </div>
             </aside>
             <div className="grow min-h-screen">
-              {children({ page, user })}
+        {typeof children === 'function' ? children({ page, user }) : children}
             </div>
           </main>
         </body>
