@@ -152,7 +152,7 @@ export default async function UserPage({ params }) {
               className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2 block flex link-item"
               href={link.url}
             >
-              <div className="relative overflow-hidden w-16 h-16">
+              <div className="relative overflow-hidden w-12 h-12">
                 {link.icon && link.icon.startsWith('http') && (
                   <Image
                     className="w-full h-full object-cover"
@@ -163,12 +163,12 @@ export default async function UserPage({ params }) {
                   />
                 )}
                 {link.icon && !link.icon.startsWith('http') && (
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center fundo-link">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center fundo-link">
                     <FontAwesomeIcon icon={['fas', link.icon.replace('fa-', '')]} className="text-white w-8 h-8" />
                   </div>
                 )}
                 {!link.icon && (
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center fundo-link">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center fundo-link">
                     <FontAwesomeIcon icon={faLink} className="text-white w-8 h-8" />
                   </div>
                 )}
