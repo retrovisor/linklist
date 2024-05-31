@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { useState, Suspense } from 'react';
 import { useRouter } from 'next/router';
 import SubmitButton from "@/components/buttons/SubmitButton";
