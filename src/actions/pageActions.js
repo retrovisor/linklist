@@ -167,7 +167,9 @@ export async function savePageSettings(formData) {
       const avatarLink = formData.get('avatar');
       await User.updateOne(
         { email: session.user?.email },
-        { image: avatarLink },
+        { $set: { image: avatarLink } },
+
+        
       );
     }
 
