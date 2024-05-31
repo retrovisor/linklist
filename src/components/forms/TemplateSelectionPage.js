@@ -7,7 +7,8 @@ import RightIcon from "@/components/icons/RightIcon";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
-export default function TemplateSelectionPage() {
+export default function TemplateSelectionPage({ page, user }) {
+
   const [selectedTemplate, setSelectedTemplate] = useState(0);
 
   const templates = [
