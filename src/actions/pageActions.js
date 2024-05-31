@@ -163,15 +163,19 @@ export async function savePageSettings(formData) {
       dataToUpdate,
     );
 
-    if (formData.has('avatar')) {
-      const avatarLink = formData.get('avatar');
-      await User.updateOne(
-        { email: session.user?.email },
-        { $set: { image: avatarLink } },
+      if (formData.has('avatar')) {
+    const avatarLink = formData.get('avatar');
+    dataToUpdate.avatar = avatarLink;
+    await User.updateOne(
+      { email: session.user?.email },
+      { $set: { image: avatarLink } },
+    );
+  }
+await Page.updateOne(
+    { owner: session?.user?.email },
+    dataToUpdate,
+  );
 
-        
-      );
-    }
 
     return { success: true };
   }
