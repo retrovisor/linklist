@@ -111,7 +111,10 @@ export default function PageSettingsForm({ page, user }) {
 
                     <Image
   className="w-full h-full object-cover"
-  src={avatar}
+  src={user?.image || 'https://fizz.link/avatar.png'}
+
+                
+
   alt="avatar"
   width={128}
   height={128}
