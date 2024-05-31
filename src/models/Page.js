@@ -7,7 +7,7 @@ const PageSchema = new Schema({
   location: { type: String, default: '' },
   bio: { type: String, default: '' },
   bgType: { type: String, default: 'color' },  // Assuming bgType could be 'color', 'image', etc.
-  bgColor: { type: String, default: '#000' },  // Default black color
+  bgColor: { type: String, default: '#6fdcc6' },  // Default black color
   bgImage: { type: String, default: '' },      // URL to a background image
     buttons: { type: Object, default: {} },
     links: { type: Array, default: [] },
