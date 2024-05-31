@@ -20,33 +20,34 @@ export default function UsernameForm({ desiredUsername }) {
   }
 
   return (
-    <div className="py-12">
-    <form onSubmit={handleSubmit}>
+    <div className="w-full flex justify-center py-12 px-8">
+  <div className="w-full max-w-xs mx-auto">
+    <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-4">
       <h1 className="text-4xl font-bold text-center mb-2">
         Grab your username
       </h1>
       <p className="text-center mb-6 text-gray-500">
         Choose your username
       </p>
-      <div className="max-w-xs mx-auto">
-        <input
-          name="username"
-          className="block p-2 mx-auto !bg-white border w-full mb-2 text-center"
-          defaultValue={desiredUsername}
-          type="text"
-          placeholder="username"
-        />
-        {taken && (
-          <div className="bg-red-200 border border-red-500 p-2 mb-2 text-center">
-            This username is taken
-          </div>
-        )}
-        <SubmitButton>
-          <span>Continue</span>
-          <RightIcon />
-        </SubmitButton>
-      </div>
+      <input
+        name="username"
+        className="block bg-white border rounded-md py-4 px-6 w-full text-center"
+        defaultValue={desiredUsername}
+        type="text"
+        placeholder="username"
+      />
+      {taken && (
+        <div className="bg-red-200 border border-red-500 py-2 text-center">
+          This username is taken
+        </div>
+      )}
+      <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded">
+        <span>Continue</span>
+        <RightIcon />
+      </button>
     </form>
-          </div>
+  </div>
+</div>
+
   );
 }
