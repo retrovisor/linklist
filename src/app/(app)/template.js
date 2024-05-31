@@ -90,7 +90,8 @@ export default async function AppTemplate({ children, ...rest }) {
                 {page && (
                   <div className="text-center mt-4 bg-custom-gray p-4 rounded-lg">
                     <div className="flex items-center justify-center space-x-1">
-                      <FontAwesomeIcon icon={faLink} className="text-blue-500" />
+                          <img src="/logo4.png" alt="Logo" style={{ width: '0.8em' }} />
+
                       <Link
                         target="_blank"
                         href={'/' + page.uri}
