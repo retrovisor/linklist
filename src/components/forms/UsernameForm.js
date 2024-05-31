@@ -31,7 +31,7 @@ export default function UsernameForm({ desiredUsername }) {
       <div className="max-w-xs mx-auto">
         <input
           name="username"
-          className="block p-2 mx-auto !bg-white border w-full mb-2 text-center"
+          className="!bg-white border rounded-md flex-1 !py-4 !px-4 sm:py-4 sm:px-6 !w-auto !mb-0 !p-0"
           defaultValue={desiredUsername}
           type="text"
           placeholder="username"
