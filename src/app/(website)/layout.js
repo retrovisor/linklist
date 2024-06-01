@@ -11,7 +11,7 @@ export const metadata = {
   description: 'Share your links, social profiles, contact info and more on one page',
 };
 
-export default function RootLayout({ children }) {
+function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
@@ -26,3 +26,5 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
+
+export default appWithTranslation(RootLayout);
