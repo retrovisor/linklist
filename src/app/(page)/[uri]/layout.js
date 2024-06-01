@@ -1,3 +1,4 @@
+import { appWithTranslation } from 'next-i18next';
 import Header from "@/components/Header";
 import { Lato } from 'next/font/google';
 import '../../globals.css';
