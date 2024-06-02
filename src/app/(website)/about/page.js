@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function AboutPage() {
   return (
     <div className="bg-white text-white min-h-screen">
-      <div className="h-36 bg-gray-400 bg-cover bg-center">
+      <div className="h-36 colorido bg-cover bg-center">
         <h1 className="text-4xl text-center pt-12">About us</h1>
       </div>
       <div className="max-w-xl mx-auto text-center my-4 text-black px-4 text-left">
