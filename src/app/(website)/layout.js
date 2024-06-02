@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google';
 import '../globals.css';
-import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -12,8 +12,9 @@ export const metadata = {
   description: 'Share your links, social profiles, contact info and more on one page',
 };
 
-export default function RootLayout({ children, params: { locale } }) {
-  const { i18n } = useTranslation();
+export default function RootLayout({ children }) {
+  const router = useRouter();
+  const { locale } = router;
 
   return (
     <html lang={locale}>
@@ -28,8 +29,4 @@ export default function RootLayout({ children, params: { locale } }) {
       </body>
     </html>
   );
-}
-
-export async function generateStaticParams() {
-  return [{ locale: 'en' }, { locale: 'ko' }]; // Add other locales if needed
 }
