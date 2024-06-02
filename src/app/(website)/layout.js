@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google';
 import '../globals.css';
-import { useLocale } from 'next-intl';
 import { IntlProvider } from 'react-intl';
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
@@ -13,9 +12,7 @@ export const metadata = {
   description: 'Share your links, social profiles, contact info and more on one page',
 };
 
-export default async function RootLayout({ children }) {
-  const locale = useLocale();
-
+export default async function RootLayout({ children, params: { locale } }) {
   let messages;
   try {
     messages = await import(`../../../translations/${locale}.json`);
