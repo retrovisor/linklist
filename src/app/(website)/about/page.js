@@ -7,13 +7,17 @@ export async function generateStaticParams() {
 
 export default async function AboutPage({ params }) {
   const locale = params?.locale || 'en';
+  console.log('AboutPage locale:', locale);
   let translations = {};
   try {
     const translationsModule = await import(`../../../../translations/${locale}.json`);
     translations = translationsModule.default;
+    console.log('Loaded translations:', translations);
   } catch (error) {
+    console.error('Error loading translations:', error);
     const translationsModule = await import(`../../../../translations/en.json`);
     translations = translationsModule.default;
+    console.log('Fallback translations:', translations);
   }
   
   return (
