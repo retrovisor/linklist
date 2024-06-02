@@ -1,3 +1,4 @@
+// src/app/(website)/layout.js
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google';
@@ -5,21 +6,13 @@ import '../globals.css';
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
-export async function generateStaticParams() {
-  return [
-    { locale: 'en' },
-    { locale: 'ko' },
-  ];
-}
 export const metadata = {
   title: 'Fizz.link - Your one link for everything',
   description: 'Share your links, social profiles, contact info and more on one page',
 };
 
 export default function RootLayout({ children, params }) {
-  const locale = params?.locale || 'en';
-    console.log('RootLayout locale:', locale);
-
+  const locale = params.locale || 'en';
 
   return (
     <html lang={locale}>
@@ -27,11 +20,11 @@ export default function RootLayout({ children, params }) {
         <Header locale={locale} />
         <div className="flex-grow">
           <div className="mx-auto">
-            {children}
+            {React.cloneElement(children, { locale })}
           </div>
         </div>
         <Footer locale={locale} />
       </body>
     </html>
   );
-} 
+}
