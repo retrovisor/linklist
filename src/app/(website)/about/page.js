@@ -6,7 +6,7 @@ export async function generateStaticParams() {
 }
 
 export default function AboutPage({ params }) {
-  const locale = params.locale || 'ko';
+  const locale = params.locale || 'en';
 
   let translations = {};
   try {
