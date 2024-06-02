@@ -1,9 +1,4 @@
-export async function generateStaticParams() {
-  return [
-    { locale: 'en' },
-    { locale: 'ko' },
-  ];
-}
+
 
 export default async function AboutPage({ params }) {
   const locale = params?.locale || 'en';
