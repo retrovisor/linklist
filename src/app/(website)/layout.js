@@ -12,25 +12,18 @@ export const metadata = {
 };
 
 export default function RootLayout({ children, params }) {
-  const locale = params.locale || 'ko';
-
-  let translations = {};
-  try {
-    translations = require(`../../../translations/${locale}.json`);
-  } catch (error) {
-    translations = require(`../../../translations/en.json`);
-  }
+  const locale = params?.locale || 'en';
 
   return (
     <html lang={locale}>
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
-        <Header />
+        <Header locale={locale} />
         <div className="flex-grow">
           <div className="mx-auto">
             {children}
           </div>
         </div>
-        <Footer locale={locale} /> {/* Pass locale to Footer */}
+        <Footer locale={locale} />
       </body>
     </html>
   );
