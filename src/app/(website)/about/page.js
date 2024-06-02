@@ -4,7 +4,7 @@ export default function AboutPage() {
   return (
     <div className="bg-white text-white min-h-screen">
       <div className="h-36 colorido bg-cover bg-center">
-        <h1 className="text-5xl font-bold text-center text-white">About us</h1>
+        <h1 className="text-5xl font-bold text-center text-white pt-12">About us</h1>
       </div>
       <div className="max-w-xl mx-auto text-center my-4 text-black px-4 text-left">
         <p className="p-4 text-left">At Fizz.link, we believe that every link you share is a chapter of your unique journey. We&apos;re more than just a tool; we&apos;re your creative space on the web where you can bring together all your important links, social profiles, and projects on one beautifully simple page. But it doesn&apos;t end there.</p>
