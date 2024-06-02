@@ -6,12 +6,12 @@ export async function generateStaticParams() {
   ];
 }
 
-export default function AboutPage({ params }) {
-  const locale = params?.locale || 'en';
+export default function AboutPage({ locale }) {
+  const effectiveLocale = locale || 'en';
 
   let translations = {};
   try {
-    translations = require(`../../../../translations/${locale}.json`);
+    translations = require(`../../../../translations/${effectiveLocale}.json`);
   } catch (error) {
     translations = require(`../../../../translations/en.json`);
   }
