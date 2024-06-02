@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useIntl } from 'react-intl';
 
 export default function AboutPage() {
-  const intl = useIntl();
+  const intl = useIntl(); 
 
   return (
     <div className="bg-white text-white min-h-screen">
