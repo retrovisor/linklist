@@ -5,7 +5,6 @@ const nextConfig = {
       {
         hostname: '*.googleusercontent.com',
       },
-    
       {
         hostname: 'linklist-files.s3.amazonaws.com',
       },
@@ -23,11 +22,10 @@ const nextConfig = {
       },
     ],
   },
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'ko'],
+  },
 };
 
-const { i18n } = require('./next-i18next.config');
-
-module.exports = {
-    reactStrictMode: true,
-  nextConfig, i18n
- };
+module.exports = nextConfig;
