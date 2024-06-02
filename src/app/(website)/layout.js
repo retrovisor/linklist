@@ -20,7 +20,7 @@ export default function RootLayout({ children, params }) {
         <Header locale={locale} />
         <div className="flex-grow">
           <div className="mx-auto">
-            {React.cloneElement(children, { locale })}
+            {children}
           </div>
         </div>
         <Footer locale={locale} />
