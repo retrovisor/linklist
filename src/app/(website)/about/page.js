@@ -1,20 +1,24 @@
+// src/app/(website)/about/page.js
+export async function generateStaticParams() {
+  return [
+    { locale: 'en' },
+    { locale: 'ko' },
+  ];
+}
 
+export default function AboutPage({ locale }) {
+  const effectiveLocale = locale || 'en';
 
-export default async function AboutPage({ params }) {
-  const locale = params?.locale || 'en';
-  console.log('AboutPage locale:', locale);
   let translations = {};
   try {
-    const translationsModule = await import(`../../../../translations/${locale}.json`);
-    translations = translationsModule.default;
-    console.log('Loaded translations:', translations);
+    const translationsModule = require(`../../../../translations/${effectiveLocale}.json`);
+    translations = translationsModule.default || translationsModule;
   } catch (error) {
     console.error('Error loading translations:', error);
-    const translationsModule = await import(`../../../../translations/en.json`);
-    translations = translationsModule.default;
-    console.log('Fallback translations:', translations);
+    const translationsModule = require(`../../../../translations/en.json`);
+    translations = translationsModule.default || translationsModule;
   }
-  
+
   return (
     <div className="bg-white text-white min-h-screen">
       <div className="h-36 colorido bg-cover bg-center">
