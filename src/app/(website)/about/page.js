@@ -1,4 +1,3 @@
-// src/app/(website)/about/page.js
 export async function generateStaticParams() {
   return [
     { locale: 'en' },
