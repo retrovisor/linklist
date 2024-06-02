@@ -9,11 +9,14 @@ export default async function AboutPage({ params }) {
   const locale = params?.locale || 'en';
   let translations = {};
   try {
-    translations = await import(`../../../../translations/${locale}.json`);
+    const translationsModule = await import(`../../../../translations/${locale}.json`);
+    translations = translationsModule.default;
   } catch (error) {
-    translations = await import(`../../../../translations/en.json`);
+    const translationsModule = await import(`../../../../translations/en.json`);
+    translations = translationsModule.default;
   }
-
+  // ...
+}
   return (
     <div className="bg-white text-white min-h-screen">
       <div className="h-36 colorido bg-cover bg-center">
