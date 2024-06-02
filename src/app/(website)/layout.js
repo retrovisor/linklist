@@ -12,7 +12,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children, params }) {
-  const locale = params.locale || 'kr';
+  const locale = params.locale || 'ko';
 
   let translations = {};
   try {
