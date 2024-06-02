@@ -11,19 +11,21 @@ export const metadata = {
   description: 'Share your links, social profiles, contact info and more on one page',
 };
 
-export default async function RootLayout({ children, params: { locale } }) {
+export default function RootLayout({ children, params }) {
+  const locale = params.locale || 'en';
+
   let translations = {};
   try {
-    translations = await import(`../../../translations/${locale}.json`);
+    translations = require(`../../../translations/${locale}.json`);
   } catch (error) {
-    translations = await import(`../../../translations/en.json`);
+    translations = require(`../../../translations/en.json`);
   }
 
   return (
     <html lang={locale}>
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
+        <Header />
         <div className="flex-grow">
-          <Header />
           <div className="mx-auto">
             {children}
           </div>
