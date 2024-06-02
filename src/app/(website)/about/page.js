@@ -1,7 +1,8 @@
 import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-export default async function AboutPage({ params: { locale } }) {
-  const { t } = await useTranslation('common', locale);
+export default function AboutPage() {
+  const { t } = useTranslation('common');
 
   return (
     <div className="bg-white text-white min-h-screen">
@@ -21,6 +22,14 @@ export default async function AboutPage({ params: { locale } }) {
       </div>
     </div>
   );
+}
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  };
 }
 
 export async function generateStaticParams() {
