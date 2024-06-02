@@ -1,5 +1,4 @@
 import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default async function AboutPage({ params: { locale } }) {
   const { t } = await useTranslation('common', locale);
@@ -20,3 +19,10 @@ export default async function AboutPage({ params: { locale } }) {
       <div className="max-w-2xl mx-auto grid md:grid-cols-2 gap-6 p-4 px-8">
         {/* Content for the grid */}
       </div>
+    </div>
+  );
+}
+
+export async function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'ko' }];
+}
