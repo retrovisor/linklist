@@ -30,7 +30,7 @@ export default function RootLayout({ children, params }) {
             {children}
           </div>
         </div>
-        <Footer />
+        <Footer locale={locale} /> {/* Pass locale to Footer */}
       </body>
     </html>
   );
