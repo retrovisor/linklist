@@ -14,9 +14,9 @@ export const metadata = {
 export default async function RootLayout({ children, params: { locale } }) {
   let translations = {};
   try {
-    translations = await import(`../../translations/${locale}.json`);
+    translations = await import(`../../../translations/${locale}.json`);
   } catch (error) {
-    translations = await import(`../../translations/en.json`);
+    translations = await import(`../../../translations/en.json`);
   }
 
   return (
