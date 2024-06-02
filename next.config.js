@@ -1,4 +1,8 @@
+const { i18n } = require('./next-i18next.config');
+
 /** @type {import('next').NextConfig} */
+
+ 
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -22,18 +26,8 @@ const nextConfig = {
       },
     ],
   },
- i18n: {
-    locales: ['en', 'ko'],
-    defaultLocale: 'en',
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/:locale/:path*',
-        destination: '/:path*',
-      },
-    ];
-  },
+   i18n,
+
 };
 
 module.exports = nextConfig;
