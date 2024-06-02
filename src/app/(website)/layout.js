@@ -16,9 +16,8 @@ export const metadata = {
   description: 'Share your links, social profiles, contact info and more on one page',
 };
 
-export default function RootLayout({ children, params }) {
-  const { i18n } = useTranslation();
-  const locale = params.locale || i18n.language;
+export default async function RootLayout({ children, params: { locale } }) {
+  const { i18n } = await useTranslation(locale);
 
   return (
     <html lang={locale}>
@@ -33,12 +32,4 @@ export default function RootLayout({ children, params }) {
       </body>
     </html>
   );
-}
-
-export async function getStaticProps({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['common'])),
-    },
-  };
 }
