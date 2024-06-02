@@ -4,9 +4,9 @@ import Link from 'next/link';
 export default function AboutPage({ params: { locale } }) {
   let translations = {};
   try {
-    translations = require(`../../../translations/${locale}.json`);
+    translations = require(`../../../../translations/${locale}.json`);
   } catch (error) {
-    translations = require(`../../../translations/en.json`);
+    translations = require(`../../../../translations/en.json`);
   }
 
   return (
