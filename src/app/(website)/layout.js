@@ -12,6 +12,8 @@ export const metadata = {
 
 export default function RootLayout({ children, params }) {
   const locale = params?.locale || 'en';
+    console.log('RootLayout locale:', locale);
+
 
   return (
     <html lang={locale}>
