@@ -1,9 +1,29 @@
 // src/app/(website)/about/page.js
 import Link from 'next/link';
-import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
-export default async function AboutPage({ params: { locale } }) {
-  const { t } = await useTranslation('common', locale);
+export default function AboutPage() {
+  const router = useRouter();
+  const { locale } = router;
+
+  const translations = {
+    en: {
+      aboutUsTitle: 'About Us',
+      paragraph1: 'This is the first paragraph.',
+      paragraph2: 'This is the second paragraph.',
+      paragraph3: 'This is the third paragraph.',
+      paragraph4: 'This is the fourth paragraph.',
+    },
+    ko: {
+      aboutUsTitle: '회사 소개',
+      paragraph1: '첫 번째 단락입니다.',
+      paragraph2: '두 번째 단락입니다.',
+      paragraph3: '세 번째 단락입니다.',
+      paragraph4: '네 번째 단락입니다.',
+    },
+  };
+
+  const t = (key) => translations[locale]?.[key] || '';
 
   return (
     <div className="bg-white text-white min-h-screen">
@@ -12,17 +32,4 @@ export default async function AboutPage({ params: { locale } }) {
       </div>
       <div className="max-w-xl mx-auto text-center my-4 text-black px-4 text-left">
         <p className="p-4 text-left">{t('paragraph1')}</p>
-        <p className="p-4 text-left">{t('paragraph2')}</p>
-        <p className="p-4 text-left">{t('paragraph3')}</p>
-        <p className="p-4 text-left">{t('paragraph4')}</p>
-      </div>
-      <div className="max-w-2xl mx-auto grid md:grid-cols-2 gap-6 p-4 px-8">
-        {/* Content for the grid */}
-      </div>
-    </div>
-  );
-}
-
-export async function generateStaticParams() {
-  return [{ locale: 'en' }, { locale: 'ko' }]; // Add other locales if needed
-}
+        <p cl
