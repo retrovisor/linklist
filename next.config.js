@@ -23,15 +23,17 @@ const nextConfig = {
     ],
   },
  i18n: {
-    defaultLocale: 'en',
     locales: ['en', 'ko'],
+    defaultLocale: 'en',
   },
-  rewrites: async () => [
-    {
-      source: '/:locale/:path*',
-      destination: '/:path*',
-    },
-  ],
+  async rewrites() {
+    return [
+      {
+        source: '/:locale/:path*',
+        destination: '/:path*',
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
