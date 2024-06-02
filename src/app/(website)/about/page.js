@@ -1,4 +1,10 @@
-// src/app/(website)/about/page.js
+export async function generateStaticParams() {
+  return [
+    { locale: 'en' },
+    { locale: 'ko' },
+  ];
+}
+
 export default function AboutPage({ params }) {
   const locale = params.locale || 'en';
 
