@@ -1,8 +1,7 @@
-// src/app/(website)/layout.js
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google';
-import '../../globals.css';
+import '../globals.css';
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
