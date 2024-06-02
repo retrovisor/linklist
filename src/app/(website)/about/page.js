@@ -15,8 +15,7 @@ export default async function AboutPage({ params }) {
     const translationsModule = await import(`../../../../translations/en.json`);
     translations = translationsModule.default;
   }
-  // ...
-}
+  
   return (
     <div className="bg-white text-white min-h-screen">
       <div className="h-36 colorido bg-cover bg-center">
