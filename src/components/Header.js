@@ -1,7 +1,8 @@
-// src/components/Header.js
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LogoutButton from "@/components/buttons/LogoutButton";
-import { getServerSession } from "next-auth";
+import { faLink } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getServerSession } from "next-auth"; 
 import Link from "next/link";
 
 export default async function Header({ locale }) {
