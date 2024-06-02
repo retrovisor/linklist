@@ -5,14 +5,13 @@ export async function generateStaticParams() {
   ];
 }
 
-export default function AboutPage({ params }) {
+export default async function AboutPage({ params }) {
   const locale = params?.locale || 'en';
-
   let translations = {};
   try {
-    translations = require(`../../../../translations/${locale}.json`);
+    translations = await import(`../../../../translations/${locale}.json`);
   } catch (error) {
-    translations = require(`../../../../translations/en.json`);
+    translations = await import(`../../../../translations/en.json`);
   }
 
   return (
