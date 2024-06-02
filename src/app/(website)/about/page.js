@@ -1,7 +1,7 @@
 // src/app/(website)/about/page.js
-import Link from 'next/link';
+export default function AboutPage({ params }) {
+  const locale = params.locale || 'en';
 
-export default function AboutPage({ params: { locale } }) {
   let translations = {};
   try {
     translations = require(`../../../../translations/${locale}.json`);
