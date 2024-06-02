@@ -3,8 +3,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google';
 import '../globals.css';
-import { useTranslation } from 'react-i18next';
-import i18n from '../../../i18n';
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -14,8 +12,12 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children, params: { locale } }) {
-  const { i18n } = useTranslation();
-  i18n.changeLanguage(locale);
+  let translations = {};
+  try {
+    translations = await import(`../../../translations/${locale}.json`);
+  } catch (error) {
+    translations = await import(`../../../translations/en.json`);
+  }
 
   return (
     <html lang={locale}>
