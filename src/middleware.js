@@ -25,10 +25,13 @@ export function middleware(req) {
   // Check if the path starts with a locale prefix
   const startsWithLocale = languages.some((loc) => pathname.startsWith(`/${loc}`));
   
+  // Check if the path is a locale path
+  const isLocalePath = languages.some((loc) => pathname === `/${loc}`);
+  
   // Check if the path matches the user-generated path pattern
   const isUserGeneratedPath = /^\/[a-zA-Z0-9_-]+$/.test(pathname);
   
-  if (!startsWithLocale && !isUserGeneratedPath) {
+  if (!startsWithLocale && !isLocalePath && !isUserGeneratedPath) {
     return NextResponse.redirect(new URL(`/${lng}${pathname}`, req.url));
   }
   
