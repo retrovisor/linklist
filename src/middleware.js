@@ -19,19 +19,19 @@ export function middleware(req) {
   if (!lng) {
     lng = fallbackLng;
   }
-
+  
   const pathname = req.nextUrl.pathname;
-
+  
   // Check if the path starts with a locale prefix
   const startsWithLocale = languages.some((loc) => pathname.startsWith(`/${loc}`));
-
+  
   // Check if the path matches the user-generated path pattern
   const isUserGeneratedPath = /^\/[a-zA-Z0-9_-]+$/.test(pathname);
-
+  
   if (!startsWithLocale && !isUserGeneratedPath) {
     return NextResponse.redirect(new URL(`/${lng}${pathname}`, req.url));
   }
-
+  
   if (req.headers.has('referer')) {
     const refererUrl = new URL(req.headers.get('referer'));
     const lngInReferer = languages.find((l) => refererUrl.pathname.startsWith(`/${l}`));
@@ -41,6 +41,6 @@ export function middleware(req) {
     }
     return response;
   }
-
+  
   return NextResponse.next();
 }
