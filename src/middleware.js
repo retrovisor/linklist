@@ -13,7 +13,7 @@ export function middleware(req) {
 
   // Check if the path starts with a locale
   const isLocalePath = languages.some((loc) => pathname.startsWith(`/${loc}`));
-  const isUserGeneratedPath = pathname.split('/').length === 2;
+  const isUserGeneratedPath = pathname.split('/').length === 2 && !isLocalePath;
 
   // Handle locale-prefixed paths
   if (isLocalePath) {
@@ -25,7 +25,7 @@ export function middleware(req) {
 
   // Handle user-generated paths
   if (isUserGeneratedPath) {
-    return NextResponse.rewrite(new URL(`/[uri]${pathname}`, req.url));
+    return NextResponse.rewrite(new URL(`/user/${pathname.slice(1)}`, req.url));
   }
 
   // Detect preferred language if no locale in path
