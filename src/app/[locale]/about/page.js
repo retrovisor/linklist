@@ -1,6 +1,7 @@
 import { useTranslation } from '../../../i18n';
 
-export default async function AboutPage({ params: { locale } }) {
+export default async function AboutPage({ params }) {
+  const { locale } = params;
   const { t } = await useTranslation(locale, 'common');
 
   return (
