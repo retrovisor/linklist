@@ -6,7 +6,9 @@ import { fallbackLng, languages, cookieName } from './i18n/settings';
 acceptLanguage.languages(languages);
 
 export const config = {
-  matcher: ['/:path*'],
+  matcher: [
+    '/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js|site.webmanifest).*)',
+  ],
 };
 
 export function middleware(req) {
@@ -14,11 +16,8 @@ export function middleware(req) {
     const { pathname } = req.nextUrl;
     console.log('Pathname:', pathname);
 
-    const isLocalePath = languages.some((loc) => pathname.startsWith(`/${loc}`));
+    const isLocalePath = languages.some((loc) => pathname.startsWith(`/${loc}/`));
     console.log('Is Locale Path:', isLocalePath);
-
-    const isUserGeneratedPath = pathname.split('/').length === 2 && !isLocalePath;
-    console.log('Is User Generated Path:', isUserGeneratedPath);
 
     if (isLocalePath) {
       const locale = pathname.split('/')[1];
@@ -27,12 +26,6 @@ export function middleware(req) {
       response.cookies.set(cookieName, locale);
       console.log('Setting locale cookie:', locale);
       return response;
-    }
-
-    if (isUserGeneratedPath) {
-      const rewriteUrl = new URL(`/[uri]${pathname}`, req.url);
-      console.log('Rewriting URL:', rewriteUrl.toString());
-      return NextResponse.rewrite(rewriteUrl);
     }
 
     let lng;
@@ -50,9 +43,10 @@ export function middleware(req) {
     }
 
     if (!isLocalePath) {
-      const redirectUrl = new URL(`/${lng}${pathname}`, req.url);
-      console.log('Redirecting to:', redirectUrl.toString());
-      return NextResponse.redirect(redirectUrl);
+      const uriPath = pathname.slice(1);
+      const rewriteUrl = new URL(`/${lng}/[uri]/${uriPath}`, req.url);
+      console.log('Rewriting URL:', rewriteUrl.toString());
+      return NextResponse.rewrite(rewriteUrl);
     }
 
     console.log('Continuing to next middleware or route handler');
