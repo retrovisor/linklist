@@ -20,7 +20,7 @@ export default function UsernameForm({ desiredUsername }) {
   }
 
   return (
-    <div className="py-12 w-full flex justify-center mt-8 px-8">
+    <div className="py-12 w-full max-w-lg mx-auto">
 
     <h1 className="text-4xl font-bold text-center mb-2">
         Grab your username
