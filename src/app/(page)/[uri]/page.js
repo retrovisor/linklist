@@ -125,10 +125,12 @@ export default async function UserPage({ params }) {
           />
         </div>
         <h2 className="text-2xl text-center font-bold mb-1">{pageData.displayName}</h2>
-        <h3 className="text-md flex gap-2 justify-center items-center text-white/70">
-          <FontAwesomeIcon className="h-4" icon={faLocationDot} />
-          <span>{pageData.location}</span>
-        </h3>
+        {pageData.location && (
+  <h3 className="text-md flex gap-2 justify-center items-center text-white/70">
+    <FontAwesomeIcon className="h-4" icon={faLocationDot} />
+    <span>{pageData.location}</span>
+  </h3>
+)}
 
         <div className="flex gap-2 justify-center mt-4 pb-4 button-container">
           {pageData.buttons && Object.keys(pageData.buttons).map(buttonKey => (
