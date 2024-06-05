@@ -43,8 +43,8 @@ export default function UsernameForm({ desiredUsername }) {
           </div>
         )}
         <SubmitButton>
-          <span>Continue</span>
-          <RightIcon />
+          Continue
+          
         </SubmitButton>
      </form>
           </div>
