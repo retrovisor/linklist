@@ -25,9 +25,7 @@ export default function UsernameForm({ desiredUsername }) {
     <h1 className="text-4xl font-bold text-center mb-2">
         Grab your username
       </h1>
-      <p className="text-center mb-6 text-gray-500">
-        Choose your username
-      </p>
+       
     <form className="flex flex-col sm:flex-row items-stretch sm:space-x-4 space-y-4 sm:space-y-0" onSubmit={handleSubmit}>
       
          <input
