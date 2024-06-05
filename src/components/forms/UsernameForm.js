@@ -30,8 +30,7 @@ export default function UsernameForm({ desiredUsername }) {
       </p>
     <form className="flex flex-col sm:flex-row items-stretch sm:space-x-4 space-y-4 sm:space-y-0" onSubmit={handleSubmit}>
       
-      <div className="max-w-xs mx-auto">
-        <input
+         <input
           name="username"
           className="!bg-white border rounded-md flex-1 !py-4 !px-4 sm:py-4 sm:px-6 !w-auto !mb-0 !p-0"
           defaultValue={desiredUsername}
@@ -47,8 +46,7 @@ export default function UsernameForm({ desiredUsername }) {
           <span>Continue</span>
           <RightIcon />
         </SubmitButton>
-      </div>
-    </form>
+     </form>
           </div>
   );
 }
