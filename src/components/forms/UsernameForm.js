@@ -30,7 +30,7 @@ export default function UsernameForm({ desiredUsername }) {
       
          <input
           name="username"
-          className="!bg-white border rounded-md flex-1 !py-4 !px-4 sm:py-4 sm:px-6 !w-auto !mb-0 !p-0 mx-6"
+          className="!bg-white border rounded-md flex-1 !py-4 !px-4 sm:py-4 sm:px-6 !w-auto !mb-0 !p-0 mx-8"
           defaultValue={desiredUsername}
           type="text"
           placeholder="username"
