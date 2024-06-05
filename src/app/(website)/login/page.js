@@ -5,7 +5,7 @@ import LoginWithKakao from "@/components/buttons/LoginWithKakao";
 import LoginWithFacebook from "@/components/buttons/LoginWithFacebook";
 import UsernameForm from "@/components/forms/UsernameForm";
 import { redirect } from "next/navigation";
-import { User } from "@/models/User";
+import { Page } from "@/models/Page";
 import mongoose from "mongoose";
 
 export default async function LoginPage({ searchParams }) {
@@ -23,14 +23,14 @@ export default async function LoginPage({ searchParams }) {
         await mongoose.connect(process.env.MONGO_URI);
       }
 
-      // Check if the user has already picked a username
-      const user = await User.findOne({ email: session?.user?.email });
-      if (user && user.username) {
-        console.log('User has already picked a username, redirecting to /account');
+      // Check if the user has a page associated with their email
+      const page = await Page.findOne({ owner: session?.user?.email });
+      if (page) {
+        console.log('User has a page, redirecting to /account');
         return redirect('/account');
       }
 
-      console.log('User has not picked a username, rendering UsernameForm');
+      console.log('User does not have a page, rendering UsernameForm');
       const desiredUsername = searchParams.desiredUsername || "";
       return <UsernameForm desiredUsername={desiredUsername} />;
     }
