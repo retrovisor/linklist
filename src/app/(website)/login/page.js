@@ -4,7 +4,6 @@ import LoginWithGoogle from "@/components/buttons/LoginWithGoogle";
 import LoginWithKakao from "@/components/buttons/LoginWithKakao";
 import LoginWithFacebook from "@/components/buttons/LoginWithFacebook";
 import UsernameForm from "@/components/forms/UsernameForm";
-import { redirect } from "next/navigation";
 import { Page } from "@/models/Page";
 import mongoose from "mongoose";
 
@@ -27,7 +26,12 @@ export default async function LoginPage({ searchParams }) {
       const page = await Page.findOne({ owner: session?.user?.email });
       if (page) {
         console.log('User has a page, redirecting to /account');
-        return redirect('/account');
+        return new Response(null, {
+          status: 302,
+          headers: {
+            Location: '/account',
+          },
+        });
       }
 
       console.log('User does not have a page, rendering UsernameForm');
