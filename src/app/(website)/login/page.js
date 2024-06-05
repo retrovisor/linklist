@@ -26,12 +26,18 @@ export default async function LoginPage({ searchParams }) {
       const page = await Page.findOne({ owner: session?.user?.email });
       if (page) {
         console.log('User has a page, redirecting to /account');
-        return new Response(null, {
-          status: 302,
-          headers: {
-            Location: '/account',
-          },
-        });
+        return (
+          <div>
+            <h1>Redirecting to Account...</h1>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.location.href = '/account';
+                `,
+              }}
+            />
+          </div>
+        );
       }
 
       console.log('User does not have a page, rendering UsernameForm');
