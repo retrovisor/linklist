@@ -76,7 +76,7 @@ export default function PageLinksForm({ page, user }) {
   }
 
   function handleIconSelect(icon) {
-    console.log('Selected Icon:', icon); // Debug log
+    console.log('선택한 아이콘:', icon); // Debug log
     setLinks((prevLinks) => {
       const newLinks = [...prevLinks];
       newLinks.forEach((link) => {
