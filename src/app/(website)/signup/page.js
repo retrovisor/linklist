@@ -24,7 +24,7 @@ export default async function LoginPage({ searchParams }) {
     return (
       <div>
         <div className="p-4 max-w-xs mx-auto">
-          <h1 className="text-4xl font-bold text-center mb-2">Create account</h1>
+          <h1 className="text-4xl font-bold text-center mb-2">계정 만들기</h1>
           <p className="text-center mb-6 text-gray-500">
             아래 방법을 사용하여 무료로 Fizz.link 계정을 생성하세요
           </p>
