@@ -28,7 +28,7 @@ export default async function LoginPage({ searchParams }) {
         console.log('User has a page, redirecting to /account');
         return (
           <div>
-            <h1>Redirecting to Account...</h1>
+            <h1>계정으로 리디렉션 중...</h1>
             <script
               dangerouslySetInnerHTML={{
                 __html: `
@@ -51,7 +51,7 @@ export default async function LoginPage({ searchParams }) {
         <div className="p-4 max-w-xs mx-auto">
           <h1 className="text-4xl font-bold text-center mb-2">Sign In</h1>
           <p className="text-center mb-6 text-gray-500">
-            Sign in to your account using one of the methods below
+            아래 방법 중 하나를 사용하여 계정에 로그인하세요
           </p>
           <LoginWithKakao />
           <div className="mt-4">
