@@ -23,19 +23,19 @@ export default async function Home() {
               ))}
             </div>
           </div>
-          <div className="text-center mt-1">&ldquo;Best link-in-bio tool I&apos;ve used&rdquo;</div>
+          <div className="text-center mt-1">&ldquo;제가 사용해 본 최고의 링크-인-바이오 도구입니다&rdquo;</div>
         </div>
       </div>
 
       <section className="pt-8 pb-12 px-6">
         <div className="max-w-md mx-auto text-center">
           <h1 className="text-5xl font-bold">
-            Your one link<br />for <span className="italic">everything</span>
+            모든 것을 하나의 <br /> <span className="italic">링크로 만드세요</span>
           </h1>
           <h2 className="text-gray-500 text-base mt-6">
-            Share your links, social profiles, creations, contact info and more on a single page
+            여러분의 링크, 소셜 프로필, 창작물, 연락처 정보 등을 한 공간에서 공유하세요
           </h2>
-          <div className="font-bold mt-4 text-xl">It&apos;s free! 🎉</div>
+          <div className="font-bold mt-4 text-xl">무료입니다! 🎉</div>
         </div>
         <div className="w-full flex justify-center mt-8 px-8">
           <HeroForm user={session?.user} />
@@ -60,11 +60,11 @@ export default async function Home() {
  
               
           <h1 className="text-5xl font-bold">
-           Amazingly easy design
+           놀라울 정도로 쉽게 디자인하세요
 
           </h1>
           <h2 className="text-gray-500 text-base my-6">
-Get started quickly with templates. Edit your own page with just your smartphone.  Simply select your favorite design and set it to change the design all at once.
+템플릿으로 이용해서 빠르게 시작하세요. 스마트폰만으로 자신만의 페이지를 편집하세요. 좋아하는 디자인을 선택하고 한 번에 디자인을 변경하세요.
 
           </h2>
 
@@ -80,12 +80,12 @@ Get started quickly with templates. Edit your own page with just your smartphone
  
               
           <h1 className="text-5xl font-bold text-white">
-           Join 10 000 users
+           10,000명의 사용자가 함께합니다
           </h1>
           <h2 className="text-gray-500 text-base mt-6 text-white">
-Users from 20+ countries and all popular platforms are already using Fizz.link. Check out their profiles and discover their pages!
+20개국+ 이상의 사용자들과 다양한 인기 플랫폼에서 이미 Fizz.link를 사용하고 있습니다. 그들의 프로필을 확인하고 페이지를 탐색하세요!
           </h2>
-          <div className="font-bold mt-4 text-xl text-white">It&apos;s free! 🎉</div>
+          <div className="font-bold mt-4 text-xl text-white">무료입니다! 🎉</div>
         </div>
               <div className="w-full flex justify-center mt-8 px-8">
           <HeroForm user={session?.user} />
