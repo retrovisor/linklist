@@ -16,9 +16,9 @@ export default function PageYouTubeForm({ page, user }) {
   async function saveYouTubeVideo(video) {
     const response = await savePageYouTubeVideo(video);
     if (response.success) {
-      toast.success('YouTube video saved!');
+      toast.success('유튜브 영상이 저장되었습니다!');
     } else {
-      toast.error('Failed to save YouTube video. Please try again.');
+      toast.error('YouTube 동영상을 저장하지 못했습니다. 다시 시도해 주세요.');
     }
   }
 
@@ -28,7 +28,7 @@ export default function PageYouTubeForm({ page, user }) {
       setYouTubeVideos(prevYouTubeVideos => prevYouTubeVideos.filter(video => video.key !== videoToDelete.key));
       setShowDeleteConfirmation(false);
       setVideoToDelete(null);
-      toast.success('YouTube video deleted!');
+      toast.success('유튜브 영상이 삭제되었습니다!');
     }
   }
 
@@ -63,14 +63,14 @@ export default function PageYouTubeForm({ page, user }) {
 
           <SectionBox>
   <div className="flex items-center justify-between mb-4">
-    <h2 className="text-2xl font-bold border-b-4 border-cyan-200 inline-block">📺 Youtube Videos</h2>
+    <h2 className="text-2xl font-bold border-b-4 border-cyan-200 inline-block">📺 유튜브 영상</h2>
     <button
       onClick={addNewYouTubeVideo}
       type="button"
       className="text-blue-500 add_button text-lg flex gap-2 items-center cursor-pointer"
     >
       <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full aspect-square" icon={faPlus} />
-      <span>Add new</span>
+      <span>새로운 걸 더하다</span>
     </button>
   </div>
 
@@ -86,7 +86,7 @@ export default function PageYouTubeForm({ page, user }) {
                 />
               </div>
               <div>
-                <label className="input-label">YouTube Video URL:</label>
+                <label className="input-label">YouTube 동영상 URL:</label>
                 <input
                   value={video.url}
                   onChange={ev => handleYouTubeVideoChange(video.key, ev)}
@@ -100,7 +100,7 @@ export default function PageYouTubeForm({ page, user }) {
                     className="bg-red-500 text-white px-4 py-2 rounded mr-2 flex items-center"
                   >
                     <FontAwesomeIcon icon={faTrash} className="mr-2" />
-                    Remove
+                    제거
                   </button>
                   <button
                     onClick={() => saveYouTubeVideo(video)}
@@ -108,7 +108,7 @@ export default function PageYouTubeForm({ page, user }) {
                     className="bg-blue-500 text-white px-4 py-2 rounded flex items-center"
                   >
                     <FontAwesomeIcon icon={faSave} className="mr-2" />
-                    Save Video
+                    비디오 저장
                   </button>
                 </div>
               </div>
@@ -132,7 +132,7 @@ export default function PageYouTubeForm({ page, user }) {
                   <h3 className="text-base font-semibold leading-6 text-gray-900">Delete YouTube Video</h3>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      Are you sure you want to delete this YouTube video? This action cannot be undone.
+                   이 링크를 정말로 삭제하시겠습니까? 이 행동은 취소할 수 없습니다.
                     </p>
                   </div>
                 </div>
@@ -144,14 +144,14 @@ export default function PageYouTubeForm({ page, user }) {
                 className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
                 onClick={confirmDeleteYouTubeVideo}
               >
-                Delete
+                삭제
               </button>
               <button
                 type="button"
                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                 onClick={() => setShowDeleteConfirmation(false)}
               >
-                Cancel
+                취소
               </button>
             </div>
           </div>
