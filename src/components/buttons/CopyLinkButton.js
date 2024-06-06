@@ -11,7 +11,7 @@ const CopyLinkButton = ({ uri }) => {
   const copyLink = () => {
     navigator.clipboard.writeText(`https://fizz.link/${uri}`);
     setCopied(true);
-    toast.success('Link copied to clipboard!');
+    toast.success('링크가 클립보드에 복사되었습니다!');
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -21,7 +21,7 @@ const CopyLinkButton = ({ uri }) => {
       onClick={copyLink}
     >
       <FontAwesomeIcon icon={faCopy} className="mr-2" />
-      <span>{copied ? 'Copied!' : 'Copy Link'}</span>
+      <span>{copied ? '복사되었습니다!' : '링크 복사'}</span>
     </button>
   );
 };
