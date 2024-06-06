@@ -21,7 +21,7 @@ export default function LoginWithKakao() {
       className="bg-yellow-400 shadow text-center w-full py-4 flex gap-3 items-center justify-center"
     >
       <Image src={kakaoLogo} alt="Kakao" width={24} height={24} className="h-6" />
-      <span>Sign In with Kakao</span>
+      <span>카카오톡으로 로그인</span>
     </button>
   );
 }
