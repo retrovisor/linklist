@@ -43,14 +43,14 @@ export default function HeroForm({ user }) {
         <input
   type="text"
   className="!bg-white border rounded-md flex-1 !py-4 !px-4 sm:py-4 sm:px-6 !w-auto !mb-0 !p-0"
-  placeholder="Enter username"
+  placeholder="사용자 이름 입력"
 />
 
         <button
           type="submit"
           className="btn-link3 text-white whitespace-nowrap !py-4 !px-4 sm:py-4 sm:px-6"
         >
-          Join for Free
+          무료로 가입하기
         </button>
       </form>
     </div>
