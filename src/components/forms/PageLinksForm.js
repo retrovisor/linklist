@@ -109,14 +109,14 @@ export default function PageLinksForm({ page, user }) {
   return (
     <SectionBox>
   <div className="flex items-center justify-between mb-4">
-    <h2 className="text-2xl font-bold border-b-4 border-cyan-200 inline-block">🔗 Links</h2>
+    <h2 className="text-2xl font-bold border-b-4 border-cyan-200 inline-block">🔗 링크</h2>
     <button
       onClick={addNewLink}
       type="button"
       className="text-blue-500 add_button text-lg flex gap-2 items-center cursor-pointer"
     >
       <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full aspect-square" icon={faPlus} />
-      <span>Add new</span>
+      <span>새로운 걸 더하다</span>
     </button>
   </div>
      
@@ -173,12 +173,12 @@ export default function PageLinksForm({ page, user }) {
                 />
               </div>
               <div>
-                <label className="input-label">Subtitle:</label>
+                <label className="input-label">부제목:</label>
                 <input
                   value={l.subtitle}
                   onChange={ev => handleLinkChange(l.key, 'subtitle', ev)}
                   type="text"
-                  placeholder="subtitle (optional)"
+                  placeholder="부제목 (optional)"
                 />
               </div>
             </div>
@@ -200,7 +200,7 @@ export default function PageLinksForm({ page, user }) {
             className="bg-red-500 text-white px-4 py-2 rounded mr-2 flex items-center"
           >
             <FontAwesomeIcon icon={faTrash} className="mr-2" />
-            Remove
+            제거
           </button>
           <button
             onClick={() => saveLink(l)}
@@ -208,7 +208,7 @@ export default function PageLinksForm({ page, user }) {
             className="bg-blue-500 text-white px-4 py-2 rounded flex items-center"
           >
             <FontAwesomeIcon icon={faSave} className="mr-2" />
-            Save Link
+            링크 저장
           </button>
         </div>
       </div>
@@ -238,10 +238,10 @@ export default function PageLinksForm({ page, user }) {
           </svg>
         </div>
         <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-          <h3 className="text-base font-semibold leading-6 text-gray-900">Delete Link</h3>
+          <h3 className="text-base font-semibold leading-6 text-gray-900">링크 삭제</h3>
           <div className="mt-2">
             <p className="text-sm text-gray-500">
-              Are you sure you want to delete this link? This action cannot be undone.
+              이 링크를 정말로 삭제하시겠습니까? 이 행동은 취소할 수 없습니다.
             </p>
           </div>
         </div>
@@ -253,14 +253,14 @@ export default function PageLinksForm({ page, user }) {
         className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
         onClick={confirmDeleteLink}
       >
-        Delete
+        삭제
       </button>
       <button
         type="button"
         className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
         onClick={() => setShowDeleteConfirmation(false)}
       >
-        Cancel
+        취소
       </button>
     </div>
   </div>
