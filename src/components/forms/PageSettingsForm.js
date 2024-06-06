@@ -133,7 +133,7 @@ export default function PageSettingsForm({ page, user }) {
             </div>
           </div>
           <div className="p-0">
-            <label className="input-label" htmlFor="nameIn">Display name</label>
+            <label className="input-label" htmlFor="nameIn">디스플레이 이름</label>
             <input
               type="text"
               id="nameIn"
