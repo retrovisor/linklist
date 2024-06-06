@@ -98,7 +98,7 @@ export default function PageSettingsForm({ page, user }) {
                       <FontAwesomeIcon
                         icon={faCloudArrowUp}
                         className="text-gray-700" />
-                      <span>Change image</span>
+                      <span>이미지 변경</span>
                     </div>
                   </label>
                 </div>
