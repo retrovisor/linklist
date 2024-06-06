@@ -31,7 +31,7 @@ export default function PageLinksForm({ page, user }) {
 
   async function saveLink(link) {
     await savePageLink(link);
-    toast.success('Link saved!');
+    toast.success('링크가 저장되었습니다!');
   }
 
   async function confirmDeleteLink() {
