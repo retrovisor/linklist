@@ -16,9 +16,9 @@ export default function PageTextBoxesForm({ page, user }) {
   async function saveTextBox(textBox) {
   const response = await savePageTextBox(textBox);
   if (response.success) {
-    toast.success('Text box saved!');
+    toast.success('텍스트 상자가 저장되었습니다!');
   } else {
-    toast.error('Failed to save text box. Please try again.');
+    toast.error('텍스트 상자를 저장하지 못했습니다. 다시 시도해 주세요.');
   }
 }
 
@@ -28,7 +28,7 @@ export default function PageTextBoxesForm({ page, user }) {
       setTextBoxes(prevTextBoxes => prevTextBoxes.filter(tb => tb.key !== textBoxToDelete.key));
       setShowDeleteConfirmation(false);
       setTextBoxToDelete(null);
-      toast.success('Text box deleted!');
+      toast.success('텍스트 상자가 삭제되었습니다!');
     }
   }
 
@@ -63,14 +63,14 @@ export default function PageTextBoxesForm({ page, user }) {
   return (
 <SectionBox>
   <div className="flex items-center justify-between mb-4">
-    <h2 className="text-2xl font-bold border-b-4 border-cyan-200 inline-block">✍️ Text Boxes</h2>
+    <h2 className="text-2xl font-bold border-b-4 border-cyan-200 inline-block">✍️ 텍스트 박스</h2>
     <button
       onClick={addNewTextBox}
       type="button"
       className="text-blue-500 add_button text-lg flex gap-2 items-center cursor-pointer"
     >
       <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full aspect-square" icon={faPlus} />
-      <span>Add new</span>
+      <span>새로운 걸 더하다</span>
     </button>
   </div>
        <div className="">
@@ -84,18 +84,18 @@ export default function PageTextBoxesForm({ page, user }) {
                 />
               </div>
               <div>
-  <label className="input-label">Title:</label>
+  <label className="input-label">제목:</label>
   <input
     value={tb.title}
     onChange={ev => handleTextBoxChange(tb.key, 'title', ev)}
     type="text"
-    placeholder="Title"
+    placeholder="제목"
   />
-  <label className="input-label">Text:</label>
+  <label className="input-label">텍스트:</label>
   <textarea
     value={tb.text}
     onChange={ev => handleTextBoxChange(tb.key, 'text', ev)}
-    placeholder="Text"
+    placeholder="텍스트"
     rows={2}
     className="min-h-[70px]"
   ></textarea>
@@ -106,7 +106,7 @@ export default function PageTextBoxesForm({ page, user }) {
       className="bg-red-500 text-white px-4 py-2 rounded mr-2 flex items-center"
     >
       <FontAwesomeIcon icon={faTrash} className="mr-2" />
-      Remove
+      제거
     </button>
     <button
       onClick={() => saveTextBox(tb)}
@@ -114,7 +114,7 @@ export default function PageTextBoxesForm({ page, user }) {
       className="bg-blue-500 text-white px-4 py-2 rounded flex items-center"
     >
       <FontAwesomeIcon icon={faSave} className="mr-2" />
-      Save Text Box
+      텍스트 박스 저장
     </button>
   </div>
 </div>
@@ -136,10 +136,10 @@ export default function PageTextBoxesForm({ page, user }) {
                   </svg>
                 </div>
                 <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                  <h3 className="text-base font-semibold leading-6 text-gray-900">Delete Text Box</h3>
+                  <h3 className="text-base font-semibold leading-6 text-gray-900">텍스트 상자 삭제</h3>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      Are you sure you want to delete this text box? This action cannot be undone.
+                      이 링크를 정말로 삭제하시겠습니까? 이 행동은 취소할 수 없습니다.
                     </p>
                   </div>
                 </div>
@@ -151,14 +151,14 @@ export default function PageTextBoxesForm({ page, user }) {
                 className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
                 onClick={confirmDeleteTextBox}
               >
-                Delete
+                삭제
               </button>
               <button
                 type="button"
                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                 onClick={() => setShowDeleteConfirmation(false)}
               >
-                Cancel
+                취소
               </button>
             </div>
           </div>
