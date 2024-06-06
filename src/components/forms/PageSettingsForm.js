@@ -21,7 +21,7 @@ export default function PageSettingsForm({ page, user }) {
   async function saveBaseSettings(formData) {
     const result = await savePageSettings(formData);
     if (result) {
-      toast.success('Saved!');
+      toast.success('저장됐습니다!');
     }
   }
 
@@ -33,7 +33,7 @@ export default function PageSettingsForm({ page, user }) {
     formData.append('bgImage', link);
     formData.append('bgType', 'image'); // Add bgType to the form data
     await savePageSettings(formData);
-    toast.success('Background image saved!');
+    toast.success('배경 이미지가 저장되었습니다!');
   });
 }
 
@@ -43,7 +43,7 @@ export default function PageSettingsForm({ page, user }) {
     const formData = new FormData();
     formData.append('avatar', link);
     await savePageSettings(formData);
-    toast.success('Avatar image saved!');
+    toast.success('아바타 이미지가 저장되었습니다!');
   });
 }
   return (
@@ -62,22 +62,22 @@ export default function PageSettingsForm({ page, user }) {
               <RadioTogglers
                 defaultValue={page.bgType}
                 options={[
-                  {value:'color', icon: faPalette, label: 'Color'},
-                  {value:'image', icon: faImage, label: 'Image'},
+                  {value:'color', icon: faPalette, label: '색상'},
+                  {value:'image', icon: faImage, label: '영상'},
                 ]}
                 onChange={val => setBgType(val)}
               />
               {bgType === 'color' && (
                 <div className="bg-gray-200 shadow text-gray-700 p-2 mt-2">
                   <div className="flex gap-2 justify-center">
-                    <span>Background color:</span>
+                    <span>배경 색상:</span>
                    <input
                   type="color"
                   name="bgColor"
                   onChange={async (ev) => {
                     setBgColor(ev.target.value);
                     await savePageSettings(new FormData(ev.target.form));
-                    toast.success('Background color saved!');
+                    toast.success('배경 이미지가 저장되었습니다!');
                   }}
                   defaultValue={page.bgColor}
                 />
@@ -139,26 +139,26 @@ export default function PageSettingsForm({ page, user }) {
               id="nameIn"
               name="displayName"
               defaultValue={page.displayName}
-              placeholder="Your Name"/>
-            <label className="input-label" htmlFor="locationIn">Location</label>
+              placeholder="내 이름"/>
+            <label className="input-label" htmlFor="locationIn">위치</label>
             <input
               type="text"
               id="locationIn"
               name="location"
               defaultValue={page.location}
-              placeholder="Your location"/>
-            <label className="input-label" htmlFor="bioIn">Bio</label>
+              placeholder="내 위치"/>
+            <label className="input-label" htmlFor="bioIn">바이오</label>
             <textarea
               rows={2}
               className="min-h-[70px]"
               name="bio"
               defaultValue={page.bio}
               id="bioIn"
-              placeholder="Your bio goes here..." />
+              placeholder="여기에 당신의 바이오를 입력하세요..." />
             <div className="max-w-[200px] mx-auto">
               <SubmitButton>
                 <FontAwesomeIcon icon={faSave} />
-                <span>Save</span>
+                <span>구하다</span>
               </SubmitButton>
             </div>
           </div>
