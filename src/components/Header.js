@@ -21,14 +21,14 @@ export default async function Header() {
           {session ? (
             <>
               <Link href={'/account'} className="btn-link2 mr-2">
-                My Page
+                내 페이지
               </Link>
               <LogoutButton />
             </>
           ) : (
             <>
-              <Link href={'/login'} className="btn-link2">Login</Link>
-              <Link href={'/signup'} className="btn-link">Sign Up</Link>
+              <Link href={'/login'} className="btn-link2">로그인</Link>
+              <Link href={'/signup'} className="btn-link">가입하기</Link>
             </>
           )}
         </nav>
