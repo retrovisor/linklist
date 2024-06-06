@@ -21,7 +21,7 @@ export default function LoginWithFacebook() {
       className="bg-blue-600 text-white shadow text-center w-full py-4 flex gap-3 items-center justify-center"
     >
       <FontAwesomeIcon icon={faFacebook} className="h-6" />
-      <span>Sign In with Facebook</span>
+      <span>페이스북으로 로그인</span>
     </button>
   );
 }
