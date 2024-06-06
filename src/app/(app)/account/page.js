@@ -77,6 +77,6 @@ export default async function AccountPage({ searchParams }) {
     );
   } catch (error) {
     console.error('Error:', error);
-    return <div>An error occurred. Please try again later.</div>;
+    return <div>에러 발생됨. 나중에 다시 시도 해주십시오</div>;
   }
 }
