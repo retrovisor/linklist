@@ -15,7 +15,7 @@ export async function generateMetadata({ params }) {
 
     if (!page) {
       return {
-        title: 'Page Not Found | Fizz.link',
+        title: '페이지를 찾을 수 없음 | Fizz.link',
       };
     }
 
