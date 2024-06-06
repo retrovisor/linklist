@@ -43,9 +43,9 @@ export default function TemplateSelectionPage({ page, user }) {
   }
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div>로드 중...</div>}>
       <form onSubmit={handleSubmit}>
-        <h1 className="text-3xl font-bold text-center my-5">Choose Your Template</h1>
+        <h1 className="text-3xl font-bold text-center my-5">템플릿 선택</h1>
         <div className="max-w-sm mx-auto">
           <div className="relative">
             <button
@@ -68,7 +68,7 @@ export default function TemplateSelectionPage({ page, user }) {
             </button>
           </div>
           <SubmitButton>
-            <span>Use this template</span>
+            <span>이 템플릿 사용</span>
             <RightIcon />
           </SubmitButton>
         </div>
