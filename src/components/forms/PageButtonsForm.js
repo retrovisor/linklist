@@ -68,13 +68,13 @@ export default function PageButtonsForm({ user, page }) {
     try {
       const response = await savePageButtons(formData); // Send formData directly
       if (response.success) {
-        toast.success('Settings saved!');
+        toast.success('설정이 저장되었습니다!');
       } else {
-        toast.error(response.message || 'Failed to save settings.');
+        toast.error(response.message || '설정을 저장하지 못했습니다.');
       }
     } catch (error) {
       console.error('Failed to save settings:', error);
-      toast.error('Failed to save settings. Please try again.');
+      toast.error('설정을 저장하지 못했습니다. 다시 시도해 주세요.');
     }
   }
 
@@ -94,7 +94,7 @@ export default function PageButtonsForm({ user, page }) {
       <form onSubmit={saveButtons}>
     <div class="inline-block p-2">
 
-            <h2 class="text-2xl font-bold mb-4 border-b-4 border-cyan-200">⭐️ Social Links</h2>
+            <h2 class="text-2xl font-bold mb-4 border-b-4 border-cyan-200">⭐️ 소셜 링크</h2>
     </div>
     
         <ReactSortable
@@ -142,7 +142,7 @@ export default function PageButtonsForm({ user, page }) {
         <div className="pt-4">
           <SubmitButton className="max-w-xs mx-auto">
             <FontAwesomeIcon icon={faSave} />
-            <span>Save</span>
+            <span>저장하기</span>
           </SubmitButton>
         </div>
       </form>
