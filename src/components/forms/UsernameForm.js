@@ -23,7 +23,7 @@ export default function UsernameForm({ desiredUsername }) {
     <div className="py-12 w-full max-w-lg mx-auto">
 
     <h1 className="text-4xl font-bold text-center mb-8">
-        Grab your username
+        사용자 이름을 선택하세요
       </h1>
        
     <form className="flex flex-col sm:flex-row items-stretch sm:space-x-4 space-y-4 sm:space-y-0" onSubmit={handleSubmit}>
@@ -33,15 +33,15 @@ export default function UsernameForm({ desiredUsername }) {
           className="!bg-white border rounded-md flex-1 !py-4 !px-4 sm:py-4 sm:px-6 !w-auto !mb-0 !p-0 mx-8"
           defaultValue={desiredUsername}
           type="text"
-          placeholder="username"
+          placeholder="사용자 이름"
         />
         {taken && (
           <div className="bg-red-200 border border-red-500 p-2 mb-2 text-center">
-            This username is taken
+            이 사용자 이름은 사용 중입니다.
           </div>
         )}
         <SubmitButton>
-          Continue
+          계속하기
           
         </SubmitButton>
      </form>
