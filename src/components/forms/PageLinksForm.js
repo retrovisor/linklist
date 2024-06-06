@@ -40,7 +40,7 @@ export default function PageLinksForm({ page, user }) {
       setLinks(prevLinks => prevLinks.filter(l => l.key !== linkToDelete.key));
       setShowDeleteConfirmation(false);
       setLinkToDelete(null);
-      toast.success('Link deleted!');
+      toast.success('링크가 저장되었습니다!');
     }
   }
 
@@ -164,7 +164,7 @@ export default function PageLinksForm({ page, user }) {
             </div>
             <div className="flex-1 ml-2">
               <div>
-                <label className="input-label">Title:</label>
+                <label className="input-label">제목:</label>
                 <input
                   value={l.title}
                   onChange={ev => handleLinkChange(l.key, 'title', ev)}
