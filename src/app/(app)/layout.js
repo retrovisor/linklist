@@ -1,11 +1,11 @@
 export const metadata = {
-  title: 'Edit profile',
-  description: 'Customize your Fizz.link profile',
+  title: '프로필 수정',
+  description: 'Fizz.link 프로필을 맞춤설정하세요',
 }
 
 export default function RootLayout({ children }) {
  return (
-    <html lang="en">
+    <html lang="kr">
       <body>{children}</body>
     </html>
   )
