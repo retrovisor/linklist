@@ -17,9 +17,9 @@ export default function PageImageLinksForm({ page, user }) {
   async function saveImageLink(imageLink) {
     const response = await savePageImageLink(imageLink);
     if (response.success) {
-      toast.success('Image link saved!');
+      toast.success('이미지 링크가 저장되었습니다!');
     } else {
-      toast.error('Failed to save image link. Please try again.');
+      toast.error('이미지 링크를 저장하지 못했습니다. 다시 시도해 주세요.');
     }
   }
 
@@ -29,7 +29,7 @@ export default function PageImageLinksForm({ page, user }) {
       setImageLinks(prevImageLinks => prevImageLinks.filter(il => il.key !== imageLinkToDelete.key));
       setShowDeleteConfirmation(false);
       setImageLinkToDelete(null);
-      toast.success('Image link deleted!');
+      toast.success('이미지 링크가 삭제되었습니다!');
     }
   }
 
@@ -79,14 +79,14 @@ export default function PageImageLinksForm({ page, user }) {
   return (
  <SectionBox>
   <div className="flex items-center justify-between mb-4">
-    <h2 className="text-2xl font-bold border-b-4 border-cyan-200 inline-block">🖼️ Image Links</h2>
+    <h2 className="text-2xl font-bold border-b-4 border-cyan-200 inline-block">🖼️ 이미지 링크</h2>
     <button
       onClick={addNewImageLink}
       type="button"
       className="text-blue-500 add_button text-lg flex gap-2 items-center cursor-pointer"
     >
       <FontAwesomeIcon className="bg-blue-500 text-white p-1 rounded-full aspect-square" icon={faPlus} />
-      <span>Add new</span>
+      <span>새로운 걸 더하다</span>
     </button>
   </div>
            
@@ -101,20 +101,20 @@ export default function PageImageLinksForm({ page, user }) {
                 />
               </div>
               <div>
-                <label className="input-label">Title:</label>
+                <label className="input-label">제목:</label>
                 <input
                   value={il.title}
                   onChange={ev => handleImageLinkChange(il.key, 'title', ev)}
                   type="text"
                   placeholder="Title"
                 />
-                <label className="input-label">Image:</label>
+                <label className="input-label">이미지:</label>
                 <input
                   type="file"
                   accept="image/*"
                   onChange={ev => handleImageUpload(il.key, ev)}
                 />
-                <label className="input-label">Link URL:</label>
+                <label className="input-label">링크 URL:</label>
                 <input
                   value={il.linkUrl}
                   onChange={ev => handleImageLinkChange(il.key, 'linkUrl', ev)}
@@ -136,7 +136,7 @@ export default function PageImageLinksForm({ page, user }) {
                     className="bg-blue-500 text-white px-4 py-2 rounded flex items-center"
                   >
                     <FontAwesomeIcon icon={faSave} className="mr-2" />
-                    Save Image Link
+                    이미지 링크 저장
                   </button>
                 </div>
               </div>
@@ -157,10 +157,10 @@ export default function PageImageLinksForm({ page, user }) {
                   </svg>
                 </div>
                 <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                  <h3 className="text-base font-semibold leading-6 text-gray-900">Delete Image Link</h3>
+                  <h3 className="text-base font-semibold leading-6 text-gray-900">이미지 링크 삭제</h3>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      Are you sure you want to delete this image link? This action cannot be undone.
+                      이 링크를 정말로 삭제하시겠습니까? 이 행동은 취소할 수 없습니다.
                     </p>
                   </div>
                 </div>
