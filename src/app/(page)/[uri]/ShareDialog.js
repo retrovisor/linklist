@@ -86,7 +86,7 @@ function ShareDialog({ uri, children }) {
       {isOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-40">
           <div ref={dialogRef} className="bg-white rounded-lg p-6 w-96">
-            <h3 className="text-xl font-semibold mb-4 text-black">Share your Fizz.Link</h3>
+            <h3 className="text-xl font-semibold mb-4 text-black">Fizz.Link를 공유하세요</h3>
             <div className="flex flex-col gap-4">
 <button
   className="bg-green-500 text-white text-lg font-bold px-6 py-4 rounded flex items-center justify-center"
@@ -116,11 +116,11 @@ function ShareDialog({ uri, children }) {
                 onClick={copyLink}
               >
                 <FontAwesomeIcon icon={faCopy} className="mr-2" />  
-                {copySuccess ? 'Copied!' : 'Copy Link'}
+                {copySuccess ? '복사됨!' : '링크 복사'}
               </button>
             </div>
             <button className="mt-4" onClick={handleClose}>
-              Close
+              닫다
             </button>
           </div>
         </div>
