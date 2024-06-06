@@ -49,7 +49,7 @@ export default async function LoginPage({ searchParams }) {
     return (
       <div>
         <div className="p-4 max-w-xs mx-auto">
-          <h1 className="text-4xl font-bold text-center mb-2">Sign In</h1>
+          <h1 className="text-4xl font-bold text-center mb-2">로그인</h1>
           <p className="text-center mb-6 text-gray-500">
             아래 방법 중 하나를 사용하여 계정에 로그인하세요
           </p>
