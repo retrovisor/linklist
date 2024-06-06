@@ -26,7 +26,7 @@ export default async function LoginPage({ searchParams }) {
         <div className="p-4 max-w-xs mx-auto">
           <h1 className="text-4xl font-bold text-center mb-2">Create account</h1>
           <p className="text-center mb-6 text-gray-500">
-            Sign up to your free Fizz.link account using one of the methods below
+            아래 방법을 사용하여 무료로 Fizz.link 계정을 생성하세요
           </p>
           <LoginWithKakao />
           <div className="mt-4">
