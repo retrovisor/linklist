@@ -23,6 +23,16 @@ const nextConfig = {
       },
     ],
   },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        fs: require.resolve('browserify-fs'),
+        path: require.resolve('path-browserify'),
+        crypto: require.resolve('crypto-browserify'),
+      };
+    }
+    return config;
+  },
 };
 
 module.exports = {
