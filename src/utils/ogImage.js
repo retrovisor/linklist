@@ -1,32 +1,56 @@
-import { createCanvas, loadImage } from 'canvas';
-import { writeFile } from 'fs/promises';
+import sharp from 'sharp';
 import path from 'path';
+import fs from 'fs';
 
-export async function generateOgImage(backgroundImageUrl, avatarImageUrl) {
+export default async function handler(req, res) {
+  const { name } = req.query;
+
   try {
-    const [background, avatar] = await Promise.all([
-      loadImage(backgroundImageUrl),
-      loadImage(avatarImageUrl),
-    ]);
+    const decodedName = decodeURIComponent(name);
+    const firstName = decodedName.split(' ')[0];
 
-    const canvas = createCanvas(1200, 630);
-    const ctx = canvas.getContext('2d');
+    // Remove accents and non-alphanumeric characters from the first name
+    const fileNameFirstName = firstName
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-zA-Z0-9]/g, '');
 
-    ctx.drawImage(background, 0, 0, 1200, 630);
+    const outputFilename = `og_${fileNameFirstName}.jpg`;
+    const baseImagePath = path.join(process.cwd(), 'public', 'base2.jpg');
+    const outputImagePath = path.join(process.cwd(), 'public', 'ogimages', outputFilename);
 
-    const avatarSize = 200;
-    const avatarX = (1200 - avatarSize) / 2;
-    const avatarY = (630 - avatarSize) / 2;
-    ctx.drawImage(avatar, avatarX, avatarY, avatarSize, avatarSize);
+    // Check if the generated image already exists
+    if (fs.existsSync(outputImagePath)) {
+      res.setHeader('Content-Type', 'image/jpeg');
+      res.send(fs.readFileSync(outputImagePath));
+      return;
+    }
 
-    const filename = `og-image-${Date.now()}.png`;
-    const imagePath = path.join(process.cwd(), 'public', 'og-images', filename);
+    const baseImage = sharp(baseImagePath);
+    const metadata = await baseImage.metadata();
 
-    await writeFile(imagePath, canvas.toBuffer());
+    const fontSize = 74;
+    const textX = 40;
+    const textY = 170;
+    const textRotation = -20;
 
-    return `/og-images/${filename}`;
+    const svgText = `
+      <svg width="${metadata.width}" height="${metadata.height}">
+        <text x="${textX}" y="${textY}" font-size="${fontSize}" fill="white" stroke="black" stroke-width="3" transform="rotate(${textRotation} ${textX}, ${textY})">
+          ${firstName}
+        </text>
+      </svg>
+    `;
+
+    const generatedImage = await baseImage
+      .composite([{ input: Buffer.from(svgText), top: 0, left: 0 }])
+      .toFile(outputImagePath);
+
+    res.setHeader('Content-Type', 'image/jpeg');
+    res.send(generatedImage);
   } catch (error) {
     console.error('Error generating OG image:', error);
-    return null;
+    res.status(500).json({ error: 'Failed to generate OG image' });
   }
 }
