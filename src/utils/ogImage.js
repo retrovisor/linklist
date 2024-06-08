@@ -1,6 +1,7 @@
 import Jimp from 'jimp';
 import path from 'path';
-import fs from 'fs';
+import fs from 'browserify-fs';
+
 
 export async function generateOgImage(backgroundImageUrl, avatarImageUrl) {
   try {
