@@ -16,6 +16,7 @@ export async function generateMetadata({ params }) {
         title: '페이지를 찾을 수 없음 | Fizz.link',
       };
     }
+    const ogImageUrl = page.ogImageUrl; // Retrieve the pre-generated OG image URL from the page's document
     return {
       title: `${page.displayName} (@${page.uri}) | Fizz.link`,
       openGraph: {
@@ -25,10 +26,10 @@ export async function generateMetadata({ params }) {
         type: 'website',
         images: [
           {
-            url: page.image,
-            width: 800,
-            height: 600,
-            alt: 'User image',
+            url: ogImageUrl, // Use the pre-generated OG image URL
+            width: 1200,
+            height: 630,
+            alt: 'Generated OG image',
           },
         ],
       },
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }) {
         description: page.bio,
         site: '@FizzLink',
         creator: '@FizzLink',
-        images: [page.image],
+        images: [ogImageUrl], // Use the pre-generated OG image URL
       },
     };
   } catch (error) {
@@ -54,7 +55,6 @@ export default function RootLayout({ children }) {
     <html lang="kr">
       <body className={lato.className}>
         <main>
-     
           {children}
         </main>
       </body>
