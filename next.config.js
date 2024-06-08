@@ -1,5 +1,4 @@
 const { i18n } = require('./next-i18next.config');
-const withTM = require('next-transpile-modules')(['sharp']);
 
 const nextConfig = {
   images: {
@@ -26,7 +25,7 @@ const nextConfig = {
   },
 };
 
-module.exports = withTM({
+module.exports = {
   ...nextConfig,
   i18n,
-});
+};
