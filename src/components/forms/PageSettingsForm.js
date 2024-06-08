@@ -28,11 +28,12 @@ export default function PageSettingsForm({ page, user }) {
   async function handleCoverImageChange(ev) {
   await upload(ev, async (link) => {
     setBgImage(link);
-    setBgType('image'); // Update bgType to 'image'
+    setBgType('image');
     const formData = new FormData();
     formData.append('bgImage', link);
-    formData.append('bgType', 'image'); // Add bgType to the form data
+    formData.append('bgType', 'image');
     await savePageSettings(formData);
+    await generateOgImage(link, avatar); // Generate OG image with the new background image
     toast.success('배경 이미지가 저장되었습니다!');
   });
 }
@@ -43,6 +44,7 @@ export default function PageSettingsForm({ page, user }) {
     const formData = new FormData();
     formData.append('avatar', link);
     await savePageSettings(formData);
+    await generateOgImage(bgImage, link); // Generate OG image with the new avatar image
     toast.success('아바타 이미지가 저장되었습니다!');
   });
 }
