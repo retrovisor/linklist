@@ -1,11 +1,12 @@
-/** @type {import('next').NextConfig} */
+const { i18n } = require('./next-i18next.config');
+const withTM = require('next-transpile-modules')(['sharp', 'canvas']);
+
 const nextConfig = {
   images: {
     remotePatterns: [
       {
         hostname: '*.googleusercontent.com',
       },
-    
       {
         hostname: 'linklist-files.s3.amazonaws.com',
       },
@@ -25,8 +26,7 @@ const nextConfig = {
   },
 };
 
-const { i18n } = require('./next-i18next.config');
-
-module.exports = {
-  nextConfig, i18n
- };
+module.exports = withTM({
+  ...nextConfig,
+  i18n,
+});
