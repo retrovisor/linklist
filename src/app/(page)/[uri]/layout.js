@@ -16,6 +16,12 @@ export async function generateMetadata({ params }) {
         title: '페이지를 찾을 수 없음 | Fizz.link',
       };
     }
+    const user = await User.findOne({ email: page.owner });
+    if (!user) {
+      return {
+        title: '사용자를 찾을 수 없음 | Fizz.link',
+      };
+    }
     return {
       title: `${page.displayName} (@${page.uri}) | Fizz.link`,
       openGraph: {
@@ -25,10 +31,10 @@ export async function generateMetadata({ params }) {
         type: 'website',
         images: [
           {
-            url: page.image,
+            url: user.image,
             width: 800,
             height: 600,
-            alt: 'User image',
+            alt: 'User avatar',
           },
         ],
       },
@@ -38,7 +44,7 @@ export async function generateMetadata({ params }) {
         description: page.bio,
         site: '@FizzLink',
         creator: '@FizzLink',
-        images: [page.image],
+        images: [user.image],
       },
     };
   } catch (error) {
@@ -48,6 +54,7 @@ export async function generateMetadata({ params }) {
     };
   }
 }
+
 
 export default function RootLayout({ children }) {
   return (
