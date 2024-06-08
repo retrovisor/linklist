@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
     return {
       title: `${page.displayName} (@${page.uri}) | Fizz.link`,
       openGraph: {
-        title: page.displayName,
+        title: `${page.displayName} (@${page.uri}) | Fizz.link`,
         description: page.bio,
         url: `https://fizz.link/${page.uri}`,
         type: 'website',
