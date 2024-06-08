@@ -1,5 +1,5 @@
 const { i18n } = require('./next-i18next.config');
-const withTM = require('next-transpile-modules')(['sharp', 'canvas']);
+const withTM = require('next-transpile-modules')(['sharp']);
 
 const nextConfig = {
   images: {
