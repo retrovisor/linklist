@@ -32,7 +32,7 @@ export async function generateMetadata({ params }) {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="kr">
       <body className={lato.className}>
         <main>
      
