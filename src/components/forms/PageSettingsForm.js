@@ -33,10 +33,12 @@ export default function PageSettingsForm({ page, user }) {
     formData.append('bgImage', link);
     formData.append('bgType', 'image');
     await savePageSettings(formData);
-    await generateOgImage(link, avatar); // Generate OG image with the new background image
+    const ogImageUrl = await generateOgImage(link, avatar);
+    await Page.updateOne({ uri: page.uri }, { ogImageUrl }); // Update the page document with the generated OG image URL
     toast.success('배경 이미지가 저장되었습니다!');
   });
 }
+
 
   async function handleAvatarImageChange(ev) {
   await upload(ev, async (link) => {
@@ -44,10 +46,12 @@ export default function PageSettingsForm({ page, user }) {
     const formData = new FormData();
     formData.append('avatar', link);
     await savePageSettings(formData);
-    await generateOgImage(bgImage, link); // Generate OG image with the new avatar image
+    const ogImageUrl = await generateOgImage(bgImage, link);
+    await Page.updateOne({ uri: page.uri }, { ogImageUrl }); // Update the page document with the generated OG image URL
     toast.success('아바타 이미지가 저장되었습니다!');
   });
 }
+
   return (
     <div>
       <SectionBox>
