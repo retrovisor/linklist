@@ -11,6 +11,7 @@ import {useState} from "react";
 import toast from "react-hot-toast";
 import { generateOgImage } from "@/utils/ogImage";
 
+
 export default function PageSettingsForm({ page, user }) {
   const [bgType, setBgType] = useState(page.bgType);
   const [bgColor, setBgColor] = useState(page.bgColor);
@@ -39,8 +40,7 @@ export default function PageSettingsForm({ page, user }) {
   });
 }
 
-
-  async function handleAvatarImageChange(ev) {
+async function handleAvatarImageChange(ev) {
   await upload(ev, async (link) => {
     setAvatar(link);
     const formData = new FormData();
