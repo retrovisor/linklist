@@ -9,7 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import {useState} from "react";
 import toast from "react-hot-toast";
-
+import { generateOgImage } from "@/utils/ogImage";
 
 export default function PageSettingsForm({ page, user }) {
   const [bgType, setBgType] = useState(page.bgType);
@@ -34,7 +34,7 @@ export default function PageSettingsForm({ page, user }) {
     formData.append('bgType', 'image');
     await savePageSettings(formData);
     const ogImageUrl = await generateOgImage(link, avatar);
-    await Page.updateOne({ uri: page.uri }, { ogImageUrl }); // Update the page document with the generated OG image URL
+    await Page.updateOne({ uri: page.uri }, { ogImageUrl });
     toast.success('배경 이미지가 저장되었습니다!');
   });
 }
@@ -47,7 +47,7 @@ export default function PageSettingsForm({ page, user }) {
     formData.append('avatar', link);
     await savePageSettings(formData);
     const ogImageUrl = await generateOgImage(bgImage, link);
-    await Page.updateOne({ uri: page.uri }, { ogImageUrl }); // Update the page document with the generated OG image URL
+    await Page.updateOne({ uri: page.uri }, { ogImageUrl });
     toast.success('아바타 이미지가 저장되었습니다!');
   });
 }
