@@ -1,5 +1,6 @@
 'use client';
 import {savePageSettings} from "@/actions/pageActions";
+import { Page } from "@/models/Page";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import RadioTogglers from "@/components/formItems/radioTogglers";
 import SectionBox from "@/components/layout/SectionBox";
@@ -10,7 +11,7 @@ import Image from "next/image";
 import {useState} from "react";
 import toast from "react-hot-toast";
 import { generateOgImage } from "@/utils/ogImage";
-import { Page } from "@/models/Page";
+
 
 
 export default function PageSettingsForm({ page, user }) {
