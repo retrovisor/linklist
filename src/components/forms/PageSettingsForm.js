@@ -29,35 +29,45 @@ export default function PageSettingsForm({ page, user }) {
   }
 
   async function handleCoverImageChange(ev) {
+  console.log('handleCoverImageChange called');
   await upload(ev, async (link) => {
+    console.log('Image uploaded:', link);
     setBgImage(link);
     setBgType('image');
     const formData = new FormData();
     formData.append('bgImage', link);
     formData.append('bgType', 'image');
     await savePageSettings(formData);
+    console.log('Page settings saved');
     const ogImageUrl = await generateOgImage(link, avatar);
-    await Page.findOneAndUpdate(
+    console.log('OG image generated:', ogImageUrl);
+    const updatedPage = await Page.findOneAndUpdate(
       { uri: page.uri },
       { ogImageUrl },
       { new: true }
     );
+    console.log('Page updated:', updatedPage);
     toast.success('배경 이미지가 저장되었습니다!');
   });
 }
 
 async function handleAvatarImageChange(ev) {
+  console.log('handleAvatarImageChange called');
   await upload(ev, async (link) => {
+    console.log('Avatar uploaded:', link);
     setAvatar(link);
     const formData = new FormData();
     formData.append('avatar', link);
     await savePageSettings(formData);
+    console.log('Page settings saved');
     const ogImageUrl = await generateOgImage(bgImage, link);
-    await Page.findOneAndUpdate(
+    console.log('OG image generated:', ogImageUrl);
+    const updatedPage = await Page.findOneAndUpdate(
       { uri: page.uri },
       { ogImageUrl },
       { new: true }
     );
+    console.log('Page updated:', updatedPage);
     toast.success('아바타 이미지가 저장되었습니다!');
   });
 }
