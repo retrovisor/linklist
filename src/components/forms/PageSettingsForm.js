@@ -39,6 +39,10 @@ export default function PageSettingsForm({ page, user }) {
     formData.append('bgType', 'image');
     await savePageSettings(formData);
     console.log('Page settings saved');
+
+    // Add a small delay before generating the OG image
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
     const ogImageUrl = await generateOgImage(link, avatar);
     console.log('OG image generated:', ogImageUrl);
     const updatedPage = await Page.findOneAndUpdate(
