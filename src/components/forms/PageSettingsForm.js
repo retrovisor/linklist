@@ -10,6 +10,7 @@ import Image from "next/image";
 import {useState} from "react";
 import toast from "react-hot-toast";
 import { generateOgImage } from "@/utils/ogImage";
+import { Page } from "@/models/Page";
 
 
 export default function PageSettingsForm({ page, user }) {
