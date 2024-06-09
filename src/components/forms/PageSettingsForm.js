@@ -36,7 +36,11 @@ export default function PageSettingsForm({ page, user }) {
     formData.append('bgType', 'image');
     await savePageSettings(formData);
     const ogImageUrl = await generateOgImage(link, avatar);
-    await Page.updateOne({ uri: page.uri }, { ogImageUrl });
+    await Page.findOneAndUpdate(
+      { uri: page.uri },
+      { ogImageUrl },
+      { new: true }
+    );
     toast.success('배경 이미지가 저장되었습니다!');
   });
 }
@@ -48,7 +52,11 @@ async function handleAvatarImageChange(ev) {
     formData.append('avatar', link);
     await savePageSettings(formData);
     const ogImageUrl = await generateOgImage(bgImage, link);
-    await Page.updateOne({ uri: page.uri }, { ogImageUrl });
+    await Page.findOneAndUpdate(
+      { uri: page.uri },
+      { ogImageUrl },
+      { new: true }
+    );
     toast.success('아바타 이미지가 저장되었습니다!');
   });
 }
