@@ -4,9 +4,14 @@ import fs from 'browserify-fs';
 
 
 export async function generateOgImage(backgroundImageUrl, avatarImageUrl) {
+    console.log('generateOgImage called');
+  console.log('Background image URL:', backgroundImageUrl);
+  console.log('Avatar image URL:', avatarImageUrl);
   try {
     const backgroundImage = await Jimp.read(backgroundImageUrl);
     const avatarImage = await Jimp.read(avatarImageUrl);
+        console.log('Images loaded successfully');
+
 
     const outputFilename = `og-image-${Date.now()}.png`;
     const outputImagePath = path.join(process.cwd(), 'public', 'og-images', outputFilename);
