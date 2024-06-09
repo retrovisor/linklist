@@ -41,7 +41,7 @@ export default function PageSettingsForm({ page, user }) {
     console.log('Page settings saved');
 
     // Add a small delay before generating the OG image
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 10000));
 
     const ogImageUrl = await generateOgImage(link, avatar);
     console.log('OG image generated:', ogImageUrl);
