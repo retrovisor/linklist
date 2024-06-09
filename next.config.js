@@ -2,6 +2,14 @@ const { i18n } = require('./next-i18next.config');
 
 const nextConfig = {
   images: {
+     domains: [
+      'googleusercontent.com',
+      'linklist-files.s3.amazonaws.com',
+      'momofriends.com',
+      'fizz.link',
+      '9057fd132931df3b08aa7529889a637f.r2.cloudflarestorage.com',
+      'k.kakaocdn.net',
+    ],
     remotePatterns: [
       {
         hostname: '*.googleusercontent.com',
