@@ -16,6 +16,7 @@ export async function generateOgImage(backgroundImageUrl, avatarImageUrl) {
     const backgroundImg = new Image();
     backgroundImg.crossOrigin = 'anonymous';
     backgroundImg.src = backgroundImageUrl;
+    backgroundImg.origin = 'https://fizz.link'; // Set the origin property
     await new Promise((resolve) => {
       backgroundImg.onload = resolve;
     });
@@ -31,6 +32,7 @@ export async function generateOgImage(backgroundImageUrl, avatarImageUrl) {
     const avatarImg = new Image();
     avatarImg.crossOrigin = 'anonymous';
     avatarImg.src = avatarImageUrl;
+    avatarImg.origin = 'https://fizz.link'; // Set the origin property
     await new Promise((resolve) => {
       avatarImg.onload = resolve;
     });
