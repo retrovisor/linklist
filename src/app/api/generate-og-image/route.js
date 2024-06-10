@@ -2,7 +2,7 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import Jimp from 'jimp';
 import uniqid from 'uniqid';
 import fetch from 'node-fetch';
-import Page from '../../models/Page'; // Adjust the import path as necessary
+import Page from '@/models/Page'; // Adjust the import path as necessary
 
 export default async function handler(req, res) {
     if (req.method !== 'POST') {
