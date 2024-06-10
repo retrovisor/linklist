@@ -1,43 +1,35 @@
-// Import necessary modules
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import sharp from 'sharp';
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import Jimp from 'jimp';
 import uniqid from 'uniqid';
-import express from 'express';
 import fetch from 'node-fetch';
+import Page from '../../models/Page'; // Adjust the import path as necessary
 
-const app = express();
-app.use(express.json());
+export default async function handler(req, res) {
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method Not Allowed' });
+    }
 
-// MongoDB setup (assuming Mongoose)
-import mongoose from 'mongoose';
-import Page from './models/Page'; // Import your Page model
-
-mongoose.connect('mongodb_connection_string');
-
-// Endpoint to generate and upload OG image
-app.post('/generate-og-image', async (req, res) => {
     const { backgroundImageUrl, avatarImageUrl, pageId } = req.body;
 
     try {
-        // Fetch and combine images using Sharp
-        const [backgroundBuffer, avatarBuffer] = await Promise.all([
-            fetch(backgroundImageUrl).then(res => res.buffer()),
-            fetch(avatarImageUrl).then(res => res.buffer())
+        const [background, avatar] = await Promise.all([
+            Jimp.read(backgroundImageUrl),
+            Jimp.read(avatarImageUrl)
         ]);
 
         const avatarSize = 200;
-        const background = sharp(backgroundBuffer);
-        const { width, height } = await background.metadata();
+        avatar.resize(avatarSize, Jimp.AUTO); // Resize avatar keeping aspect ratio
 
-        const ogImage = await background
-            .composite([{
-                input: avatarBuffer,
-                top: (height - avatarSize) / 2,
-                left: (width - avatarSize) / 2,
-                resize: { width: avatarSize, height: avatarSize }
-            }])
-            .png()
-            .toBuffer();
+        const x = (background.bitmap.width - avatarSize) / 2;
+        const y = (background.bitmap.height - avatarSize) / 2;
+
+        background.composite(avatar, x, y, {
+            mode: Jimp.BLEND_SOURCE_OVER,
+            opacitySource: 1,
+            opacityDest: 1
+        });
+
+        const ogImageBuffer = await background.getBufferAsync(Jimp.MIME_PNG);
 
         // Upload to R2
         const s3Client = new S3Client({
@@ -57,7 +49,7 @@ app.post('/generate-og-image', async (req, res) => {
             Bucket: bucketName,
             Key: newFilename,
             ACL: 'public-read',
-            Body: ogImage,
+            Body: ogImageBuffer,
             ContentType: 'image/png'
         }));
 
@@ -67,12 +59,9 @@ app.post('/generate-og-image', async (req, res) => {
         // Update MongoDB
         await Page.findOneAndUpdate({ _id: pageId }, { ogImageUrl: link });
 
-        res.json({ success: true, link });
+        res.status(200).json({ success: true, link });
     } catch (error) {
-        console.error('Error processing images', error);
-        res.status(500).json({ success: false, message: error.message });
+        console.error('Failed to generate OG image:', error);
+        res.status(500).json({ error: 'Internal Server Error', details: error.message });
     }
-});
-
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
