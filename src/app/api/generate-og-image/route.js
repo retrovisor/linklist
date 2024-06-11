@@ -26,10 +26,9 @@ export async function POST(request) {
 
         console.log('Images loaded successfully');
 
-        const exampleImagePath = '/mnt/data/image.png';
-        const exampleImage = await Jimp.read(exampleImagePath);
-        const finalWidth = exampleImage.bitmap.width;
-        const finalHeight = exampleImage.bitmap.height;
+        // Set final dimensions based on the example image
+        const finalWidth = 1000;  // Set the final width
+        const finalHeight = 524;  // Set the final height
 
         // Resize avatar keeping aspect ratio
         const avatarSize = 200;
@@ -60,8 +59,8 @@ export async function POST(request) {
         console.log('Mask applied successfully');
 
         // Calculate the position: one-third horizontally and vertically centered
-        const x = (background.bitmap.width / 3) - (avatarSize / 2);
-        const y = (background.bitmap.height - avatarSize) / 2;
+        const x = (finalWidth / 3) - (avatarSize / 2);
+        const y = (finalHeight - avatarSize) / 2;
         
         // Composite the avatar on top of the background
         background.composite(avatar, x, y, {
