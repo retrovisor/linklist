@@ -42,10 +42,10 @@ export async function POST(request) {
 
         // Create a circular mask
         const mask = new Jimp(avatarSize, avatarSize, 0x00000000); // Create a black (transparent) image
-        const centerX = avatarSize / 2;
-        const centerY = avatarSize / 2;
-        const radius = avatarSize / 2;
         mask.scan(0, 0, mask.bitmap.width, mask.bitmap.height, (x, y, idx) => {
+            const radius = avatarSize / 2;
+            const centerX = avatarSize / 2;
+            const centerY = avatarSize / 2;
             const dx = x - centerX;
             const dy = y - centerY;
             if (dx * dx + dy * dy <= radius * radius) {
