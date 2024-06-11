@@ -25,7 +25,26 @@ export async function POST(request) {
 
         const avatarSize = 200;
         avatar.resize(avatarSize, Jimp.AUTO); // Resize avatar keeping aspect ratio
-        const x = (background.bitmap.width - avatarSize) / 2;
+        
+        // Create a circular mask
+        const mask = new Jimp(avatarSize, avatarSize, (err, mask) => {
+            mask.scan(0, 0, mask.bitmap.width, mask.bitmap.height, (x, y, idx) => {
+                const radius = avatarSize / 2;
+                const centerX = avatarSize / 2;
+                const centerY = avatarSize / 2;
+                const distance = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+
+                if (distance > radius) {
+                    mask.bitmap.data[idx + 3] = 0; // Set alpha channel to 0
+                }
+            });
+        });
+
+        // Apply the circular mask to the avatar
+        avatar.mask(mask, 0, 0);
+
+        // Calculate the position: one-third horizontally and vertically centered
+        const x = (background.bitmap.width / 3) - (avatarSize / 2);
         const y = (background.bitmap.height - avatarSize) / 2;
         background.composite(avatar, x, y, {
             mode: Jimp.BLEND_SOURCE_OVER,
