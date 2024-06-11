@@ -3,6 +3,7 @@ import Jimp from 'jimp';
 import uniqid from 'uniqid';
 import { Page } from '@/models/Page';
 import mongoose from 'mongoose';
+import path from 'path';
 
 mongoose.connect(process.env.MONGO_URI, {
   serverSelectionTimeoutMS: 30000,
@@ -20,7 +21,9 @@ export async function POST(request) {
       Jimp.read(avatarImageUrl)
     ]);
 
-    const font = await Jimp.loadFont(Jimp.FONT_SANS_32_WHITE);
+    // Load font from local files
+    const fontPath = path.join(process.cwd(), 'public/fonts/open-sans/open-sans-32-white/open-sans-32-white.fnt');
+    const font = await Jimp.loadFont(fontPath);
 
     const finalWidth = 1000;
     const finalHeight = 524;
