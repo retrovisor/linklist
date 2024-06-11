@@ -39,7 +39,8 @@ export async function POST(request) {
     avatar.circle();
 
     const x = (finalWidth - avatarSize) / 2;
-    const y = (finalHeight - avatarSize) / 2;
+    const topMargin = 50; // Adjust this value to control the distance from the top
+    const y = topMargin;
 
     background.composite(avatar, x, y, {
       mode: Jimp.BLEND_SOURCE_OVER,
