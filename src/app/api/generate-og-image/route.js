@@ -23,7 +23,14 @@ export async function POST(request) {
     ]);
 
     const avatarSize = 200;
-    avatar.resize(avatarSize, avatarSize); // Resize avatar to a square
+    avatar.cover(avatarSize, avatarSize); // Resize avatar to cover the square dimensions
+
+    // Create a circular mask
+    const mask = new Jimp(avatarSize, avatarSize, 0x0000ffff);
+    mask.circle({ radius: avatarSize / 2, x: avatarSize / 2, y: avatarSize / 2 });
+
+    // Apply the circular mask to the avatar image
+    avatar.mask(mask, 0, 0);
 
     const x = (background.bitmap.width - avatarSize) / 2;
     const y = (background.bitmap.height - avatarSize) / 2;
