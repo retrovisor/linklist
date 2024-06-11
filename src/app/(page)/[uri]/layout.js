@@ -1,7 +1,6 @@
 import { Lato } from 'next/font/google';
 import '../../globals.css';
 import '@/styles/global.css';
-import Head from 'next/head';
 import { Page } from "@/models/Page";
 import mongoose from "mongoose";
 
@@ -51,26 +50,12 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default function RootLayout({ children, metadata }) {
+export default function RootLayout({ children }) {
   return (
     <html lang="kr">
-      <Head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.openGraph.description} />
-        <meta property="og:title" content={metadata.openGraph.title} />
-        <meta property="og:description" content={metadata.openGraph.description} />
-        <meta property="og:url" content={metadata.openGraph.url} />
-        <meta property="og:type" content={metadata.openGraph.type} />
-        {metadata.openGraph.images.map((image, index) => (
-          <meta key={index} property="og:image" content={image.url} />
-        ))}
-        <meta name="twitter:card" content={metadata.twitter.card} />
-        <meta name="twitter:title" content={metadata.twitter.title} />
-        <meta name="twitter:description" content={metadata.twitter.description} />
-        {metadata.twitter.images.map((image, index) => (
-          <meta key={index} name="twitter:image" content={image} />
-        ))}
-      </Head>
+      <head>
+        {/* This is where metadata would be injected */}
+      </head>
       <body className={lato.className}>
         <main>
           {children}
