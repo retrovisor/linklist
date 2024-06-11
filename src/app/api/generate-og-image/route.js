@@ -17,9 +17,10 @@ export async function POST(request) {
       throw new Error('Image generation timed out');
     }, 60000);
 
-    const [background, avatar] = await Promise.all([
+    const [background, avatar, font] = await Promise.all([
       Jimp.read(backgroundImageUrl),
-      Jimp.read(avatarImageUrl)
+      Jimp.read(avatarImageUrl),
+      Jimp.loadFont(Jimp.FONT_SANS_32_BLACK)
     ]);
 
     // Set final dimensions based on the example image
@@ -47,6 +48,13 @@ export async function POST(request) {
       opacitySource: 1,
       opacityDest: 1
     });
+
+    const text = "Fizz.link";
+    const textWidth = Jimp.measureText(font, text);
+    const textX = (finalWidth - textWidth) / 2;
+    const textY = y - 40; // Adjust this value to control the distance between the text and avatar
+
+    background.print(font, textX, textY, text);
 
     const ogImageBuffer = await background.getBufferAsync(Jimp.MIME_PNG);
 
