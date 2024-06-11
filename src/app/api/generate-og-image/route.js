@@ -35,7 +35,7 @@ export async function POST(request) {
         const centerX = avatarSize / 2;
         const centerY = avatarSize / 2;
         const radius = avatarSize / 2;
-        mask.scan(0, 0, avatarSize, avatarSize, (x, y, idx) => {
+        mask.scan(0, 0, mask.bitmap.width, mask.bitmap.height, (x, y, idx) => {
             const dx = x - centerX;
             const dy = y - centerY;
             if (dx * dx + dy * dy <= radius * radius) {
@@ -51,8 +51,8 @@ export async function POST(request) {
         // Calculate the position: one-third horizontally and vertically centered
         const x = (background.bitmap.width / 3) - (avatarSize / 2);
         const y = (background.bitmap.height - avatarSize) / 2;
-
-        // Composite the avatar on top of the background
+        
+        // Ensure avatar is correctly composited on top of the background
         background.composite(avatar, x, y, {
             mode: Jimp.BLEND_SOURCE_OVER,
             opacitySource: 1,
