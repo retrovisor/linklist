@@ -23,31 +23,41 @@ export async function POST(request) {
             Jimp.read(avatarImageUrl)
         ]);
 
+        console.log('Images loaded successfully');
+
         const avatarSize = 200;
         avatar.resize(avatarSize, Jimp.AUTO); // Resize avatar keeping aspect ratio
 
         // Create a circular mask
-        const mask = new Jimp(avatarSize, avatarSize, 0xFFFFFFFF);
+        const mask = new Jimp(avatarSize, avatarSize, 0x00000000); // Create a black (transparent) image
+        const centerX = avatarSize / 2;
+        const centerY = avatarSize / 2;
+        const radius = avatarSize / 2;
         mask.scan(0, 0, mask.bitmap.width, mask.bitmap.height, (x, y, idx) => {
-            const radius = avatarSize / 2;
-            const centerX = avatarSize / 2;
-            const centerY = avatarSize / 2;
-            const distance = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
-
-            if (distance > radius) {
-                mask.bitmap.data[idx + 3] = 0; // Set alpha channel to 0 (transparent)
+            const dx = x - centerX;
+            const dy = y - centerY;
+            if (dx * dx + dy * dy <= radius * radius) {
+                mask.bitmap.data[idx + 3] = 255; // Set alpha channel to 255 (opaque)
             }
         });
 
-        avatar.mask(mask, 0, 0); // Apply circular mask to the avatar
+        // Apply the circular mask to the avatar
+        avatar.mask(mask, 0, 0);
 
+        console.log('Mask applied successfully');
+
+        // Calculate the position: one-third horizontally and vertically centered
         const x = (background.bitmap.width / 3) - (avatarSize / 2);
         const y = (background.bitmap.height - avatarSize) / 2;
+        
+        // Composite the avatar on top of the background
         background.composite(avatar, x, y, {
             mode: Jimp.BLEND_SOURCE_OVER,
             opacitySource: 1,
             opacityDest: 1
         });
+
+        console.log('Avatar composited successfully');
 
         const ogImageBuffer = await background.getBufferAsync(Jimp.MIME_PNG);
 
