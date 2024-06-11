@@ -25,15 +25,13 @@ export async function POST(request) {
     const avatarSize = 200;
     avatar.cover(avatarSize, avatarSize); // Resize avatar to cover the square dimensions
 
-    // Create a new circular avatar image
-    const circularAvatar = new Jimp(avatarSize, avatarSize);
-    circularAvatar.circle({ radius: avatarSize / 2, x: avatarSize / 2, y: avatarSize / 2 });
-    circularAvatar.composite(avatar, 0, 0);
+    // Create a circular avatar image using the @jimp/plugin-circle plugin
+    avatar.circle();
 
     const x = (background.bitmap.width - avatarSize) / 2;
     const y = (background.bitmap.height - avatarSize) / 2;
 
-    background.composite(circularAvatar, x, y, {
+    background.composite(avatar, x, y, {
       mode: Jimp.BLEND_SOURCE_OVER,
       opacitySource: 1,
       opacityDest: 1
