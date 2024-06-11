@@ -1,8 +1,10 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import Jimp from 'jimp';
+import { loadFontAsync } from '@jimp/plugin-print';
 import uniqid from 'uniqid';
 import { Page } from '@/models/Page';
 import mongoose from 'mongoose';
+import path from 'path';
 
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -17,11 +19,14 @@ export async function POST(request) {
       throw new Error('Image generation timed out');
     }, 60000);
 
-    const [background, avatar, font] = await Promise.all([
+    const [background, avatar] = await Promise.all([
       Jimp.read(backgroundImageUrl),
-      Jimp.read(avatarImageUrl),
-      Jimp.loadFont(Jimp.FONT_SANS_32_BLACK)
+      Jimp.read(avatarImageUrl)
     ]);
+
+    // Load the Roboto-MediumItalic font
+    const fontPath = path.resolve(process.cwd(), 'public', 'Roboto-MediumItalic.ttf');
+    const font = await loadFontAsync(fontPath);
 
     // Set final dimensions based on the example image
     const finalWidth = 1000; // Set the final width
@@ -50,11 +55,42 @@ export async function POST(request) {
     });
 
     const text = "Fizz.link";
-    const textWidth = Jimp.measureText(font, text);
+    const fontSize = 40; // Set the font size
+    const textWidth = Jimp.measureText(font, text, fontSize);
     const textX = (finalWidth - textWidth) / 2;
-    const textY = y - 40; // Adjust this value to control the distance between the text and avatar
+    const textY = y - 60; // Adjust this value to control the distance between the text and avatar
 
-    background.print(font, textX, textY, text);
+    const textColor = '#FFFFFF'; // Set the text color to white
+    const shadowColor = '#000000'; // Set the shadow color to black
+    const shadowOffset = 2; // Set the shadow offset
+
+    // Print the text with shadow on the background image
+    background.print(
+      font,
+      textX + shadowOffset,
+      textY + shadowOffset,
+      {
+        text,
+        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
+      },
+      textWidth,
+      fontSize,
+      shadowColor
+    );
+    background.print(
+      font,
+      textX,
+      textY,
+      {
+        text,
+        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
+      },
+      textWidth,
+      fontSize,
+      textColor
+    );
 
     const ogImageBuffer = await background.getBufferAsync(Jimp.MIME_PNG);
 
