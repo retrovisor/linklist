@@ -1,6 +1,5 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import Jimp from 'jimp';
-import { loadFontAsync } from '@jimp/plugin-print';
 import uniqid from 'uniqid';
 import { Page } from '@/models/Page';
 import mongoose from 'mongoose';
@@ -26,7 +25,7 @@ export async function POST(request) {
 
     // Load the Roboto-MediumItalic font
     const fontPath = path.resolve(process.cwd(), 'public', 'Roboto-MediumItalic.ttf');
-    const font = await loadFontAsync(fontPath);
+    const font = await Jimp.loadFont(fontPath);
 
     // Set final dimensions based on the example image
     const finalWidth = 1000; // Set the final width
@@ -56,7 +55,7 @@ export async function POST(request) {
 
     const text = "Fizz.link";
     const fontSize = 40; // Set the font size
-    const textWidth = Jimp.measureText(font, text, fontSize);
+    const textWidth = Jimp.measureText(font, text);
     const textX = (finalWidth - textWidth) / 2;
     const textY = y - 60; // Adjust this value to control the distance between the text and avatar
 
@@ -74,8 +73,6 @@ export async function POST(request) {
         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
       },
-      textWidth,
-      fontSize,
       shadowColor
     );
     background.print(
@@ -87,8 +84,6 @@ export async function POST(request) {
         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
         alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
       },
-      textWidth,
-      fontSize,
       textColor
     );
 
