@@ -51,6 +51,8 @@ export async function POST(request) {
         // Calculate the position: one-third horizontally and vertically centered
         const x = (background.bitmap.width / 3) - (avatarSize / 2);
         const y = (background.bitmap.height - avatarSize) / 2;
+
+        // Composite the avatar on top of the background
         background.composite(avatar, x, y, {
             mode: Jimp.BLEND_SOURCE_OVER,
             opacitySource: 1,
