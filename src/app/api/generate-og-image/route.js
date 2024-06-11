@@ -6,8 +6,6 @@ import mongoose from 'mongoose';
 import path from 'path';
 
 mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
   serverSelectionTimeoutMS: 30000,
 });
 
@@ -23,28 +21,22 @@ export async function POST(request) {
       Jimp.read(avatarImageUrl)
     ]);
 
-    // Load the Roboto-MediumItalic font
-    const fontPath = path.resolve(process.cwd(), 'public', 'Roboto-MediumItalic.ttf');
+    // Ensure correct font path
+    const fontPath = path.join(process.cwd(), 'public', 'Roboto-MediumItalic.ttf');
     const font = await Jimp.loadFont(fontPath);
 
-    // Set final dimensions based on the example image
-    const finalWidth = 1000; // Set the final width
-    const finalHeight = 524; // Set the final height
+    const finalWidth = 1000;
+    const finalHeight = 524;
 
-    // Stretch background to match the width and height of the example image
     background.resize(finalWidth, finalHeight);
-
-    // Reduce opacity of the background image
     background.opacity(0.7);
 
     const avatarSize = 170;
-    avatar.cover(avatarSize, avatarSize); // Resize avatar to cover the square dimensions
-
-    // Create a circular avatar image using the @jimp/plugin-circle plugin
+    avatar.cover(avatarSize, avatarSize);
     avatar.circle();
 
     const x = (finalWidth - avatarSize) / 2;
-    const topMargin = 80; // Adjust this value to control the distance from the top
+    const topMargin = 80;
     const y = topMargin;
 
     background.composite(avatar, x, y, {
@@ -54,16 +46,16 @@ export async function POST(request) {
     });
 
     const text = "Fizz.link";
-    const fontSize = 40; // Set the font size
+    const fontSize = 40;
     const textWidth = Jimp.measureText(font, text);
     const textX = (finalWidth - textWidth) / 2;
-    const textY = y - 60; // Adjust this value to control the distance between the text and avatar
+    const textY = y - 60;
 
-    const textColor = '#FFFFFF'; // Set the text color to white
-    const shadowColor = '#000000'; // Set the shadow color to black
-    const shadowOffset = 2; // Set the shadow offset
+    const textColor = '#FFFFFF';
+    const shadowColor = '#000000';
+    const shadowOffset = 2;
 
-    // Print the text with shadow on the background image
+    // Print text with shadow
     background.print(
       font,
       textX + shadowOffset,
