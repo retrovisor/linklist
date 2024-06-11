@@ -3,6 +3,7 @@ import Jimp from 'jimp';
 import uniqid from 'uniqid';
 import { Page } from '@/models/Page';
 import mongoose from 'mongoose';
+import path from 'path';
 
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -17,32 +18,34 @@ export async function POST(request) {
       throw new Error('Image generation timed out');
     }, 60000);
 
-    const [background, avatar] = await Promise.all([
+    const [background, avatar, overlay] = await Promise.all([
       Jimp.read(backgroundImageUrl),
-      Jimp.read(avatarImageUrl)
+      Jimp.read(avatarImageUrl),
+      Jimp.read(path.join(process.cwd(), 'public/images/overlay.png')) // Path to your overlay image
     ]);
 
-    // Set final dimensions based on the example image
-    const finalWidth = 1000; // Set the final width
-    const finalHeight = 524; // Set the final height
+    const finalWidth = 1000;
+    const finalHeight = 524;
 
-    // Stretch background to match the width and height of the example image
     background.resize(finalWidth, finalHeight);
-
-    // Reduce opacity of the background image
     background.opacity(0.7);
 
     const avatarSize = 170;
-    avatar.cover(avatarSize, avatarSize); // Resize avatar to cover the square dimensions
-
-    // Create a circular avatar image using the @jimp/plugin-circle plugin
+    avatar.cover(avatarSize, avatarSize);
     avatar.circle();
 
     const x = (finalWidth - avatarSize) / 2;
-    const topMargin = 80; // Adjust this value to control the distance from the top
+    const topMargin = 80;
     const y = topMargin;
 
     background.composite(avatar, x, y, {
+      mode: Jimp.BLEND_SOURCE_OVER,
+      opacitySource: 1,
+      opacityDest: 1
+    });
+
+    // Composite the fixed transparent overlay image on top
+    background.composite(overlay, 0, 0, {
       mode: Jimp.BLEND_SOURCE_OVER,
       opacitySource: 1,
       opacityDest: 1
