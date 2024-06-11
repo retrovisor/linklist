@@ -1,15 +1,10 @@
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import Jimp from 'jimp';
 import uniqid from 'uniqid';
-import fetch from 'node-fetch';
 import { Page } from '@/models/Page'; // Adjust the import path as necessary
 
-export default async function handler(req, res) {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method Not Allowed' });
-    }
-
-    const { backgroundImageUrl, avatarImageUrl, pageId } = req.body;
+export async function POST(request) {
+    const { backgroundImageUrl, avatarImageUrl, pageUri } = await request.json();
 
     try {
         const [background, avatar] = await Promise.all([
@@ -57,11 +52,11 @@ export default async function handler(req, res) {
         const link = `https://${customDomain}/${newFilename}`;
 
         // Update MongoDB
-        await Page.findOneAndUpdate({ _id: pageId }, { ogImageUrl: link });
+        await Page.findOneAndUpdate({ uri: pageUri }, { ogImageUrl: link });
 
-        res.status(200).json({ success: true, link });
+        return new Response(JSON.stringify({ success: true, link }), { status: 200 });
     } catch (error) {
         console.error('Failed to generate OG image:', error);
-        res.status(500).json({ error: 'Internal Server Error', details: error.message });
+        return new Response(JSON.stringify({ error: 'Internal Server Error', details: error.message }), { status: 500 });
     }
 }
