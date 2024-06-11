@@ -21,9 +21,7 @@ export async function POST(request) {
       Jimp.read(avatarImageUrl)
     ]);
 
-    // Ensure correct font path
-    const fontPath = path.join(process.cwd(), 'public', 'Roboto-MediumItalic.ttf');
-    const font = await Jimp.loadFont(fontPath);
+    const font = await Jimp.loadFont(Jimp.FONT_SANS_32_WHITE);
 
     const finalWidth = 1000;
     const finalHeight = 524;
@@ -46,38 +44,15 @@ export async function POST(request) {
     });
 
     const text = "Fizz.link";
-    const fontSize = 40;
     const textWidth = Jimp.measureText(font, text);
     const textX = (finalWidth - textWidth) / 2;
     const textY = y - 60;
 
-    const textColor = '#FFFFFF';
-    const shadowColor = '#000000';
-    const shadowOffset = 2;
-
-    // Print text with shadow
-    background.print(
-      font,
-      textX + shadowOffset,
-      textY + shadowOffset,
-      {
-        text,
-        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
-        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
-      },
-      shadowColor
-    );
-    background.print(
-      font,
-      textX,
-      textY,
-      {
-        text,
-        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
-        alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
-      },
-      textColor
-    );
+    background.print(font, textX, textY, {
+      text,
+      alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+      alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
+    });
 
     const ogImageBuffer = await background.getBufferAsync(Jimp.MIME_PNG);
 
