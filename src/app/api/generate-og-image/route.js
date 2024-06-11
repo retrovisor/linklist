@@ -3,9 +3,10 @@ import Jimp from 'jimp';
 import uniqid from 'uniqid';
 import { Page } from '@/models/Page';
 import mongoose from 'mongoose';
-import path from 'path';
 
 mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
   serverSelectionTimeoutMS: 30000,
 });
 
@@ -21,22 +22,24 @@ export async function POST(request) {
       Jimp.read(avatarImageUrl)
     ]);
 
-    // Load font from local files
-    const fontPath = path.join(process.cwd(), 'public/fonts/open-sans/open-sans-32-white/open-sans-32-white.fnt');
-    const font = await Jimp.loadFont(fontPath);
+    // Set final dimensions based on the example image
+    const finalWidth = 1000; // Set the final width
+    const finalHeight = 524; // Set the final height
 
-    const finalWidth = 1000;
-    const finalHeight = 524;
-
+    // Stretch background to match the width and height of the example image
     background.resize(finalWidth, finalHeight);
+
+    // Reduce opacity of the background image
     background.opacity(0.7);
 
     const avatarSize = 170;
-    avatar.cover(avatarSize, avatarSize);
+    avatar.cover(avatarSize, avatarSize); // Resize avatar to cover the square dimensions
+
+    // Create a circular avatar image using the @jimp/plugin-circle plugin
     avatar.circle();
 
     const x = (finalWidth - avatarSize) / 2;
-    const topMargin = 80;
+    const topMargin = 80; // Adjust this value to control the distance from the top
     const y = topMargin;
 
     background.composite(avatar, x, y, {
@@ -44,23 +47,6 @@ export async function POST(request) {
       opacitySource: 1,
       opacityDest: 1
     });
-
-    const text = "Fizz.link";
-    const maxWidth = finalWidth;
-    const maxHeight = finalHeight;
-
-    background.print(
-      font,
-      0,
-      y - 60,
-      {
-        text: text,
-        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
-        alignmentY: Jimp.VERTICAL_ALIGN_TOP,
-      },
-      maxWidth,
-      maxHeight
-    );
 
     const ogImageBuffer = await background.getBufferAsync(Jimp.MIME_PNG);
 
