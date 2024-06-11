@@ -7,6 +7,12 @@ export async function POST(request) {
     const { backgroundImageUrl, avatarImageUrl, pageUri } = await request.json();
 
     try {
+
+            const timeoutId = setTimeout(() => {
+      throw new Error('Image generation timed out');
+    }, 30000);
+
+        
         const [background, avatar] = await Promise.all([
             Jimp.read(backgroundImageUrl),
             Jimp.read(avatarImageUrl)
@@ -53,6 +59,9 @@ export async function POST(request) {
 
         // Update MongoDB
         await Page.findOneAndUpdate({ uri: pageUri }, { ogImageUrl: link });
+
+            clearTimeout(timeoutId); 
+
 
         return new Response(JSON.stringify({ success: true, link }), { status: 200 });
     } catch (error) {
