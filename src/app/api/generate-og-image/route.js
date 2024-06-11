@@ -32,13 +32,13 @@ export async function POST(request) {
 
         // Create a circular mask
         const mask = new Jimp(avatarSize, avatarSize, 0x00000000);
-        mask.scan(0, 0, mask.bitmap.width, mask.bitmap.height, (x, y, idx) => {
-            const radius = avatarSize / 2;
-            const centerX = avatarSize / 2;
-            const centerY = avatarSize / 2;
-            const distance = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
-
-            if (distance < radius) {
+        const centerX = avatarSize / 2;
+        const centerY = avatarSize / 2;
+        const radius = avatarSize / 2;
+        mask.scan(0, 0, avatarSize, avatarSize, (x, y, idx) => {
+            const dx = x - centerX;
+            const dy = y - centerY;
+            if (dx * dx + dy * dy <= radius * radius) {
                 mask.bitmap.data[idx + 3] = 255; // Set alpha channel to 255 (opaque)
             }
         });
