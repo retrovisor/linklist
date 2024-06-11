@@ -28,8 +28,12 @@ export async function POST(request) {
     // Create a circular avatar image using the @jimp/plugin-circle plugin
     avatar.circle();
 
-    // Add a shadow effect to the avatar image using the @jimp/plugin-shadow plugin
-    avatar.shadow({
+    // Create a new image with a transparent background to apply the shadow
+    const avatarWithShadow = new Jimp(avatarSize, avatarSize, 0x00000000);
+    avatarWithShadow.composite(avatar, 0, 0);
+
+    // Add a shadow effect to the circular avatar image using the @jimp/plugin-shadow plugin
+    avatarWithShadow.shadow({
       opacity: 0.6,
       size: 1.2,
       blur: 10,
@@ -40,7 +44,7 @@ export async function POST(request) {
     const x = (background.bitmap.width - avatarSize) / 2;
     const y = (background.bitmap.height - avatarSize) / 2;
 
-    background.composite(avatar, x, y, {
+    background.composite(avatarWithShadow, x, y, {
       mode: Jimp.BLEND_SOURCE_OVER,
       opacitySource: 1,
       opacityDest: 1
