@@ -3,7 +3,6 @@ import Jimp from 'jimp';
 import uniqid from 'uniqid';
 import { Page } from '@/models/Page';
 import mongoose from 'mongoose';
-import path from 'path';
 
 mongoose.connect(process.env.MONGO_URI, {
   serverSelectionTimeoutMS: 30000,
@@ -44,15 +43,21 @@ export async function POST(request) {
     });
 
     const text = "Fizz.link";
-    const textWidth = Jimp.measureText(font, text);
-    const textX = (finalWidth - textWidth) / 2;
-    const textY = y - 60;
+    const maxWidth = finalWidth; // Set the max width to the width of the image
+    const maxHeight = finalHeight; // Set the max height to the height of the image
 
-    background.print(font, textX, textY, {
-      text,
-      alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
-      alignmentY: Jimp.VERTICAL_ALIGN_MIDDLE
-    });
+    background.print(
+      font,
+      0, // x position
+      y - 60, // y position
+      {
+        text: text,
+        alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
+        alignmentY: Jimp.VERTICAL_ALIGN_TOP,
+      },
+      maxWidth,
+      maxHeight
+    );
 
     const ogImageBuffer = await background.getBufferAsync(Jimp.MIME_PNG);
 
