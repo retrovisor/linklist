@@ -43,13 +43,13 @@ export async function POST(request) {
     });
 
     const text = "Fizz.link";
-    const maxWidth = finalWidth; // Set the max width to the width of the image
-    const maxHeight = finalHeight; // Set the max height to the height of the image
+    const maxWidth = finalWidth;
+    const maxHeight = finalHeight;
 
     background.print(
       font,
-      0, // x position
-      y - 60, // y position
+      0,
+      y - 60,
       {
         text: text,
         alignmentX: Jimp.HORIZONTAL_ALIGN_CENTER,
