@@ -32,14 +32,14 @@ export async function POST(request) {
     // Reduce opacity of the background image
     background.opacity(0.7);
 
-    const avatarSize = 200;
+    const avatarSize = 170;
     avatar.cover(avatarSize, avatarSize); // Resize avatar to cover the square dimensions
 
     // Create a circular avatar image using the @jimp/plugin-circle plugin
     avatar.circle();
 
     const x = (finalWidth - avatarSize) / 2;
-    const topMargin = 50; // Adjust this value to control the distance from the top
+    const topMargin = 80; // Adjust this value to control the distance from the top
     const y = topMargin;
 
     background.composite(avatar, x, y, {
