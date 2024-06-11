@@ -2,24 +2,31 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import Jimp from 'jimp';
 import uniqid from 'uniqid';
 import { Page } from '@/models/Page'; // Adjust the import path as necessary
+import mongoose from 'mongoose';
+
+// Connect to MongoDB with increased timeout
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 30000, // 30 seconds timeout
+});
 
 export async function POST(request) {
     const { backgroundImageUrl, avatarImageUrl, pageUri } = await request.json();
-    let timeoutId;
     try {
-        timeoutId = setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             throw new Error('Image generation timed out');
-        }, 30000);  // Timeout after 30 seconds
+        }, 60000); // Increase timeout to 60 seconds
 
         const [background, avatar] = await Promise.all([
             Jimp.read(backgroundImageUrl),
             Jimp.read(avatarImageUrl)
         ]);
-        
-        avatar.resize(200, Jimp.AUTO); // Resize avatar keeping aspect ratio
-        const x = (background.bitmap.width - avatar.bitmap.width) / 2;
-        const y = (background.bitmap.height - avatar.bitmap.height) / 2;
 
+        const avatarSize = 200;
+        avatar.resize(avatarSize, Jimp.AUTO); // Resize avatar keeping aspect ratio
+        const x = (background.bitmap.width - avatarSize) / 2;
+        const y = (background.bitmap.height - avatarSize) / 2;
         background.composite(avatar, x, y, {
             mode: Jimp.BLEND_SOURCE_OVER,
             opacitySource: 1,
@@ -52,12 +59,11 @@ export async function POST(request) {
         const customDomain = 'momofriends.com/naelink';
         const link = `https://${customDomain}/${newFilename}`;
 
-        await Page.findOneAndUpdate({ uri: pageUri }, { ogImageUrl: link }, { new: true });
+        await Page.findOneAndUpdate({ uri: pageUri }, { ogImageUrl: link });
 
-        clearTimeout(timeoutId);  // Clear the timeout on successful completion
+        clearTimeout(timeoutId);
         return new Response(JSON.stringify({ success: true, link }), { status: 200 });
     } catch (error) {
-        clearTimeout(timeoutId);  // Ensure timeout is cleared on error
         console.error('Failed to generate OG image:', error);
         return new Response(JSON.stringify({ error: 'Internal Server Error', details: error.message }), { status: 500 });
     }
