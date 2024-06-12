@@ -12,23 +12,28 @@ mongoose.connect(process.env.MONGO_URI, {
 });
 
 export async function POST(request) {
-  const { backgroundImageUrl, avatarImageUrl, pageUri } = await request.json();
+  const { backgroundImageUrl, avatarImageUrl, pageUri, bgColor } = await request.json();
   try {
     const timeoutId = setTimeout(() => {
       throw new Error('Image generation timed out');
     }, 60000);
 
-    const [background, avatar, overlay] = await Promise.all([
-      Jimp.read(backgroundImageUrl),
+    let background;
+    if (backgroundImageUrl) {
+      background = await Jimp.read(backgroundImageUrl);
+    } else {
+      background = new Jimp(1000, 524, bgColor || '#FFFFFF');
+    }
+
+    const [avatar, overlay] = await Promise.all([
       Jimp.read(avatarImageUrl),
       Jimp.read(path.join(process.cwd(), 'public/images/overlay.png')) // Path to your overlay image
     ]);
 
     const finalWidth = 1000;
     const finalHeight = 524;
-
     background.resize(finalWidth, finalHeight);
-    background.opacity(0.7);
+    background.opacity(0.75);
 
     const avatarSize = 170;
     avatar.cover(avatarSize, avatarSize);
