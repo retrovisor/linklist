@@ -156,7 +156,7 @@ export default function PageSettingsForm({ page, user }) {
                       name="bgColor"
                       onChange={handleBgColorChange}
 
-                      defaultValue={page.bgColor}
+                      defaultValue={bgColor}
                     />
                   </div>
                 </div>
