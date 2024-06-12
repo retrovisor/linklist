@@ -54,6 +54,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="kr">
       <head>
+            <link rel="icon" href="/logo4.png" />
+
         {/* This is where metadata would be injected */}
       </head>
       <body className={lato.className}>
