@@ -3,8 +3,7 @@
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import kakaoLogo from '/public/kakao.png';
-import { useRouter } from "next/navigation";
-
+ 
 export default function LoginWithKakao() {
   
   return (
