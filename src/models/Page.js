@@ -13,7 +13,7 @@ const PageSchema = new Schema({
     links: { type: Array, default: [] },
   template: { type: String, default: '' },
   avatar: { type: String, default: '' },
-  ogImageUrl: { type: String, default: '' }, // Add this line to include the ogImageUrl field
+  ogImageUrl: { type: String, default: 'https://momofriends.com/naelink/alxbu6ej0.png' }, // Add this line to include the ogImageUrl field
   textBoxes: [
     {
       key: { type: String, required: true },
