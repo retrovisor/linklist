@@ -13,8 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="kr">
-    <link rel="icon" href="/logo4.png" />
-
+ 
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
         <div className="flex-grow">
           <Header />
