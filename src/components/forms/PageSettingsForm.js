@@ -60,6 +60,38 @@ export default function PageSettingsForm({ page, user }) {
     });
   }
 
+  async function handleBgColorChange(ev) {
+  setBgColor(ev.target.value);
+  setBgType('color');
+  const formData = new FormData();
+  formData.append('bgColor', ev.target.value);
+  formData.append('bgType', 'color');
+  await savePageSettings(formData);
+  console.log('Page settings saved');
+
+  // Call the new API route to generate the OG image
+  const response = await fetch('/api/generate-og-image', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      bgColor: ev.target.value,
+      avatarImageUrl: avatar,
+      pageUri: page.uri,
+    }),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+    console.log('OG image generated:', data.link);
+    toast.success('배경 색상이 저장되었습니다!');
+  } else {
+    console.error('Failed to generate OG image');
+    toast.error('OG 이미지 생성에 실패했습니다.');
+  }
+}
+
   async function handleAvatarImageChange(ev) {
     console.log('handleAvatarImageChange called');
     await upload(ev, async (link) => {
@@ -122,11 +154,8 @@ export default function PageSettingsForm({ page, user }) {
                     <input
                       type="color"
                       name="bgColor"
-                      onChange={async (ev) => {
-                        setBgColor(ev.target.value);
-                        await savePageSettings(new FormData(ev.target.form));
-                        toast.success('배경 이미지가 저장되었습니다!');
-                      }}
+                      onChange={handleBgColorChange}
+
                       defaultValue={page.bgColor}
                     />
                   </div>
