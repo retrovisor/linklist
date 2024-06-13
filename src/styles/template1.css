@@ -5,6 +5,11 @@
   font-family: Arial, sans-serif;
 }
 
+.template1 .text-white {
+    --tw-text-opacity: 1;
+    color: rgb(54 54 108);
+}
+
 .template.template1 .text-md {   
   color: #0c1e40;
 }
