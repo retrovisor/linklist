@@ -123,7 +123,7 @@ export default async function UserPage({ params }) {
         <div className="aspect-square w-24 h-24 mx-auto relative my-2">
           <Image
             className="rounded-full w-full h-full object-cover border-3 border-white shadow shadow-black/50"
-            src={user.avatar}
+            src={user.image}
             alt="avatar"
             width={90}
             height={90}
