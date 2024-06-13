@@ -5,6 +5,10 @@
   font-family: Arial, sans-serif;
 }
 
+.template1 .w-12 {
+    background-color: aliceblue;
+}
+
 .template1 .text-white {
     --tw-text-opacity: 1;
     color: rgb(54 54 108);
