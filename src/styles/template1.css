@@ -135,6 +135,8 @@
 
 .template.template1 .video-wrapper {
   position: relative;
+  padding: 15px;
+    border-radius: 10px;
   margin-bottom: 20px;
 }
 
