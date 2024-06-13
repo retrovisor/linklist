@@ -14,6 +14,8 @@ import toast from "react-hot-toast";
 export default function PageSettingsForm({ page, user }) {
   const [bgType, setBgType] = useState(page.bgType);
   const [bgColor, setBgColor] = useState(page.bgColor);
+    const [tempBgColor, setTempBgColor] = useState(bgColor);
+
   const [bgImage, setBgImage] = useState(page.bgImage);
   const [avatar, setAvatar] = useState(page.avatar || user?.image);
 
