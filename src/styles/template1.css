@@ -1,9 +1,12 @@
 /* template1.css */
 
 .template.template1 {
-  background-color: #0c1e40;
-  color: white;
+  color: #0c1e40;
   font-family: Arial, sans-serif;
+}
+
+.text-md {   
+  color: #0c1e40;
 }
 
 .template.template1 .logo-container {
@@ -69,7 +72,7 @@
 
 .template.template1 .bio {
   max-width: 600px;
-  margin: 0 auto;
+  margin-bottom: 20px;
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
