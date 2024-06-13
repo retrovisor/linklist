@@ -44,6 +44,6 @@ const nextConfig = {
 };
 
 module.exports = {
-  ...nextConfig,
-  i18n,
+  ...nextConfig
+
 };
