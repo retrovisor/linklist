@@ -182,28 +182,27 @@ export default function PageSettingsForm({ page, user }) {
                 ]}
                 onChange={val => setBgType(val)}
               />
-                    {bgType === 'color' && (
-        <div className="bg-gray-200 shadow text-gray-700 p-2 mt-2">
-          <div className="flex gap-2 justify-center">
-            <span>배경 색상:</span>
-            <input
-              type="color"
-              name="bgColor"
-              onChange={(ev) => setTempBgColor(ev.target.value)}
-              value={tempBgColor}
-            />
-          </div>
-          <div className="flex justify-center mt-2">
-            <button
-              type="button"
-              onClick={handleSaveBgColor}
-              className="bg-blue-500 text-white px-4 py-2 rounded"
-            >
-              저장
-            </button>
-          </div>
-        </div>
-      )}
+                   
+{bgType === 'color' && (
+  <div className="bg-gray-200 shadow text-gray-700 p-2 mt-2">
+    <div className="flex gap-2 items-center justify-center">
+      <span>배경 색상:</span>
+      <input
+        type="color"
+        name="bgColor"
+        onChange={(ev) => setTempBgColor(ev.target.value)}
+        value={tempBgColor}
+      />
+      <button
+        type="button"
+        onClick={handleSaveBgColor}
+        className="bg-blue-500 text-white px-4 py-2 rounded"
+      >
+        저장
+      </button>
+    </div>
+  </div>
+)}
 
               {bgType === 'image' && (
                 <div className="flex justify-center">
