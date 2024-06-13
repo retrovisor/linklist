@@ -12,8 +12,10 @@ export default function TemplateSelectionPage({ page, user }) {
   const [selectedTemplate, setSelectedTemplate] = useState(0);
 
   const templates = [
-    { name: 'Template 1', value: 'template1', image: '/template1.jpg' },
-    { name: 'Template 2', value: 'template2', image: '/template2.jpg' },
+    { name: '템플릿 1', value: 'template2', image: '/template2.jpg' },
+    { name: '템플릿 2', value: 'template3', image: '/template3.jpg' },
+    { name: '템플릿 3', value: 'template1', image: '/template1.jpg' },
+    
     // Add more templates as needed
   ];
 
