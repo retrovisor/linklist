@@ -60,6 +60,39 @@ export default function PageSettingsForm({ page, user }) {
     });
   }
 
+    async function handleSaveBgColor() {
+    setBgColor(tempBgColor);
+    setBgType('color');
+    const formData = new FormData();
+    formData.append('bgColor', tempBgColor);
+    formData.append('bgType', 'color');
+    await savePageSettings(formData);
+    console.log('Page settings saved');
+
+    // Call the new API route to generate the OG image
+    const response = await fetch('/api/generate-og-image', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        bgColor: tempBgColor,
+        avatarImageUrl: avatar,
+        pageUri: page.uri,
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log('OG image generated:', data.link);
+      toast.success('배경 색상이 저장되었습니다!');
+    } else {
+      console.error('Failed to generate OG image');
+      toast.error('OG 이미지 생성에 실패했습니다.');
+    }
+  }
+
+
   async function handleBgColorChange(ev) {
   setBgColor(ev.target.value);
   setBgType('color');
@@ -147,20 +180,29 @@ export default function PageSettingsForm({ page, user }) {
                 ]}
                 onChange={val => setBgType(val)}
               />
-              {bgType === 'color' && (
-                <div className="bg-gray-200 shadow text-gray-700 p-2 mt-2">
-                  <div className="flex gap-2 justify-center">
-                    <span>배경 색상:</span>
-                    <input
-                      type="color"
-                      name="bgColor"
-                      onChange={handleBgColorChange}
+                    {bgType === 'color' && (
+        <div className="bg-gray-200 shadow text-gray-700 p-2 mt-2">
+          <div className="flex gap-2 justify-center">
+            <span>배경 색상:</span>
+            <input
+              type="color"
+              name="bgColor"
+              onChange={(ev) => setTempBgColor(ev.target.value)}
+              value={tempBgColor}
+            />
+          </div>
+          <div className="flex justify-center mt-2">
+            <button
+              type="button"
+              onClick={handleSaveBgColor}
+              className="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              저장
+            </button>
+          </div>
+        </div>
+      )}
 
-                      defaultValue={bgColor}
-                    />
-                  </div>
-                </div>
-              )}
               {bgType === 'image' && (
                 <div className="flex justify-center">
                   <label className="shadow px-4 py-2 bg-white mt-2 flex gap-2">
