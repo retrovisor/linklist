@@ -1,27 +1,31 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Chart from "@/components/Chart";
 import SectionBox from "@/components/layout/SectionBox";
-import { Event } from "@/models/Event";
-import { Page } from "@/models/Page";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { differenceInDays, formatISO9075, isToday } from "date-fns";
-import mongoose from "mongoose";
+import { isToday } from "date-fns";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
 import clientPromise from "@/libs/mongoClient";
 
-
 export default async function AnalyticsPage() {
-  const client = await clientPromise; const db = client.db();
+  const client = await clientPromise;
+  const db = client.db();
   const session = await getServerSession(authOptions);
 
   if (!session) {
     return redirect('/');
   }
 
-  const page = await Page.findOne({ owner: session.user.email });
+  const page = await db.collection("pages").findOne({ owner: session.user.email });
+
+  if (!page) {
+    return (
+      <div>
+        <p className="text-center text-gray-500">No page found for the current user.</p>
+      </div>
+    );
+  }
 
   const groupedViews = await db.collection("events").aggregate([
     {
@@ -38,16 +42,16 @@ export default async function AnalyticsPage() {
             format: "%Y-%m-%d",
           },
         },
-        count: { "$count": {} },
+        count: { $count: {} },
       },
     },
     { $sort: { _id: 1 } },
-  ]);
+  ]).toArray();
 
   const clicks = await db.collection("events").find({
     page: page.uri,
     type: 'click',
-  });
+  }).toArray();
 
   return (
     <div>
@@ -74,12 +78,12 @@ export default async function AnalyticsPage() {
             <div className="grow">
               <h3>{link.title || 'no title'}</h3>
               <p className="text-gray-700 text-sm">{link.subtitle || 'no description'}</p>
-              <a className="text-xs text-blue-400" target="_blank" href="link.url">{link.url}</a>
+              <a className="text-xs text-blue-400" target="_blank" href={link.url}>{link.url}</a>
             </div>
             <div className="text-center">
               <div className="border rounded-md p-2 mt-1 md:mt-0">
                 <div className="text-3xl">
-                  {clicks.filter((c) => c.uri === link.url && isToday(c.createdAt)).length}
+                  {clicks.filter((c) => c.uri === link.url && isToday(new Date(c.createdAt))).length}
                 </div>
                 <div className="text-gray-400 text-xs uppercase font-bold">clicks today</div>
               </div>
