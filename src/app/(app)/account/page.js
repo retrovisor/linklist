@@ -24,12 +24,27 @@ export default async function AccountPage({ searchParams }) {
       return redirect('/');
     }
 
+    if (!session.user) {
+      throw new Error('Session user is undefined');
+    }
+
     const desiredUsername = searchParams?.desiredUsername;
     console.log('Desired Username:', desiredUsername);
 
     const client = await clientPromise;
+    if (!client) {
+      throw new Error('Failed to initialize MongoDB client');
+    }
+
     const db = client.db();
+    if (!db) {
+      throw new Error('Failed to get MongoDB database');
+    }
+
     const collection = db.collection("pages");
+    if (!collection) {
+      throw new Error('Failed to get MongoDB collection');
+    }
 
     console.log('Looking for page with owner:', session.user.email);
     const page = await collection.findOne({ owner: session.user.email });
@@ -48,7 +63,11 @@ export default async function AccountPage({ searchParams }) {
     console.log('Page found:', page);
 
     const leanPage = cloneDeep(page);
-    leanPage._id = leanPage._id.toString();
+    if (leanPage._id) {
+      leanPage._id = leanPage._id.toString();
+    } else {
+      console.warn('Page _id is undefined');
+    }
     console.log('Lean Page:', leanPage);
 
     return (
@@ -72,4 +91,3 @@ export default async function AccountPage({ searchParams }) {
     return <div>에러 발생됨. 나중에 다시 시도 해주십시오</div>;
   }
 }
-
