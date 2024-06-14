@@ -9,12 +9,12 @@ import clientPromise from "@/libs/mongoClient";
 export default async function grabUsername(formData) {
   const username = formData.get('username');
   const client = await clientPromise; const db = client.db();
-  const existingPageDoc = await Page.findOne({uri:username});
+  const existingPageDoc = await db.collection("pages").findOne({uri:username});
   if (existingPageDoc) {
     return false;
   } else {
     const session = await getServerSession(authOptions);
-    return await Page.create({
+    return await db.collection("pages").insertOne({
       uri:username,
       owner:session?.user?.email,
     });
