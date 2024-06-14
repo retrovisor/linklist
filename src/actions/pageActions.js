@@ -11,10 +11,12 @@ async function connectToDatabase() {
   if (!mongoose.connection.readyState) {
     const client = await clientPromise;
     const db = client.db();
-    mongoose.connection.useDb(db.databaseName);
+    mongoose.connect(db.s.client.s.url, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
   }
 }
-
 
 const serviceUrlMap = {
   email: '{{value}}',
