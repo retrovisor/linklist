@@ -23,6 +23,8 @@ import "@/styles/template3.css";
 import "@/styles/template4.css";
 import ShareDialog from "./ShareDialog";
 import retry from "async-retry";
+import clientPromise from "@/libs/mongoClient";
+
 
 library.add(fas, faBookmark, faLink, faLocationDot, faEnvelope, faPhone, faDiscord, faFacebook, faGithub, faInstagram, faTelegram, faTiktok, faWhatsapp, faYoutube, faShare, faComment, faMugHot, faWeixin, faLine);
 
