@@ -77,10 +77,17 @@ export async function POST(request) {
 
     const client = await clientPromise;
     const db = client.db();
-    await db.collection("pages").findOneAndUpdate(
+    const collection = db.collection("pages");
+
+    const updateResult = await collection.findOneAndUpdate(
       { uri: pageUri },
-      { $set: { ogImageUrl: link } }
+      { $set: { ogImageUrl: link } },
+      { returnDocument: 'after' }
     );
+
+    if (!updateResult.value) {
+      throw new Error('Failed to update the page');
+    }
 
     return new Response(JSON.stringify({ success: true, link }), { status: 200 });
   } catch (error) {
