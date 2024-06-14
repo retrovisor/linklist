@@ -13,7 +13,6 @@ import { faShare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faShareFromSquare } from "@fortawesome/free-regular-svg-icons";
-
 import mongoose from "mongoose";
 import { btoa } from "next/dist/compiled/@edge-runtime/primitives";
 import Image from "next/image";
@@ -23,6 +22,7 @@ import "@/styles/template2.css";
 import "@/styles/template3.css";
 import "@/styles/template4.css";
 import ShareDialog from "./ShareDialog";
+import retry from "async-retry";
 
 library.add(fas, faBookmark, faLink, faLocationDot, faEnvelope, faPhone, faDiscord, faFacebook, faGithub, faInstagram, faTelegram, faTiktok, faWhatsapp, faYoutube, faShare, faComment, faMugHot, faWeixin, faLine);
 
@@ -68,8 +68,17 @@ export default async function UserPage({ params }) {
   console.log("UserPage function started for URI:", uri);
 
   try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("Connected to MongoDB");
+    await retry(
+      async () => {
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log("Connected to MongoDB");
+      },
+      {
+        retries: 3,
+        minTimeout: 1000,
+        maxTimeout: 5000,
+      }
+    );
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
     return <div>Error connecting to the database</div>;
