@@ -6,7 +6,13 @@ if (!process.env.MONGODB_URI) {
 }
 
 const uri = process.env.MONGODB_URI;
-const options = {};
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  maxPoolSize: 50, // Set the maximum number of connections in the pool
+  minPoolSize: 10, // Set the minimum number of connections in the pool
+  maxIdleTimeMS: 30000, // Set the maximum idle time for a connection in milliseconds
+};
 
 let client;
 let clientPromise;
