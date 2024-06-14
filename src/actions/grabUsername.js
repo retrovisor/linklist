@@ -3,10 +3,12 @@ import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import {Page} from "@/models/Page";
 import mongoose from "mongoose";
 import {getServerSession} from "next-auth";
+import clientPromise from "@/libs/mongoClient";
+
 
 export default async function grabUsername(formData) {
   const username = formData.get('username');
-  mongoose.connect(process.env.MONGO_URI);
+  const client = await clientPromise; const db = client.db();
   const existingPageDoc = await Page.findOne({uri:username});
   if (existingPageDoc) {
     return false;
