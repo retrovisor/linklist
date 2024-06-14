@@ -6,24 +6,17 @@ import PageTextBoxesForm from "@/components/forms/PageTextBoxesForm";
 import UsernameForm from "@/components/forms/UsernameForm";
 import PageYouTubeForm from "@/components/forms/PageYouTubeForm";
 import PageImageLinksForm from "@/components/forms/PageImageLinksForm";
-import { Page } from "@/models/Page";
-import mongoose from "mongoose";
+import clientPromise from "@/libs/mongoClient";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import cloneDeep from 'clone-deep';
 import Head from 'next/head';
-import clientPromise from "@/libs/mongoClient";
-
- 
 
 export default async function AccountPage({ searchParams }) {
   console.log('AccountPage function started');
 
   const session = await getServerSession(authOptions);
   console.log('Session:', session);
-
-     
-
 
   const desiredUsername = searchParams?.desiredUsername;
   console.log('Desired Username:', desiredUsername);
@@ -33,13 +26,12 @@ export default async function AccountPage({ searchParams }) {
     return redirect('/');
   }
 
-  // Ensure mongoose connection is established only once
-  if (mongoose.connection.readyState === 0) {
-    const client = await clientPromise; const db = client.db();
-  }
-
   try {
-    const page = await Page.findOne({ owner: session?.user?.email });
+    const client = await clientPromise;
+    const db = client.db();
+    const collection = db.collection("pages");
+
+    const page = await collection.findOne({ owner: session.user.email });
     console.log('Query executed successfully');
     console.log('Page:', page);
 
@@ -54,27 +46,23 @@ export default async function AccountPage({ searchParams }) {
 
     console.log('Page found:', page);
 
-    const leanPage = cloneDeep(page.toJSON());
+    const leanPage = cloneDeep(page);
     leanPage._id = leanPage._id.toString();
     console.log('Lean Page:', leanPage);
 
     return (
       <>
-            <Head>
-        <title>{`Edit account - ${session.user.name}`}</title>
-      </Head>
-      <div className="container h-full bg-center fixed bg-auto overflow-x-hidden bg-no-repeat pb-10">
-  
-        <PageSettingsForm page={leanPage} user={session.user} />
-        <PageButtonsForm page={leanPage} user={session.user} />
-        <PageLinksForm page={leanPage} user={session.user} />
-        <PageTextBoxesForm page={leanPage} user={session.user} />
-        <PageImageLinksForm page={leanPage} user={session.user} />
-        <PageYouTubeForm page={leanPage} user={session.user} />
-      </div>
-
-
-      
+        <Head>
+          <title>{`Edit account - ${session.user.name}`}</title>
+        </Head>
+        <div className="container h-full bg-center fixed bg-auto overflow-x-hidden bg-no-repeat pb-10">
+          <PageSettingsForm page={leanPage} user={session.user} />
+          <PageButtonsForm page={leanPage} user={session.user} />
+          <PageLinksForm page={leanPage} user={session.user} />
+          <PageTextBoxesForm page={leanPage} user={session.user} />
+          <PageImageLinksForm page={leanPage} user={session.user} />
+          <PageYouTubeForm page={leanPage} user={session.user} />
+        </div>
       </>
     );
   } catch (error) {
