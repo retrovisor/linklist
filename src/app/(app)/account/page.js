@@ -12,6 +12,8 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import cloneDeep from 'clone-deep';
 import Head from 'next/head';
+import clientPromise from "@/libs/mongoClient";
+
  
 
 export default async function AccountPage({ searchParams }) {
@@ -33,7 +35,7 @@ export default async function AccountPage({ searchParams }) {
 
   // Ensure mongoose connection is established only once
   if (mongoose.connection.readyState === 0) {
-    await mongoose.connect(process.env.MONGO_URI);
+    const client = await clientPromise; const db = client.db();
   }
 
   try {
