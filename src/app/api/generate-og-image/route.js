@@ -4,12 +4,8 @@ import uniqid from 'uniqid';
 import { Page } from '@/models/Page';
 import mongoose from 'mongoose';
 import path from 'path';
-
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 30000,
-});
+import clientPromise from "@/libs/mongoClient";
+ 
 
 export async function POST(request) {
   const { backgroundImageUrl, avatarImageUrl, pageUri, bgColor } = await request.json();
@@ -82,7 +78,10 @@ export async function POST(request) {
     const customDomain = 'momofriends.com/naelink';
     const link = `https://${customDomain}/${newFilename}`;
 
-    await Page.findOneAndUpdate({ uri: pageUri }, { ogImageUrl: link });
+        const client = await clientPromise;
+    const db = client.db();
+    await db.collection("pages").findOneAndUpdate({ uri: pageUri }, { $set: { ogImageUrl: link } });
+
 
     clearTimeout(timeoutId);
     return new Response(JSON.stringify({ success: true, link }), { status: 200 });
