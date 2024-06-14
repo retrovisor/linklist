@@ -7,7 +7,7 @@ import clientPromise from "@/libs/mongoClient";
 export async function POST(request) {
   const { backgroundImageUrl, avatarImageUrl, pageUri, bgColor } = await request.json();
   console.log('Request received:', { backgroundImageUrl, avatarImageUrl, pageUri, bgColor });
-
+  
   const timeoutId = setTimeout(() => {
     throw new Error('Image generation timed out');
   }, 60000);
@@ -76,42 +76,26 @@ export async function POST(request) {
 
     const customDomain = 'momofriends.com/naelink';
     const link = `https://${customDomain}/${newFilename}`;
-
     console.log('Image uploaded to S3:', link);
 
     const client = await clientPromise;
-    if (!client) {
-      throw new Error('Failed to initialize MongoDB client');
-    }
-
     const db = client.db();
-    if (!db) {
-      throw new Error('Failed to get MongoDB database');
+    
+    // Wrap the database operation in a try-catch block
+    try {
+      const result = await db.collection("pages").updateOne(
+        { uri: pageUri },
+        { $set: { ogImageUrl: link } }
+      );
+      console.log('Page updated successfully:', result);
+    } catch (error) {
+      console.error('Failed to update page:', error);
+      throw error;
     }
 
-    const collection = db.collection("pages");
-    if (!collection) {
-      throw new Error('Failed to get MongoDB collection');
-    }
-
-    console.log('Updating page with URI:', pageUri);
-    const updateResult = await collection.findOneAndUpdate(
-      { uri: pageUri },
-      { $set: { ogImageUrl: link } },
-      { returnDocument: 'after' }
-    );
-
-    if (!updateResult.value) {
-      throw new Error('Failed to update the page');
-    }
-
-    console.log('Page updated successfully:', updateResult.value);
-
-    clearTimeout(timeoutId);
     return new Response(JSON.stringify({ success: true, link }), { status: 200 });
   } catch (error) {
-    console.error('Failed to generate OG image:', error.message);
-    console.error('Error stack:', error.stack);
+    console.error('Failed to generate OG image:', error);
     return new Response(JSON.stringify({ error: 'Internal Server Error', details: error.message }), { status: 500 });
   } finally {
     clearTimeout(timeoutId);
