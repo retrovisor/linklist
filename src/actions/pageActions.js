@@ -5,6 +5,8 @@ import { Page } from "@/models/Page";
 import { User } from "@/models/User";
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
+import clientPromise from "@/libs/mongoClient";
+
 
 // Helper function to ensure the database connection
 async function connectToDatabase() {
