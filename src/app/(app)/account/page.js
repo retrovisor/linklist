@@ -15,22 +15,23 @@ import Head from 'next/head';
 export default async function AccountPage({ searchParams }) {
   console.log('AccountPage function started');
 
-  const session = await getServerSession(authOptions);
-  console.log('Session:', session);
-
-  const desiredUsername = searchParams?.desiredUsername;
-  console.log('Desired Username:', desiredUsername);
-
-  if (!session) {
-    console.log('No session, redirecting to /');
-    return redirect('/');
-  }
-
   try {
+    const session = await getServerSession(authOptions);
+    console.log('Session:', session);
+
+    if (!session) {
+      console.log('No session, redirecting to /');
+      return redirect('/');
+    }
+
+    const desiredUsername = searchParams?.desiredUsername;
+    console.log('Desired Username:', desiredUsername);
+
     const client = await clientPromise;
     const db = client.db();
     const collection = db.collection("pages");
 
+    console.log('Looking for page with owner:', session.user.email);
     const page = await collection.findOne({ owner: session.user.email });
     console.log('Query executed successfully');
     console.log('Page:', page);
@@ -66,7 +67,9 @@ export default async function AccountPage({ searchParams }) {
       </>
     );
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error occurred:', error.message);
+    console.error('Error stack:', error.stack);
     return <div>에러 발생됨. 나중에 다시 시도 해주십시오</div>;
   }
 }
+
