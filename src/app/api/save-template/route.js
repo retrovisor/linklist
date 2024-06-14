@@ -3,9 +3,11 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { Page } from '@/models/Page';
 import mongoose from 'mongoose';
+import clientPromise from "@/libs/mongoClient";
+
 
 export async function POST(request) {
-  await mongoose.connect(process.env.MONGO_URI);
+  const client = await clientPromise; const db = client.db();
 
   const session = await getServerSession(authOptions);
   if (!session) {
