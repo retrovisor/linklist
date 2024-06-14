@@ -9,12 +9,12 @@ import { getServerSession } from "next-auth";
 // Helper function to ensure the database connection
 async function connectToDatabase() {
   if (!mongoose.connection.readyState) {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const client = await clientPromise;
+    const db = client.db();
+    mongoose.connection.useDb(db.databaseName);
   }
 }
+
 
 const serviceUrlMap = {
   email: '{{value}}',
