@@ -31,44 +31,43 @@ export default async function AccountPage({ searchParams }) {
     const desiredUsername = searchParams?.desiredUsername;
     console.log('Desired Username:', desiredUsername);
 
-    const client = await clientPromise;
-    if (!client) {
-      throw new Error('Failed to initialize MongoDB client');
-    }
+    try {
+      const client = await clientPromise;
+      if (!client) {
+        throw new Error('Failed to initialize MongoDB client');
+      }
+      const db = client.db();
+      if (!db) {
+        throw new Error('Failed to get MongoDB database');
+      }
+      const collection = db.collection("pages");
+      if (!collection) {
+        throw new Error('Failed to get MongoDB collection');
+      }
+      console.log('Looking for page with owner:', session.user.email);
+      const page = await collection.findOne({ owner: session.user.email });
+      console.log('Query executed successfully');
+      console.log('Page:', page);
 
-    const db = client.db();
-    if (!db) {
-      throw new Error('Failed to get MongoDB database');
-    }
+      if (!page) {
+        console.log('Page not found for the user');
+        return (
+          <div>
+            <UsernameForm desiredUsername={desiredUsername} />
+          </div>
+        );
+      }
 
-    const collection = db.collection("pages");
-    if (!collection) {
-      throw new Error('Failed to get MongoDB collection');
-    }
+      console.log('Page found:', page);
+      const leanPage = cloneDeep(page);
+      if (leanPage._id) {
+        leanPage._id = leanPage._id.toString();
+      } else {
+        console.warn('Page _id is undefined');
+      }
+      console.log('Lean Page:', leanPage);
 
-    console.log('Looking for page with owner:', session.user.email);
-    const page = await collection.findOne({ owner: session.user.email });
-    console.log('Query executed successfully');
-    console.log('Page:', page);
 
-    if (!page) {
-      console.log('Page not found for the user');
-      return (
-        <div>
-          <UsernameForm desiredUsername={desiredUsername} />
-        </div>
-      );
-    }
-
-    console.log('Page found:', page);
-
-    const leanPage = cloneDeep(page);
-    if (leanPage._id) {
-      leanPage._id = leanPage._id.toString();
-    } else {
-      console.warn('Page _id is undefined');
-    }
-    console.log('Lean Page:', leanPage);
 
     return (
       <>
