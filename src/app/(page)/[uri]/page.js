@@ -64,28 +64,15 @@ function getYouTubeVideoId(url) {
 }
 
 export default async function UserPage({ params }) {
-  const uri = decodeURIComponent(params.uri); // Decode the URI parameter
+  const uri = decodeURIComponent(params.uri);
   console.log("UserPage function started for URI:", uri);
 
   try {
-    await retry(
-      async () => {
-        await mongoose.connect(process.env.MONGO_URI);
-        console.log("Connected to MongoDB");
-      },
-      {
-        retries: 3,
-        minTimeout: 1000,
-        maxTimeout: 5000,
-      }
-    );
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
-    return <div>Error connecting to the database</div>;
-  }
+    const client = await clientPromise;
+    const db = client.db(); // Get the database instance from the client
+    console.log("Connected to MongoDB");
 
-  try {
-    const page = await Page.findOne({ uri });
+    const page = await db.collection("pages").findOne({ uri });
     console.log("Page data:", page);
 
     if (!page) {
@@ -93,7 +80,7 @@ export default async function UserPage({ params }) {
       return <div>Page not found</div>;
     }
 
-    const user = await User.findOne({ email: page.owner });
+    const user = await db.collection("users").findOne({ email: page.owner });
     console.log("User data:", user);
 
     if (!user) {
@@ -101,11 +88,12 @@ export default async function UserPage({ params }) {
       return <div>User not found</div>;
     }
 
-    await Event.create({ uri: uri, page: uri, type: 'view' });
+    await db.collection("events").insertOne({ uri: uri, page: uri, type: 'view' });
     console.log("Event created");
 
-    const pageData = page.toObject(); // Convert the page object to a plain JavaScript object
-    const template = pageData.template || "template1"; // Default to template1 if not specified
+    const pageData = page;
+    const template = pageData.template || "template1";
+
 
     return (
       <div className={`w-full h-full bg-center bg-cover fixed top-0 z-10 bg-auto bg-no-repeat overflow-x-hidden text-white template ${template}`} style={
