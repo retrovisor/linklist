@@ -10,9 +10,11 @@ import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
+import clientPromise from "@/libs/mongoClient";
+
 
 export default async function AnalyticsPage() {
-  mongoose.connect(process.env.MONGO_URI);
+  const client = await clientPromise; const db = client.db();
   const session = await getServerSession(authOptions);
 
   if (!session) {
