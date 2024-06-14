@@ -67,23 +67,26 @@ export default async function AccountPage({ searchParams }) {
       }
       console.log('Lean Page:', leanPage);
 
-
-
-    return (
-      <>
-        <Head>
-          <title>{`Edit account - ${session.user.name}`}</title>
-        </Head>
-        <div className="container h-full bg-center fixed bg-auto overflow-x-hidden bg-no-repeat pb-10">
-          <PageSettingsForm page={leanPage} user={session.user} />
-          <PageButtonsForm page={leanPage} user={session.user} />
-          <PageLinksForm page={leanPage} user={session.user} />
-          <PageTextBoxesForm page={leanPage} user={session.user} />
-          <PageImageLinksForm page={leanPage} user={session.user} />
-          <PageYouTubeForm page={leanPage} user={session.user} />
-        </div>
-      </>
-    );
+      return (
+        <>
+          <Head>
+            <title>{`Edit account - ${session.user.name}`}</title>
+          </Head>
+          <div className="container h-full bg-center fixed bg-auto overflow-x-hidden bg-no-repeat pb-10">
+            <PageSettingsForm page={leanPage} user={session.user} />
+            <PageButtonsForm page={leanPage} user={session.user} />
+            <PageLinksForm page={leanPage} user={session.user} />
+            <PageTextBoxesForm page={leanPage} user={session.user} />
+            <PageImageLinksForm page={leanPage} user={session.user} />
+            <PageYouTubeForm page={leanPage} user={session.user} />
+          </div>
+        </>
+      );
+    } catch (dbError) {
+      console.error('Error occurred while interacting with the database:', dbError.message);
+      console.error('Error stack:', dbError.stack);
+      throw dbError; // Re-throw the error to be caught by the outer catch block
+    }
   } catch (error) {
     console.error('Error occurred:', error.message);
     console.error('Error stack:', error.stack);
