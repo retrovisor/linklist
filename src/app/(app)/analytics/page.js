@@ -23,7 +23,7 @@ export default async function AnalyticsPage() {
 
   const page = await Page.findOne({ owner: session.user.email });
 
-  const groupedViews = await Event.aggregate([
+  const groupedViews = await db.collection("events").aggregate([
     {
       $match: {
         type: 'view',
@@ -44,7 +44,7 @@ export default async function AnalyticsPage() {
     { $sort: { _id: 1 } },
   ]);
 
-  const clicks = await Event.find({
+  const clicks = await db.collection("events").find({
     page: page.uri,
     type: 'click',
   });
