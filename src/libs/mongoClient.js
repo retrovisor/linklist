@@ -1,3 +1,4 @@
+// mongoClient.js
 import { MongoClient } from "mongodb";
 
 if (!process.env.MONGODB_URI) {
@@ -18,15 +19,17 @@ let client;
 let clientPromise;
 
 const connect = async () => {
-  try {
-    client = new MongoClient(uri, options);
-    await client.connect();
-    console.log("Connected to MongoDB");
-    return client;
-  } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
-    throw error;
+  if (!client || !client.isConnected()) {
+    try {
+      client = new MongoClient(uri, options);
+      await client.connect();
+      console.log("Connected to MongoDB");
+    } catch (error) {
+      console.error("Error connecting to MongoDB:", error);
+      throw error;
+    }
   }
+  return client;
 };
 
 if (process.env.NODE_ENV === "development") {
@@ -37,21 +40,5 @@ if (process.env.NODE_ENV === "development") {
 } else {
   clientPromise = connect();
 }
-
-// Attempt to reconnect if there is an error or the connection is lost
-client.on("error", async (error) => {
-  console.error("MongoDB connection error:", error);
-  try {
-    await client.close();
-  } catch (closeError) {
-    console.error("Error closing MongoDB connection:", closeError);
-  }
-  clientPromise = connect();
-});
-
-client.on("close", async () => {
-  console.warn("MongoDB connection closed. Attempting to reconnect...");
-  clientPromise = connect();
-});
 
 export default clientPromise;
