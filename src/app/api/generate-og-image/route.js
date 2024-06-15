@@ -7,7 +7,7 @@ import clientPromise from "@/libs/mongoClient";
 export async function POST(request) {
   const { backgroundImageUrl, avatarImageUrl, pageUri, bgColor } = await request.json();
   console.log('Request received:', { backgroundImageUrl, avatarImageUrl, pageUri, bgColor });
-  
+
   const timeoutId = setTimeout(() => {
     throw new Error('Image generation timed out');
   }, 60000);
@@ -79,8 +79,18 @@ export async function POST(request) {
     console.log('Image uploaded to S3:', link);
 
     const client = await clientPromise;
+    if (!client.isConnected()) {
+      try {
+        await client.connect();
+        console.log("Reconnected to MongoDB");
+      } catch (error) {
+        console.error("Error reconnecting to MongoDB:", error);
+        throw error;
+      }
+    }
+
     const db = client.db();
-    
+
     // Wrap the database operation in a try-catch block
     try {
       const result = await db.collection("pages").updateOne(
