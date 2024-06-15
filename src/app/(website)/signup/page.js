@@ -6,6 +6,7 @@ import LoginWithKakao from "@/components/buttons/LoginWithKakao";
 import LoginWithFacebook from "@/components/buttons/LoginWithFacebook";
 import UsernameForm from "@/components/forms/UsernameForm";
 import { redirect } from "next/navigation";
+import clientPromise from "@/libs/mongoClient";
 
 export default async function LoginPage({ searchParams }) {
   console.log('LoginPage function started');
@@ -40,6 +41,33 @@ export default async function LoginPage({ searchParams }) {
     );
   } catch (error) {
     console.error('Error in LoginPage:', error);
-    return <div>An error occurred. Please try again later.</div>;
+
+    if (error.name === 'MongoNetworkTimeoutError') {
+      // Retry the operation
+      const maxRetries = 3;
+      let retryCount = 0;
+
+      while (retryCount < maxRetries) {
+        try {
+          await clientPromise;
+          console.log('MongoDB connection established after retry');
+          break;
+        } catch (retryError) {
+          console.error('Error connecting to MongoDB (retry attempt):', retryError);
+          retryCount++;
+
+          if (retryCount === maxRetries) {
+            console.error('Max retries reached. MongoDB connection failed.');
+            return <div>서비스를 사용할 수 없습니다. 나중에 다시 시도해 주세요.</div>;
+          }
+
+          // Wait for a certain duration before retrying
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+      }
+    } else {
+      // Handle other errors
+      return <div>오류가 발생했습니다. 나중에 다시 시도해 주세요.</div>;
+    }
   }
 }
