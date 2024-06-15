@@ -14,50 +14,38 @@ const options = {
   socketTimeoutMS: 45000, // Increase the socket timeout
   connectTimeoutMS: 30000, // Increase the connection timeout
 };
+
+const retryOptions = {
+  retries: 5, // Number of retry attempts
+  minTimeout: 1000, // Minimum delay between retries (in ms)
+  maxTimeout: 5000, // Maximum delay between retries (in ms)
+  factor: 2, // Exponential backoff factor
+};
+
 let client;
 let clientPromise;
+
+const connect = async () => {
+  try {
+    await retry(async () => {
+      await client.connect();
+    }, retryOptions);
+    console.log("Connected to MongoDB");
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error);
+    throw error;
+  }
+};
 
 if (process.env.NODE_ENV === "development") {
   if (!global._mongoClientPromise) {
     client = new MongoClient(uri, options);
-    global._mongoClientPromise = retry(
-      async () => {
-        try {
-          await client.connect();
-          console.log("Connected to MongoDB");
-          return client;
-        } catch (error) {
-          console.error("Error connecting to MongoDB:", error);
-          throw error;
-        }
-      },
-      {
-        retries: 3,
-        minTimeout: 1000,
-        maxTimeout: 5000,
-      }
-    );
+    global._mongoClientPromise = connect();
   }
   clientPromise = global._mongoClientPromise;
 } else {
   client = new MongoClient(uri, options);
-  clientPromise = retry(
-    async () => {
-      try {
-        await client.connect();
-        console.log("Connected to MongoDB");
-        return client;
-      } catch (error) {
-        console.error("Error connecting to MongoDB:", error);
-        throw error;
-      }
-    },
-    {
-      retries: 3,
-      minTimeout: 1000,
-      maxTimeout: 5000,
-    }
-  );
+  clientPromise = connect();
 }
 
 export default clientPromise;
