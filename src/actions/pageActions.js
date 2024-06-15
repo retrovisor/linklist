@@ -1,23 +1,13 @@
 'use server';
 
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { Page } from "@/models/Page";
-import { User } from "@/models/User";
-import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import clientPromise from "@/libs/mongoClient";
 
-
 // Helper function to ensure the database connection
 async function connectToDatabase() {
-  if (!mongoose.connection.readyState) {
-    const client = await clientPromise;
-    const db = client.db();
-    mongoose.connect(db.s.client.s.url, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-  }
+  const client = await clientPromise;
+  return client.db();
 }
 
 const serviceUrlMap = {
@@ -39,7 +29,7 @@ const serviceUrlMap = {
 };
 
 export async function savePageButtons(formData) {
-  await connectToDatabase();
+  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
 
   if (session) {
@@ -63,10 +53,10 @@ export async function savePageButtons(formData) {
 
     const dataToUpdate = { buttons: buttonsValues };
 
-    await Page.updateOne(
-  { owner: session?.user?.email },
-  dataToUpdate,
-);
+    await db.collection("pages").updateOne(
+      { owner: session?.user?.email },
+      { $set: dataToUpdate },
+    );
 
     return { success: true };
   }
@@ -74,33 +64,25 @@ export async function savePageButtons(formData) {
   return { success: false, message: 'Unauthorized' };
 }
 
-
-async function saveLink(link) {
-  const response = await savePageLink(link);
-  if (response.success) {
-    setLinks(prevLinks => prevLinks.map(l => l.key === link.key ? link : l));
-    toast.success('Link saved!');
-  } else {
-    toast.error('Failed to save link. Please try again.');
-  }
-}
-
 export async function savePageImageLink(imageLink) {
-  await connectToDatabase();
+  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
 
   if (session) {
-    const existingImageLink = await Page.findOne({ owner: session?.user?.email, "imageLinks.key": imageLink.key });
+    const existingImageLink = await db.collection("pages").findOne({
+      owner: session?.user?.email,
+      "imageLinks.key": imageLink.key
+    });
 
     if (existingImageLink) {
       // Update existing image link
-      await Page.updateOne(
+      await db.collection("pages").updateOne(
         { owner: session?.user?.email, "imageLinks.key": imageLink.key },
         { $set: { "imageLinks.$": imageLink } },
       );
     } else {
       // Add new image link
-      await Page.updateOne(
+      await db.collection("pages").updateOne(
         { owner: session?.user?.email },
         { $push: { imageLinks: imageLink } },
       );
@@ -113,11 +95,11 @@ export async function savePageImageLink(imageLink) {
 }
 
 export async function deletePageImageLink(imageLinkKey) {
-  await connectToDatabase();
+  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
 
   if (session) {
-    await Page.updateOne(
+    await db.collection("pages").updateOne(
       { owner: session?.user?.email },
       { $pull: { imageLinks: { key: imageLinkKey } } },
     );
@@ -129,11 +111,11 @@ export async function deletePageImageLink(imageLinkKey) {
 }
 
 export async function deletePageLink(linkKey) {
-  await connectToDatabase();
+  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
   
   if (session) {
-    await Page.updateOne(
+    await db.collection("pages").updateOne(
       { owner: session?.user?.email },
       { $pull: { links: { key: linkKey } } },
     );
@@ -145,7 +127,7 @@ export async function deletePageLink(linkKey) {
 }
 
 export async function savePageSettings(formData) {
-  await connectToDatabase();
+  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
 
   if (session) {
@@ -162,24 +144,24 @@ export async function savePageSettings(formData) {
       }
     }
 
-    await Page.updateOne(
+    await db.collection("pages").updateOne(
       { owner: session?.user?.email },
-      dataToUpdate,
+      { $set: dataToUpdate },
     );
 
-      if (formData.has('avatar')) {
-    const avatarLink = formData.get('avatar');
-    dataToUpdate.avatar = avatarLink;
-    await User.updateOne(
-      { email: session.user?.email },
-      { $set: { image: avatarLink } },
-    );
-  }
-await Page.updateOne(
-    { owner: session?.user?.email },
-    dataToUpdate,
-  );
+    if (formData.has('avatar')) {
+      const avatarLink = formData.get('avatar');
+      dataToUpdate.avatar = avatarLink;
+      await db.collection("users").updateOne(
+        { email: session.user?.email },
+        { $set: { image: avatarLink } },
+      );
+    }
 
+    await db.collection("pages").updateOne(
+      { owner: session?.user?.email },
+      { $set: dataToUpdate },
+    );
 
     return { success: true };
   }
@@ -188,21 +170,24 @@ await Page.updateOne(
 }
 
 export async function savePageYouTubeVideo(video) {
-  await connectToDatabase();
+  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
   
   if (session) {
-    const existingVideo = await Page.findOne({ owner: session?.user?.email, "youTubeVideos.key": video.key });
+    const existingVideo = await db.collection("pages").findOne({
+      owner: session?.user?.email,
+      "youTubeVideos.key": video.key
+    });
     
     if (existingVideo) {
       // Update existing video
-      await Page.updateOne(
+      await db.collection("pages").updateOne(
         { owner: session?.user?.email, "youTubeVideos.key": video.key },
         { $set: { "youTubeVideos.$": video } },
       );
     } else {
       // Add new video
-      await Page.updateOne(
+      await db.collection("pages").updateOne(
         { owner: session?.user?.email },
         { $push: { youTubeVideos: video } },
       );
@@ -215,11 +200,11 @@ export async function savePageYouTubeVideo(video) {
 }
 
 export async function deletePageYouTubeVideo(videoKey) {
-  await connectToDatabase();
+  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
   
   if (session) {
-    await Page.updateOne(
+    await db.collection("pages").updateOne(
       { owner: session?.user?.email },
       { $pull: { youTubeVideos: { key: videoKey } } },
     );
@@ -231,21 +216,24 @@ export async function deletePageYouTubeVideo(videoKey) {
 }
 
 export async function savePageLink(link) {
-  await connectToDatabase();
+  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
   
   if (session) {
-    const existingLink = await Page.findOne({ owner: session?.user?.email, "links.key": link.key });
+    const existingLink = await db.collection("pages").findOne({
+      owner: session?.user?.email,
+      "links.key": link.key
+    });
     
     if (existingLink) {
       // Update existing link
-      await Page.updateOne(
+      await db.collection("pages").updateOne(
         { owner: session?.user?.email, "links.key": link.key },
         { $set: { "links.$": link } },
       );
     } else {
       // Add new link
-      await Page.updateOne(
+      await db.collection("pages").updateOne(
         { owner: session?.user?.email },
         { $push: { links: link } },
       );
@@ -256,17 +244,15 @@ export async function savePageLink(link) {
     return { success: false, message: 'Unauthorized' };
   }
 }
- 
- 
 
 export async function saveTextBoxes(textBoxes) {
-  await connectToDatabase();
+  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
 
   if (session) {
-    await Page.updateOne(
+    await db.collection("pages").updateOne(
       { owner: session?.user?.email },
-      { textBoxes },
+      { $set: { textBoxes } },
     );
 
     return { success: true };
@@ -276,21 +262,24 @@ export async function saveTextBoxes(textBoxes) {
 }
 
 export async function savePageTextBox(textBox) {
-  await connectToDatabase();
+  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
   
   if (session) {
-    const existingTextBox = await Page.findOne({ owner: session?.user?.email, "textBoxes.key": textBox.key });
+    const existingTextBox = await db.collection("pages").findOne({
+      owner: session?.user?.email,
+      "textBoxes.key": textBox.key
+    });
     
     if (existingTextBox) {
       // Update existing text box
-      await Page.updateOne(
+      await db.collection("pages").updateOne(
         { owner: session?.user?.email, "textBoxes.key": textBox.key },
         { $set: { "textBoxes.$": textBox } },
       );
     } else {
       // Add new text box
-      await Page.updateOne(
+      await db.collection("pages").updateOne(
         { owner: session?.user?.email },
         { $push: { textBoxes: textBox } },
       );
