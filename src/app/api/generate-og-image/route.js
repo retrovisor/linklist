@@ -79,16 +79,6 @@ export async function POST(request) {
     console.log('Image uploaded to S3:', link);
 
     const client = await clientPromise;
-    if (!client.isConnected()) {
-      try {
-        await client.connect();
-        console.log("Reconnected to MongoDB");
-      } catch (error) {
-        console.error("Error reconnecting to MongoDB:", error);
-        throw error;
-      }
-    }
-
     const db = client.db();
 
     // Wrap the database operation in a try-catch block
