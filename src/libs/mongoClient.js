@@ -10,9 +10,9 @@ const options = {
   maxPoolSize: 50,
   minPoolSize: 10,
   maxIdleTimeMS: 30000,
-  serverSelectionTimeoutMS: 5000, // Increase the server selection timeout
-  socketTimeoutMS: 45000, // Increase the socket timeout
-  connectTimeoutMS: 30000, // Increase the connection timeout
+  serverSelectionTimeoutMS: 15000, // Increase the server selection timeout to 15 seconds
+  socketTimeoutMS: 45000,
+  connectTimeoutMS: 30000,
 };
 let client;
 let clientPromise;
