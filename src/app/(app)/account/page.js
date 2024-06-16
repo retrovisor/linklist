@@ -63,33 +63,4 @@ export default async function AccountPage({ searchParams }) {
     const leanPage = cloneDeep(page);
     if (leanPage._id) {
       leanPage._id = leanPage._id.toString();
-    } else {
-      console.warn('Page _id is undefined');
-    }
-    console.log('Lean Page:', leanPage);
-
-    if (!leanPage.uri) {
-      throw new Error('Page uri is undefined');
-    }
-
-    return (
-      <>
-        <Head>
-          <title>{`Edit account - ${session.user.name}`}</title>
-        </Head>
-        <div className="container h-full bg-center fixed bg-auto overflow-x-hidden bg-no-repeat pb-10">
-          <PageSettingsForm page={leanPage} user={session.user} />
-          <PageButtonsForm page={leanPage} user={session.user} />
-          <PageLinksForm page={leanPage} user={session.user} />
-          <PageTextBoxesForm page={leanPage} user={session.user} />
-          <PageImageLinksForm page={leanPage} user={session.user} />
-          <PageYouTubeForm page={leanPage} user={session.user} />
-        </div>
-      </>
-    );
-  } catch (dbError) {
-    console.error('Error occurred while interacting with the database:', dbError.message);
-    console.error('Error stack:', dbError.stack);
-    return <div>에러 발생됨. 나중에 다시 시도 해주십시오</div>;
-  }
-}
+   
