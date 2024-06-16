@@ -38,12 +38,14 @@ export default async function AppTemplate({ children, ...rest }) {
     });
     console.log('MongoDB connection established.');
 
-    const page = await Page.findOne({ owner: session.user.id });
-    const user = await User.findOne({ _id: session.user.id });
-    console.log('MongoDB findOne query executed:', page ? `Page found for ${session.user.email}.` : 'Page not found.');
+        const page = await Page.findOne({ owner: new ObjectId(session.user.id) });
+
+        const user = await User.findOne({ _id: new ObjectId(session.user.id) });
+
+    console.log('MongoDB findOne query executed:', page ? `Page found for ${session.user.id}.` : 'Page not found.');
 
     return (
-      <html lang="en">
+      <html lang="kr">
         <body className={lato.className}>
           <Toaster />
           <main className="md:flex">
@@ -90,21 +92,25 @@ export default async function AppTemplate({ children, ...rest }) {
                   <Image src={user?.image || 'https://fizz.link/avatar.png'} className="object-cover w-full h-full" width={256} height={256} alt={'avatar'} unoptimized />
                 </div>
                 {page && (
-                  <div className="text-center mt-4 bg-custom-gray p-4 rounded-lg">
-                    <div className="flex items-center justify-center space-x-1">
-                      <img src="/logo4.png" alt="Logo" style={{ width: '1em' }} />
-                      <Link
-                        target="_blank"
-                        href={'/' + page.uri}
-                        className="text-base font-semibold text-slate-900 hover:text-blue-600 transition duration-200"
-                      >
-                        <span>Fizz.link/{page.uri}</span>
-                      </Link>
-                    </div>
-                    <div className="mt-2 flex justify-center">
-                      <CopyLinkButton uri={page.uri} />
-                    </div>
-                  </div>
+                    <div className="text-center mt-4 bg-custom-gray p-4 rounded-lg">
+    <div className="flex items-center justify-center space-x-1">
+      <img src="/logo4.png" alt="Logo" style={{ width: '1em' }} />
+      {page.uri && (
+        <Link
+          target="_blank"
+          href={'/' + page.uri}
+          className="text-base font-semibold text-slate-900 hover:text-blue-600 transition duration-200"
+        >
+          <span>Fizz.link/{page.uri}</span>
+        </Link>
+      )}
+    </div>
+    {page.uri && (
+      <div className="mt-2 flex justify-center">
+        <CopyLinkButton uri={page.uri} />
+      </div>
+    )}
+  </div>
                 )}
                 <div className="text-center">
                   <AppSidebar />
