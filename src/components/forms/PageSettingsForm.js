@@ -12,16 +12,17 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function PageSettingsForm({ page, user }) {
-  // Ensure all necessary data is present
-  if (!page || !page.uri || !page.bgType || !page.bgColor) {
+  // Initialize state hooks at the top level
+  const [bgType, setBgType] = useState(page?.bgType || 'color');
+  const [bgColor, setBgColor] = useState(page?.bgColor || '#ffffff');
+  const [tempBgColor, setTempBgColor] = useState(bgColor);
+  const [bgImage, setBgImage] = useState(page?.bgImage || '');
+  const [avatar, setAvatar] = useState(page?.avatar || user?.image || 'https://fizz.link/avatar.png');
+
+  // Early return if page data is invalid
+  if (!page || !page.uri) {
     return <div>Error: Invalid page data</div>;
   }
-
-  const [bgType, setBgType] = useState(page.bgType);
-  const [bgColor, setBgColor] = useState(page.bgColor);
-  const [tempBgColor, setTempBgColor] = useState(bgColor);
-  const [bgImage, setBgImage] = useState(page.bgImage);
-  const [avatar, setAvatar] = useState(page.avatar || user?.image);
 
   async function saveBaseSettings(formData) {
     const result = await savePageSettings(formData);
@@ -200,7 +201,7 @@ export default function PageSettingsForm({ page, user }) {
               <div className="overflow-hidden h-full rounded-full border-4 border-white shadow shadow-black/50">
                 <Image
                   className="w-full h-full object-cover"
-                  src={avatar || 'https://fizz.link/avatar.png'}
+                  src={avatar}
                   alt="avatar"
                   width={128}
                   height={128}
