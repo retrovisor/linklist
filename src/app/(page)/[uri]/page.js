@@ -81,7 +81,8 @@ export default async function UserPage({ params }) {
       return <div>Page not found</div>;
     }
 
-    const user = await db.collection("users").findOne({ email: page.owner });
+  const user = await db.collection("users").findOne({ _id: page.owner }); // Use _id instead of email
+
     console.log("User data:", user);
 
     if (!user) {
