@@ -28,7 +28,7 @@ export default async function Header() {
           ) : (
             <>
               <Link href={'/login'} className="btn-link2">로그인</Link>
-              <Link href={'/signup'} className="btn-link">가입하기</Link>
+              <Link href={'/signup'} className="btn-link">무료 등록</Link>
             </>
           )}
         </nav>
