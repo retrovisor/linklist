@@ -1,5 +1,4 @@
 'use client';
-
 import grabUsername from "@/actions/grabUsername";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import RightIcon from "@/components/icons/RightIcon";
@@ -11,24 +10,24 @@ export default function UsernameForm({ desiredUsername }) {
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const result = await grabUsername(formData);
+    const username = formData.get('username');
+    console.log('Desired username (client-side):', username); // Log the desired username from the client-side
 
+    const result = await grabUsername(formData);
     setTaken(result === false);
     if (result) {
-      window.location.href = '/select-template?created=' + formData.get('username');
+      window.location.href = '/select-template?created=' + username;
     }
   }
 
   return (
     <div className="py-12 w-full max-w-lg mx-auto">
-
-    <h1 className="text-4xl font-bold text-center mb-8">
+      <h1 className="text-4xl font-bold text-center mb-8">
         사용자 이름을 선택하세요
       </h1>
-       
-    <form className="flex flex-col sm:flex-row items-stretch sm:space-x-4 space-y-4 sm:space-y-0" onSubmit={handleSubmit}>
-      
-         <input
+
+      <form className="flex flex-col sm:flex-row items-stretch sm:space-x-4 space-y-4 sm:space-y-0" onSubmit={handleSubmit}>
+        <input
           name="username"
           className="!bg-white border rounded-md flex-1 !py-4 !px-4 sm:py-4 sm:px-6 !w-auto !mb-0 !p-0 mx-8"
           defaultValue={desiredUsername}
@@ -42,9 +41,8 @@ export default function UsernameForm({ desiredUsername }) {
         )}
         <SubmitButton>
           계속하기
-          
         </SubmitButton>
-     </form>
-          </div>
+      </form>
+    </div>
   );
 }
