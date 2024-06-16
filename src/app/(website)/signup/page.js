@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 import clientPromise from "@/libs/mongoClient";
 
 export default async function LoginPage({ searchParams }) {
-  console.log('LoginPage function started');
+  console.log('Signup function started');
 
   try {
     const session = await getServerSession(authOptions);
