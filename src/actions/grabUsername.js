@@ -3,6 +3,8 @@ import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import {Page} from "@/models/Page";
 import {getServerSession} from "next-auth";
 import clientPromise from "@/libs/mongoClient";
+import { ObjectId } from 'mongodb';
+
 
 export default async function grabUsername(formData) {
   const username = formData.get('username');
@@ -15,10 +17,10 @@ export default async function grabUsername(formData) {
       return false;
     } else {
       const session = await getServerSession(authOptions);
-      return await db.collection("pages").insertOne({
-        uri: username,
-        owner: session?.user?.id, // Use session.user.id instead of session.user.email
-      });
+    return await db.collection("pages").insertOne({
+  uri: username,
+  owner: new ObjectId(session?.user?.id), // Convert the user's _id string to ObjectId
+});
     }
   } catch (error) {
     console.error('Error in grabUsername:', error);
