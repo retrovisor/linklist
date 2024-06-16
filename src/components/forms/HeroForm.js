@@ -1,4 +1,4 @@
-// 'use client';
+'use client';
 import { signIn } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import { useEffect } from "react";
