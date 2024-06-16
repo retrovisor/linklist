@@ -1,4 +1,5 @@
 'use client';
+
 import { signIn } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -19,13 +20,11 @@ export default function HeroForm({ user }) {
 
   async function handleSubmit(ev) {
     ev.preventDefault();
-    const form = ev.target;
-    const input = form.querySelector('input');
-    const username = input.value;
-
+    const formData = new FormData(ev.target);
+    const username = formData.get('username');
     console.log('Desired username (HeroForm):', username); // Log the desired username
 
-    if (username.length > 0) {
+    if (username && username.length > 0) {
       if (user) {
         router.push('/account?desiredUsername=' + username);
       } else {
@@ -43,6 +42,7 @@ export default function HeroForm({ user }) {
       >
         <input
           type="text"
+          name="username"
           className="!bg-white border rounded-md flex-1 !py-4 !px-4 sm:py-4 sm:px-6 !w-auto !mb-0 !p-0"
           placeholder="사용자 이름 입력"
         />
