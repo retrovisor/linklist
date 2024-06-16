@@ -5,11 +5,14 @@ import Image from "next/image";
 import kakaoLogo from '/public/kakao.png';
  
 export default function LoginWithKakao() {
+  const handleClick = () => {
+    console.log('Clicked on LoginWithKakao button');
+    signIn('kakao');
+  };
   
   return (
     <button
-            onClick={() => signIn('kakao')}
-
+      onClick={handleClick}
       className="bg-yellow-400 shadow text-center w-full py-4 flex gap-3 items-center justify-center"
     >
       <Image src={kakaoLogo} alt="Kakao" width={24} height={24} className="h-6" />
@@ -17,3 +20,4 @@ export default function LoginWithKakao() {
     </button>
   );
 }
+
