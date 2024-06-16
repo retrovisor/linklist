@@ -55,7 +55,7 @@ export default async function AccountPage({ searchParams }) {
     console.log('Looking for page with owner:', session.user.id);
 
     page = await collection.findOne({ owner: session.user.id });
-    console.log('Query executed successfully', page);
+    console.log('Query executed successfully');
 
     if (!page) {
       console.log('Page not found for the user');
@@ -76,7 +76,9 @@ export default async function AccountPage({ searchParams }) {
     }
     console.log('Lean Page:', leanPage);
 
+    // Ensure leanPage.uri exists before rendering components that might access it
     if (!leanPage.uri) {
+      console.error('Page uri is undefined:', leanPage);
       throw new Error('Page uri is undefined');
     }
 
