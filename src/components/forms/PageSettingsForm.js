@@ -12,10 +12,13 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function PageSettingsForm({ page, user }) {
+  if (!page || !page.uri) {
+    return <div>Error: Invalid page data</div>;
+  }
+
   const [bgType, setBgType] = useState(page.bgType);
   const [bgColor, setBgColor] = useState(page.bgColor);
-    const [tempBgColor, setTempBgColor] = useState(bgColor);
-
+  const [tempBgColor, setTempBgColor] = useState(bgColor);
   const [bgImage, setBgImage] = useState(page.bgImage);
   const [avatar, setAvatar] = useState(page.avatar || user?.image);
 
@@ -25,6 +28,7 @@ export default function PageSettingsForm({ page, user }) {
       toast.success('저장됐습니다!');
     }
   }
+
 
   async function handleCoverImageChange(ev) {
     console.log('handleCoverImageChange called');
