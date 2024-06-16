@@ -1,5 +1,4 @@
 'use server';
-
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import clientPromise from "@/libs/mongoClient";
@@ -7,6 +6,7 @@ import { ObjectId } from 'mongodb';
 
 export default async function grabUsername(formData) {
   const username = formData.get('username');
+  console.log('Desired username:', username); // Log the desired username
 
   try {
     const client = await clientPromise;
@@ -15,7 +15,8 @@ export default async function grabUsername(formData) {
     // Check if a page with the same uri already exists
     const existingPageDoc = await db.collection("pages").findOne({ uri: username });
     if (existingPageDoc) {
-      return false; // Username already taken
+      console.log('Username already taken:', username); // Log if the username is already taken
+      return false;
     } else {
       // Get the session to retrieve user information
       const session = await getServerSession(authOptions);
@@ -45,6 +46,7 @@ export default async function grabUsername(formData) {
         updatedAt: new Date()
       });
 
+      console.log('Username grabbed successfully:', username); // Log successful username grab
       return result.insertedId;
     }
   } catch (error) {
