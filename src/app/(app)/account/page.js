@@ -46,8 +46,7 @@ export default async function AccountPage({ searchParams }) {
         throw new Error('Failed to get MongoDB collection');
       }
       console.log('Looking for page with owner:', session.user.id);
-           const page = await db.collection("pages").findOne({ uri });
-
+      const page = await collection.findOne({ owner: session.user.id });
       console.log('Query executed successfully');
       console.log('Page:', page);
 
