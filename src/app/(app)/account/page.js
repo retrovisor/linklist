@@ -13,7 +13,6 @@ import cloneDeep from 'clone-deep';
 import Head from 'next/head';
 import { ObjectId } from 'mongodb';
 
-
 export default async function AccountPage({ searchParams }) {
   console.log('AccountPage function started');
 
@@ -75,12 +74,16 @@ export default async function AccountPage({ searchParams }) {
             <title>{`Edit account - ${session.user.name}`}</title>
           </Head>
           <div className="container h-full bg-center fixed bg-auto overflow-x-hidden bg-no-repeat pb-10">
-            <PageSettingsForm page={leanPage} user={session.user} />
-            <PageButtonsForm page={leanPage} user={session.user} />
-            <PageLinksForm page={leanPage} user={session.user} />
-            <PageTextBoxesForm page={leanPage} user={session.user} />
-            <PageImageLinksForm page={leanPage} user={session.user} />
-            <PageYouTubeForm page={leanPage} user={session.user} />
+            {leanPage && (
+              <>
+                <PageSettingsForm page={leanPage} user={session.user} />
+                <PageButtonsForm page={leanPage} user={session.user} />
+                <PageLinksForm page={leanPage} user={session.user} />
+                <PageTextBoxesForm page={leanPage} user={session.user} />
+                <PageImageLinksForm page={leanPage} user={session.user} />
+                <PageYouTubeForm page={leanPage} user={session.user} />
+              </>
+            )}
           </div>
         </>
       );
