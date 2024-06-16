@@ -34,12 +34,12 @@ export default async function AppTemplate({ children, ...rest }) {
     const client = await clientPromise;
     const db = client.db();
 
-    console.log('MongoDB connection established.');
+    console.log('MongoDB connection established2.');
 
     const page = await db.collection("pages").findOne({ owner: new ObjectId(session.user.id) });
 
     if (!page) {
-      console.log('Page not found for the user:', session.user.id);
+      console.log('Page not found for the user2:', session.user.id);
       return (
         <html lang="en">
           <body>
@@ -51,7 +51,7 @@ export default async function AppTemplate({ children, ...rest }) {
 
     const user = await db.collection("users").findOne({ _id: new ObjectId(session.user.id) });
 
-    console.log('MongoDB findOne query executed:', `Page found for ${session.user.id}.`);
+    console.log('MongoDB findOne query executed2:', `Page found for ${session.user.id}.`);
 
     return (
       <html lang="kr">
@@ -134,7 +134,7 @@ export default async function AppTemplate({ children, ...rest }) {
       </html>
     );
   } catch (error) {
-    console.error('Error during MongoDB operation or page rendering:', error);
+    console.error('Error during MongoDB operation or page rendering2:', error);
     return (
       <html lang="en">
         <body>
