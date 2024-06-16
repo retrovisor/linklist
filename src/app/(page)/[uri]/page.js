@@ -82,12 +82,14 @@ export default async function UserPage({ params }) {
       return <div>Page not found</div>;
     }
 
-const user = await db.collection("users").findOne({ _id: new ObjectId(page.owner) }); // Convert the owner string to ObjectId
+        
+        const user = await db.collection("users").findOne({ _id: new ObjectId(page.owner) });
+
     
     console.log("User data:", user);
 
     if (!user) {
-      console.log("User not found for email:", page.owner);
+      console.log("User not found for _id:", page.owner);
       return <div>User not found</div>;
     }
 
@@ -98,7 +100,7 @@ const user = await db.collection("users").findOne({ _id: new ObjectId(page.owner
     const template = pageData.template || "template1";
 
 
-    return (
+     return (
       <div className={`w-full h-full bg-center bg-cover fixed top-0 z-10 bg-auto bg-no-repeat overflow-x-hidden text-white template ${template}`} style={
         pageData.bgType === 'color'
           ? { backgroundColor: pageData.bgColor }
@@ -152,7 +154,7 @@ const user = await db.collection("users").findOne({ _id: new ObjectId(page.owner
         </div>
 
         <div className="max-wid mx-auto px-5">
-          {pageData.links.map(link => (
+          {pageData.links && pageData.links.map(link => (
             <Link
               key={link.url}
               target="_blank"
@@ -194,7 +196,7 @@ const user = await db.collection("users").findOne({ _id: new ObjectId(page.owner
         </div>
 
         <div className="max-wid mx-auto px-5">
-          {pageData.textBoxes.map(textBox => (
+          {pageData.textBoxes && pageData.textBoxes.map(textBox => (
             <div key={textBox.key} className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2 text-box">
               <h3 className="text-black text-xl font-semibold">{textBox.title}</h3>
               <p className="text-black">{textBox.text}</p>
@@ -203,7 +205,7 @@ const user = await db.collection("users").findOne({ _id: new ObjectId(page.owner
         </div>
 
         <div className="max-wid mx-auto px-5">
-          {pageData.youTubeVideos.map(video => (
+          {pageData.youTubeVideos && pageData.youTubeVideos.map(video => (
             <div key={video.key} className="bg-white border-slate-950 border-2 shadow-lg mb-5 p-2 video-wrapper">
               <div className="relative" style={{ paddingTop: '56.25%' }}>
                 <iframe
@@ -220,7 +222,7 @@ const user = await db.collection("users").findOne({ _id: new ObjectId(page.owner
         </div>
 
         <div className="max-wid mx-auto px-5">
-          {pageData.imageLinks.map(il => (
+          {pageData.imageLinks && pageData.imageLinks.map(il => (
             <a
               key={il.key}
               href={il.linkUrl}
