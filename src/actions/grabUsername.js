@@ -6,11 +6,10 @@ import clientPromise from "@/libs/mongoClient";
 
 export default async function grabUsername(formData) {
   const username = formData.get('username');
-  
+
   try {
     const client = await clientPromise;
     const db = client.db();
-
     const existingPageDoc = await db.collection("pages").findOne({ uri: username });
     if (existingPageDoc) {
       return false;
@@ -18,7 +17,7 @@ export default async function grabUsername(formData) {
       const session = await getServerSession(authOptions);
       return await db.collection("pages").insertOne({
         uri: username,
-        owner: session?.user?.email,
+        owner: session?.user?.id, // Use session.user.id instead of session.user.email
       });
     }
   } catch (error) {
