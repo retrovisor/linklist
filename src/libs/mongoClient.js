@@ -1,3 +1,4 @@
+// mongoClient.js
 import { MongoClient } from "mongodb";
 
 if (!process.env.MONGODB_URI) {
@@ -17,15 +18,27 @@ const options = {
 let client;
 let clientPromise;
 
+const connect = async () => {
+  if (!client || !client.isConnected()) {
+    try {
+      client = new MongoClient(uri, options);
+      await client.connect();
+      console.log("Connected to MongoDB");
+    } catch (error) {
+      console.error("Error connecting to MongoDB:", error);
+      throw error;
+    }
+  }
+  return client;
+};
+
 if (process.env.NODE_ENV === "development") {
   if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, options);
-    global._mongoClientPromise = client.connect();
+    global._mongoClientPromise = connect();
   }
   clientPromise = global._mongoClientPromise;
 } else {
-  client = new MongoClient(uri, options);
-  clientPromise = client.connect();
+  clientPromise = connect();
 }
 
 export default clientPromise;
