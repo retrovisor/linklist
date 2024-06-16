@@ -17,7 +17,7 @@ export default async function AnalyticsPage() {
     return redirect('/');
   }
 
-  const page = await db.collection("pages").findOne({ owner: session.user.email });
+  const page = await db.collection("pages").findOne({ owner: session.user.id });
 
   if (!page) {
     return (
