@@ -18,7 +18,7 @@ export async function POST(request) {
 
   try {
     const page = await db.collection("pages").findOneAndUpdate(
-      { owner: session.user.email },
+      { owner: session.user.id },
       { $set: { template } },
       { new: true }
     );
