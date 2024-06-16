@@ -50,7 +50,7 @@ export default async function AppTemplate({ children, ...rest }) {
     }
 
     console.log('Looking for page with owner:', session.user.id);
-    page = await collection.findOne({ owner: new ObjectId(session.user.id) });
+    page = await collection.findOne({ owner: session.user.id });
     console.log('MongoDB query result:', page);
 
     if (!page) {
@@ -62,7 +62,6 @@ export default async function AppTemplate({ children, ...rest }) {
 
     user = await db.collection("users").findOne({ _id: new ObjectId(session.user.id) });
     console.log('User found:', user);
-
 
     return (
       <html lang="kr">
@@ -85,11 +84,13 @@ export default async function AppTemplate({ children, ...rest }) {
                     <Link href="/analytics">
                       <FontAwesomeIcon icon={faChartSimple} className="text-slate-500 w-6 h-6" />
                     </Link>
-                    <ShareDialog uri={page.uri}>
-                      <button>
-                        <FontAwesomeIcon icon={faShareFromSquare} className="text-slate-500 w-6 h-6" />
-                      </button>
-                    </ShareDialog>
+                    {page && page.uri && (
+                      <ShareDialog uri={page.uri}>
+                        <button>
+                          <FontAwesomeIcon icon={faShareFromSquare} className="text-slate-500 w-6 h-6" />
+                        </button>
+                      </ShareDialog>
+                    )}
                     <div className="rounded-full overflow-hidden w-12 h-12 shadow">
                       <Image
                         src={user?.image || 'https://fizz.link/avatar.png'}
@@ -115,21 +116,17 @@ export default async function AppTemplate({ children, ...rest }) {
                   <div className="text-center mt-4 bg-custom-gray p-4 rounded-lg">
                     <div className="flex items-center justify-center space-x-1">
                       <img src="/logo4.png" alt="Logo" style={{ width: '1em' }} />
-                      {page.uri && (
-                        <Link
-                          target="_blank"
-                          href={'/' + page.uri}
-                          className="text-base font-semibold text-slate-900 hover:text-blue-600 transition duration-200"
-                        >
-                          <span>Fizz.link/{page.uri}</span>
-                        </Link>
-                      )}
+                      <Link
+                        target="_blank"
+                        href={'/' + page.uri}
+                        className="text-base font-semibold text-slate-900 hover:text-blue-600 transition duration-200"
+                      >
+                        <span>Fizz.link/{page.uri}</span>
+                      </Link>
                     </div>
-                    {page.uri && (
-                      <div className="mt-2 flex justify-center">
-                        <CopyLinkButton uri={page.uri} />
-                      </div>
-                    )}
+                    <div className="mt-2 flex justify-center">
+                      <CopyLinkButton uri={page.uri} />
+                    </div>
                   </div>
                 )}
                 <div className="text-center">
@@ -145,7 +142,7 @@ export default async function AppTemplate({ children, ...rest }) {
       </html>
     );
   } catch (error) {
-    console.error('Error during MongoDB operation or page rendering2:', error);
+    console.error('Error during MongoDB operation or page rendering:', error);
     return (
       <html lang="en">
         <body>
