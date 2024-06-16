@@ -2,7 +2,7 @@ import { model, models, Schema } from "mongoose";
 
 const PageSchema = new Schema({
   uri: { type: String, required: true, unique: true, minlength: 1 },
-  owner: { type: String, required: true },
+  owner: { type: Schema.Types.ObjectId, ref: 'User', required: true }, // Change the owner field to reference the User model by _id
   displayName: { type: String, default: '' },
   location: { type: String, default: '' },
   bio: { type: String, default: '' },
