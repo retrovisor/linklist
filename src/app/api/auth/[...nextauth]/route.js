@@ -11,21 +11,13 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      profile(profile) {
-        return {
-          id: profile.sub, // Use the 'sub' field as the providerId for Google
-          name: profile.name,
-          email: profile.email,
-          image: profile.picture,
-        };
-      },
     }),
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID,
       clientSecret: process.env.KAKAO_CLIENT_SECRET,
       profile(profile) {
         return {
-          id: profile.id, // Use the 'id' field as the providerId for Kakao
+          id: profile.id,
           name: profile.kakao_account.profile.nickname,
           email: profile.kakao_account.email,
           image: profile.kakao_account.profile.profile_image_url.replace('http://', 'https://'),
@@ -41,16 +33,14 @@ export const authOptions = {
     encryption: true,
   },
   callbacks: {
-    async jwt({ token, user, account }) {
+    async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
-        token.providerId = account.provider + ':' + user.id; // Add this line to include the providerId
+        token.sub = user.id;
       }
       return token;
     },
     async session({ session, token }) {
-      session.user.id = token.id;
-      session.user.providerId = token.providerId; // Add this line to include the providerId in the session
+      session.user.id = token.sub;
       
       // Check if the user's image URL exists, otherwise set the default image URL
       if (!session.user.image) {
