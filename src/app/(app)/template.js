@@ -93,7 +93,8 @@ export default async function AppTemplate({ children, ...rest }) {
                 <div className="rounded-full overflow-hidden aspect-square w-24 mx-auto border-3 border-white shadow shadow-black/50">
                   <Image src={user?.image || 'https://fizz.link/avatar.png'} className="object-cover w-full h-full" width={256} height={256} alt={'avatar'} unoptimized />
                 </div>
-                {page && (
+              {page && page.uri && (
+
                     <div className="text-center mt-4 bg-custom-gray p-4 rounded-lg">
     <div className="flex items-center justify-center space-x-1">
       <img src="/logo4.png" alt="Logo" style={{ width: '1em' }} />
