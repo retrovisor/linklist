@@ -68,22 +68,23 @@ export default async function AccountPage({ searchParams }) {
       }
       console.log('Lean Page:', leanPage);
 
+      // Ensure leanPage.uri exists before rendering components that might access it
+      if (!leanPage.uri) {
+        throw new Error('Page uri is undefined');
+      }
+
       return (
         <>
           <Head>
             <title>{`Edit account - ${session.user.name}`}</title>
           </Head>
           <div className="container h-full bg-center fixed bg-auto overflow-x-hidden bg-no-repeat pb-10">
-            {leanPage && (
-              <>
-                <PageSettingsForm page={leanPage} user={session.user} />
-                <PageButtonsForm page={leanPage} user={session.user} />
-                <PageLinksForm page={leanPage} user={session.user} />
-                <PageTextBoxesForm page={leanPage} user={session.user} />
-                <PageImageLinksForm page={leanPage} user={session.user} />
-                <PageYouTubeForm page={leanPage} user={session.user} />
-              </>
-            )}
+            <PageSettingsForm page={leanPage} user={session.user} />
+            <PageButtonsForm page={leanPage} user={session.user} />
+            <PageLinksForm page={leanPage} user={session.user} />
+            <PageTextBoxesForm page={leanPage} user={session.user} />
+            <PageImageLinksForm page={leanPage} user={session.user} />
+            <PageYouTubeForm page={leanPage} user={session.user} />
           </div>
         </>
       );
