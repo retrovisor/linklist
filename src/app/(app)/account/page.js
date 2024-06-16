@@ -55,6 +55,8 @@ export default async function AccountPage({ searchParams }) {
     console.log('Looking for page with owner:', session.user.id);
 
     page = await collection.findOne({ owner: session.user.id });
+    console.log('MongoDB query result:', page);
+
     console.log('Query executed successfully');
 
     if (!page) {
