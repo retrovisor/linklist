@@ -23,7 +23,7 @@ export default async function LoginPage({ searchParams }) {
       }
 
       // Check if the user has a page associated with their email
-      const page = await Page.findOne({ owner: session?.user?.email });
+      const page = await Page.findOne({ owner: session?.user?.id });
       if (page) {
         console.log('User has a page, redirecting to /account');
         return (
