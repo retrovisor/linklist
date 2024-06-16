@@ -19,7 +19,7 @@ export default async function AccountPage({ searchParams }) {
   let session;
   try {
     session = await getServerSession(authOptions);
-    console.log('Session:', JSON.stringify(session, null, 2));
+    console.log('Session:', session);
 
     if (!session) {
       console.log('No session, redirecting to /');
@@ -40,17 +40,25 @@ export default async function AccountPage({ searchParams }) {
   let page;
   try {
     const client = await clientPromise;
+    if (!client) {
+      throw new Error('Failed to initialize MongoDB client');
+    }
     const db = client.db();
+    if (!db) {
+      throw new Error('Failed to get MongoDB database');
+    }
     console.log('Connected to MongoDB');
 
     const collection = db.collection("pages");
+    if (!collection) {
+      throw new Error('Failed to get MongoDB collection');
+    }
     console.log('Looking for page with owner:', session.user.id);
 
     // Use ObjectId for querying by owner if necessary
     const userId = new ObjectId(session.user.id);
     page = await collection.findOne({ owner: userId });
     console.log('Query executed successfully');
-    console.log('Page:', page);
 
     if (!page) {
       console.log('Page not found for the user');
@@ -61,6 +69,8 @@ export default async function AccountPage({ searchParams }) {
       );
     }
 
+    console.log('Page found:', page);
+
     const leanPage = cloneDeep(page);
     if (leanPage._id) {
       leanPage._id = leanPage._id.toString();
@@ -69,6 +79,7 @@ export default async function AccountPage({ searchParams }) {
     }
     console.log('Lean Page:', leanPage);
 
+    // Ensure leanPage.uri exists before rendering components that might access it
     if (!leanPage.uri) {
       throw new Error('Page uri is undefined');
     }
