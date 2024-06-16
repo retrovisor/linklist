@@ -30,28 +30,39 @@ export default async function AppTemplate({ children, ...rest }) {
     return redirect('/');
   }
 
+  let page, user;
   try {
     const client = await clientPromise;
-    const db = client.db();
-
-    console.log('MongoDB connection established2.');
-
-    const page = await db.collection("pages").findOne({ owner: new ObjectId(session.user.id) });
-
-    if (!page) {
-      console.log('Page not found for the user2:', session.user.id);
-      return (
-        <html lang="en">
-          <body>
-            <p>Page not found. Please create a new page.</p>
-          </body>
-        </html>
-      );
+    if (!client) {
+      throw new Error('Failed to initialize MongoDB client');
     }
 
-    const user = await db.collection("users").findOne({ _id: new ObjectId(session.user.id) });
+    const db = client.db();
+    if (!db) {
+      throw new Error('Failed to get MongoDB database');
+    }
 
-    console.log('MongoDB findOne query executed2:', `Page found for ${session.user.id}.`);
+    console.log('Connected to MongoDB');
+
+    const collection = db.collection("pages");
+    if (!collection) {
+      throw new Error('Failed to get MongoDB collection');
+    }
+
+    console.log('Looking for page with owner:', session.user.id);
+    page = await collection.findOne({ owner: new ObjectId(session.user.id) });
+    console.log('MongoDB query result:', page);
+
+    if (!page) {
+      console.log('Page not found for the user:', session.user.id);
+      return redirect('/account');
+    }
+
+    console.log('Page found:', page);
+
+    user = await db.collection("users").findOne({ _id: new ObjectId(session.user.id) });
+    console.log('User found:', user);
+
 
     return (
       <html lang="kr">
