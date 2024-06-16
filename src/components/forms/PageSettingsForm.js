@@ -1,7 +1,6 @@
 'use client';
 
 import { savePageSettings } from "@/actions/pageActions";
-import { Page } from "@/models/Page";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import RadioTogglers from "@/components/formItems/radioTogglers";
 import SectionBox from "@/components/layout/SectionBox";
@@ -13,15 +12,16 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function PageSettingsForm({ page, user }) {
+  // Ensure all necessary data is present
+  if (!page || !page.uri || !page.bgType || !page.bgColor) {
+    return <div>Error: Invalid page data</div>;
+  }
+
   const [bgType, setBgType] = useState(page.bgType);
   const [bgColor, setBgColor] = useState(page.bgColor);
   const [tempBgColor, setTempBgColor] = useState(bgColor);
   const [bgImage, setBgImage] = useState(page.bgImage);
   const [avatar, setAvatar] = useState(page.avatar || user?.image);
-
-  if (!page || !page.uri) {
-    return <div>Error: Invalid page data</div>;
-  }
 
   async function saveBaseSettings(formData) {
     const result = await savePageSettings(formData);
