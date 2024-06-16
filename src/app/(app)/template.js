@@ -1,10 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import AppSidebar from "@/components/layout/AppSidebar";
-import { Page } from "@/models/Page";
-import { User } from "@/models/User";
 import { faFileLines, faShareFromSquare, faBars, faLink, faChartSimple } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
 import { Lato } from 'next/font/google';
 import '../globals.css';
@@ -16,7 +13,7 @@ import { Toaster } from "react-hot-toast";
 import ShareDialog from '../(page)/[uri]/ShareDialog';
 import CopyLinkButton from '@/components/buttons/CopyLinkButton';
 import { ObjectId } from 'mongodb';
-
+import clientPromise from "@/libs/mongoClient";
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -34,17 +31,27 @@ export default async function AppTemplate({ children, ...rest }) {
   }
 
   try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
+    const client = await clientPromise;
+    const db = client.db();
+
     console.log('MongoDB connection established.');
 
-        const page = await Page.findOne({ owner: new ObjectId(session.user.id) });
+    const page = await db.collection("pages").findOne({ owner: new ObjectId(session.user.id) });
 
-        const user = await User.findOne({ _id: new ObjectId(session.user.id) });
+    if (!page) {
+      console.log('Page not found for the user:', session.user.id);
+      return (
+        <html lang="en">
+          <body>
+            <p>Page not found. Please create a new page.</p>
+          </body>
+        </html>
+      );
+    }
 
-    console.log('MongoDB findOne query executed:', page ? `Page found for ${session.user.id}.` : 'Page not found.');
+    const user = await db.collection("users").findOne({ _id: new ObjectId(session.user.id) });
+
+    console.log('MongoDB findOne query executed:', `Page found for ${session.user.id}.`);
 
     return (
       <html lang="kr">
@@ -93,27 +100,26 @@ export default async function AppTemplate({ children, ...rest }) {
                 <div className="rounded-full overflow-hidden aspect-square w-24 mx-auto border-3 border-white shadow shadow-black/50">
                   <Image src={user?.image || 'https://fizz.link/avatar.png'} className="object-cover w-full h-full" width={256} height={256} alt={'avatar'} unoptimized />
                 </div>
-              {page && page.uri && (
-
-                    <div className="text-center mt-4 bg-custom-gray p-4 rounded-lg">
-    <div className="flex items-center justify-center space-x-1">
-      <img src="/logo4.png" alt="Logo" style={{ width: '1em' }} />
-      {page.uri && (
-        <Link
-          target="_blank"
-          href={'/' + page.uri}
-          className="text-base font-semibold text-slate-900 hover:text-blue-600 transition duration-200"
-        >
-          <span>Fizz.link/{page.uri}</span>
-        </Link>
-      )}
-    </div>
-    {page.uri && (
-      <div className="mt-2 flex justify-center">
-        <CopyLinkButton uri={page.uri} />
-      </div>
-    )}
-  </div>
+                {page && page.uri && (
+                  <div className="text-center mt-4 bg-custom-gray p-4 rounded-lg">
+                    <div className="flex items-center justify-center space-x-1">
+                      <img src="/logo4.png" alt="Logo" style={{ width: '1em' }} />
+                      {page.uri && (
+                        <Link
+                          target="_blank"
+                          href={'/' + page.uri}
+                          className="text-base font-semibold text-slate-900 hover:text-blue-600 transition duration-200"
+                        >
+                          <span>Fizz.link/{page.uri}</span>
+                        </Link>
+                      )}
+                    </div>
+                    {page.uri && (
+                      <div className="mt-2 flex justify-center">
+                        <CopyLinkButton uri={page.uri} />
+                      </div>
+                    )}
+                  </div>
                 )}
                 <div className="text-center">
                   <AppSidebar />
@@ -121,7 +127,7 @@ export default async function AppTemplate({ children, ...rest }) {
               </div>
             </aside>
             <div className="grow min-h-screen">
-        {typeof children === 'function' ? children({ page, user }) : children}
+              {typeof children === 'function' ? children({ page, user }) : children}
             </div>
           </main>
         </body>
