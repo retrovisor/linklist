@@ -38,8 +38,8 @@ export default async function AppTemplate({ children, ...rest }) {
     });
     console.log('MongoDB connection established.');
 
-    const page = await Page.findOne({ owner: session.user.email });
-    const user = await User.findOne({ email: session.user.email });
+    const page = await Page.findOne({ owner: session.user.id });
+    const user = await User.findOne({ _id: session.user.id });
     console.log('MongoDB findOne query executed:', page ? `Page found for ${session.user.email}.` : 'Page not found.');
 
     return (
