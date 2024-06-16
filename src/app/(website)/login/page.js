@@ -1,11 +1,12 @@
+// app/(website)/login/page.js
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LoginWithGoogle from "@/components/buttons/LoginWithGoogle";
 import LoginWithKakao from "@/components/buttons/LoginWithKakao";
 import LoginWithFacebook from "@/components/buttons/LoginWithFacebook";
 import UsernameForm from "@/components/forms/UsernameForm";
-import { Page } from "@/models/Page";
-import mongoose from "mongoose";
+import { redirect } from "next/navigation";
+import clientPromise from "@/libs/mongoClient";
 
 export default async function LoginPage({ searchParams }) {
   console.log('LoginPage function started');
@@ -15,32 +16,7 @@ export default async function LoginPage({ searchParams }) {
     console.log('Session:', session);
 
     if (session) {
-      console.log('User is logged in');
-
-      // Ensure mongoose connection is established only once
-      if (mongoose.connection.readyState === 0) {
-        await mongoose.connect(process.env.MONGO_URI);
-      }
-
-      // Check if the user has a page associated with their email
-      const page = await Page.findOne({ owner: session?.user?.id });
-      if (page) {
-        console.log('User has a page, redirecting to /account');
-        return (
-          <div>
-            <h1>계정으로 리디렉션 중...</h1>
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.location.href = '/account';
-                `,
-              }}
-            />
-          </div>
-        );
-      }
-
-      console.log('User does not have a page, rendering UsernameForm');
+      console.log('User is logged in, rendering UsernameForm');
       const desiredUsername = searchParams.desiredUsername || "";
       return <UsernameForm desiredUsername={desiredUsername} />;
     }
@@ -49,9 +25,9 @@ export default async function LoginPage({ searchParams }) {
     return (
       <div>
         <div className="p-4 max-w-xs mx-auto">
-          <h1 className="text-4xl font-bold text-center mb-2">로그인</h1>
+          <h1 className="text-4xl font-bold text-center mb-2">계정 만들기</h1>
           <p className="text-center mb-6 text-gray-500">
-            아래 방법 중 하나를 사용하여 계정에 로그인하세요
+            아래 방법을 사용하여 무료로 Fizz.link 계정을 생성하세요
           </p>
           <LoginWithKakao />
           <div className="mt-4">
@@ -65,6 +41,33 @@ export default async function LoginPage({ searchParams }) {
     );
   } catch (error) {
     console.error('Error in LoginPage:', error);
-    return <div>An error occurred. Please try again later.</div>;
+
+    if (error.name === 'MongoNetworkTimeoutError') {
+      // Retry the operation
+      const maxRetries = 3;
+      let retryCount = 0;
+
+      while (retryCount < maxRetries) {
+        try {
+          await clientPromise;
+          console.log('MongoDB connection established after retry');
+          break;
+        } catch (retryError) {
+          console.error('Error connecting to MongoDB (retry attempt):', retryError);
+          retryCount++;
+
+          if (retryCount === maxRetries) {
+            console.error('Max retries reached. MongoDB connection failed.');
+            return <div>서비스를 사용할 수 없습니다. 나중에 다시 시도해 주세요.</div>;
+          }
+
+          // Wait for a certain duration before retrying
+          await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+      }
+    } else {
+      // Handle other errors
+      return <div>오류가 발생했습니다. 나중에 다시 시도해 주세요.</div>;
+    }
   }
 }
