@@ -23,6 +23,7 @@ import "@/styles/template4.css";
 import ShareDialog from "./ShareDialog";
 import retry from "async-retry";
 import clientPromise from "@/libs/mongoClient";
+import { ObjectId } from 'mongodb';
 
 
 library.add(fas, faBookmark, faLink, faLocationDot, faEnvelope, faPhone, faDiscord, faFacebook, faGithub, faInstagram, faTelegram, faTiktok, faWhatsapp, faYoutube, faShare, faComment, faMugHot, faWeixin, faLine);
@@ -81,8 +82,8 @@ export default async function UserPage({ params }) {
       return <div>Page not found</div>;
     }
 
-  const user = await db.collection("users").findOne({ _id: page.owner }); // Use _id instead of email
-
+const user = await db.collection("users").findOne({ _id: new ObjectId(page.owner) }); // Convert the owner string to ObjectId
+    
     console.log("User data:", user);
 
     if (!user) {
