@@ -11,7 +11,6 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import cloneDeep from 'clone-deep';
 import Head from 'next/head';
-import { ObjectId } from 'mongodb';
 
 export default async function AccountPage({ searchParams }) {
   console.log('AccountPage function started');
@@ -55,9 +54,7 @@ export default async function AccountPage({ searchParams }) {
     }
     console.log('Looking for page with owner:', session.user.id);
 
-    // Use ObjectId for querying by owner if necessary
-    const userId = new ObjectId(session.user.id);
-    page = await collection.findOne({ owner: userId });
+    page = await collection.findOne({ owner: session.user.id });
     console.log('Query executed successfully');
 
     if (!page) {
