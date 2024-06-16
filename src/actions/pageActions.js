@@ -54,7 +54,7 @@ export async function savePageButtons(formData) {
     const dataToUpdate = { buttons: buttonsValues };
 
     await db.collection("pages").updateOne(
-      { owner: session?.user?.email },
+      { owner: session?.user?.id },
       { $set: dataToUpdate },
     );
 
@@ -70,20 +70,20 @@ export async function savePageImageLink(imageLink) {
 
   if (session) {
     const existingImageLink = await db.collection("pages").findOne({
-      owner: session?.user?.email,
+      owner: session?.user?.id,
       "imageLinks.key": imageLink.key
     });
 
     if (existingImageLink) {
       // Update existing image link
       await db.collection("pages").updateOne(
-        { owner: session?.user?.email, "imageLinks.key": imageLink.key },
+        { owner: session?.user?.id, "imageLinks.key": imageLink.key },
         { $set: { "imageLinks.$": imageLink } },
       );
     } else {
       // Add new image link
       await db.collection("pages").updateOne(
-        { owner: session?.user?.email },
+        { owner: session?.user?.id },
         { $push: { imageLinks: imageLink } },
       );
     }
@@ -100,7 +100,7 @@ export async function deletePageImageLink(imageLinkKey) {
 
   if (session) {
     await db.collection("pages").updateOne(
-      { owner: session?.user?.email },
+      { owner: session?.user?.id },
       { $pull: { imageLinks: { key: imageLinkKey } } },
     );
 
@@ -116,7 +116,7 @@ export async function deletePageLink(linkKey) {
   
   if (session) {
     await db.collection("pages").updateOne(
-      { owner: session?.user?.email },
+      { owner: session?.user?.id },
       { $pull: { links: { key: linkKey } } },
     );
     
@@ -145,7 +145,7 @@ export async function savePageSettings(formData) {
     }
 
     await db.collection("pages").updateOne(
-      { owner: session?.user?.email },
+      { owner: session?.user?.id },
       { $set: dataToUpdate },
     );
 
@@ -159,7 +159,7 @@ export async function savePageSettings(formData) {
     }
 
     await db.collection("pages").updateOne(
-      { owner: session?.user?.email },
+      { owner: session?.user?.id },
       { $set: dataToUpdate },
     );
 
@@ -175,20 +175,20 @@ export async function savePageYouTubeVideo(video) {
   
   if (session) {
     const existingVideo = await db.collection("pages").findOne({
-      owner: session?.user?.email,
+      owner: session?.user?.id,
       "youTubeVideos.key": video.key
     });
     
     if (existingVideo) {
       // Update existing video
       await db.collection("pages").updateOne(
-        { owner: session?.user?.email, "youTubeVideos.key": video.key },
+        { owner: session?.user?.id, "youTubeVideos.key": video.key },
         { $set: { "youTubeVideos.$": video } },
       );
     } else {
       // Add new video
       await db.collection("pages").updateOne(
-        { owner: session?.user?.email },
+        { owner: session?.user?.id },
         { $push: { youTubeVideos: video } },
       );
     }
@@ -205,7 +205,7 @@ export async function deletePageYouTubeVideo(videoKey) {
   
   if (session) {
     await db.collection("pages").updateOne(
-      { owner: session?.user?.email },
+      { owner: session?.user?.id },
       { $pull: { youTubeVideos: { key: videoKey } } },
     );
     
@@ -221,20 +221,20 @@ export async function savePageLink(link) {
   
   if (session) {
     const existingLink = await db.collection("pages").findOne({
-      owner: session?.user?.email,
+      owner: session?.user?.id,
       "links.key": link.key
     });
     
     if (existingLink) {
       // Update existing link
       await db.collection("pages").updateOne(
-        { owner: session?.user?.email, "links.key": link.key },
+        { owner: session?.user?.id, "links.key": link.key },
         { $set: { "links.$": link } },
       );
     } else {
       // Add new link
       await db.collection("pages").updateOne(
-        { owner: session?.user?.email },
+        { owner: session?.user?.id },
         { $push: { links: link } },
       );
     }
@@ -251,7 +251,7 @@ export async function saveTextBoxes(textBoxes) {
 
   if (session) {
     await db.collection("pages").updateOne(
-      { owner: session?.user?.email },
+      { owner: session?.user?.id },
       { $set: { textBoxes } },
     );
 
@@ -267,20 +267,20 @@ export async function savePageTextBox(textBox) {
   
   if (session) {
     const existingTextBox = await db.collection("pages").findOne({
-      owner: session?.user?.email,
+      owner: session?.user?.id,
       "textBoxes.key": textBox.key
     });
     
     if (existingTextBox) {
       // Update existing text box
       await db.collection("pages").updateOne(
-        { owner: session?.user?.email, "textBoxes.key": textBox.key },
+        { owner: session?.user?.id, "textBoxes.key": textBox.key },
         { $set: { "textBoxes.$": textBox } },
       );
     } else {
       // Add new text box
       await db.collection("pages").updateOne(
-        { owner: session?.user?.email },
+        { owner: session?.user?.id },
         { $push: { textBoxes: textBox } },
       );
     }
