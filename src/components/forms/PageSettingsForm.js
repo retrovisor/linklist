@@ -1,4 +1,5 @@
 'use client';
+
 import { savePageSettings } from "@/actions/pageActions";
 import { Page } from "@/models/Page";
 import SubmitButton from "@/components/buttons/SubmitButton";
@@ -12,15 +13,15 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 
 export default function PageSettingsForm({ page, user }) {
-  if (!page || !page.uri) {
-    return <div>Error: Invalid page data</div>;
-  }
-
   const [bgType, setBgType] = useState(page.bgType);
   const [bgColor, setBgColor] = useState(page.bgColor);
   const [tempBgColor, setTempBgColor] = useState(bgColor);
   const [bgImage, setBgImage] = useState(page.bgImage);
   const [avatar, setAvatar] = useState(page.avatar || user?.image);
+
+  if (!page || !page.uri) {
+    return <div>Error: Invalid page data</div>;
+  }
 
   async function saveBaseSettings(formData) {
     const result = await savePageSettings(formData);
@@ -28,7 +29,6 @@ export default function PageSettingsForm({ page, user }) {
       toast.success('저장됐습니다!');
     }
   }
-
 
   async function handleCoverImageChange(ev) {
     console.log('handleCoverImageChange called');
@@ -66,7 +66,7 @@ export default function PageSettingsForm({ page, user }) {
     });
   }
 
-    async function handleSaveBgColor() {
+  async function handleSaveBgColor() {
     setBgColor(tempBgColor);
     setBgType('color');
     const formData = new FormData();
@@ -97,39 +97,6 @@ export default function PageSettingsForm({ page, user }) {
       toast.error('OG 이미지 생성에 실패했습니다.');
     }
   }
-
-
-  async function handleBgColorChange(ev) {
-  setBgColor(ev.target.value);
-  setBgType('color');
-  const formData = new FormData();
-  formData.append('bgColor', ev.target.value);
-  formData.append('bgType', 'color');
-  await savePageSettings(formData);
-  console.log('Page settings saved');
-
-  // Call the new API route to generate the OG image
-  const response = await fetch('/api/generate-og-image', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      bgColor: ev.target.value,
-      avatarImageUrl: avatar,
-      pageUri: page.uri,
-    }),
-  });
-
-  if (response.ok) {
-    const data = await response.json();
-    console.log('OG image generated:', data.link);
-    toast.success('배경 색상이 저장되었습니다!');
-  } else {
-    console.error('Failed to generate OG image');
-    toast.error('OG 이미지 생성에 실패했습니다.');
-  }
-}
 
   async function handleAvatarImageChange(ev) {
     console.log('handleAvatarImageChange called');
@@ -186,27 +153,26 @@ export default function PageSettingsForm({ page, user }) {
                 ]}
                 onChange={val => setBgType(val)}
               />
-                   
-{bgType === 'color' && (
-  <div className="bg-gray-200 shadow text-gray-700 p-2 mt-2">
-    <div className="flex gap-2 items-center justify-center">
-      <span>배경 색상:</span>
-      <input
-        type="color"
-        name="bgColor"
-        onChange={(ev) => setTempBgColor(ev.target.value)}
-        value={tempBgColor}
-      />
-      <button
-        type="button"
-        onClick={handleSaveBgColor}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
-      >
-        저장
-      </button>
-    </div>
-  </div>
-)}
+              {bgType === 'color' && (
+                <div className="bg-gray-200 shadow text-gray-700 p-2 mt-2">
+                  <div className="flex gap-2 items-center justify-center">
+                    <span>배경 색상:</span>
+                    <input
+                      type="color"
+                      name="bgColor"
+                      onChange={(ev) => setTempBgColor(ev.target.value)}
+                      value={tempBgColor}
+                    />
+                    <button
+                      type="button"
+                      onClick={handleSaveBgColor}
+                      className="bg-blue-500 text-white px-4 py-2 rounded"
+                    >
+                      저장
+                    </button>
+                  </div>
+                </div>
+              )}
 
               {bgType === 'image' && (
                 <div className="flex justify-center">
