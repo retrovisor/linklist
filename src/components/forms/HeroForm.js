@@ -19,20 +19,31 @@ export default function HeroForm({ user }) {
   }, []);
 
   async function handleSubmit(ev) {
-    ev.preventDefault();
-    const formData = new FormData(ev.target);
-    const username = formData.get('username');
-    console.log('Desired username (HeroForm):', username); // Log the desired username
+  ev.preventDefault();
+  const formData = new FormData(ev.target);
+  const username = formData.get('username');
+  
+  console.log('Desired username (HeroForm):', username); // Log to console for client-side debugging
 
-    if (username && username.length > 0) {
-      if (user) {
-        router.push('/account?desiredUsername=' + username);
-      } else {
-        window.localStorage.setItem('desiredUsername', username);
-        router.push('/signup?desiredUsername=' + username);
-      }
+  if (username && username.length > 0) {
+    // Send username to the server for logging
+    fetch('/api/username/logUsername', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username }),
+    });
+
+    if (user) {
+      router.push('/account?desiredUsername=' + username);
+    } else {
+      window.localStorage.setItem('desiredUsername', username);
+      router.push('/signup?desiredUsername=' + username);
     }
   }
+}
+
 
   return (
     <div className="w-full max-w-lg mx-auto">
