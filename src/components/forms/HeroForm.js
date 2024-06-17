@@ -22,22 +22,28 @@ export default function HeroForm({ user }) {
   ev.preventDefault();
   const formData = new FormData(ev.target);
   const username = formData.get('username');
-  
-  console.log('Desired username (HeroForm):', username); // Log to console for client-side debugging
+
+  console.log('Desired username (HeroForm):', username);
 
   if (username && username.length > 0) {
-    // Send username to the server for logging
-    fetch('/api/username/logUsername', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({ username }),
-})
-.then(response => response.json())
-.then(data => console.log(data))
-.catch(error => console.error('Error logging username:', error));
+    try {
+      const response = await fetch('/api/username/logUsername', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username }),
+      });
 
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      } else {
+        console.error('Error logging username:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error logging username:', error);
+    }
 
     if (user) {
       router.push('/account?desiredUsername=' + username);
@@ -47,6 +53,7 @@ export default function HeroForm({ user }) {
     }
   }
 }
+
 
 
   return (
