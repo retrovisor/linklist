@@ -1,19 +1,24 @@
-// app/api/username/logUsername.js
+// src/app/api/username/logUsername.js
+import connectToDatabase from "@/libs/mongoClient";
 
-import { connectToDatabase } from "@/libs/mongoClient";  // Adjust path as necessary
-
-export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    try {
-      const { username } = req.body;
-      const { db } = await connectToDatabase();
-      await db.collection('usernames').insertOne({ username, timestamp: new Date() });
-      res.status(200).json({ message: 'Username logged successfully' });
-    } catch (error) {
-      res.status(500).json({ message: 'Error logging username', error });
-    }
-  } else {
-    res.setHeader('Allow', ['POST']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+export async function POST(req, res) {
+  try {
+    const { username } = await req.json();
+    const db = await connectToDatabase();
+    await db.collection('usernames').insertOne({ username, timestamp: new Date() });
+    return new Response(JSON.stringify({ message: 'Username logged successfully' }), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  } catch (error) {
+    console.error('Error logging username:', error);
+    return new Response(JSON.stringify({ message: 'Error logging username', error: error.message }), {
+      status: 500,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   }
 }
