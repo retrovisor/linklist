@@ -27,7 +27,7 @@ export default function HeroForm({ user }) {
 
   if (username && username.length > 0) {
     try {
-      const response = await fetch('/api/username/logUsername', {
+      const response = await fetch('@/app/api/username/logUsername', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
