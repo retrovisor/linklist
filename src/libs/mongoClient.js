@@ -6,14 +6,14 @@ if (!process.env.MONGODB_URI) {
 }
 
 const uri = process.env.MONGODB_URI;
-const options = {
-  maxPoolSize: 50,
-  minPoolSize: 10,
-  maxIdleTimeMS: 30000,
-  serverSelectionTimeoutMS: 30000,
-  socketTimeoutMS: 45000,
-  connectTimeoutMS: 30000,
-};
+// const options = {
+//   maxPoolSize: 50,
+//   minPoolSize: 10,
+//   maxIdleTimeMS: 30000,
+//   serverSelectionTimeoutMS: 30000,
+//   socketTimeoutMS: 45000,
+//   connectTimeoutMS: 30000,
+// };
 
 let client;
 let clientPromise;
@@ -21,7 +21,7 @@ let clientPromise;
 const connect = async () => {
   if (!client || !client.isConnected()) {
     try {
-      client = new MongoClient(uri, options);
+      client = new MongoClient(uri);
       await client.connect();
       console.log("Connected to MongoDB");
     } catch (error) {
