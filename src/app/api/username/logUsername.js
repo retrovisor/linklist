@@ -1,9 +1,9 @@
 // src/app/api/username/logUsername.js
 import connectToDatabase from "@/libs/mongoClient";
 
-export async function POST(req, res) {
+export async function POST(request) {
   try {
-    const { username } = await req.json();
+    const { username } = await request.json();
     const db = await connectToDatabase();
     await db.collection('usernames').insertOne({ username, timestamp: new Date() });
     return new Response(JSON.stringify({ message: 'Username logged successfully' }), {
@@ -21,4 +21,20 @@ export async function POST(req, res) {
       },
     });
   }
+}
+
+export async function GET(request) {
+  return new Response('Method Not Allowed', { status: 405 });
+}
+
+export async function PUT(request) {
+  return new Response('Method Not Allowed', { status: 405 });
+}
+
+export async function DELETE(request) {
+  return new Response('Method Not Allowed', { status: 405 });
+}
+
+export async function PATCH(request) {
+  return new Response('Method Not Allowed', { status: 405 });
 }
