@@ -1,16 +1,16 @@
 import { Lato } from 'next/font/google';
 import '../../globals.css';
 import '@/styles/global.css';
-import { Page } from "@/models/Page";
-import mongoose from "mongoose";
+import clientPromise from "@/libs/mongoClient";
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
 export async function generateMetadata({ params }) {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
+    const client = await clientPromise;
+    const db = client.db();
     const uri = params.uri;
-    const page = await Page.findOne({ uri });
+    const page = await db.collection('pages').findOne({ uri });
     if (!page) {
       return {
         title: '페이지를 찾을 수 없음 | Fizz.link',
@@ -54,7 +54,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="kr">
       <head>
- 
         {/* This is where metadata would be injected */}
       </head>
       <body className={lato.className}>
