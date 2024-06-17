@@ -10,15 +10,11 @@ let client;
 const connect = async () => {
   if (!client || !client.isConnected()) {
     try {
-      client = new MongoClient(uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
+      client = new MongoClient(uri);
       await client.connect();
       console.log("Connected to MongoDB");
     } catch (error) {
       console.error("Error connecting to MongoDB:", error);
-      // Handle the error gracefully, e.g., return an error response
       throw new Error("Failed to connect to MongoDB");
     }
   }
