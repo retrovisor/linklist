@@ -29,7 +29,7 @@ export default function HeroForm({ user }) {
         router.push('/account?desiredUsername=' + username);
       } else {
         window.localStorage.setItem('desiredUsername', username);
-        router.push('/login?desiredUsername=' + username);
+        router.push('/signup?desiredUsername=' + username);
       }
     }
   }
