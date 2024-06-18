@@ -18,7 +18,7 @@ export default async function Footer({ locale }) {
             <span className="font-bold cor-roxa">Fizz.link</span>
           </Link>
           <nav className="flex items-center gap-4 text-slate-500 text-sm">
-            <Link href={`/${locale}/about`}>에 대한</Link>
+            <Link href={`/about`}>에 대한</Link>
           </nav>
         </div>
       </div>
