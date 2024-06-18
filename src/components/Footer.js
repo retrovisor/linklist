@@ -13,7 +13,7 @@ export default async function Footer({ locale }) {
     <footer className="fundo-home border-t py-6">
       <div className="max-w-4xl flex justify-between mx-auto px-4">
         <div className="flex items-center gap-6">
-          <Link href={`/${locale}`} className="flex items-center gap-1 text-blue-500">
+          <Link href={`/`} className="flex items-center gap-1 text-blue-500">
             <img src="/logo4.png" alt="Logo" style={{ width: '1em' }} />
             <span className="font-bold cor-roxa">Fizz.link</span>
           </Link>
