@@ -31,6 +31,7 @@
     "recharts": "^2.10.3",
     "sortablejs": "^1.15.0",
     "typescript": "^4.2.0",
+    "hangul-js": "^0.2.6",
     "uniqid": "^5.4.0"
   },
   "devDependencies": {
