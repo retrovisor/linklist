@@ -65,6 +65,7 @@ function getYouTubeVideoId(url) {
   return match ? match[1] : null;
 }
 
+
 export default async function UserPage({ params }) {
   const uri = decodeURIComponent(params.uri);
   console.log("UserPage function started for URI:", uri);
@@ -82,10 +83,16 @@ export default async function UserPage({ params }) {
       return <div>Page not found</div>;
     }
 
-        
-        const user = await db.collection("users").findOne({ _id: new ObjectId(page.owner) });
+    // Validate if page.owner is a valid ObjectId
+    let ownerId;
+    if (ObjectId.isValid(page.owner)) {
+      ownerId = new ObjectId(page.owner);
+    } else {
+      console.log("Invalid ObjectId:", page.owner);
+      return <div>Invalid owner ID</div>;
+    }
 
-    
+    const user = await db.collection("users").findOne({ _id: ownerId });
     console.log("User data:", user);
 
     if (!user) {
@@ -99,8 +106,7 @@ export default async function UserPage({ params }) {
     const pageData = page;
     const template = pageData.template || "template1";
 
-
-     return (
+    return (
       <div className={`w-full h-full bg-center bg-cover fixed top-0 z-10 bg-auto bg-no-repeat overflow-x-hidden text-white template ${template}`} style={
         pageData.bgType === 'color'
           ? { backgroundColor: pageData.bgColor }
