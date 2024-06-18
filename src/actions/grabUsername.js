@@ -3,16 +3,38 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import clientPromise from "@/libs/mongoClient";
 import { ObjectId } from 'mongodb';
-import Hangul from 'hangul-js';
 
-// Function to convert Korean to Romanized text using hangul-js
 function koreanToRomanized(text) {
-  return Hangul.romanize(text);
+  const initialConsonants = ['g', 'kk', 'n', 'd', 'tt', 'r', 'm', 'b', 'pp', 's', 'ss', 'ng', 'j', 'jj', 'ch', 'k', 't', 'p', 'h'];
+  const medialVowels = ['a', 'ae', 'ya', 'yae', 'eo', 'e', 'yeo', 'ye', 'o', 'wa', 'wae', 'oe', 'yo', 'u', 'wo', 'we', 'wi', 'yu', 'eu', 'ui', 'i'];
+  const finalConsonants = ['', 'g', 'kk', 'ks', 'n', 'nc', 'nh', 'd', 'r', 'rk', 'rm', 'rp', 'rs', 'rt', 'rp', 'rh', 'm', 'b', 'bs', 's', 'ss', 'ng', 'j', 'ch', 'k', 't', 'p', 'h'];
+
+  return text.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, function (match) {
+    const koreanChar = match.charCodeAt(0);
+    let romanized = '';
+
+    if (koreanChar >= 0xAC00 && koreanChar <= 0xD7A3) {
+      const syllableIndex = koreanChar - 0xAC00;
+      const initialIndex = Math.floor(syllableIndex / 588);
+      const medialIndex = Math.floor((syllableIndex % 588) / 28);
+      const finalIndex = syllableIndex % 28;
+      romanized = initialConsonants[initialIndex] + medialVowels[medialIndex] + finalConsonants[finalIndex];
+    } else {
+      const singleConsonantMapping = {
+        'ㄱ': 'g', 'ㄲ': 'kk', 'ㄴ': 'n', 'ㄷ': 'd', 'ㄸ': 'tt', 'ㄹ': 'r', 'ㅁ': 'm', 'ㅂ': 'b', 'ㅃ': 'pp', 'ㅅ': 's',
+        'ㅆ': 'ss', 'ㅇ': 'ng', 'ㅈ': 'j', 'ㅉ': 'jj', 'ㅊ': 'ch', 'ㅋ': 'k', 'ㅌ': 't', 'ㅍ': 'p', 'ㅎ': 'h'
+      };
+      const singleVowelMapping = {
+        'ㅏ': 'a', 'ㅐ': 'ae', 'ㅑ': 'ya', 'ㅒ': 'yae', 'ㅓ': 'eo', 'ㅔ': 'e', 'ㅕ': 'yeo', 'ㅖ': 'ye', 'ㅗ': 'o', 'ㅘ': 'wa',
+        'ㅙ': 'wae', 'ㅚ': 'oe', 'ㅛ': 'yo', 'ㅜ': 'u', 'ㅝ': 'wo', 'ㅞ': 'we', 'ㅟ': 'wi', 'ㅠ': 'yu', 'ㅡ': 'eu', 'ㅢ': 'ui', 'ㅣ': 'i'
+      };
+      romanized = singleConsonantMapping[match] || singleVowelMapping[match] || '';
+    }
+
+    return romanized;
+  });
 }
 
-const text = "desiredUsername=김태현";
-const romanizedText = koreanToRomanized(text);
-console.log(romanizedText); // Output should be: desiredUsername=kimtaehyun
 
 export default async function grabUsername(formData) {
   const username = formData.get('username');
