@@ -7,7 +7,7 @@ import { ObjectId } from 'mongodb';
 function koreanToRomanized(text) {
   const initialConsonants = ['g', 'kk', 'n', 'd', 'tt', 'r', 'm', 'b', 'pp', 's', 'ss', 'ng', 'j', 'jj', 'ch', 'k', 't', 'p', 'h'];
   const medialVowels = ['a', 'ae', 'ya', 'yae', 'eo', 'e', 'yeo', 'ye', 'o', 'wa', 'wae', 'oe', 'yo', 'u', 'wo', 'we', 'wi', 'yu', 'eu', 'ui', 'i'];
-  const finalConsonants = ['', 'g', 'kk', 'ks', 'n', 'nc', 'nh', 'd', 'r', 'rk', 'rm', 'rp', 'rs', 'rt', 'rp', 'rh', 'm', 'b', 'bs', 's', 'ss', 'ng', 'j', 'ch', 'k', 't', 'p', 'h'];
+  const finalConsonants = ['', 'k', 'k', 'ks', 'n', 'nc', 'nh', 't', 'r', 'rk', 'rm', 'rp', 'rs', 'rt', 'rp', 'rh', 'm', 'p', 'ps', 't', 't', 'ng', 't', 'ch', 'k', 't', 'p', 'h'];
 
   return text.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, function (match) {
     const koreanChar = match.charCodeAt(0);
@@ -18,6 +18,7 @@ function koreanToRomanized(text) {
       const initialIndex = Math.floor(syllableIndex / 588);
       const medialIndex = Math.floor((syllableIndex % 588) / 28);
       const finalIndex = syllableIndex % 28;
+
       romanized = initialConsonants[initialIndex] + medialVowels[medialIndex] + finalConsonants[finalIndex];
     } else {
       const singleConsonantMapping = {
@@ -28,13 +29,13 @@ function koreanToRomanized(text) {
         'ㅏ': 'a', 'ㅐ': 'ae', 'ㅑ': 'ya', 'ㅒ': 'yae', 'ㅓ': 'eo', 'ㅔ': 'e', 'ㅕ': 'yeo', 'ㅖ': 'ye', 'ㅗ': 'o', 'ㅘ': 'wa',
         'ㅙ': 'wae', 'ㅚ': 'oe', 'ㅛ': 'yo', 'ㅜ': 'u', 'ㅝ': 'wo', 'ㅞ': 'we', 'ㅟ': 'wi', 'ㅠ': 'yu', 'ㅡ': 'eu', 'ㅢ': 'ui', 'ㅣ': 'i'
       };
+
       romanized = singleConsonantMapping[match] || singleVowelMapping[match] || '';
     }
 
     return romanized;
   });
 }
-
 
 export default async function grabUsername(formData) {
   const username = formData.get('username');
