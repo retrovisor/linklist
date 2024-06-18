@@ -37,6 +37,11 @@ function koreanToRomanized(text) {
   });
 }
 
+const text = "desiredUsername=김태현";
+const romanizedText = koreanToRomanized(text);
+console.log(romanizedText); // Output should be: desiredUsername=kimtaehyun
+
+
 export default async function grabUsername(formData) {
   const username = formData.get('username');
   console.log('Desired username:', username); // Log the desired username
