@@ -2,6 +2,7 @@ import { Lato } from 'next/font/google';
 import '../../globals.css';
 import '@/styles/global.css';
 import clientPromise from "@/libs/mongoClient";
+import Script from 'next/script'; // Import Script component
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -54,6 +55,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="kr">
       <head>
+        {/* Fathom Analytics Script */}
+        <Script
+          src="https://cdn.usefathom.com/script.js"
+          data-site="FIEGHTLD"
+          strategy="afterInteractive"
+          defer
+        />
         {/* This is where metadata would be injected */}
       </head>
       <body className={lato.className}>
