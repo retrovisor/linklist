@@ -5,30 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 import Script from 'next/script'; // Import Script component
-import * as Fathom from 'fathom-client'; // Import Fathom client
 
 export default async function Header() {
   const session = await getServerSession(authOptions);
-
-  // Initialize Fathom Analytics
-  useEffect(() => {
-    Fathom.load('FIEGHTLD', {
-      includedDomains: ['fizz.link']
-    });
-
-    // Track page views on route change
-    const onRouteChangeComplete = () => {
-      Fathom.trackPageview();
-    };
-
-    // Add route change listener
-    router.events.on('routeChangeComplete', onRouteChangeComplete);
-
-    // Cleanup listener on unmount
-    return () => {
-      router.events.off('routeChangeComplete', onRouteChangeComplete);
-    };
-  }, []);
 
   return (
     <header className="py-4 sticky top-0 z-50 fundo-home">
@@ -55,7 +34,14 @@ export default async function Header() {
           )}
         </nav>
       </div>
- 
+
+      {/* Fathom Analytics Script */}
+      <Script
+        src="https://cdn.usefathom.com/script.js"
+        data-site="FIEGHTLD"
+        strategy="afterInteractive"
+        defer
+      />
     </header>
   );
 }
