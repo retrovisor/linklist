@@ -3,7 +3,6 @@
 import { signIn } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { trackEvent } from 'fathom-client';
 
 export default function HeroForm({ user }) {
   const router = useRouter();
@@ -17,19 +16,15 @@ export default function HeroForm({ user }) {
       window.localStorage.removeItem('desiredUsername');
       redirect('/account?desiredUsername=' + username);
     }
-
-    // Initialize Fathom when the component mounts
-    Fathom.load('YOUR_FATHOM_ID', {
-      includedDomains: ['yourdomain.com']
-    });
   }, []);
 
   async function handleSubmit(ev) {
   ev.preventDefault();
   const formData = new FormData(ev.target);
   const username = formData.get('username');
+
   console.log('Desired username (HeroForm):', username);
-  
+
   if (username && username.length > 0) {
     try {
       const response = await fetch('@/app/api/username/logUsername', {
@@ -39,6 +34,7 @@ export default function HeroForm({ user }) {
         },
         body: JSON.stringify({ username }),
       });
+
       if (response.ok) {
         const data = await response.json();
         console.log(data);
@@ -49,9 +45,6 @@ export default function HeroForm({ user }) {
       console.error('Error logging username:', error);
     }
 
-    // Track the event
-    trackEvent('Submit HeroForm', { username });
-
     if (user) {
       router.push('/account?desiredUsername=' + username);
     } else {
@@ -60,6 +53,10 @@ export default function HeroForm({ user }) {
     }
   }
 }
+
+
+
+
 
   return (
     <div className="w-full max-w-lg mx-auto">
