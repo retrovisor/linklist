@@ -4,16 +4,18 @@ import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
+import Script from 'next/script'; // Import Script component
 
 export default async function Header() {
   const session = await getServerSession(authOptions);
+  const trackingId = process.env.NEXT_PUBLIC_GA_TRACKING_ID;
+
   return (
     <header className="py-4 sticky top-0 z-50 fundo-home">
       <div className="max-w-4xl flex justify-between mx-auto px-4 text-xl">
         <div className="flex items-center gap-6">
           <Link href={'/'} className="flex items-center gap-1 text-blue-500">
-          <img src="/logo4.png" alt="Logo" style={{ width: '1.2em' }} />
-
+            <img src="/logo4.png" alt="Logo" style={{ width: '1.2em' }} />
             <span className="font-bold cor-roxa">Fizz.link</span>
           </Link>
         </div>
@@ -33,6 +35,24 @@ export default async function Header() {
           )}
         </nav>
       </div>
+
+      {/* Google Analytics Script */}
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`}
+      />
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${trackingId}');
+          `,
+        }}
+      />
     </header>
   );
 }
