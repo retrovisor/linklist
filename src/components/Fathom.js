@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import * as FathomClient from 'fathom-client';
 
-function TrackPageView() {
+export default function TrackPageView() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -23,8 +23,4 @@ function TrackPageView() {
   }, [pathname, searchParams]);
 
   return null;
-}
-
-export default function FathomTracker() {
-  return <TrackPageView />;
 }
