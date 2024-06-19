@@ -47,7 +47,10 @@ export default function HeroForm({ user }) {
 
       // Track Fathom event
       if (typeof window !== 'undefined' && window.fathom) {
+        console.log('Tracking Fathom event');
         window.fathom.trackGoal('YOUR_FATHOM_EVENT_ID', 0);
+      } else {
+        console.error('Fathom not loaded');
       }
 
       if (user) {
