@@ -2,8 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google';
 import '../globals.css';
-import { useEffect } from 'react';
-import * as Fathom from 'fathom-client';
+import FathomTracker from "@/components/Fathom";
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -13,15 +12,10 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  useEffect(() => {
-    Fathom.load('FIEGHTLD', {
-      auto: false,
-    });
-  }, []);
-
   return (
     <html lang="kr">
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
+        <FathomTracker />
         <div className="flex-grow">
           <Header />
           <div className="mx-auto">
