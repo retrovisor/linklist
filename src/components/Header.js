@@ -8,7 +8,6 @@ import Script from 'next/script'; // Import Script component
 
 export default async function Header() {
   const session = await getServerSession(authOptions);
-  const trackingId = process.env.NEXT_PUBLIC_GA_TRACKING_ID;
 
   return (
     <header className="py-4 sticky top-0 z-50 fundo-home">
@@ -36,22 +35,12 @@ export default async function Header() {
         </nav>
       </div>
 
-      {/* Google Analytics Script */}
+      {/* Fathom Analytics Script */}
       <Script
+        src="https://cdn.usefathom.com/script.js"
+        data-site="FIEGHTLD"
         strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`}
-      />
-      <Script
-        id="google-analytics"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${trackingId}');
-          `,
-        }}
+        defer
       />
     </header>
   );
