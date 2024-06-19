@@ -2,8 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google';
 import '../globals.css';
-import FathomTracker from './Fathom'; // Add this import
-
+import FathomTracker from "@/components/Fathom";
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
