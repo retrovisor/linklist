@@ -14,6 +14,8 @@ import ShareDialog from '../(page)/[uri]/ShareDialog';
 import CopyLinkButton from '@/components/buttons/CopyLinkButton';
 import { ObjectId } from 'mongodb';
 import clientPromise from "@/libs/mongoClient";
+import TrackPageView from "@/components/Fathom";
+
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -66,6 +68,8 @@ export default async function AppTemplate({ children, ...rest }) {
     return (
       <html lang="kr">
         <body className={lato.className}>
+              <TrackPageView />
+
           <Toaster />
           <main className="md:flex">
             <div className="flex justify-end sticky bg-white top-0 z-10 shadow">
