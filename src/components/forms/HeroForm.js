@@ -3,7 +3,7 @@
 import { signIn } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import { useEffect } from "react";
-import * as Fathom from 'fathom-client';
+import { trackEvent } from 'fathom-client';
 
 export default function HeroForm({ user }) {
   const router = useRouter();
@@ -25,43 +25,41 @@ export default function HeroForm({ user }) {
   }, []);
 
   async function handleSubmit(ev) {
-    ev.preventDefault();
-    const formData = new FormData(ev.target);
-    const username = formData.get('username');
-
-    console.log('Desired username (HeroForm):', username);
-
-    if (username && username.length > 0) {
-      try {
-        const response = await fetch('/api/username/logUsername', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username }),
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data);
-        } else {
-          console.error('Error logging username:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error logging username:', error);
-      }
-
-      // Track Fathom event
-      Fathom.trackGoal('Clickou_HeroForm', 0);
-
-      if (user) {
-        router.push('/account?desiredUsername=' + username);
+  ev.preventDefault();
+  const formData = new FormData(ev.target);
+  const username = formData.get('username');
+  console.log('Desired username (HeroForm):', username);
+  
+  if (username && username.length > 0) {
+    try {
+      const response = await fetch('@/app/api/username/logUsername', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
       } else {
-        window.localStorage.setItem('desiredUsername', username);
-        router.push('/signup?desiredUsername=' + username);
+        console.error('Error logging username:', response.statusText);
       }
+    } catch (error) {
+      console.error('Error logging username:', error);
+    }
+
+    // Track the event
+    trackEvent('Submit HeroForm', { username });
+
+    if (user) {
+      router.push('/account?desiredUsername=' + username);
+    } else {
+      window.localStorage.setItem('desiredUsername', username);
+      router.push('/signup?desiredUsername=' + username);
     }
   }
+}
 
   return (
     <div className="w-full max-w-lg mx-auto">
