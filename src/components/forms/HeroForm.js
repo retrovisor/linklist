@@ -45,7 +45,7 @@ export default function HeroForm({ user }) {
       }
 
       // Track the event
-      trackEvent('Submit Username', { username });
+      trackEvent('Submit HeroForm', { username });
 
       if (user) {
         router.push('/account?desiredUsername=' + username);
