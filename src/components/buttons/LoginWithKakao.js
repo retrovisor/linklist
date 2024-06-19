@@ -9,7 +9,7 @@ import { trackEvent } from "fathom-client";
 export default function LoginWithKakao() {
   const handleClick = () => {
     console.log('Clicked on LoginWithKakao button');
-    trackEvent('Signup With Kakao');   
+    trackEvent('Login With Kakao');   
     signIn('kakao');
   };
   
