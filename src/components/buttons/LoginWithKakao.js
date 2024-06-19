@@ -3,10 +3,13 @@
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import kakaoLogo from '/public/kakao.png';
+import { trackEvent } from "fathom-client";
+
  
 export default function LoginWithKakao() {
   const handleClick = () => {
     console.log('Clicked on LoginWithKakao button');
+    trackEvent('Signup With Kakao');   
     signIn('kakao');
   };
   
