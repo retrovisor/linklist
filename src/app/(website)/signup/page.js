@@ -1,8 +1,8 @@
 // app/(website)/login/page.js
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import LoginWithGoogle from "@/components/buttons/SignupWithGoogle";
-import LoginWithKakao from "@/components/buttons/SignupWithKakao";
+import SignupWithGoogle from "@/components/buttons/SignupWithGoogle";
+import SignupWithKakao from "@/components/buttons/SignupWithKakao";
 import UsernameForm from "@/components/forms/UsernameForm";
 import { redirect } from "next/navigation";
 import clientPromise from "@/libs/mongoClient";
