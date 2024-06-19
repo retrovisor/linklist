@@ -2,10 +2,13 @@
 import {faGoogle} from "@fortawesome/free-brands-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {signIn} from "next-auth/react";
+import { trackEvent } from "fathom-client";
+
 
 export default function SignupWithGoogle() {
   const handleClick = () => {
     console.log('Clicked on SignupWithGoogle button');
+    trackEvent('Signup With Google');
     signIn('google');
   };
 
