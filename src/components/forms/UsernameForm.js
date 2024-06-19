@@ -3,6 +3,8 @@ import grabUsername from "@/actions/grabUsername";
 import SubmitButton from "@/components/buttons/SubmitButton";
 import RightIcon from "@/components/icons/RightIcon";
 import { useState } from 'react';
+import { trackEvent } from "fathom-client";
+
 
 export default function UsernameForm({ desiredUsername }) {
   const [taken, setTaken] = useState(false);
@@ -16,6 +18,7 @@ export default function UsernameForm({ desiredUsername }) {
     const result = await grabUsername(formData);
     setTaken(result === false);
     if (result) {
+      trackEvent('Submit UsernameContinue', { username });
       window.location.href = '/select-template?created=' + username;
     }
   }
