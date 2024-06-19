@@ -6,6 +6,8 @@ import SubmitButton from "@/components/buttons/SubmitButton";
 import RightIcon from "@/components/icons/RightIcon";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { trackEvent } from "fathom-client";
+
 
 export default function TemplateSelectionPage({ page, user }) {
 
@@ -33,6 +35,8 @@ export default function TemplateSelectionPage({ page, user }) {
 
     if (response.ok) {
       window.location.href = '/account';
+          trackEvent('Submit ThisTemplate');   
+
     }
   }
 
