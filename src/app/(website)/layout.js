@@ -2,6 +2,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google';
 import '../globals.css';
+import FathomTracker from './Fathom'; // Add this import
+
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -15,6 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="kr">
  
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
+          <FathomTracker /> {/* Add the FathomTracker component */}
         <div className="flex-grow">
           <Header />
           <div className="mx-auto">
