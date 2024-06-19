@@ -3,6 +3,7 @@
 import { signIn } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import * as Fathom from 'fathom-client';
 
 export default function HeroForm({ user }) {
   const router = useRouter();
@@ -16,6 +17,11 @@ export default function HeroForm({ user }) {
       window.localStorage.removeItem('desiredUsername');
       redirect('/account?desiredUsername=' + username);
     }
+
+    // Initialize Fathom when the component mounts
+    Fathom.load('YOUR_FATHOM_ID', {
+      includedDomains: ['yourdomain.com']
+    });
   }, []);
 
   async function handleSubmit(ev) {
@@ -27,7 +33,7 @@ export default function HeroForm({ user }) {
 
     if (username && username.length > 0) {
       try {
-        const response = await fetch('@/app/api/username/logUsername', {
+        const response = await fetch('/api/username/logUsername', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -46,12 +52,7 @@ export default function HeroForm({ user }) {
       }
 
       // Track Fathom event
-      if (typeof window !== 'undefined' && window.fathom) {
-        console.log('Tracking Fathom event');
-        window.fathom.trackGoal('YOUR_FATHOM_EVENT_ID', 0);
-      } else {
-        console.error('Fathom not loaded');
-      }
+      Fathom.trackGoal('Clickou_HeroForm', 0);
 
       if (user) {
         router.push('/account?desiredUsername=' + username);
