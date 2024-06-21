@@ -15,22 +15,12 @@ import Head from 'next/head';
 export default async function AccountPage({ searchParams }) {
   console.log('AccountPage function started');
 
-  let session;
-  try {
-    session = await getServerSession(authOptions);
-    console.log('Session:', session);
+  const session = await getServerSession(authOptions);
+  console.log('Session:', session);
 
-    if (!session) {
-      console.log('No session, redirecting to /');
-      return redirect('/');
-    }
-
-    if (!session.user) {
-      throw new Error('Session user is undefined');
-    }
-  } catch (sessionError) {
-    console.error('Session retrieval error:', sessionError.message);
-    return <div>에러 발생됨. 나중에 다시 시도 해주십시오</div>;
+  if (!session) {
+    console.log('No session, redirecting to /login');
+    return redirect('/login');
   }
 
   const desiredUsername = searchParams?.desiredUsername;
@@ -39,25 +29,12 @@ export default async function AccountPage({ searchParams }) {
   let page;
   try {
     const client = await clientPromise;
-    if (!client) {
-      throw new Error('Failed to initialize MongoDB client');
-    }
     const db = client.db();
-    if (!db) {
-      throw new Error('Failed to get MongoDB database');
-    }
     console.log('Connected to MongoDB');
 
     const collection = db.collection("pages");
-    if (!collection) {
-      throw new Error('Failed to get MongoDB collection');
-    }
-    console.log('Looking for page with owner:', session.user.id);
-
     page = await collection.findOne({ owner: session.user.id });
     console.log('MongoDB query result:', page);
-
-    console.log('Query executed successfully');
 
     if (!page) {
       console.log('Page not found for the user');
@@ -73,12 +50,9 @@ export default async function AccountPage({ searchParams }) {
     const leanPage = cloneDeep(page);
     if (leanPage._id) {
       leanPage._id = leanPage._id.toString();
-    } else {
-      console.warn('Page _id is undefined');
     }
     console.log('Lean Page:', leanPage);
 
-    // Ensure leanPage.uri exists before rendering components that might access it
     if (!leanPage.uri) {
       console.error('Page uri is undefined:', leanPage);
       throw new Error('Page uri is undefined');
@@ -99,9 +73,9 @@ export default async function AccountPage({ searchParams }) {
         </div>
       </>
     );
-  } catch (dbError) {
-    console.error('Error occurred while interacting with the database:', dbError.message);
-    console.error('Error stack:', dbError.stack);
+  } catch (error) {
+    console.error('Error occurred:', error.message);
+    console.error('Error stack:', error.stack);
     return <div>에러 발생됨. 나중에 다시 시도 해주십시오</div>;
   }
 }
