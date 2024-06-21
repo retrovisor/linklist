@@ -10,30 +10,27 @@ const options = {
   minPoolSize: 5,
   retryWrites: true,
   w: "majority",
-  serverSelectionTimeoutMS: 60000, // Increase timeout to 60 seconds
-  connectTimeoutMS: 60000, // Increase connection timeout to 60 seconds
+  serverSelectionTimeoutMS: 60000,
+  connectTimeoutMS: 60000,
 };
 
 let client;
 let clientPromise;
 
 if (process.env.NODE_ENV === "development") {
-  // In development mode, use a global variable so that the value
-  // is preserved across module reloads caused by HMR (Hot Module Replacement).
   if (!global._mongoClientPromise) {
     client = new MongoClient(uri, options);
     global._mongoClientPromise = client.connect();
   }
   clientPromise = global._mongoClientPromise;
 } else {
-  // In production mode, it's best to not use a global variable.
   client = new MongoClient(uri, options);
   clientPromise = client.connect();
 }
 
 export default clientPromise;
 
-export async function withRetry(operation, maxRetries = 3) {
+export async function performDatabaseOperation(operation, maxRetries = 3) {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       const client = await clientPromise;
@@ -45,10 +42,4 @@ export async function withRetry(operation, maxRetries = 3) {
       await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
     }
   }
-}
-
-export async function performDatabaseOperation(operation) {
-  return withRetry(async (db) => {
-    return await operation(db);
-  });
 }
