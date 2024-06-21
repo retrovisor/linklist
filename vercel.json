@@ -1,0 +1,12 @@
+{
+  "functions": {
+    "api/auth/[...nextauth].js": {
+      "memory": 1024,
+      "maxDuration": 10
+    },
+    "app/**/*.js": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  }
+}
