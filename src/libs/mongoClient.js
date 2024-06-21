@@ -9,6 +9,7 @@ let client;
 let clientPromise;
 
 const options = {
+    serverSelectionTimeoutMS: 60000, // Increase timeout to 60 seconds
   maxPoolSize: 10,
   minPoolSize: 5,
   retryWrites: true,
