@@ -5,7 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import KakaoProvider from "next-auth/providers/kakao";
 
 export const authOptions = {
-  secret: process.env.SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   adapter: MongoDBAdapter(clientPromise),
   providers: [
     GoogleProvider({
@@ -27,9 +27,10 @@ export const authOptions = {
   ],
   session: {
     strategy: 'jwt',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   jwt: {
-    secret: process.env.SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
     encryption: true,
   },
   callbacks: {
@@ -42,13 +43,28 @@ export const authOptions = {
     async session({ session, token }) {
       session.user.id = token.sub;
       
-      // Check if the user's image URL exists, otherwise set the default image URL
       if (!session.user.image) {
         session.user.image = 'https://fizz.link/avatar.png';
       }
       
       return session;
     },
+    async signIn({ user, account, profile, email, credentials }) {
+      return true;
+    },
+    async redirect({ url, baseUrl }) {
+      return baseUrl;
+    },
+  },
+  events: {
+    async error(error) {
+      console.error('NextAuth error:', error);
+      // Implement custom error logging or handling here
+    },
+  },
+  pages: {
+    signIn: '/login',
+    error: '/auth/error',
   },
 };
 
