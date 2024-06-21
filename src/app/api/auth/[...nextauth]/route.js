@@ -31,7 +31,6 @@ export const authOptions = {
   },
   jwt: {
     secret: process.env.NEXTAUTH_SECRET,
-    encryption: true,
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -42,29 +41,33 @@ export const authOptions = {
     },
     async session({ session, token }) {
       session.user.id = token.sub;
-      
       if (!session.user.image) {
         session.user.image = 'https://fizz.link/avatar.png';
       }
-      
       return session;
     },
     async signIn({ user, account, profile, email, credentials }) {
       return true;
     },
     async redirect({ url, baseUrl }) {
-      return baseUrl;
-    },
-  },
-  events: {
-    async error(error) {
-      console.error('NextAuth error:', error);
-      // Implement custom error logging or handling here
+      return url.startsWith(baseUrl) ? url : baseUrl;
     },
   },
   pages: {
     signIn: '/login',
     error: '/auth/error',
+  },
+  debug: process.env.NODE_ENV === 'development',
+  logger: {
+    error(code, metadata) {
+      console.error(code, metadata);
+    },
+    warn(code) {
+      console.warn(code);
+    },
+    debug(code, metadata) {
+      console.debug(code, metadata);
+    },
   },
 };
 
