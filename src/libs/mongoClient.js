@@ -1,35 +1,32 @@
 import { MongoClient } from "mongodb";
 
-if (!process.env.MONGODB_URI) {
-  throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
-}
-
 const uri = process.env.MONGODB_URI;
 let client;
-
-const connect = async () => {
-  if (!client || !client.isConnected()) {
-    try {
-      client = new MongoClient(uri);
-      await client.connect();
-      console.log("Connected to MongoDB");
-    } catch (error) {
-      console.error("Error connecting to MongoDB:", error);
-      throw new Error("Failed to connect to MongoDB");
-    }
-  }
-  return client;
-};
-
 let clientPromise;
+
+if (!process.env.MONGODB_URI) {
+  throw new Error("Please add your Mongo URI to .env.local");
+}
 
 if (process.env.NODE_ENV === "development") {
   if (!global._mongoClientPromise) {
-    global._mongoClientPromise = connect();
+    client = new MongoClient(uri, {
+      maxPoolSize: 10,
+      minPoolSize: 5,
+      retryWrites: true,
+      w: "majority",
+    });
+    global._mongoClientPromise = client.connect();
   }
   clientPromise = global._mongoClientPromise;
 } else {
-  clientPromise = connect();
+  client = new MongoClient(uri, {
+    maxPoolSize: 10,
+    minPoolSize: 5,
+    retryWrites: true,
+    w: "majority",
+  });
+  clientPromise = client.connect();
 }
 
 export default clientPromise;
