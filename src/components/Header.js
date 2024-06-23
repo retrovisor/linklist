@@ -6,10 +6,19 @@ import { getServerSession } from "next-auth";
 import Link from "next/link";
 import { getDictionary } from '@/libs/getDictionary';
 
-export default function Header({ dict, lang }) {
+export default async function Header({ lang }) {
+  let session;
+  let dict;
 
-  const session = await getServerSession(authOptions);
-  const dict = await getDictionary(lang);
+  try {
+    [session, dict] = await Promise.all([
+      getServerSession(authOptions),
+      getDictionary(lang)
+    ]);
+  } catch (error) {
+    console.error("Error in Header:", error);
+    // Handle error as needed
+  }
 
   return (
     <header className="py-4 sticky top-0 z-50 fundo-home">
@@ -39,3 +48,4 @@ export default function Header({ dict, lang }) {
     </header>
   );
 }
+
