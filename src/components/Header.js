@@ -1,24 +1,12 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LogoutButton from "@/components/buttons/LogoutButton";
-import { faLink } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getServerSession } from "next-auth";
+import { getServerSession } from "next-auth/next";
 import Link from "next/link";
 import { getDictionary } from '@/libs/getDictionary';
 
 export default async function Header({ lang }) {
-  let session;
-  let dict;
-
-  try {
-    [session, dict] = await Promise.all([
-      getServerSession(authOptions),
-      getDictionary(lang)
-    ]);
-  } catch (error) {
-    console.error("Error in Header:", error);
-    // Handle error as needed
-  }
+  const session = await getServerSession(authOptions);
+  const dict = await getDictionary(lang);
 
   return (
     <header className="py-4 sticky top-0 z-50 fundo-home">
@@ -48,4 +36,3 @@ export default async function Header({ lang }) {
     </header>
   );
 }
-
