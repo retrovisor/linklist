@@ -1,12 +1,19 @@
-import clientPromise from "@/libs/mongoClient";
+import { connectToMongoDB } from "@/libs/mongoClient";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import KakaoProvider from "next-auth/providers/kakao";
 
+const CustomMongoDBAdapter = (config) => {
+  return {
+    ...MongoDBAdapter(connectToMongoDB()),
+    ...config,
+  }
+};
+
 export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
-  adapter: MongoDBAdapter(clientPromise),
+    adapter: CustomMongoDBAdapter(),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
