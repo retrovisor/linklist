@@ -6,7 +6,7 @@ import PageTextBoxesForm from "@/components/forms/PageTextBoxesForm";
 import UsernameForm from "@/components/forms/UsernameForm";
 import PageYouTubeForm from "@/components/forms/PageYouTubeForm";
 import PageImageLinksForm from "@/components/forms/PageImageLinksForm";
-import clientPromise from "@/libs/mongoClient";
+import { performDatabaseOperation } from "@/libs/mongoClient";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import cloneDeep from 'clone-deep';
@@ -14,7 +14,6 @@ import Head from 'next/head';
 
 export default async function AccountPage({ searchParams }) {
   console.log('AccountPage function started');
-
   const session = await getServerSession(authOptions);
   console.log('Session:', session);
 
@@ -28,12 +27,12 @@ export default async function AccountPage({ searchParams }) {
 
   let page;
   try {
-    const client = await clientPromise;
-    const db = client.db();
-    console.log('Connected to MongoDB');
+    page = await performDatabaseOperation(async (db) => {
+      console.log('Connected to MongoDB');
+      const collection = db.collection("pages");
+      return await collection.findOne({ owner: session.user.id });
+    });
 
-    const collection = db.collection("pages");
-    page = await collection.findOne({ owner: session.user.id });
     console.log('MongoDB query result:', page);
 
     if (!page) {
@@ -46,7 +45,6 @@ export default async function AccountPage({ searchParams }) {
     }
 
     console.log('Page found:', page);
-
     const leanPage = cloneDeep(page);
     if (leanPage._id) {
       leanPage._id = leanPage._id.toString();
