@@ -3,9 +3,10 @@
     "title": "Fizz.link - Create One Link for Everything",
     "description": "Share your links, social profiles, creations, contact information, and more in one place"
   },
-  "nav": {
-    "home": "Home",
-    "about": "About",
-    "contact": "Contact"
+  "header": {
+    "myPage": "My Page",
+    "logout": "Logout",
+    "login": "Login",
+    "signup": "Sign Up Free"
   }
 }
