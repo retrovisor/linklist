@@ -1,5 +1,13 @@
  
 const nextConfig = {
+
+ serverRuntimeConfig: {
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+  },
+  publicRuntimeConfig: {
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+  },
+ 
   images: {
      domains: [
       'googleusercontent.com',
