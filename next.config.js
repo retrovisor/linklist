@@ -1,10 +1,7 @@
 
 const nextConfig = {
 
-  i18n: {
-    locales: ['kr', 'en'],
-    defaultLocale: 'kr',
-  },
+   
  
  serverRuntimeConfig: {
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
