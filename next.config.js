@@ -1,8 +1,11 @@
-const { i18n } = require('./next-i18next.config');
- 
- 
+
 const nextConfig = {
 
+  i18n: {
+    locales: ['kr', 'en'],
+    defaultLocale: 'kr',
+  },
+ 
  serverRuntimeConfig: {
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
   },
@@ -53,6 +56,6 @@ const nextConfig = {
 };
 
 module.exports = {
-  ...nextConfig, i18n
+  ...nextConfig
 
 };
