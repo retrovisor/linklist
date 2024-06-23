@@ -31,16 +31,23 @@ export const authOptions = {
   },
   jwt: {
     secret: process.env.NEXTAUTH_SECRET,
+    encryption: true, // Make sure encryption is enabled
   },
   callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.sub = user.id;
+    async jwt({ token, user, account }) {
+      if (account && user) {
+        return {
+          ...token,
+          accessToken: account.access_token,
+          refreshToken: account.refresh_token,
+          userId: user.id,
+        }
       }
-      return token;
+      return token
     },
     async session({ session, token }) {
       session.user.id = token.sub;
+      session.accessToken = token.accessToken
       if (!session.user.image) {
         session.user.image = 'https://fizz.link/avatar.png';
       }
