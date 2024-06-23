@@ -2,13 +2,7 @@
 
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
-import clientPromise from "@/libs/mongoClient";
-
-// Helper function to ensure the database connection
-async function connectToDatabase() {
-  const client = await clientPromise;
-  return client.db();
-}
+import { performDatabaseOperation } from "@/libs/mongoClient";
 
 const serviceUrlMap = {
   email: '{{value}}',
@@ -29,7 +23,6 @@ const serviceUrlMap = {
 };
 
 export async function savePageButtons(formData) {
-  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
 
   if (session) {
@@ -53,81 +46,80 @@ export async function savePageButtons(formData) {
 
     const dataToUpdate = { buttons: buttonsValues };
 
-    await db.collection("pages").updateOne(
-      { owner: session?.user?.id },
-      { $set: dataToUpdate },
-    );
-
-    return { success: true };
+    return performDatabaseOperation(async (db) => {
+      await db.collection("pages").updateOne(
+        { owner: session?.user?.id },
+        { $set: dataToUpdate },
+      );
+      return { success: true };
+    });
   }
 
   return { success: false, message: 'Unauthorized' };
 }
 
 export async function savePageImageLink(imageLink) {
-  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
 
   if (session) {
-    const existingImageLink = await db.collection("pages").findOne({
-      owner: session?.user?.id,
-      "imageLinks.key": imageLink.key
+    return performDatabaseOperation(async (db) => {
+      const existingImageLink = await db.collection("pages").findOne({
+        owner: session?.user?.id,
+        "imageLinks.key": imageLink.key
+      });
+
+      if (existingImageLink) {
+        await db.collection("pages").updateOne(
+          { owner: session?.user?.id, "imageLinks.key": imageLink.key },
+          { $set: { "imageLinks.$": imageLink } },
+        );
+      } else {
+        await db.collection("pages").updateOne(
+          { owner: session?.user?.id },
+          { $push: { imageLinks: imageLink } },
+        );
+      }
+
+      return { success: true };
     });
-
-    if (existingImageLink) {
-      // Update existing image link
-      await db.collection("pages").updateOne(
-        { owner: session?.user?.id, "imageLinks.key": imageLink.key },
-        { $set: { "imageLinks.$": imageLink } },
-      );
-    } else {
-      // Add new image link
-      await db.collection("pages").updateOne(
-        { owner: session?.user?.id },
-        { $push: { imageLinks: imageLink } },
-      );
-    }
-
-    return { success: true };
   } else {
     return { success: false, message: 'Unauthorized' };
   }
 }
 
 export async function deletePageImageLink(imageLinkKey) {
-  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
 
   if (session) {
-    await db.collection("pages").updateOne(
-      { owner: session?.user?.id },
-      { $pull: { imageLinks: { key: imageLinkKey } } },
-    );
-
-    return { success: true };
+    return performDatabaseOperation(async (db) => {
+      await db.collection("pages").updateOne(
+        { owner: session?.user?.id },
+        { $pull: { imageLinks: { key: imageLinkKey } } },
+      );
+      return { success: true };
+    });
   } else {
     return { success: false, message: 'Unauthorized' };
   }
 }
 
 export async function deletePageLink(linkKey) {
-  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
   
   if (session) {
-    await db.collection("pages").updateOne(
-      { owner: session?.user?.id },
-      { $pull: { links: { key: linkKey } } },
-    );
-    
-    return { success: true };
+    return performDatabaseOperation(async (db) => {
+      await db.collection("pages").updateOne(
+        { owner: session?.user?.id },
+        { $pull: { links: { key: linkKey } } },
+      );
+      return { success: true };
+    });
   } else {
     return { success: false, message: 'Unauthorized' };
   }
 }
 
 export async function savePageSettings(formData) {
-  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
 
   if (session) {
@@ -144,148 +136,147 @@ export async function savePageSettings(formData) {
       }
     }
 
-    await db.collection("pages").updateOne(
-      { owner: session?.user?.id },
-      { $set: dataToUpdate },
-    );
-
-    if (formData.has('avatar')) {
-      const avatarLink = formData.get('avatar');
-      dataToUpdate.avatar = avatarLink;
-      await db.collection("users").updateOne(
-        { email: session.user?.email },
-        { $set: { image: avatarLink } },
+    return performDatabaseOperation(async (db) => {
+      await db.collection("pages").updateOne(
+        { owner: session?.user?.id },
+        { $set: dataToUpdate },
       );
-    }
 
-    await db.collection("pages").updateOne(
-      { owner: session?.user?.id },
-      { $set: dataToUpdate },
-    );
+      if (formData.has('avatar')) {
+        const avatarLink = formData.get('avatar');
+        dataToUpdate.avatar = avatarLink;
+        await db.collection("users").updateOne(
+          { email: session.user?.email },
+          { $set: { image: avatarLink } },
+        );
+      }
 
-    return { success: true };
+      await db.collection("pages").updateOne(
+        { owner: session?.user?.id },
+        { $set: dataToUpdate },
+      );
+
+      return { success: true };
+    });
   }
 
   return { success: false, message: 'Unauthorized' };
 }
 
 export async function savePageYouTubeVideo(video) {
-  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
   
   if (session) {
-    const existingVideo = await db.collection("pages").findOne({
-      owner: session?.user?.id,
-      "youTubeVideos.key": video.key
+    return performDatabaseOperation(async (db) => {
+      const existingVideo = await db.collection("pages").findOne({
+        owner: session?.user?.id,
+        "youTubeVideos.key": video.key
+      });
+      
+      if (existingVideo) {
+        await db.collection("pages").updateOne(
+          { owner: session?.user?.id, "youTubeVideos.key": video.key },
+          { $set: { "youTubeVideos.$": video } },
+        );
+      } else {
+        await db.collection("pages").updateOne(
+          { owner: session?.user?.id },
+          { $push: { youTubeVideos: video } },
+        );
+      }
+      
+      return { success: true };
     });
-    
-    if (existingVideo) {
-      // Update existing video
-      await db.collection("pages").updateOne(
-        { owner: session?.user?.id, "youTubeVideos.key": video.key },
-        { $set: { "youTubeVideos.$": video } },
-      );
-    } else {
-      // Add new video
-      await db.collection("pages").updateOne(
-        { owner: session?.user?.id },
-        { $push: { youTubeVideos: video } },
-      );
-    }
-    
-    return { success: true };
   } else {
     return { success: false, message: 'Unauthorized' };
   }
 }
 
 export async function deletePageYouTubeVideo(videoKey) {
-  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
   
   if (session) {
-    await db.collection("pages").updateOne(
-      { owner: session?.user?.id },
-      { $pull: { youTubeVideos: { key: videoKey } } },
-    );
-    
-    return { success: true };
+    return performDatabaseOperation(async (db) => {
+      await db.collection("pages").updateOne(
+        { owner: session?.user?.id },
+        { $pull: { youTubeVideos: { key: videoKey } } },
+      );
+      return { success: true };
+    });
   } else {
     return { success: false, message: 'Unauthorized' };
   }
 }
 
 export async function savePageLink(link) {
-  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
   
   if (session) {
-    const existingLink = await db.collection("pages").findOne({
-      owner: session?.user?.id,
-      "links.key": link.key
+    return performDatabaseOperation(async (db) => {
+      const existingLink = await db.collection("pages").findOne({
+        owner: session?.user?.id,
+        "links.key": link.key
+      });
+      
+      if (existingLink) {
+        await db.collection("pages").updateOne(
+          { owner: session?.user?.id, "links.key": link.key },
+          { $set: { "links.$": link } },
+        );
+      } else {
+        await db.collection("pages").updateOne(
+          { owner: session?.user?.id },
+          { $push: { links: link } },
+        );
+      }
+      
+      return { success: true };
     });
-    
-    if (existingLink) {
-      // Update existing link
-      await db.collection("pages").updateOne(
-        { owner: session?.user?.id, "links.key": link.key },
-        { $set: { "links.$": link } },
-      );
-    } else {
-      // Add new link
-      await db.collection("pages").updateOne(
-        { owner: session?.user?.id },
-        { $push: { links: link } },
-      );
-    }
-    
-    return { success: true };
   } else {
     return { success: false, message: 'Unauthorized' };
   }
 }
 
 export async function saveTextBoxes(textBoxes) {
-  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
 
   if (session) {
-    await db.collection("pages").updateOne(
-      { owner: session?.user?.id },
-      { $set: { textBoxes } },
-    );
-
-    return { success: true };
+    return performDatabaseOperation(async (db) => {
+      await db.collection("pages").updateOne(
+        { owner: session?.user?.id },
+        { $set: { textBoxes } },
+      );
+      return { success: true };
+    });
   } else {
     return { success: false, message: 'Unauthorized' };
   }
 }
 
 export async function savePageTextBox(textBox) {
-  const db = await connectToDatabase();
   const session = await getServerSession(authOptions);
   
   if (session) {
-    const existingTextBox = await db.collection("pages").findOne({
-      owner: session?.user?.id,
-      "textBoxes.key": textBox.key
+    return performDatabaseOperation(async (db) => {
+      const existingTextBox = await db.collection("pages").findOne({
+        owner: session?.user?.id,
+        "textBoxes.key": textBox.key
+      });
+      
+      if (existingTextBox) {
+        await db.collection("pages").updateOne(
+          { owner: session?.user?.id, "textBoxes.key": textBox.key },
+          { $set: { "textBoxes.$": textBox } },
+        );
+      } else {
+        await db.collection("pages").updateOne(
+          { owner: session?.user?.id },
+          { $push: { textBoxes: textBox } },
+        );
+      }
+      
+      return { success: true };
     });
-    
-    if (existingTextBox) {
-      // Update existing text box
-      await db.collection("pages").updateOne(
-        { owner: session?.user?.id, "textBoxes.key": textBox.key },
-        { $set: { "textBoxes.$": textBox } },
-      );
-    } else {
-      // Add new text box
-      await db.collection("pages").updateOne(
-        { owner: session?.user?.id },
-        { $push: { textBoxes: textBox } },
-      );
-    }
-    
-    return { success: true };
   } else {
     return { success: false, message: 'Unauthorized' };
   }
