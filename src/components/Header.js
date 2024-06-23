@@ -4,7 +4,7 @@ import { faLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
-import { getDictionary } from '@/lib/getDictionary';
+import { getDictionary } from '@/libs/getDictionary';
 
 export default async function Header({ lang }) {
   const session = await getServerSession(authOptions);
