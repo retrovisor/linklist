@@ -1,16 +1,17 @@
-// app/(website)/login/page.js
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import SignupWithGoogle from "@/components/buttons/SignupWithGoogle";
 import SignupWithKakao from "@/components/buttons/SignupWithKakao";
 import UsernameForm from "@/components/forms/UsernameForm";
 import { redirect } from "next/navigation";
-import clientPromise from "@/libs/mongoClient";
+import { connectToMongoDB } from "@/libs/mongoClient";
 
-export default async function LoginPage({ searchParams }) {
+export default async function SignupPage({ searchParams }) {
   console.log('Signup function started');
-
   try {
+    // Ensure MongoDB connection
+    await connectToMongoDB();
+
     const session = await getServerSession(authOptions);
     console.log('Session:', session);
 
@@ -32,39 +33,16 @@ export default async function LoginPage({ searchParams }) {
           <div className="mt-4">
             <SignupWithGoogle />
           </div>
-          
         </div>
       </div>
     );
   } catch (error) {
-    console.error('Error in LoginPage:', error);
-
-    if (error.name === 'MongoNetworkTimeoutError') {
-      // Retry the operation
-      const maxRetries = 3;
-      let retryCount = 0;
-
-      while (retryCount < maxRetries) {
-        try {
-          await clientPromise;
-          console.log('MongoDB connection established after retry');
-          break;
-        } catch (retryError) {
-          console.error('Error connecting to MongoDB (retry attempt):', retryError);
-          retryCount++;
-
-          if (retryCount === maxRetries) {
-            console.error('Max retries reached. MongoDB connection failed.');
-            return <div>서비스를 사용할 수 없습니다. 나중에 다시 시도해 주세요.</div>;
-          }
-
-          // Wait for a certain duration before retrying
-          await new Promise(resolve => setTimeout(resolve, 2000));
-        }
-      }
-    } else {
-      // Handle other errors
-      return <div>오류가 발생했습니다. 나중에 다시 시도해 주세요.</div>;
+    console.error('Error in SignupPage:', error);
+    if (error.code === 'ERR_JWE_DECRYPTION_FAILED') {
+      console.error('JWT decryption failed. This might be due to an invalid or mismatched NEXTAUTH_SECRET.');
+      // You might want to clear the session here
+      // await signOut({ redirect: false });
     }
+    return <div>An error occurred. Please try again later or contact support.</div>;
   }
 }
