@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google';
 import '../globals.css';
 import TrackPageView from "@/components/Fathom";
-import { getDictionary } from '@/lib/getDictionary';
+import { getDictionary } from '@/libs/getDictionary';
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
