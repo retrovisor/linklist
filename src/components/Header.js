@@ -4,7 +4,8 @@ import { getServerSession } from "next-auth/next";
 import Link from "next/link";
 import { getDictionary } from '@/libs/getDictionary';
 
-export default async function Header({ lang }) {
+export default async function Header({ dict, lang }) {
+
   const session = await getServerSession(authOptions);
   const dict = await getDictionary(lang);
 
