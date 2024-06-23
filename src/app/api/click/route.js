@@ -1,12 +1,18 @@
-import {Event} from '@/models/Event';
-import clientPromise from "@/libs/mongoClient";
+import { Event } from '@/models/Event';
+import { performDatabaseOperation } from "@/libs/mongoClient";
 
 export async function POST(req) {
-  const client = await clientPromise;
-  const db = client.db();
   const url = new URL(req.url);
   const clickedLink = atob(url.searchParams.get('url'));
   const page = url.searchParams.get('page');
-  await db.collection('events').insertOne({ type: 'click', uri: clickedLink, page });
-  return Response.json(true);
+
+  try {
+    await performDatabaseOperation(async (db) => {
+      await db.collection('events').insertOne({ type: 'click', uri: clickedLink, page });
+    });
+    return Response.json(true);
+  } catch (error) {
+    console.error('Error recording click event:', error);
+    return Response.json({ error: 'Failed to record click event' }, { status: 500 });
+  }
 }
