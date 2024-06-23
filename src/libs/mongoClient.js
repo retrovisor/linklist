@@ -38,8 +38,25 @@ export async function performDatabaseOperation(operation, maxRetries = 3) {
       return await operation(db);
     } catch (error) {
       console.error(`Attempt ${attempt} failed:`, error);
-      if (attempt === maxRetries) throw error;
-      await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+      if (attempt === maxRetries) {
+        if (error.name === 'MongoServerSelectionError') {
+          console.error('MongoDB connection failed after multiple attempts. Please check your connection string and network.');
+        }
+        throw error;
+      }
+      await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, attempt))); // Exponential backoff
     }
+  }
+}
+
+export async function connectToMongoDB() {
+  try {
+    const client = await clientPromise;
+    await client.db().command({ ping: 1 });
+    console.log("Connected to MongoDB");
+    return client;
+  } catch (error) {
+    console.error("Failed to connect to MongoDB", error);
+    throw error;
   }
 }
