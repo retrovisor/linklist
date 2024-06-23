@@ -8,5 +8,31 @@
     "logout": "Logout",
     "login": "Login",
     "signup": "Sign Up Free"
+  },
+  "about": {
+    "title": "About us",
+    "content": [
+      "Welcome to Fizz.link – where your links meet your story.",
+      "At Fizz.link, we believe that every link you share is a chapter of your unique journey. We're more than just a tool; we're a creative space where you can bring together all your important links, social profiles, and projects into one beautiful, simple page. But we don't stop there.",
+      "We understand that you're not just a collection of links, but an individual with preferences, passions, and a story to tell. Fizz.link gives you the opportunity to express your true self. Here, you can share your favorite quote, showcase your hobbies, or tell the little anecdotes that make you, you.",
+      "Whether you're a professional looking to consolidate your portfolio, a creator wanting to share your latest work, or someone looking to make a personal statement in the digital space, Fizz.link helps ensure your digital presence reflects both your work and your personality.",
+      "Create, customize, and connect with Fizz.link – because every link should tell your story."
+    ]
+  },
+  "contact": {
+    "title": "Contact Page",
+    "content": "Welcome to the contact page. Here you will find information about our website and mission."
+  },
+  "login": {
+    "title": "Create an Account",
+    "subtitle": "Create a free Fizz.link account using the methods below"
+  },
+  "pricing": {
+    "title": "Pricing Page",
+    "content": "Welcome to the Pricing page. Here you will find information about our website and mission."
+  },
+  "signup": {
+    "title": "Create an Account",
+    "subtitle": "Create a free Fizz.link account using the methods below"
   }
 }
