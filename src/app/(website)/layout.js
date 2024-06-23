@@ -3,33 +3,32 @@ import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google';
 import '../globals.css';
 import TrackPageView from "@/components/Fathom";
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { getDictionary } from '@/lib/getDictionary';
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
 export async function generateMetadata({ params: { lang } }) {
-  const { t } = await serverSideTranslations(lang, ['common']);
+  const dict = await getDictionary(lang);
   return {
-    title: t('metadata.title'),
-    description: t('metadata.description'),
+    title: dict.metadata.title,
+    description: dict.metadata.description,
   };
 }
 
 export default async function RootLayout({ children, params: { lang } }) {
-  const { t } = await serverSideTranslations(lang, ['common']);
+  const dict = await getDictionary(lang);
 
   return (
     <html lang={lang}>
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
         <TrackPageView />
         <div className="flex-grow">
-          <Header t={t} />
+          <Header dict={dict} />
           <div className="mx-auto">
             {children}
           </div>
         </div>
-        <Footer t={t} />
+        <Footer dict={dict} />
       </body>
     </html>
   );
