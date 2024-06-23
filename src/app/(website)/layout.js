@@ -34,11 +34,3 @@ export default async function RootLayout({ children, params: { lang } }) {
     </html>
   );
 }
-
-export async function getStaticProps({ params: { lang } }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(lang, ['common'])),
-    },
-  };
-}
