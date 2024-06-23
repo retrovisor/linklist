@@ -23,12 +23,12 @@ export default async function RootLayout({ children, params: { lang } }) {
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
         <TrackPageView />
         <div className="flex-grow">
-          <Header lang={lang} />
+          <Header dict={dict} lang={lang} />
           <div className="mx-auto">
             {children}
           </div>
         </div>
-        <Footer dict={dict} />
+        <Footer dict={dict} lang={lang} />
       </body>
     </html>
   );
