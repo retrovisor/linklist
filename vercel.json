@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/auth/[...nextauth].js": {
+    "app/api/auth/[...nextauth]/route.js": {
       "memory": 1024,
       "maxDuration": 10
     },
