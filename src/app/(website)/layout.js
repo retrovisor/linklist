@@ -1,4 +1,3 @@
-// layout.js
 import { getDictionary } from '@/libs/getDictionary';
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -21,7 +20,7 @@ export default async function RootLayout({ children, params, searchParams }) {
   console.log('RootLayout params:', params);
   const lang = searchParams?.lang || 'en';
   console.log('RootLayout lang:', lang);
-  
+
   let dict;
   try {
     dict = await getDictionary(lang);
@@ -38,7 +37,7 @@ export default async function RootLayout({ children, params, searchParams }) {
       </div>
     );
   }
-  
+
   if (!dict) {
     console.error('Dictionary is undefined:', dict);
     return (
@@ -48,7 +47,7 @@ export default async function RootLayout({ children, params, searchParams }) {
       </div>
     );
   }
-  
+
   return (
     <html lang={lang}>
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
