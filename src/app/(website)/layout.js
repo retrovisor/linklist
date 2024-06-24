@@ -5,16 +5,11 @@ import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google';
 import '../globals.css';
 import TrackPageView from "@/components/Fathom";
-import { useSearchParams } from 'next/navigation';
-
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
-export async function generateMetadata({ searchParams }) {
-
-    console.log('generateMetadata searchParams:', searchParams);
-  
-  const lang = searchParams?.lang || 'en';
+export async function generateMetadata({ params }) {
+  const lang = params?.lang || 'en';
   const dict = await getDictionary(lang);
   return {
     title: dict.metadata.title,
@@ -22,10 +17,9 @@ export async function generateMetadata({ searchParams }) {
   };
 }
 
-export default async function RootLayout({ children, params }) {
-  
+export default async function RootLayout({ children, params, searchParams }) {
   console.log('RootLayout params:', params);
-  const lang = params?.lang || 'en';
+  const lang = searchParams?.lang || 'en';
   console.log('RootLayout lang:', lang);
   
   let dict;
@@ -44,7 +38,7 @@ export default async function RootLayout({ children, params }) {
       </div>
     );
   }
-
+  
   if (!dict) {
     console.error('Dictionary is undefined:', dict);
     return (
@@ -54,7 +48,7 @@ export default async function RootLayout({ children, params }) {
       </div>
     );
   }
-
+  
   return (
     <html lang={lang}>
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
