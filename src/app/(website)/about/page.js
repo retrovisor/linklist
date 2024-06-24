@@ -1,8 +1,7 @@
 import { getDictionary } from '@/libs/getDictionary';
 
-export default async function AboutPage({ params }) {
-  console.log('AboutPage function called with params:', params);
-  const lang = params?.lang || 'en';
+export default async function AboutPage({ searchParams }) {
+  const lang = searchParams?.lang || 'en';
   console.log('Language:', lang);
 
   let dict;
@@ -46,7 +45,7 @@ export default async function AboutPage({ params }) {
       <div className="mt-8 p-4 bg-gray-100 rounded max-w-xl mx-auto">
         <h2 className="text-xl font-bold text-black mb-2">Debug Information:</h2>
         <pre className="text-xs text-black whitespace-pre-wrap">
-          {JSON.stringify({ params, lang, dict: dict.about }, null, 2)}
+          {JSON.stringify({ lang, dict: dict.about }, null, 2)}
         </pre>
       </div>
     </div>
