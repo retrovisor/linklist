@@ -28,7 +28,7 @@ export default async function AboutPage({ params }) {
     return (
       <div className="bg-white text-black min-h-screen p-4">
         <h1 className="text-2xl font-bold">Page Content Unavailable</h1>
-        <p>We're sorry, but the page content could not be loaded at this time.</p>
+        <p>We&apos;re sorry, but the page content could not be loaded at this time.</p>
       </div>
     );
   }
