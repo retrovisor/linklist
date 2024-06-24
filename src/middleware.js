@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-
+ 
 const PUBLIC_FILE = /\.(.*)$/;
 const LOCALIZED_PAGES = ['about', 'login', 'signup'];
 
