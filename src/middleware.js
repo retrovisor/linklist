@@ -1,10 +1,12 @@
 import { NextResponse } from 'next/server';
 
 const PUBLIC_FILE = /\.(.*)$/;
+const LOCALIZED_PAGES = ['', 'about', 'login', 'signup'];
 
 export function middleware(request) {
   const { pathname } = request.nextUrl;
 
+  // Allow these paths to pass through
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
@@ -17,15 +19,22 @@ export function middleware(request) {
     return NextResponse.next();
   }
 
-  if (pathname === '/') {
-    return NextResponse.redirect(new URL('/en', request.url));
+  // Check if the path should be localized
+  const shouldLocalize = LOCALIZED_PAGES.some(page => 
+    pathname === `/${page}` || pathname === `/${page}/`
+  );
+
+  if (shouldLocalize) {
+    const pathnameHasLocale = pathname.startsWith('/en') || pathname.startsWith('/kr');
+    if (!pathnameHasLocale) {
+      return NextResponse.redirect(new URL(`/en${pathname}`, request.url));
+    }
   }
 
-  const pathnameHasLocale = pathname.startsWith('/en') || pathname.startsWith('/kr');
-
-  if (!pathnameHasLocale) {
-    return NextResponse.redirect(new URL(`/en${pathname}`, request.url));
-  }
-
+  // For all other paths, including usernames, just pass through
   return NextResponse.next();
 }
+
+export const config = {
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+};
