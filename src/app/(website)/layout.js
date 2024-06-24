@@ -9,7 +9,8 @@ import TrackPageView from "@/components/Fathom";
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
 export async function generateMetadata({ searchParams }) {
-  const lang = searchParams?.lang || 'en';
+    const lang = params?.lang || 'en';
+
   const dict = await getDictionary(lang);
   return {
     title: dict.metadata.title,
@@ -18,7 +19,8 @@ export async function generateMetadata({ searchParams }) {
 }
 
 export default async function RootLayout({ children, searchParams }) {
-  const lang = searchParams?.lang || 'en';
+    const lang = params?.lang || 'en';
+
   console.log('RootLayout lang:', lang);
 
   let dict;
