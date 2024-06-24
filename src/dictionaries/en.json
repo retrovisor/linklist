@@ -15,6 +15,12 @@
   "usersTitle": "Join 10,000 users",
   "usersDescription": "Fizz.link is already being used by users in over 20 countries and on various popular platforms. Check out their profiles and explore the pages!"
 },
+  
+  "heroForm": {
+    "usernamePlaceholder": "Enter username",
+    "submitButton": "Sign up for free"
+  
+},
 
   "header": {
     "myPage": "My Page",
