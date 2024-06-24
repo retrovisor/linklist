@@ -4,7 +4,7 @@ import { redirect, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { trackEvent } from "fathom-client";
 
-export default function HeroForm({ user }) {
+export default function HeroForm({ user, lang, dict }) {
   const router = useRouter();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function HeroForm({ user }) {
 
     if (username && username.length > 0) {
       try {
-        const response = await fetch('@/app/api/username/logUsername', {
+        const response = await fetch('/api/username/logUsername', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -48,10 +48,10 @@ export default function HeroForm({ user }) {
       trackEvent('Submit HeroForm', { username });
 
       if (user) {
-        router.push('/account?desiredUsername=' + username);
+        router.push(`/${lang}/account?desiredUsername=${username}`);
       } else {
         window.localStorage.setItem('desiredUsername', username);
-        router.push('/signup?desiredUsername=' + username);
+        router.push(`/${lang}/signup?desiredUsername=${username}`);
       }
     }
   }
@@ -66,13 +66,13 @@ export default function HeroForm({ user }) {
           type="text"
           name="username"
           className="!bg-white border rounded-md flex-1 !py-4 !px-4 sm:py-4 sm:px-6 !w-auto !mb-0 !p-0"
-          placeholder="사용자 이름 입력"
+          placeholder={dict.heroForm.usernamePlaceholder}
         />
         <button
           type="submit"
           className="btn-link3 text-white whitespace-nowrap !py-4 !px-4 sm:py-4 sm:px-6"
         >
-          무료로 가입하기
+          {dict.heroForm.submitButton}
         </button>
       </form>
     </div>
