@@ -10,6 +10,11 @@
     "signup": "무료 등록"
   },
 
+   "heroForm": {
+    "usernamePlaceholder": "사용자 이름 입력",
+    "submitButton": "무료로 가입하기"
+  },
+
   "home": {
     "testimonial": "\"제가 사용해 본 최고의 링크-인-바이오 도구입니다\"",
     "title1": "모든 것을 하나의",
