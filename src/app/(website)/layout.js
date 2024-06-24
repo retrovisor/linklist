@@ -17,7 +17,6 @@ export async function generateMetadata({ params: { lang } }) {
 
 export default async function RootLayout({ children, params: { lang } }) {
   const dict = await getDictionary(lang);
-
   return (
     <html lang={lang}>
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
