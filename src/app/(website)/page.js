@@ -40,7 +40,8 @@ export default async function Home({ params }) {
           <div className="font-bold mt-4 text-xl">{dict.home.freeMessage}</div>
         </div>
         <div className="w-full flex justify-center mt-8 px-8">
-          <HeroForm user={session?.user} lang={lang} />
+          <HeroForm user={session?.user} lang={lang} dict={dict} />
+
         </div>
       </section>
       <section className="py-16 bg-slate-200 px-6">
