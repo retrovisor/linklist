@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 
 const PUBLIC_FILE = /\.(.*)$/;
-const LOCALIZED_PAGES = ['', 'about', 'login', 'signup'];
 
 export function middleware(request) {
   const { pathname } = request.nextUrl;
@@ -19,21 +18,14 @@ export function middleware(request) {
     return NextResponse.next();
   }
 
-  // Check if the path should be localized
-  const shouldLocalize = LOCALIZED_PAGES.some(page => 
-    pathname === `/${page}` || pathname === `/${page}/`
-  );
-
-  if (shouldLocalize) {
-    // If it's not already localized, add the default locale
-    if (!pathname.startsWith('/en/') && !pathname.startsWith('/kr/')) {
-      return NextResponse.redirect(new URL(`/en${pathname}`, request.url));
-    }
-  }
-
   // For the root path, redirect to /en
   if (pathname === '/') {
     return NextResponse.redirect(new URL('/en', request.url));
+  }
+
+  // If the path doesn't start with /en or /kr, prepend /en
+  if (!pathname.startsWith('/en') && !pathname.startsWith('/kr')) {
+    return NextResponse.redirect(new URL(`/en${pathname}`, request.url));
   }
 
   // For all other paths, just pass through
