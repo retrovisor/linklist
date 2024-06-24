@@ -25,12 +25,10 @@ export function middleware(request) {
   );
 
   if (shouldLocalize) {
-    // If it's already localized, pass it through
-    if (pathname.startsWith('/en/') || pathname.startsWith('/kr/')) {
-      return NextResponse.next();
+    // If it's not already localized, add the default locale
+    if (!pathname.startsWith('/en/') && !pathname.startsWith('/kr/')) {
+      return NextResponse.redirect(new URL(`/en${pathname}`, request.url));
     }
-    // If it's not localized, add the default locale
-    return NextResponse.redirect(new URL(`/en${pathname}`, request.url));
   }
 
   // For the root path, redirect to /en
@@ -38,7 +36,7 @@ export function middleware(request) {
     return NextResponse.redirect(new URL('/en', request.url));
   }
 
-  // For all other paths, including usernames, just pass through
+  // For all other paths, just pass through
   return NextResponse.next();
 }
 
