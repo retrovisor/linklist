@@ -17,10 +17,10 @@ export async function generateMetadata({ searchParams }) {
   };
 }
 
-export default async function RootLayout({ children, searchParams }) {
+export default async function RootLayout({ children, params }) {
   
-  console.log('RootLayout searchParams:', searchParams);
-  const lang = searchParams?.lang || 'en';
+  console.log('RootLayout params:', params);
+  const lang = params?.lang || 'en';
   console.log('RootLayout lang:', lang);
   
   let dict;
