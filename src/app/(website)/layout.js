@@ -18,9 +18,11 @@ export async function generateMetadata({ searchParams }) {
 }
 
 export default async function RootLayout({ children, searchParams }) {
+  
+  console.log('RootLayout searchParams:', searchParams);
   const lang = searchParams?.lang || 'en';
   console.log('RootLayout lang:', lang);
-
+  
   let dict;
   try {
     dict = await getDictionary(lang);
