@@ -25,10 +25,17 @@ export function middleware(request) {
   );
 
   if (shouldLocalize) {
-    const pathnameHasLocale = pathname.startsWith('/en') || pathname.startsWith('/kr');
-    if (!pathnameHasLocale) {
-      return NextResponse.redirect(new URL(`/en${pathname}`, request.url));
+    // If it's already localized, pass it through
+    if (pathname.startsWith('/en/') || pathname.startsWith('/kr/')) {
+      return NextResponse.next();
     }
+    // If it's not localized, add the default locale
+    return NextResponse.redirect(new URL(`/en${pathname}`, request.url));
+  }
+
+  // For the root path, redirect to /en
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL('/en', request.url));
   }
 
   // For all other paths, including usernames, just pass through
