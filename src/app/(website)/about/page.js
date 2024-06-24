@@ -1,7 +1,7 @@
 import { getDictionary } from '@/libs/getDictionary';
 
 export default async function AboutPage({ params: { lang } }) {
-  const dict = await getDictionary(lang);
+    const dict = await getDictionary(lang || 'en');
 
   return (
     <div className="bg-white text-white min-h-screen">
