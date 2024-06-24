@@ -11,7 +11,8 @@ import { getDictionary } from '@/libs/getDictionary';
 
 
 export default async function LoginPage({ params: { lang }, searchParams }) {
-  const dict = await getDictionary(lang);
+    const dict = await getDictionary(lang || 'en');
+
   console.log('LoginPage function started');
   try {
     const session = await getServerSession(authOptions);
