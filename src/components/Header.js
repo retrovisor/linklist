@@ -1,9 +1,13 @@
+// header.js
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LogoutButton from "@/components/buttons/LogoutButton";
 import { getServerSession } from "next-auth/next";
 import Link from "next/link";
+import { useSearchParams } from 'next/navigation';
 
-export default async function Header({ dict, lang }) {
+export default async function Header({ dict }) {
+  const searchParams = useSearchParams();
+  const lang = searchParams.get('lang') || 'en';
   console.log('Header lang:', lang);
   console.log('Header dict:', dict);
 
