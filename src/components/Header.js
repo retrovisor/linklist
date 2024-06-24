@@ -4,6 +4,8 @@ import { getServerSession } from "next-auth/next";
 import Link from "next/link";
 
 export default async function Header({ dict, lang }) {
+   console.log('Header dict:', dict);
+  console.log('Header lang:', lang);
   const session = await getServerSession(authOptions);
 
   const addLangToHref = (href) => {
