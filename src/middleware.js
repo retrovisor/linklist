@@ -9,7 +9,10 @@ export function middleware(request) {
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
     pathname.startsWith('/static') ||
-    PUBLIC_FILE.test(pathname)
+    PUBLIC_FILE.test(pathname) ||
+    pathname.startsWith('/account') ||
+    pathname.startsWith('/analytics') ||
+    pathname.startsWith('/select-template')
   ) {
     return NextResponse.next();
   }
