@@ -5,8 +5,6 @@ import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google';
 import '../globals.css';
 import TrackPageView from "@/components/Fathom";
-import { useSearchParams } from 'next/navigation';
-
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -22,13 +20,11 @@ export async function generateMetadata({ searchParams }) {
   };
 }
 
-
-export default async function RootLayout({ children }) {
-  const searchParams = useSearchParams();
-    console.log('RootLayout searchParams:', searchParams);
-  const lang = searchParams.get('lang') || 'en';
+export default async function RootLayout({ children, params }) {
+  
+  console.log('RootLayout params:', params);
+  const lang = params?.lang || 'en';
   console.log('RootLayout lang:', lang);
-
   
   let dict;
   try {
