@@ -3,6 +3,19 @@
     "title": "Fizz.link - Create One Link for Everything",
     "description": "Share your links, social profiles, creations, contact information, and more in one place"
   },
+  
+  "home": {
+  "testimonial": "\"The best link-in-bio tool I've ever used\"",
+  "title1": "Make everything into",
+  "title2": "one link",
+  "subtitle": "Share your links, social profiles, creations, and contact information all in one place",
+  "freeMessage": "It's free! 🎉",
+  "designTitle": "Design incredibly easily",
+  "designDescription": "Start quickly with templates. Edit your own page using just your smartphone. Choose your favorite design and change the design all at once.",
+  "usersTitle": "Join 10,000 users",
+  "usersDescription": "Fizz.link is already being used by users in over 20 countries and on various popular platforms. Check out their profiles and explore the pages!"
+},
+
   "header": {
     "myPage": "My Page",
     "logout": "Logout",
