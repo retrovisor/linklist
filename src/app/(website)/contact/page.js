@@ -2,7 +2,9 @@ import { getDictionary } from '@/libs/getDictionary';
 import Link from 'next/link';
 
 export default async function ContactPage({ params: { lang } }) {
-  const dict = await getDictionary(lang);
+  
+    const dict = await getDictionary(lang || 'en');
+
 
   return (
     <div className="bg-blue-950 text-white min-h-screen">
