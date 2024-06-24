@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 
 const PUBLIC_FILE = /\.(.*)$/;
-const LOCALIZED_PAGES = ['about', 'login', 'signup'];
+const LOCALIZED_PAGES = ['', 'about', 'login', 'signup'];
 
 export function middleware(request) {
-  const { pathname } = request.nextUrl;
+  const { pathname, searchParams } = request.nextUrl;
 
   // Allow these paths to pass through
   if (
@@ -19,18 +19,14 @@ export function middleware(request) {
     return NextResponse.next();
   }
 
-  // For the root path, redirect to /en
-  if (pathname === '/') {
-    return NextResponse.redirect(new URL('/en', request.url));
-  }
-
   // Check if the path should be localized
   const shouldLocalize = LOCALIZED_PAGES.some(page => pathname === `/${page}` || pathname === `/${page}/`);
 
   if (shouldLocalize) {
-    // If it's not already localized, add the default locale
-    if (!pathname.startsWith('/en/') && !pathname.startsWith('/kr/')) {
-      return NextResponse.redirect(new URL(`/en${pathname}`, request.url));
+    // If lang is not in the search params, add it
+    if (!searchParams.has('lang')) {
+      searchParams.set('lang', 'en');
+      return NextResponse.redirect(new URL(`${pathname}?${searchParams}`, request.url));
     }
   }
 
