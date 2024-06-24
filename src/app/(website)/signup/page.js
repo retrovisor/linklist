@@ -9,7 +9,8 @@ import { getDictionary } from '@/libs/getDictionary';
 
 
 export default async function SignupPage({ params: { lang }, searchParams }) {
-  const dict = await getDictionary(lang);
+    const dict = await getDictionary(lang || 'en');
+
   console.log('Signup function started');
   try {
     // Ensure MongoDB connection
