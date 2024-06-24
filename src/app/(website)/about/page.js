@@ -2,7 +2,6 @@ import { getDictionary } from '@/libs/getDictionary';
 
 export default async function AboutPage({ params }) {
   console.log('AboutPage function called with params:', params);
-
   const lang = params?.lang || 'en';
   console.log('Language:', lang);
 
@@ -34,7 +33,6 @@ export default async function AboutPage({ params }) {
   }
 
   console.log('Rendering AboutPage component');
-
   return (
     <div className="bg-white text-white min-h-screen">
       <div className="h-36 colorido bg-cover bg-center">
