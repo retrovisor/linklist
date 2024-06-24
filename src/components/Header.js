@@ -1,13 +1,13 @@
+// header.js
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LogoutButton from "@/components/buttons/LogoutButton";
 import { getServerSession } from "next-auth/next";
 import Link from "next/link";
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 
 export default async function Header({ dict }) {
-  const router = useRouter();
-  const { query } = router;
-  const lang = query.lang || 'en';
+  const searchParams = useSearchParams();
+  const lang = searchParams.get('lang') || 'en';
 
   console.log('Header lang:', lang);
   console.log('Header dict:', dict);
@@ -17,7 +17,6 @@ export default async function Header({ dict }) {
   const addLangToHref = (href) => {
     return `${href}${href.includes('?') ? '&' : '?'}lang=${lang}`;
   };
-
 
   return (
     <header className="py-4 sticky top-0 z-50 fundo-home">
