@@ -18,6 +18,10 @@ async function RootLayout({ children }) {
   const lang = searchParams?.lang || 'en';
   const dict = await getDictionary(lang);
 
+  console.log('RootLayout searchParams:', searchParams);
+  console.log('RootLayout lang:', lang);
+  console.log('RootLayout dict:', dict);
+
   return (
     <html lang={lang}>
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
