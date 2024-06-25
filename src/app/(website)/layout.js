@@ -8,17 +8,17 @@ import { Lato } from 'next/font/google';
 import '../globals.css';
 import TrackPageView from "@/components/Fathom";
 import React from 'react';
-import { getSearchParams } from '@/libs/getSearchParams';
+import { useSearchParams } from 'next/navigation';
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
 async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
-  const searchParams = getSearchParams(children.props.childProp.segment);
-  const lang = searchParams?.lang || 'en';
+  const searchParams = useSearchParams();
+  const lang = searchParams.get('lang') || 'en';
   const dict = await getDictionary(lang);
 
-  console.log('RootLayout searchParams:', searchParams);
+  console.log('RootLayout searchParams:', Object.fromEntries(searchParams.entries()));
   console.log('RootLayout lang:', lang);
   console.log('RootLayout dict:', dict);
 
