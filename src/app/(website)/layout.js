@@ -6,17 +6,25 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google';
 import '../globals.css';
-import TrackPageView from "@/components/Fathom";
+import TrackPageView from "@/components/TrackPageView';
 import React from 'react';
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
-// layout.js
-export default async function RootLayout({ children, params }) {
-  const lang = params?.lang || 'en';
+export async function generateMetadata({ searchParams }) {
+  const lang = searchParams?.lang || 'en';
+  const dict = await getDictionary(lang);
+  return {
+    title: dict.metadata.title,
+    description: dict.metadata.description,
+  };
+}
+
+export default async function RootLayout({ children, searchParams }) {
+  const lang = searchParams?.lang || 'en';
   const session = await getServerSession(authOptions);
 
-  console.log('RootLayout params:', params);
+  console.log('RootLayout searchParams:', searchParams);
   console.log('RootLayout lang:', lang);
 
   let dict;
