@@ -1,4 +1,4 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+// header.js
 import { useSearchParams } from 'next/navigation';
 import LogoutButton from "@/components/buttons/LogoutButton";
 import Link from "next/link";
