@@ -8,13 +8,12 @@ import { Lato } from 'next/font/google';
 import '../globals.css';
 import TrackPageView from "@/components/Fathom";
 import React from 'react';
-import { useSearchParams } from 'next/navigation';
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
-async function RootLayout({ children }) {
+async function RootLayout({ children, headers }) {
   const session = await getServerSession(authOptions);
-  const searchParams = useSearchParams();
+  const searchParams = new URLSearchParams(headers().get('query'));
   const lang = searchParams.get('lang') || 'en';
   const dict = await getDictionary(lang);
 
