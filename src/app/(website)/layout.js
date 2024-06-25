@@ -9,36 +9,23 @@ import '../globals.css';
 import TrackPageView from "@/components/Fathom";
 import React from 'react';
 
-
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
-export default async function RootLayout({ children, searchParams }) {
-  const lang = searchParams?.lang || 'en';
+export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
-
-  console.log('RootLayout searchParams:', searchParams);
-  console.log('RootLayout lang:', lang);
-
-  let dict;
-  try {
-    dict = await getDictionary(lang);
-    console.log('RootLayout dict:', dict);
-  } catch (error) {
-    console.error('Error loading dictionary:', error);
-    // Handle the error appropriately
-  }
+  const dict = await getDictionary('en');
 
   return (
-    <html lang={lang}>
+    <html lang="en">
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
         <TrackPageView />
         <div className="flex-grow">
-          <Header dict={dict} session={session} />
+          <Header dict={dict} />
           <div className="mx-auto">
-            {React.cloneElement(children, { lang })}
+            {children}
           </div>
         </div>
-        <Footer dict={dict} lang={lang} />
+        <Footer dict={dict} />
       </body>
     </html>
   );
