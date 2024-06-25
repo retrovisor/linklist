@@ -1,3 +1,4 @@
+// src/app/(website)/layout.js
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getDictionary } from '@/libs/getDictionary';
@@ -7,38 +8,14 @@ import { Lato } from 'next/font/google';
 import '../globals.css';
 import TrackPageView from "@/components/Fathom";
 import React from 'react';
-import { getSearchParams } from '@/libs/getSearchParams';
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
-export async function getServerSideProps(context) {
-  const searchParams = getSearchParams(context.req);
-  const lang = searchParams?.lang || 'en';
-  const session = await getServerSession(context.req, context.res, authOptions);
-
-  console.log('RootLayout searchParams:', searchParams);
-  console.log('RootLayout lang:', lang);
-
-  let dict;
-  try {
-    dict = await getDictionary(lang);
-    console.log('RootLayout dict:', dict);
-  } catch (error) {
-    console.error('Error loading dictionary:', error);
-    dict = {}; // Ensure dict is defined to prevent crashes
-  }
-
-  return {
-    props: {
-      lang,
-      dict,
-      session
-    },
-  };
+export async function generateStaticParams() {
+  return [{ lang: 'en' }, { lang: 'kr' }];
 }
 
-export async function generateMetadata({ searchParams }) {
-  const lang = searchParams?.lang || 'en';
+export async function generateMetadata({ params: { lang } }) {
   const dict = await getDictionary(lang);
   return {
     title: dict.metadata.title,
@@ -46,9 +23,9 @@ export async function generateMetadata({ searchParams }) {
   };
 }
 
-function RootLayout({ children, lang, dict, session }) {
-  console.log('RootLayout props - lang:', lang);
-  console.log('RootLayout props - dict:', dict);
+async function RootLayout({ children, params: { lang } }) {
+  const dict = await getDictionary(lang);
+  const session = await getServerSession(authOptions);
 
   return (
     <html lang={lang}>
