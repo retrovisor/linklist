@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth/next";
 import Link from "next/link";
 
 export default async function Header({ dict = {}, lang, session }) {
+
   console.log('Header lang:', lang);
   console.log('Header dict:', dict);
 
