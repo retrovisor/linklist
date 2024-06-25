@@ -1,7 +1,10 @@
-// getSearchParams.js
-import { parse } from 'url';
-
-export function getSearchParams(req) {
-  const { query } = parse(req.url, true);
-  return query;
+// src/libs/getSearchParams.js
+export function getSearchParams(segment) {
+  if (!segment) return {};
+  const searchParams = {};
+  segment.split('?')[1]?.split('&').forEach((param) => {
+    const [key, value] = param.split('=');
+    searchParams[key] = value;
+  });
+  return searchParams;
 }
