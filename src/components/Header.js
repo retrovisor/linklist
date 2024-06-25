@@ -3,11 +3,9 @@ import LogoutButton from "@/components/buttons/LogoutButton";
 import { getServerSession } from "next-auth/next";
 import Link from "next/link";
 
-export default async function Header({ dict, lang }) {
+export default async function Header({ dict = {}, lang, session }) {
   console.log('Header lang:', lang);
   console.log('Header dict:', dict);
-
-  const session = await getServerSession(authOptions);
 
   const addLangToHref = (href) => {
     return `${href}${href.includes('?') ? '&' : '?'}lang=${lang}`;
@@ -26,14 +24,14 @@ export default async function Header({ dict, lang }) {
           {session ? (
             <>
               <Link href={addLangToHref('/account')} className="btn-link2 mr-2">
-                {dict.header.myPage}
+                {dict.header?.myPage || 'My Page'}
               </Link>
-              <LogoutButton label={dict.header.logout} />
+              <LogoutButton label={dict.header?.logout || 'Logout'} />
             </>
           ) : (
             <>
-              <Link href={addLangToHref('/login')} className="btn-link2">{dict.header.login}</Link>
-              <Link href={addLangToHref('/signup')} className="btn-link">{dict.header.signup}</Link>
+              <Link href={addLangToHref('/login')} className="btn-link2">{dict.header?.login || 'Login'}</Link>
+              <Link href={addLangToHref('/signup')} className="btn-link">{dict.header?.signup || 'Sign Up'}</Link>
             </>
           )}
         </nav>
