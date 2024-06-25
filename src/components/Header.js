@@ -9,6 +9,8 @@ export default function Header({ dict, session }) {
   const lang = searchParams.get('lang') || 'en';
 
   console.log('Header lang:', lang);
+    console.log('Header searchParams:', searchParams);
+
   console.log('Header dict:', dict);
 
   const addLangToHref = (href) => {
