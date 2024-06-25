@@ -1,4 +1,3 @@
-'use client';
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { useSearchParams } from 'next/navigation';
 import LogoutButton from "@/components/buttons/LogoutButton";
