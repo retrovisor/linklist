@@ -1,4 +1,3 @@
-// layout.js
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getDictionary } from '@/libs/getDictionary';
@@ -26,7 +25,7 @@ export async function getServerSideProps(context) {
     console.log('RootLayout dict:', dict);
   } catch (error) {
     console.error('Error loading dictionary:', error);
-    // Handle the error appropriately
+    dict = {}; // Ensure dict is defined to prevent crashes
   }
 
   return {
@@ -48,6 +47,9 @@ export async function generateMetadata({ searchParams }) {
 }
 
 function RootLayout({ children, lang, dict, session }) {
+  console.log('RootLayout props - lang:', lang);
+  console.log('RootLayout props - dict:', dict);
+
   return (
     <html lang={lang}>
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
