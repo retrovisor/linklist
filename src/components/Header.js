@@ -1,19 +1,15 @@
 'use client';
 
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import LogoutButton from "@/components/buttons/LogoutButton";
-import { getServerSession } from "next-auth/next";
 import Link from "next/link";
 import { useSearchParams } from 'next/navigation';
 
-export default function Header({ dict }) {
+export default function Header({ dict, session }) {
   const searchParams = useSearchParams();
   const lang = searchParams.get('lang') || 'en';
 
   console.log('Header lang:', lang);
   console.log('Header dict:', dict);
-
-  const session = await getServerSession(authOptions);
 
   const addLangToHref = (href) => {
     return `${href}${href.includes('?') ? '&' : '?'}lang=${lang}`;
