@@ -4,6 +4,9 @@ import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google';
 import '../globals.css';
 import TrackPageView from "@/components/Fathom";
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -16,9 +19,12 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function RootLayout({ children, params, searchParams }) {
-  console.log('RootLayout params:', params);
+export default async function RootLayout({ children, searchParams }) {
   const lang = searchParams?.lang || 'en';
+  const dict = await getDictionary(lang);
+  const session = await getServerSession(authOptions);
+
+  console.log('RootLayout searchParams:', searchParams);
   console.log('RootLayout lang:', lang);
 
   let dict;
@@ -53,7 +59,7 @@ export default async function RootLayout({ children, params, searchParams }) {
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
         <TrackPageView />
         <div className="flex-grow">
-          <Header dict={dict} lang={lang} />
+        <Header dict={dict} session={session} />
           <div className="mx-auto">
             {children}
           </div>
