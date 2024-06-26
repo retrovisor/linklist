@@ -1,8 +1,25 @@
 'use client';
 import { useTranslation } from 'next-i18next';
+import { useEffect } from 'react';
 
 export default function AboutPageClient({ lang, translations }) {
+  useEffect(() => {
+    console.log('AboutPageClient mounted with lang:', lang);
+    console.log('Received translations:', translations);
+  }, [lang, translations]);
+
   const { t } = useTranslation('about');
+  
+  useEffect(() => {
+    console.log('t function loaded, checking translation keys:');
+    console.log('title:', t('title'));
+    console.log('welcome:', t('welcome'));
+    console.log('description1:', t('description1'));
+    console.log('description2:', t('description2'));
+    console.log('description3:', t('description3'));
+    console.log('description4:', t('description4'));
+  }, [t]);
+
   return (
     <div className="bg-white text-white min-h-screen">
       <div className="h-36 colorido bg-cover bg-center">
