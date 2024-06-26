@@ -1,13 +1,50 @@
 'use client';
 
-// src/app/(localized)/[lang]/HomeContent.js
-import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from 'react';
+import { useTranslation, initReactI18next } from 'react-i18next';
+import i18n from 'i18next';
 import HeroForm from "@/components/forms/HeroForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-export default function HomeContent({ session }) {
-  const { t } = useTranslation('home');
+export default function HomeContent({ session, translations }) {
+  const [i18nInitialized, setI18nInitialized] = useState(false);
+
+  useEffect(() => {
+    console.log('HomeContent mounted with translations:', translations);
+
+    i18n.use(initReactI18next).init({
+      resources: {
+        [translations.lang]: {
+          translation: translations,
+        },
+      },
+      lng: translations.lang,
+      fallbackLng: 'en',
+      interpolation: {
+        escapeValue: false,
+      },
+      react: {
+        useSuspense: false,
+      },
+    }).then(() => {
+      setI18nInitialized(true);  // Update state to trigger re-render
+    });
+  }, [translations]);
+
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    if (i18nInitialized) {
+      console.log('t function loaded, checking translation keys:');
+      console.log('heading1:', t('heading1'));
+      console.log('heading2:', t('heading2'));
+      console.log('subheading:', t('subheading'));
+      console.log('freeMessage:', t('freeMessage'));
+    }
+  }, [i18nInitialized, t]);
+
+  if (!i18nInitialized) return null; // Optionally render a loading state
 
   return (
     <main>
