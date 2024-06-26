@@ -1,4 +1,4 @@
-const path = require('path'); // Import the path module
+const path = require('path');
 
 module.exports = {
   i18n: {
@@ -6,5 +6,5 @@ module.exports = {
     locales: ['en', 'kr'],
     localeDetection: false,
   },
-  localePath: path.resolve('./public/locales'), // Use path module here
+  localePath: path.resolve('./public/locales'),
 };
