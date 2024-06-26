@@ -14,7 +14,7 @@ async function fetchTranslations(lang) {
 
   const res = await fetch(url.toString());
   if (!res.ok) {
-    throw new Error('Failed to fetch translations');
+    throw new Error('Failed to fetch translations1');
   }
   return res.json();
 }
