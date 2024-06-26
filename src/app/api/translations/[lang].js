@@ -1,11 +1,11 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-export default async function handler(req, res) {
-  const { lang } = req.query;
+export async function GET(req, { params }) {
+  const { lang } = params;
   try {
     const translations = await serverSideTranslations(lang, ['about']);
-    res.status(200).json(translations);
+    return new Response(JSON.stringify(translations), { status: 200 });
   } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch translations' });
+    return new Response(JSON.stringify({ error: 'Failed to fetch translations' }), { status: 500 });
   }
 }
