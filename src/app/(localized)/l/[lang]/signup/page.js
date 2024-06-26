@@ -5,11 +5,11 @@ import SignupWithKakao from "@/components/buttons/SignupWithKakao";
 import UsernameForm from "@/components/forms/UsernameForm";
 import { redirect } from "next/navigation";
 import { connectToMongoDB } from "@/libs/mongoClient";
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslations } from 'next-intl';
 
-export default async function SignupPage({ searchParams }) {
-  const { t } = useTranslation('signup');
+export default async function SignupPage({ params: { lang }, searchParams }) {
+  const t = useTranslations('signup');
+  
   console.log('Signup function started');
   try {
     // Ensure MongoDB connection
@@ -40,17 +40,7 @@ export default async function SignupPage({ searchParams }) {
     console.error('Error in SignupPage:', error);
     if (error.code === 'ERR_JWE_DECRYPTION_FAILED') {
       console.error('JWT decryption failed. This might be due to an invalid or mismatched NEXTAUTH_SECRET.');
-      // You might want to clear the session here
-      // await signOut({ redirect: false });
     }
     return <div>{t('errorOccurred')}</div>;
   }
-}
-
-export async function getStaticProps({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['common', 'signup'])),
-    },
-  };
 }
