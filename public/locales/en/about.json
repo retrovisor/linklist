@@ -1,0 +1,9 @@
+// public/locales/en/about.json
+{
+  "title": "About us",
+  "welcome": "Welcome to Fizz.link – where your links meet your story.",
+  "description1": "At Fizz.link, we believe that every link you share is a chapter in your unique journey. We're more than just a tool; we're a creative space where you can gather all your important links, social profiles, and projects into one beautiful, simple page. But it doesn't stop there.",
+  "description2": "We understand that you're not just a collection of links, but a vibrant individual with preferences, passions, and a story to tell. Fizz.link gives you the opportunity to express your true self. Here, you can share your favorite quotes, showcase your hobbies, or tell the little stories that make you, you.",
+  "description3": "Whether you're a professional looking to consolidate your portfolio, a creator eager to share your latest work, or someone who wants to make a personal statement in the digital space, Fizz.link helps ensure that your digital presence reflects both your work and your personality.",
+  "description4": "Create, customize, and connect with Fizz.link – because every link should tell your story."
+}
