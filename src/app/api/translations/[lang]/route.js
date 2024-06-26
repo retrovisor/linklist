@@ -5,7 +5,15 @@ export async function GET(request, { params }) {
   const { lang } = params;
   console.log(`API route called for lang: ${lang}`);
   try {
-    const translations = await serverSideTranslations(lang, ['about']);
+    // Simplify to static response for debugging
+    const translations = {
+      title: "About Us",
+      welcome: "Welcome to our website",
+      description1: "This is the first description.",
+      description2: "This is the second description.",
+      description3: "This is the third description.",
+      description4: "This is the fourth description."
+    };
     console.log('Translations in API route:', translations);
     return new Response(JSON.stringify(translations), { 
       status: 200,
@@ -23,3 +31,4 @@ export async function GET(request, { params }) {
     });
   }
 }
+
