@@ -6,11 +6,11 @@ import LoginWithFacebook from "@/components/buttons/LoginWithFacebook";
 import UsernameForm from "@/components/forms/UsernameForm";
 import { redirect } from "next/navigation";
 import clientPromise from "@/libs/mongoClient";
-import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslations } from 'next-intl';
 
-export default async function LoginPage({ searchParams }) {
-  const { t } = useTranslation('login');
+export default async function LoginPage({ params: { lang }, searchParams }) {
+  const t = useTranslations('login');
+  
   console.log('LoginPage function started');
   try {
     const session = await getServerSession(authOptions);
@@ -61,16 +61,7 @@ export default async function LoginPage({ searchParams }) {
         }
       }
     } else {
-      // Handle other errors
       return <div>{t('errorOccurred')}</div>;
     }
   }
-}
-
-export async function getStaticProps({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['common', 'login'])),
-    },
-  };
 }
