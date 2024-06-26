@@ -8,11 +8,10 @@ export async function generateMetadata({ params: { lang } }) {
   };
 }
 
- 
-async function fetchTranslations(lang) {
+async function fetchTranslations(lang, file) {
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
   const host = headers().get('host');
-  const url = `${protocol}://${host}/api/translations/${lang}`;
+  const url = `${protocol}://${host}/api/translations/${lang}?file=${file}`;
   console.log('Fetching translations from:', url);
 
   try {
@@ -34,7 +33,7 @@ async function fetchTranslations(lang) {
 export default async function AboutPage({ params: { lang } }) {
   console.log('AboutPage function started with lang:', lang);
   try {
-    const translations = await fetchTranslations(lang);
+    const translations = await fetchTranslations(lang, 'about');
     return <AboutPageClient lang={lang} translations={translations} />;
   } catch (error) {
     console.error('Error in AboutPage:', error);
