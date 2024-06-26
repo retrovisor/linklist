@@ -5,30 +5,29 @@ import SignupWithKakao from "@/components/buttons/SignupWithKakao";
 import UsernameForm from "@/components/forms/UsernameForm";
 import { redirect } from "next/navigation";
 import { connectToMongoDB } from "@/libs/mongoClient";
-import { getDictionary } from '@/libs/getDictionary';
 
-
-export default async function SignupPage({ params: { lang }, searchParams }) {
-    const dict = await getDictionary(lang || 'en');
-
+export default async function SignupPage({ searchParams }) {
   console.log('Signup function started');
   try {
     // Ensure MongoDB connection
     await connectToMongoDB();
+
     const session = await getServerSession(authOptions);
     console.log('Session:', session);
+
     if (session) {
       console.log('User is logged in, rendering UsernameForm');
       const desiredUsername = searchParams.desiredUsername || "";
       return <UsernameForm desiredUsername={desiredUsername} />;
     }
-    console.log('User is not logged in, rendering signup buttons');
+
+    console.log('User is not logged in, rendering login buttons');
     return (
       <div>
         <div className="p-4 max-w-xs mx-auto">
-          <h1 className="text-4xl font-bold text-center mb-2">{dict.signup.title}</h1>
+          <h1 className="text-4xl font-bold text-center mb-2">계정 만들기</h1>
           <p className="text-center mb-6 text-gray-500">
-            {dict.signup.subtitle}
+            아래 방법을 사용하여 무료로 Fizz.link 계정을 생성하세요
           </p>
           <SignupWithKakao />
           <div className="mt-4">
@@ -38,7 +37,6 @@ export default async function SignupPage({ params: { lang }, searchParams }) {
       </div>
     );
   } catch (error) {
-
     console.error('Error in SignupPage:', error);
     if (error.code === 'ERR_JWE_DECRYPTION_FAILED') {
       console.error('JWT decryption failed. This might be due to an invalid or mismatched NEXTAUTH_SECRET.');
