@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation, initReactI18next } from 'react-i18next';
 import i18n from 'i18next';
 import LoginWithGoogle from "@/components/buttons/LoginWithGoogle";
@@ -9,6 +9,8 @@ import LoginWithFacebook from "@/components/buttons/LoginWithFacebook";
 import UsernameForm from "@/components/forms/UsernameForm";
 
 export default function LoginPageClient({ session, searchParams, translations }) {
+  const [i18nInitialized, setI18nInitialized] = useState(false);
+
   useEffect(() => {
     console.log('LoginPageClient mounted with translations:', translations);
 
@@ -26,16 +28,22 @@ export default function LoginPageClient({ session, searchParams, translations })
       react: {
         useSuspense: false,
       },
+    }).then(() => {
+      setI18nInitialized(true);  // Update state to trigger re-render
     });
   }, [translations]);
 
   const { t } = useTranslation();
 
   useEffect(() => {
-    console.log('t function loaded, checking translation keys:');
-    console.log('createAccount:', t('createAccount'));
-    console.log('createAccountDescription:', t('createAccountDescription'));
-  }, [t]);
+    if (i18nInitialized) {
+      console.log('t function loaded, checking translation keys:');
+      console.log('createAccount:', t('createAccount'));
+      console.log('createAccountDescription:', t('createAccountDescription'));
+    }
+  }, [i18nInitialized, t]);
+
+  if (!i18nInitialized) return null; // Optionally render a loading state
 
   if (session) {
     console.log('User is logged in, rendering UsernameForm');
