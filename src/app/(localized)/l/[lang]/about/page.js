@@ -9,7 +9,7 @@ export async function generateMetadata({ params: { lang } }) {
 
 async function fetchTranslations(lang) {
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-  const host = process.env.VERCEL_URL || 'localhost:3000'; // Use VERCEL_URL for production environment
+  const host = process.env.VERCEL_URL || 'localhost:3000';
   const url = `${protocol}://${host}/api/translations/${lang}`;
 
   console.log('Protocol:', protocol);
@@ -19,9 +19,12 @@ async function fetchTranslations(lang) {
   try {
     const res = await fetch(url);
     if (!res.ok) {
+      console.error('Error response from translations API:', await res.text());
       throw new Error('Failed to fetch translations');
     }
-    return await res.json();
+    const json = await res.json();
+    console.log('Fetched translations:', json);
+    return json;
   } catch (error) {
     console.error('Error fetching translations:', error);
     throw error;
