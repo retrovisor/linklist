@@ -2,7 +2,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google';
-import '../globals.css';
+import '../../globals.css';
 import TrackPageView from "@/components/Fathom";
 import { useTranslation } from 'next-i18next';
 import { dir } from 'i18next';
