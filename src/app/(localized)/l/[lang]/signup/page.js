@@ -2,15 +2,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { connectToMongoDB } from "@/libs/mongoClient";
 import SignupPageClient from './SignupPageClient';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
-export async function getStaticProps({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['signup'])),
-    },
-  };
-}
 
 export default async function SignupPage({ params: { lang }, searchParams }) {
   console.log('Signup function started');
