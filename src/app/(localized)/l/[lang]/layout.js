@@ -5,7 +5,7 @@ import { Lato } from 'next/font/google';
 import '../../../globals.css';
 import TrackPageView from "@/components/Fathom";
 import { dir } from 'i18next';
-import I18nextProvider from '../../i18next-provider'; // Adjust the import path as necessary
+import I18nextProvider from '../../../i18next-provider'; // Adjust the import path as necessary
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
