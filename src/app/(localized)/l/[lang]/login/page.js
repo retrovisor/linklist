@@ -34,7 +34,7 @@ export default async function LoginPage({ params: { lang }, searchParams }) {
 
     const translations = await fetchTranslations(lang, 'login');
     
-    return <LoginPageClient session={session} searchParams={searchParams} translations={translations} />;
+    return <LoginPageClient session={session} searchParams={searchParams} translations={{ lang, ...translations }} />;
   } catch (error) {
     console.error('Error in LoginPage:', error);
     if (error.name === 'MongoNetworkTimeoutError') {
