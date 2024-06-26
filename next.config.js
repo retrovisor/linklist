@@ -1,3 +1,4 @@
+const { i18n } = require('./next-i18next.config');
 
 const nextConfig = {
 
@@ -53,6 +54,6 @@ const nextConfig = {
 };
 
 module.exports = {
-  ...nextConfig
+  ...nextConfig, i18n
 
 };
