@@ -4,29 +4,19 @@ import { Lato } from 'next/font/google';
 import '../../../globals.css';
 import TrackPageView from "@/components/Fathom";
 import { dir } from 'i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
 export async function generateMetadata({ params: { lang } }) {
-  const { t } = await serverSideTranslations(lang, ['common']);
+  // You might need to implement a server-side translation function here
+  // or use a different method to get translations for metadata
   return {
-    title: t('metadata.title'),
-    description: t('metadata.description'),
+    title: 'Fizz.link - 모든 것을 하나의 링크로 만드세요',
+    description: '여러분의 링크, 소셜 프로필, 창작물, 연락처 정보 등을 한 공간에서 공유하세요',
   };
 }
 
-export async function getStaticProps({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['common'])),
-    },
-  };
-}
-
-export default async function LocalizedLayout({ children, params: { lang } }) {
-  const { t } = await serverSideTranslations(lang, ['common']);
-
+export default function LocalizedLayout({ children, params: { lang } }) {
   return (
     <html lang={lang} dir={dir(lang)}>
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
