@@ -1,5 +1,4 @@
 import AboutPageClient from './AboutPageClient';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export async function generateMetadata({ params: { lang } }) {
   return {
