@@ -9,6 +9,7 @@ import { headers } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import ShareDialog from './components/ShareDialog';
 import { Toaster } from "react-hot-toast";
 import CopyLinkButton from '@/components/buttons/CopyLinkButton';
 import { ObjectId } from 'mongodb';
