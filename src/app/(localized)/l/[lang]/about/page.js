@@ -9,8 +9,10 @@ export async function generateMetadata({ params: { lang } }) {
 
 async function fetchTranslations(lang) {
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-  const host = process.env.NEXT_PUBLIC_VERCEL_URL || 'localhost:3000';
-  const res = await fetch(`${protocol}://${host}/api/translations/${lang}`);
+  const host = process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_URL : 'localhost:3000';
+  const url = new URL(`/api/translations/${lang}`, `${protocol}://${host}`);
+
+  const res = await fetch(url.toString());
   if (!res.ok) {
     throw new Error('Failed to fetch translations');
   }
