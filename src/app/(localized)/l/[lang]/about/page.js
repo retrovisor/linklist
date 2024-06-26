@@ -1,4 +1,5 @@
 import AboutPageClient from './AboutPageClient';
+import { headers } from 'next/headers';
 
 export async function generateMetadata({ params: { lang } }) {
   return {
@@ -9,7 +10,7 @@ export async function generateMetadata({ params: { lang } }) {
 
 async function fetchTranslations(lang) {
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-  const host = process.env.VERCEL_URL || 'localhost:3000';
+  const host = headers().get('host');
   const url = `${protocol}://${host}/api/translations/${lang}`;
 
   console.log('Protocol:', protocol);
@@ -19,7 +20,8 @@ async function fetchTranslations(lang) {
   try {
     const res = await fetch(url);
     if (!res.ok) {
-      console.error('Error response from translations API:', await res.text());
+      const errorText = await res.text();
+      console.error('Error response from translations API:', errorText);
       throw new Error('Failed to fetch translations');
     }
     const json = await res.json();
