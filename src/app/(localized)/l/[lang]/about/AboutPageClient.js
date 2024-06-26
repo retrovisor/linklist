@@ -2,8 +2,8 @@
 
 import { useTranslation } from 'next-i18next';
 
-export default function AboutPageClient({ lang, translations }) {
-  const { t } = useTranslation('about', { i18n: translations });
+export default function AboutPageClient({ lang }) {
+  const { t } = useTranslation('about', { lng: lang });
 
   return (
     <div className="bg-white text-white min-h-screen">
