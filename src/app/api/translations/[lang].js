@@ -1,3 +1,5 @@
+'use client';
+
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export async function GET(req, { params }) {
