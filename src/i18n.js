@@ -1,7 +1,6 @@
-// src/i18n.js
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { nextI18NextConfig } from '../next-i18next.config';
+import nextI18NextConfig from '../next-i18next.config'; // Make sure the path is correct
 
 i18n
   .use(initReactI18next)
