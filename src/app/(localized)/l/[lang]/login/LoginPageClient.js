@@ -31,6 +31,12 @@ export default function LoginPageClient({ session, searchParams, translations })
 
   const { t } = useTranslation();
 
+  useEffect(() => {
+    console.log('t function loaded, checking translation keys:');
+    console.log('createAccount:', t('createAccount'));
+    console.log('createAccountDescription:', t('createAccountDescription'));
+  }, [t]);
+
   if (session) {
     console.log('User is logged in, rendering UsernameForm');
     const desiredUsername = searchParams.desiredUsername || "";
