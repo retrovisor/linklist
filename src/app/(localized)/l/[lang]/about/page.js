@@ -8,9 +8,7 @@ export async function generateMetadata({ params: { lang } }) {
   };
 }
 
-import AboutPageClient from './AboutPageClient';
-import { headers } from 'next/headers';
-
+ 
 async function fetchTranslations(lang) {
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
   const host = headers().get('host');
