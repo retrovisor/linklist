@@ -3,11 +3,13 @@ import path from 'path';
 
 export async function GET(request, { params }) {
   const { lang } = params;
-  console.log(`API route called for lang: ${lang}`);
-  
+  const { searchParams } = new URL(request.url);
+  const file = searchParams.get('file') || 'about'; // Default to 'about' if no file is specified
+  console.log(`API route called for lang: ${lang} and file: ${file}`);
+
   try {
     // Construct the file path
-    const filePath = path.join(process.cwd(), 'public', 'locales', lang, 'about.json');
+    const filePath = path.join(process.cwd(), 'public', 'locales', lang, `${file}.json`);
     console.log('Reading file from:', filePath);
 
     // Read the file contents
@@ -29,7 +31,7 @@ export async function GET(request, { params }) {
       },
     });
   } catch (error) {
-    console.error('Error fetching translations in API route:', error);
+    console.error('Error fetching translations in API route:', error.message);
     return new Response(JSON.stringify({ error: 'Failed to fetch translations' }), {
       status: 500,
       headers: {
