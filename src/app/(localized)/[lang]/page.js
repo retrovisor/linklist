@@ -1,10 +1,10 @@
+// src/app/(localized)/[lang]/page.js
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import HeroForm from "@/components/forms/HeroForm";
 import { getServerSession } from "next-auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default async function Home() {
   const { t } = useTranslation('home');
@@ -74,12 +74,4 @@ export default async function Home() {
       </section>
     </main>
   );
-}
-
-export async function getStaticProps({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['common', 'home'])),
-    },
-  };
 }
