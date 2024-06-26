@@ -7,28 +7,27 @@ import LoginWithFacebook from "@/components/buttons/LoginWithFacebook";
 import UsernameForm from "@/components/forms/UsernameForm";
 import { redirect } from "next/navigation";
 import clientPromise from "@/libs/mongoClient";
-import { getDictionary } from '@/libs/getDictionary';
 
-
-export default async function LoginPage({ params: { lang }, searchParams }) {
-    const dict = await getDictionary(lang || 'en');
-
+export default async function LoginPage({ searchParams }) {
   console.log('LoginPage function started');
+
   try {
     const session = await getServerSession(authOptions);
     console.log('Session:', session);
+
     if (session) {
       console.log('User is logged in, rendering UsernameForm');
       const desiredUsername = searchParams.desiredUsername || "";
       return <UsernameForm desiredUsername={desiredUsername} />;
     }
+
     console.log('User is not logged in, rendering login buttons');
     return (
       <div>
         <div className="p-4 max-w-xs mx-auto">
-          <h1 className="text-4xl font-bold text-center mb-2">{dict.login.title}</h1>
+          <h1 className="text-4xl font-bold text-center mb-2">계정 만들기</h1>
           <p className="text-center mb-6 text-gray-500">
-            {dict.login.subtitle}
+            아래 방법을 사용하여 무료로 Fizz.link 계정을 생성하세요
           </p>
           <LoginWithKakao />
           <div className="mt-4">
@@ -41,7 +40,6 @@ export default async function LoginPage({ params: { lang }, searchParams }) {
       </div>
     );
   } catch (error) {
-
     console.error('Error in LoginPage:', error);
 
     if (error.name === 'MongoNetworkTimeoutError') {
