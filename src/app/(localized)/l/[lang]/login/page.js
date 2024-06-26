@@ -1,47 +1,19 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import LoginWithGoogle from "@/components/buttons/LoginWithGoogle";
-import LoginWithKakao from "@/components/buttons/LoginWithKakao";
-import LoginWithFacebook from "@/components/buttons/LoginWithFacebook";
-import UsernameForm from "@/components/forms/UsernameForm";
-import { redirect } from "next/navigation";
 import clientPromise from "@/libs/mongoClient";
-import { useTranslations } from 'next-intl';
+import LoginPageClient from './LoginPageClient';
 
-export default async function LoginPage({ params: { lang }, searchParams }) {
-  const t = useTranslations('login');
-  
+export default async function LoginPage({ searchParams }) {
   console.log('LoginPage function started');
   try {
     const session = await getServerSession(authOptions);
     console.log('Session:', session);
-    if (session) {
-      console.log('User is logged in, rendering UsernameForm');
-      const desiredUsername = searchParams.desiredUsername || "";
-      return <UsernameForm desiredUsername={desiredUsername} />;
-    }
-    console.log('User is not logged in, rendering login buttons');
-    return (
-      <div>
-        <div className="p-4 max-w-xs mx-auto">
-          <h1 className="text-4xl font-bold text-center mb-2">{t('createAccount')}</h1>
-          <p className="text-center mb-6 text-gray-500">
-            {t('createAccountDescription')}
-          </p>
-          <LoginWithKakao />
-          <div className="mt-4">
-            <LoginWithGoogle />
-          </div>
-          <div className="mt-4">
-            <LoginWithFacebook />
-          </div>
-        </div>
-      </div>
-    );
+    
+    return <LoginPageClient session={session} searchParams={searchParams} />;
   } catch (error) {
     console.error('Error in LoginPage:', error);
     if (error.name === 'MongoNetworkTimeoutError') {
-      // Retry the operation
+      // Retry logic...
       const maxRetries = 3;
       let retryCount = 0;
       while (retryCount < maxRetries) {
@@ -54,14 +26,14 @@ export default async function LoginPage({ params: { lang }, searchParams }) {
           retryCount++;
           if (retryCount === maxRetries) {
             console.error('Max retries reached. MongoDB connection failed.');
-            return <div>{t('serviceUnavailable')}</div>;
+            return <div>Service Unavailable</div>;
           }
           // Wait for a certain duration before retrying
           await new Promise(resolve => setTimeout(resolve, 2000));
         }
       }
     } else {
-      return <div>{t('errorOccurred')}</div>;
+      return <div>An error occurred</div>;
     }
   }
 }
