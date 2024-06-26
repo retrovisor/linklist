@@ -1,10 +1,8 @@
 'use client';
-
 import { useTranslation } from 'next-i18next';
 
-export default function AboutPageClient({ lang }) {
-  const { t } = useTranslation('about', { lng: lang });
-
+export default function AboutPageClient({ lang, translations }) {
+  const { t } = useTranslation('about');
   return (
     <div className="bg-white text-white min-h-screen">
       <div className="h-36 colorido bg-cover bg-center">
