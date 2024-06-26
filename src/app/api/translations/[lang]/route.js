@@ -1,11 +1,10 @@
-'use client';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export async function GET(request, { params }) {
   const { lang } = params;
   console.log(`API route called for lang: ${lang}`);
   try {
-    // Simplify to static response for debugging
+    // Simplified static response for debugging
     const translations = {
       title: "About Us",
       welcome: "Welcome to our website",
@@ -31,4 +30,3 @@ export async function GET(request, { params }) {
     });
   }
 }
-
