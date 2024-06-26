@@ -7,10 +7,18 @@ export async function generateMetadata({ params: { lang } }) {
   };
 }
 
+async function fetchTranslations(lang) {
+  const res = await fetch(`/api/translations/${lang}`);
+  if (!res.ok) {
+    throw new Error('Failed to fetch translations');
+  }
+  return res.json();
+}
+
 export default async function AboutPage({ params: { lang } }) {
   console.log('AboutPage function started with lang:', lang);
   try {
-    const translations = await serverSideTranslations(lang, ['about']);
+    const translations = await fetchTranslations(lang);
     console.log('Translations fetched:', translations);
 
     return <AboutPageClient lang={lang} translations={translations} />;
