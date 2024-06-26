@@ -2,14 +2,39 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import clientPromise from "@/libs/mongoClient";
 import LoginPageClient from './LoginPageClient';
+import { headers } from 'next/headers';
 
-export default async function LoginPage({ searchParams }) {
+async function fetchTranslations(lang, file) {
+  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
+  const host = headers().get('host');
+  const url = `${protocol}://${host}/api/translations/${lang}?file=${file}`;
+  console.log('Fetching translations from:', url);
+
+  try {
+    const res = await fetch(url, { next: { revalidate: 3600 } });
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error('Error response from translations API:', errorText);
+      throw new Error('Failed to fetch translations');
+    }
+    const json = await res.json();
+    console.log('Fetched translations:', json);
+    return json;
+  } catch (error) {
+    console.error('Error fetching translations:', error);
+    throw error;
+  }
+}
+
+export default async function LoginPage({ params: { lang }, searchParams }) {
   console.log('LoginPage function started');
   try {
     const session = await getServerSession(authOptions);
     console.log('Session:', session);
+
+    const translations = await fetchTranslations(lang, 'login');
     
-    return <LoginPageClient session={session} searchParams={searchParams} />;
+    return <LoginPageClient session={session} searchParams={searchParams} translations={translations} />;
   } catch (error) {
     console.error('Error in LoginPage:', error);
     if (error.name === 'MongoNetworkTimeoutError') {
