@@ -1,4 +1,5 @@
 import AboutPageClient from './AboutPageClient';
+import { headers } from 'next/headers';
 
 export async function generateMetadata({ params: { lang } }) {
   return {
@@ -8,7 +9,9 @@ export async function generateMetadata({ params: { lang } }) {
 }
 
 async function fetchTranslations(lang) {
-  const res = await fetch(`/api/translations/${lang}`);
+  const host = headers().get('host');
+  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
+  const res = await fetch(`${protocol}://${host}/api/translations/${lang}`);
   if (!res.ok) {
     throw new Error('Failed to fetch translations');
   }
