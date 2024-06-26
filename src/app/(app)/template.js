@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Toaster } from "react-hot-toast";
-import ShareDialog from '../../../pages/[uri]/ShareDialog';
+import ShareDialog from '../../../../pages/[uri]/ShareDialog';
 import CopyLinkButton from '@/components/buttons/CopyLinkButton';
 import { ObjectId } from 'mongodb';
 import clientPromise from "@/libs/mongoClient";
