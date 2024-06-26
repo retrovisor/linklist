@@ -5,4 +5,5 @@ module.exports = {
     locales: ['en', 'kr'],
     localeDetection: false,
   },
+  localePath: path.resolve('./public/locales')
 };
