@@ -1,12 +1,18 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { promises as fs } from 'fs';
+import path from 'path';
 
 export async function GET(request, { params }) {
   const { lang } = params;
   console.log(`API route called for lang: ${lang}`);
+  
   try {
-    const translations = await serverSideTranslations(lang, ['about']);
+    // Construct the file path
+    const filePath = path.join(process.cwd(), 'public', 'locales', lang, 'about.json');
+    const fileContents = await fs.readFile(filePath, 'utf-8');
+    const translations = JSON.parse(fileContents);
+
     console.log('Translations in API route:', translations);
-    return new Response(JSON.stringify(translations), { 
+    return new Response(JSON.stringify(translations), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
@@ -14,7 +20,7 @@ export async function GET(request, { params }) {
     });
   } catch (error) {
     console.error('Error fetching translations in API route:', error);
-    return new Response(JSON.stringify({ error: 'Failed to fetch translations' }), { 
+    return new Response(JSON.stringify({ error: 'Failed to fetch translations' }), {
       status: 500,
       headers: {
         'Content-Type': 'application/json',
