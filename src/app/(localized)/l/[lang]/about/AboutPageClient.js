@@ -11,7 +11,7 @@ export default function AboutPageClient({ lang, translations }) {
     i18n.use(initReactI18next).init({
       resources: {
         [lang]: {
-          about: translations.about,
+          translation: translations,
         },
       },
       lng: lang,
@@ -25,7 +25,7 @@ export default function AboutPageClient({ lang, translations }) {
     });
   }, [lang, translations]);
 
-  const { t } = useTranslation('about');
+  const { t } = useTranslation();
 
   useEffect(() => {
     console.log('t function loaded, checking translation keys:');
@@ -55,4 +55,3 @@ export default function AboutPageClient({ lang, translations }) {
     </div>
   );
 }
-``
