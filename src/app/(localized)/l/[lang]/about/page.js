@@ -9,14 +9,23 @@ export async function generateMetadata({ params: { lang } }) {
 
 async function fetchTranslations(lang) {
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-  const host = process.env.NODE_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_URL : 'localhost:3000';
-  const url = new URL(`/api/translations/${lang}`, `${protocol}://${host}`);
+  const host = process.env.VERCEL_URL || 'localhost:3000'; // Use VERCEL_URL for production environment
+  const url = `${protocol}://${host}/api/translations/${lang}`;
 
-  const res = await fetch(url.toString());
-  if (!res.ok) {
-    throw new Error('Failed to fetch translations1');
+  console.log('Protocol:', protocol);
+  console.log('Host:', host);
+  console.log('URL:', url);
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error('Failed to fetch translations');
+    }
+    return await res.json();
+  } catch (error) {
+    console.error('Error fetching translations:', error);
+    throw error;
   }
-  return res.json();
 }
 
 export default async function AboutPage({ params: { lang } }) {
