@@ -8,10 +8,16 @@ export async function GET(request, { params }) {
   try {
     // Construct the file path
     const filePath = path.join(process.cwd(), 'public', 'locales', lang, 'about.json');
-    const fileContents = await fs.readFile(filePath, 'utf-8');
-    const translations = JSON.parse(fileContents);
+    console.log('Reading file from:', filePath);
 
+    // Read the file contents
+    const fileContents = await fs.readFile(filePath, 'utf-8');
+    console.log('File contents:', fileContents);
+
+    // Parse the JSON contents
+    const translations = JSON.parse(fileContents);
     console.log('Translations in API route:', translations);
+
     return new Response(JSON.stringify(translations), {
       status: 200,
       headers: {
