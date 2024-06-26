@@ -1,15 +1,32 @@
 'use client';
-import { useTranslation } from 'next-i18next';
 import { useEffect } from 'react';
+import i18n from 'i18next';
+import { useTranslation, initReactI18next } from 'react-i18next';
 
 export default function AboutPageClient({ lang, translations }) {
   useEffect(() => {
     console.log('AboutPageClient mounted with lang:', lang);
     console.log('Received translations:', translations);
+
+    i18n.use(initReactI18next).init({
+      resources: {
+        [lang]: {
+          translation: translations.about,
+        },
+      },
+      lng: lang,
+      fallbackLng: 'en',
+      interpolation: {
+        escapeValue: false,
+      },
+      react: {
+        useSuspense: false,
+      },
+    });
   }, [lang, translations]);
 
-  const { t } = useTranslation('about');
-  
+  const { t } = useTranslation();
+
   useEffect(() => {
     console.log('t function loaded, checking translation keys:');
     console.log('title:', t('title'));
