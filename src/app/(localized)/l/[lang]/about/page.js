@@ -1,5 +1,5 @@
 import AboutPageClient from './AboutPageClient';
-import { getTranslations } from '../../../libs/getTranslations';
+import { getTranslations } from '../../libs/getTranslations';
 
 export async function generateStaticParams() {
   return [{ lang: 'en' }, { lang: 'kr' }];
