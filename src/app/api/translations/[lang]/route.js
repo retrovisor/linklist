@@ -12,10 +12,14 @@ export async function GET(request, { params }) {
 
     // Read the file contents
     const fileContents = await fs.readFile(filePath, 'utf-8');
-    console.log('File contents:', fileContents);
+    console.log('Raw file contents:', fileContents);
+
+    // Clean up potential issues with file content
+    const cleanFileContents = fileContents.replace(/^\s*\/\/.*$/gm, '').trim();
+    console.log('Clean file contents:', cleanFileContents);
 
     // Parse the JSON contents
-    const translations = JSON.parse(fileContents);
+    const translations = JSON.parse(cleanFileContents);
     console.log('Translations in API route:', translations);
 
     return new Response(JSON.stringify(translations), {
