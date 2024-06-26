@@ -8,17 +8,17 @@ export async function generateMetadata({ params: { lang } }) {
   };
 }
 
+import AboutPageClient from './AboutPageClient';
+import { headers } from 'next/headers';
+
 async function fetchTranslations(lang) {
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
   const host = headers().get('host');
   const url = `${protocol}://${host}/api/translations/${lang}`;
-
-  console.log('Protocol:', protocol);
-  console.log('Host:', host);
-  console.log('URL:', url);
+  console.log('Fetching translations from:', url);
 
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, { next: { revalidate: 3600 } });
     if (!res.ok) {
       const errorText = await res.text();
       console.error('Error response from translations API:', errorText);
@@ -37,8 +37,6 @@ export default async function AboutPage({ params: { lang } }) {
   console.log('AboutPage function started with lang:', lang);
   try {
     const translations = await fetchTranslations(lang);
-    console.log('Translations fetched:', translations);
-
     return <AboutPageClient lang={lang} translations={translations} />;
   } catch (error) {
     console.error('Error in AboutPage:', error);
