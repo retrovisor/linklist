@@ -54,6 +54,10 @@ const nextConfig = {
 };
 
 module.exports = {
-  ...nextConfig, i18n
+  ...nextConfig,  
+   i18n: {
+    locales: ['en', 'kr'],
+    defaultLocale: 'en',
+  },
 
 };
