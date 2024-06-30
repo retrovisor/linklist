@@ -4,7 +4,7 @@ import { Lato } from 'next/font/google';
 import '../../../globals.css';
 import TrackPageView from "@/components/Fathom";
 import { dir } from 'i18next';
-import I18nextProvider from '../../../i18next-provider'; // Adjust the import path as necessary
+import ClientI18nextProvider from './ClientI18nextProvider';
 
 const lato = Lato({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -20,7 +20,7 @@ export default function LocalizedLayout({ children, params: { lang } }) {
     <html lang={lang} dir={dir(lang)}>
       <body className={`${lato.className} min-h-screen fundo-home flex flex-col`}>
         <TrackPageView />
-        <I18nextProvider>
+        <ClientI18nextProvider lang={lang}>
           <div className="flex-grow">
             <Header />
             <div className="mx-auto">
@@ -28,7 +28,7 @@ export default function LocalizedLayout({ children, params: { lang } }) {
             </div>
           </div>
           <Footer />
-        </I18nextProvider>
+        </ClientI18nextProvider>
       </body>
     </html>
   );
