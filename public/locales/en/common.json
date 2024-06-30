@@ -2,5 +2,22 @@
   "welcome": "Welcome to our website",
   "about": "About Us",
   "contact": "Contact",
-  "pricing": "Pricing"
+  "pricing": "Pricing",
+  "header": {
+    "myPage": "My Page",
+    "login": "Login",
+    "signup": "Sign Up Free",
+    "logout": "Logout"
+  },
+  "buttons": {
+    "submit": "Submit",
+    "cancel": "Cancel"
+  },
+  "forms": {
+    "username": "Username",
+    "password": "Password"
+  },
+  "footer": {
+    "allRightsReserved": "All Rights Reserved"
+  }
 }
