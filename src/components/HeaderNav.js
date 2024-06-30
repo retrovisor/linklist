@@ -10,6 +10,11 @@ export default function HeaderNav({ session }) {
   const { t } = useTranslation('common');
   const { lang } = useParams();
 
+    console.log('Current language:', lang); // Add this for debugging
+  console.log('Translation for login:', t('header.login')); // Add this for debugging
+
+
+
   return (
     <nav className="flex items-center text-sm text-slate-500">
       {session ? (
