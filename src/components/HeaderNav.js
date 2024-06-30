@@ -2,6 +2,7 @@
 
 import { useTranslation } from 'react-i18next';
 import Link from "next/link";
+import LogoutButton from "@/components/buttons/LogoutButton";
 import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 
