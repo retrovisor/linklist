@@ -1,19 +1,21 @@
-// components/HeaderNav.js
 'use client';
 
 import { useTranslation } from 'react-i18next';
 import Link from "next/link";
-import LogoutButton from "@/components/buttons/LogoutButton";
 import { useParams } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function HeaderNav({ session }) {
-  const { t } = useTranslation('common');
+  const { t, i18n } = useTranslation('common');
   const { lang } = useParams();
 
-    console.log('Current language:', lang); // Add this for debugging
-  console.log('Translation for login:', t('header.login')); // Add this for debugging
+  useEffect(() => {
+    console.log('Current language:', lang);
+    console.log('All translations:', i18n.getResourceBundle(lang, 'common'));
+    console.log('Translation for login:', t('header.login'));
+  }, [lang, t, i18n]);
 
-
+ 
 
   return (
     <nav className="flex items-center text-sm text-slate-500">
