@@ -1,3 +1,5 @@
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { Lato } from 'next/font/google';
 import '../../../globals.css';
 import TrackPageView from "@/components/Fathom";
@@ -20,11 +22,13 @@ export default function LocalizedLayout({ children, params: { lang } }) {
         <TrackPageView />
         <I18nextProvider>
           <div className="flex-grow">
-             <div className="mx-auto">
+            <Header />
+            <div className="mx-auto">
               {children}
             </div>
           </div>
-         </I18nextProvider>
+          <Footer />
+        </I18nextProvider>
       </body>
     </html>
   );
