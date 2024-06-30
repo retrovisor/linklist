@@ -24,8 +24,7 @@ export default function LocalizedLayout({ children, params: { lang } }) {
               {children}
             </div>
           </div>
-          <Footer />
-        </I18nextProvider>
+         </I18nextProvider>
       </body>
     </html>
   );
