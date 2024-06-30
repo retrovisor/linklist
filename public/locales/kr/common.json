@@ -2,5 +2,22 @@
   "welcome": "우리 웹사이트에 오신 것을 환영합니다",
   "about": "회사 소개",
   "contact": "연락처",
-  "pricing": "가격"
+  "pricing": "가격",
+  "header": {
+    "myPage": "내 페이지",
+    "login": "로그인",
+    "signup": "무료 등록",
+    "logout": "로그아웃"
+  },
+  "buttons": {
+    "submit": "제출",
+    "cancel": "취소"
+  },
+  "forms": {
+    "username": "사용자 이름",
+    "password": "비밀번호"
+  },
+  "footer": {
+    "allRightsReserved": "모든 권리 보유"
+  }
 }
